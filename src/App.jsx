@@ -56,7 +56,8 @@ export default function App() {
   useEffect(() => {
     if ('serviceWorker' in navigator && window.isSecureContext) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/service-worker.js', { scope: '/' }).then(
+        const baseUrl = import.meta.env.BASE_URL;
+        navigator.serviceWorker.register(`${baseUrl}service-worker.js`, { scope: baseUrl }).then(
           (reg) => console.log('[PWA] ServiceWorker registered with scope:', reg.scope),
           (err) => console.warn('[PWA] ServiceWorker registration failed:', err)
         );

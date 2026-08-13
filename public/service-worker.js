@@ -1,14 +1,18 @@
 // ponytail: stale-while-revalidate → cache-first for offline-first PWA. Add runtime asset caching if user reports missing resources after deploy.
-const CACHE_NAME = 'zen-kana-v3';
+const CACHE_NAME = 'zen-kana-v4';
+const appUrl = (path) => new URL(path, self.registration.scope).toString();
 
 // Install Event - App Shell first, then critical assets
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
-      const appShell = ['/index.html', '/manifest.json'];
+      const appShell = [appUrl('index.html'), appUrl('manifest.json')];
       return Promise.all([
         ...appShell.map(url => cache.put(url, fetch(url))),
-        ...['/icons/icon-192x192.png', '/icons/icon-512x512.png'].map(url => cache.put(url, fetch(url)))
+        ...['icons/icon-192x192.png', 'icons/icon-512x512.png'].map(url => {
+          const absoluteUrl = appUrl(url);
+          return cache.put(absoluteUrl, fetch(absoluteUrl));
+        })
       ]).then(() => self.skipWaiting())
     })
   );
