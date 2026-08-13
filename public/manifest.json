@@ -2,20 +2,23 @@
   "name": "Zen Kana - Study Studio",
   "short_name": "Zen Kana",
   "description": "Japanese Hiragana and Katakana PWA Study Studio with audio quizzes, stroke writing practice, and flashcards.",
-  "start_url": "/",
+  "id": "./",
+  "lang": "en",
+  "start_url": "./",
+  "scope": "./",
   "display": "standalone",
   "orientation": "any",
   "background_color": "#f4fafd",
   "theme_color": "#38656f",
   "icons": [
     {
-      "src": "/icons/icon-192x192.png",
+      "src": "./icons/icon-192x192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "/icons/icon-512x512.png",
+      "src": "./icons/icon-512x512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
