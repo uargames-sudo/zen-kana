@@ -10,9 +10,9 @@ export default function Vocabulary() {
   const visibleWords = useMemo(() => {
     const normalizedQuery = query.trim().toLowerCase();
     return VOCABULARY.filter((word) => (
-      (scriptFilter === 'all' || word.type === scriptFilter)
+      (scriptFilter === 'all' || word.script === scriptFilter)
       && (!normalizedQuery || [word.kana, word.romaji, word.english, word.italian]
-        .some((value) => value.toLowerCase().includes(normalizedQuery)))
+        .some((value) => value && value.toLowerCase().includes(normalizedQuery)))
     ));
   }, [query, scriptFilter]);
 
@@ -48,7 +48,7 @@ export default function Vocabulary() {
           return (
             <button key={word.id} onClick={() => playKanaSound(word.kana)} className="zen-card zen-card-active flex min-h-44 flex-col rounded-2xl border border-zen-surface-high p-5 text-left dark:border-zen-dark-border">
               <div className="flex items-start justify-between">
-                <span className="rounded-full bg-zen-surface-container px-2.5 py-1 text-[11px] font-bold capitalize text-zen-text-muted dark:bg-zen-dark-surface-high dark:text-zen-dark-text-muted">{word.type}</span>
+                <span className="rounded-full bg-zen-surface-container px-2.5 py-1 text-[11px] font-bold capitalize text-zen-text-muted dark:bg-zen-dark-surface-high dark:text-zen-dark-text-muted">{word.script}</span>
                 <span className="rounded-xl bg-zen-primary/10 p-2 text-zen-primary dark:bg-zen-dark-primary/20 dark:text-zen-dark-primary"><Icon className="h-6 w-6" /></span>
               </div>
               <div className="mt-auto flex items-end justify-between gap-3">

@@ -42,6 +42,7 @@ export default function Navigation({
     { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard, desc: 'Overview & Study Stats' },
     { id: 'table', label: 'Kana Table', icon: Grid, desc: 'Interactive Syllabary' },
     { id: 'flashcards', label: 'Flashcards', icon: Layers, desc: 'Space Repetition Memory' },
+    { id: 'activeStudy', label: 'Active Study', icon: Sparkles, desc: 'Transliteration Training' },
     { id: 'vocabulary', label: 'Vocabulary', icon: BookOpen, desc: 'Words & Pronunciation' },
     { id: 'lessons', label: 'Lessons', icon: ListChecks, desc: 'Guided Study Path' },
     { id: 'writing', label: 'Writing', icon: PenTool, desc: 'Stroke Order & Canvas' },

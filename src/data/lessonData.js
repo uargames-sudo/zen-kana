@@ -37,7 +37,7 @@ const isKanaCharacter = (character) => /[\u3040-\u309f\u30a0-\u30ff]/.test(chara
 
 export function getLessonVocabulary(lesson, scriptMode, minimum = 6) {
   const allowedKana = getAllowedKana(lesson, scriptMode);
-  const candidates = VOCABULARY.filter((word) => word.type === scriptMode);
+  const candidates = VOCABULARY.filter((word) => word.script === scriptMode);
   const strict = candidates.filter((word) => Array.from(word.kana).filter(isKanaCharacter).every((character) => allowedKana.has(character)));
 
   if (strict.length >= minimum) return strict;
