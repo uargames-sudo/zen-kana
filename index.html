@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ja" class="text-zen-text dark:text-zen-dark-text">
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+    <title>Zen Kana - PWA Japanese Hiragana & Katakana Study Studio</title>
+    <meta name="description" content="Zen Kana is a Progressive Web App for learning Japanese Hiragana and Katakana through interactive flashcards, stroke writing practice, and audio quizzes." />
+    
+    <!-- PWA & Theme Color -->
+    <meta name="theme-color" content="#38656f" />
+    <link rel="manifest" href="/manifest.json" />
+
+    <!-- Apple iOS & iPadOS Meta Tags -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Zen Kana" />
+    <link rel="apple-touch-icon" sizes="192x192" href="/icons/icon-192x192.png" />
+    
+    <!-- Google Fonts & Material Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Literata:ital,opsz,wght@0,7..72,500;0,7..72,600;0,7..72,700;1,7..72,600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet" />
+  </head>
+  <body class="font-sans antialiased selection:bg-zen-primary-light selection:text-zen-primary-dark">
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

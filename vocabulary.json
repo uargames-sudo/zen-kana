@@ -1,0 +1,902 @@
+[
+    {
+        "id": "h1",
+        "kana": "ねこ",
+        "type": "hiragana",
+        "romaji": "neko",
+        "english": "cat",
+        "italian": "gatto",
+        "imageKeyword": "cat"
+    },
+    {
+        "id": "h2",
+        "kana": "いぬ",
+        "type": "hiragana",
+        "romaji": "inu",
+        "english": "dog",
+        "italian": "cane",
+        "imageKeyword": "dog"
+    },
+    {
+        "id": "h3",
+        "kana": "とり",
+        "type": "hiragana",
+        "romaji": "tori",
+        "english": "bird",
+        "italian": "uccello",
+        "imageKeyword": "bird"
+    },
+    {
+        "id": "h4",
+        "kana": "さかな",
+        "type": "hiragana",
+        "romaji": "sakana",
+        "english": "fish",
+        "italian": "pesce",
+        "imageKeyword": "fish"
+    },
+    {
+        "id": "h5",
+        "kana": "りんご",
+        "type": "hiragana",
+        "romaji": "ringo",
+        "english": "apple",
+        "italian": "mela",
+        "imageKeyword": "apple"
+    },
+    {
+        "id": "h6",
+        "kana": "みず",
+        "type": "hiragana",
+        "romaji": "mizu",
+        "english": "water",
+        "italian": "acqua",
+        "imageKeyword": "droplet"
+    },
+    {
+        "id": "h7",
+        "kana": "ほん",
+        "type": "hiragana",
+        "romaji": "hon",
+        "english": "book",
+        "italian": "libro",
+        "imageKeyword": "book"
+    },
+    {
+        "id": "h8",
+        "kana": "くるま",
+        "type": "hiragana",
+        "romaji": "kuruma",
+        "english": "car",
+        "italian": "auto",
+        "imageKeyword": "car"
+    },
+    {
+        "id": "h9",
+        "kana": "いえ",
+        "type": "hiragana",
+        "romaji": "ie",
+        "english": "house",
+        "italian": "casa",
+        "imageKeyword": "home"
+    },
+    {
+        "id": "h10",
+        "kana": "ともだち",
+        "type": "hiragana",
+        "romaji": "tomodachi",
+        "english": "friend",
+        "italian": "amico",
+        "imageKeyword": "users"
+    },
+    {
+        "id": "h11",
+        "kana": "せんせい",
+        "type": "hiragana",
+        "romaji": "sensei",
+        "english": "teacher",
+        "italian": "insegnante",
+        "imageKeyword": "graduation-cap"
+    },
+    {
+        "id": "h12",
+        "kana": "がくせい",
+        "type": "hiragana",
+        "romaji": "gakusei",
+        "english": "student",
+        "italian": "studente",
+        "imageKeyword": "user"
+    },
+    {
+        "id": "h13",
+        "kana": "つき",
+        "type": "hiragana",
+        "romaji": "tsuki",
+        "english": "moon",
+        "italian": "luna",
+        "imageKeyword": "moon"
+    },
+    {
+        "id": "h14",
+        "kana": "たいよう",
+        "type": "hiragana",
+        "romaji": "taiyou",
+        "english": "sun",
+        "italian": "sole",
+        "imageKeyword": "sun"
+    },
+    {
+        "id": "h15",
+        "kana": "はな",
+        "type": "hiragana",
+        "romaji": "hana",
+        "english": "flower",
+        "italian": "fiore",
+        "imageKeyword": "flower"
+    },
+    {
+        "id": "h16",
+        "kana": "うみ",
+        "type": "hiragana",
+        "romaji": "umi",
+        "english": "sea",
+        "italian": "mare",
+        "imageKeyword": "waves"
+    },
+    {
+        "id": "h17",
+        "kana": "やま",
+        "type": "hiragana",
+        "romaji": "yama",
+        "english": "mountain",
+        "italian": "montagna",
+        "imageKeyword": "mountain"
+    },
+    {
+        "id": "h18",
+        "kana": "かわ",
+        "type": "hiragana",
+        "romaji": "kawa",
+        "english": "river",
+        "italian": "fiume",
+        "imageKeyword": "spline"
+    },
+    {
+        "id": "h19",
+        "kana": "あめ",
+        "type": "hiragana",
+        "romaji": "ame",
+        "english": "rain",
+        "italian": "pioggia",
+        "imageKeyword": "cloud-rain"
+    },
+    {
+        "id": "h20",
+        "kana": "ゆき",
+        "type": "hiragana",
+        "romaji": "yuki",
+        "english": "snow",
+        "italian": "neve",
+        "imageKeyword": "snowflake"
+    },
+    {
+        "id": "h21",
+        "kana": "かぜ",
+        "type": "hiragana",
+        "romaji": "kaze",
+        "english": "wind",
+        "italian": "vento",
+        "imageKeyword": "wind"
+    },
+    {
+        "id": "h22",
+        "kana": "て",
+        "type": "hiragana",
+        "romaji": "te",
+        "english": "hand",
+        "italian": "mano",
+        "imageKeyword": "hand"
+    },
+    {
+        "id": "h23",
+        "kana": "め",
+        "type": "hiragana",
+        "romaji": "me",
+        "english": "eye",
+        "italian": "occhio",
+        "imageKeyword": "eye"
+    },
+    {
+        "id": "h24",
+        "kana": "みみ",
+        "type": "hiragana",
+        "romaji": "mimi",
+        "english": "ear",
+        "italian": "orecchio",
+        "imageKeyword": "ear"
+    },
+    {
+        "id": "h25",
+        "kana": "くち",
+        "type": "hiragana",
+        "romaji": "kuchi",
+        "english": "mouth",
+        "italian": "bocca",
+        "imageKeyword": "smile"
+    },
+    {
+        "id": "h26",
+        "kana": "あし",
+        "type": "hiragana",
+        "romaji": "ashi",
+        "english": "foot",
+        "italian": "piede",
+        "imageKeyword": "footprint"
+    },
+    {
+        "id": "h27",
+        "kana": "こころ",
+        "type": "hiragana",
+        "romaji": "kokoro",
+        "english": "heart",
+        "italian": "cuore",
+        "imageKeyword": "heart"
+    },
+    {
+        "id": "h28",
+        "kana": "おかね",
+        "type": "hiragana",
+        "romaji": "okane",
+        "english": "money",
+        "italian": "soldi",
+        "imageKeyword": "coins"
+    },
+    {
+        "id": "h29",
+        "kana": "じかん",
+        "type": "hiragana",
+        "romaji": "jikan",
+        "english": "time",
+        "italian": "tempo",
+        "imageKeyword": "clock"
+    },
+    {
+        "id": "h30",
+        "kana": "きょう",
+        "type": "hiragana",
+        "romaji": "kyou",
+        "english": "today",
+        "italian": "oggi",
+        "imageKeyword": "calendar-days"
+    },
+    {
+        "id": "h31",
+        "kana": "あした",
+        "type": "hiragana",
+        "romaji": "ashita",
+        "english": "tomorrow",
+        "italian": "domani",
+        "imageKeyword": "calendar-range"
+    },
+    {
+        "id": "h32",
+        "kana": "きのう",
+        "type": "hiragana",
+        "romaji": "kinou",
+        "english": "yesterday",
+        "italian": "ieri",
+        "imageKeyword": "calendar-days"
+    },
+    {
+        "id": "h33",
+        "kana": "あさ",
+        "type": "hiragana",
+        "romaji": "asa",
+        "english": "morning",
+        "italian": "mattina",
+        "imageKeyword": "sunrise"
+    },
+    {
+        "id": "h34",
+        "kana": "よる",
+        "type": "hiragana",
+        "romaji": "yoru",
+        "english": "night",
+        "italian": "notte",
+        "imageKeyword": "moon-star"
+    },
+    {
+        "id": "h35",
+        "kana": "き",
+        "type": "hiragana",
+        "romaji": "ki",
+        "english": "tree",
+        "italian": "albero",
+        "imageKeyword": "tree-pine"
+    },
+    {
+        "id": "h36",
+        "kana": "むし",
+        "type": "hiragana",
+        "romaji": "mushi",
+        "english": "bug",
+        "italian": "insetto",
+        "imageKeyword": "bug"
+    },
+    {
+        "id": "h37",
+        "kana": "おと",
+        "type": "hiragana",
+        "romaji": "oto",
+        "english": "sound",
+        "italian": "suono",
+        "imageKeyword": "volume-2"
+    },
+    {
+        "id": "h38",
+        "kana": "うた",
+        "type": "hiragana",
+        "romaji": "uta",
+        "english": "song",
+        "italian": "canzone",
+        "imageKeyword": "music"
+    },
+    {
+        "id": "h39",
+        "kana": "え",
+        "type": "hiragana",
+        "romaji": "e",
+        "english": "picture",
+        "italian": "quadro",
+        "imageKeyword": "image"
+    },
+    {
+        "id": "h40",
+        "kana": "てがみ",
+        "type": "hiragana",
+        "romaji": "tegami",
+        "english": "letter",
+        "italian": "lettera",
+        "imageKeyword": "mail"
+    },
+    {
+        "id": "h41",
+        "kana": "きっぷ",
+        "type": "hiragana",
+        "romaji": "kippu",
+        "english": "ticket",
+        "italian": "biglietto",
+        "imageKeyword": "ticket"
+    },
+    {
+        "id": "h42",
+        "kana": "でんしゃ",
+        "type": "hiragana",
+        "romaji": "densha",
+        "english": "train",
+        "italian": "treno",
+        "imageKeyword": "train-front"
+    },
+    {
+        "id": "h43",
+        "kana": "ひこうき",
+        "type": "hiragana",
+        "romaji": "hikouki",
+        "english": "airplane",
+        "italian": "aereo",
+        "imageKeyword": "plane"
+    },
+    {
+        "id": "h44",
+        "kana": "みせ",
+        "type": "hiragana",
+        "romaji": "mise",
+        "english": "shop",
+        "italian": "negozio",
+        "imageKeyword": "store"
+    },
+    {
+        "id": "h45",
+        "kana": "ふく",
+        "type": "hiragana",
+        "romaji": "fuku",
+        "english": "clothes",
+        "italian": "vestiti",
+        "imageKeyword": "shirt"
+    },
+    {
+        "id": "h46",
+        "kana": "くつ",
+        "type": "hiragana",
+        "romaji": "kutsu",
+        "english": "shoes",
+        "italian": "scarpe",
+        "imageKeyword": "footprints"
+    },
+    {
+        "id": "h47",
+        "kana": "かばん",
+        "type": "hiragana",
+        "romaji": "kaban",
+        "english": "bag",
+        "italian": "borsa",
+        "imageKeyword": "briefcase"
+    },
+    {
+        "id": "h48",
+        "kana": "とけい",
+        "type": "hiragana",
+        "romaji": "tokei",
+        "english": "watch",
+        "italian": "orologio",
+        "imageKeyword": "watch"
+    },
+    {
+        "id": "h49",
+        "kana": "つくえ",
+        "type": "hiragana",
+        "romaji": "tsukue",
+        "english": "desk",
+        "italian": "scrivania",
+        "imageKeyword": "table"
+    },
+    {
+        "id": "h50",
+        "kana": "いす",
+        "type": "hiragana",
+        "romaji": "isu",
+        "english": "chair",
+        "italian": "sedia",
+        "imageKeyword": "armchair"
+    },
+    {
+        "id": "k1",
+        "kana": "カメラ",
+        "type": "katakana",
+        "romaji": "kamera",
+        "english": "camera",
+        "italian": "fotocamera",
+        "imageKeyword": "camera"
+    },
+    {
+        "id": "k2",
+        "kana": "テレビ",
+        "type": "katakana",
+        "romaji": "terebi",
+        "english": "TV",
+        "italian": "televisione",
+        "imageKeyword": "tv"
+    },
+    {
+        "id": "k3",
+        "kana": "ラジオ",
+        "type": "katakana",
+        "romaji": "rajio",
+        "english": "radio",
+        "italian": "radio",
+        "imageKeyword": "radio"
+    },
+    {
+        "id": "k4",
+        "kana": "パソコン",
+        "type": "katakana",
+        "romaji": "pasokon",
+        "english": "PC",
+        "italian": "computer",
+        "imageKeyword": "laptop"
+    },
+    {
+        "id": "k5",
+        "kana": "スマホ",
+        "type": "katakana",
+        "romaji": "sumaho",
+        "english": "smartphone",
+        "italian": "cellulare",
+        "imageKeyword": "smartphone"
+    },
+    {
+        "id": "k6",
+        "kana": "トイレ",
+        "type": "katakana",
+        "romaji": "toire",
+        "english": "toilet",
+        "italian": "bagno",
+        "imageKeyword": "bath"
+    },
+    {
+        "id": "k7",
+        "kana": "ベッド",
+        "type": "katakana",
+        "romaji": "beddo",
+        "english": "bed",
+        "italian": "letto",
+        "imageKeyword": "bed"
+    },
+    {
+        "id": "k8",
+        "kana": "ドア",
+        "type": "katakana",
+        "romaji": "doa",
+        "english": "door",
+        "italian": "porta",
+        "imageKeyword": "door-closed"
+    },
+    {
+        "id": "k9",
+        "kana": "ノート",
+        "type": "katakana",
+        "romaji": "nooto",
+        "english": "notebook",
+        "italian": "quaderno",
+        "imageKeyword": "notebook"
+    },
+    {
+        "id": "k10",
+        "kana": "ペン",
+        "type": "katakana",
+        "romaji": "pen",
+        "english": "pen",
+        "italian": "penna",
+        "imageKeyword": "pen"
+    },
+    {
+        "id": "k11",
+        "kana": "コーヒー",
+        "type": "katakana",
+        "romaji": "koohii",
+        "english": "coffee",
+        "italian": "caffè",
+        "imageKeyword": "coffee"
+    },
+    {
+        "id": "k12",
+        "kana": "ココア",
+        "type": "katakana",
+        "romaji": "kokoa",
+        "english": "cocoa",
+        "italian": "cioccolata",
+        "imageKeyword": "cup-soda"
+    },
+    {
+        "id": "k13",
+        "kana": "ミルク",
+        "type": "katakana",
+        "romaji": "miruku",
+        "english": "milk",
+        "italian": "latte",
+        "imageKeyword": "glass-water"
+    },
+    {
+        "id": "k14",
+        "kana": "ジュース",
+        "type": "katakana",
+        "romaji": "juusu",
+        "english": "juice",
+        "italian": "succo",
+        "imageKeyword": "milk"
+    },
+    {
+        "id": "k15",
+        "kana": "ビール",
+        "type": "katakana",
+        "romaji": "biiru",
+        "english": "beer",
+        "italian": "birra",
+        "imageKeyword": "beer"
+    },
+    {
+        "id": "k16",
+        "kana": "ワイン",
+        "type": "katakana",
+        "romaji": "wain",
+        "english": "wine",
+        "italian": "vino",
+        "imageKeyword": "wine"
+    },
+    {
+        "id": "k17",
+        "kana": "ケーキ",
+        "type": "katakana",
+        "romaji": "keeki",
+        "english": "cake",
+        "italian": "torta",
+        "imageKeyword": "cake"
+    },
+    {
+        "id": "k18",
+        "kana": "パン",
+        "type": "katakana",
+        "romaji": "pan",
+        "english": "bread",
+        "italian": "pane",
+        "imageKeyword": "croissant"
+    },
+    {
+        "id": "k19",
+        "kana": "バター",
+        "type": "katakana",
+        "romaji": "bataa",
+        "english": "butter",
+        "italian": "burro",
+        "imageKeyword": "package"
+    },
+    {
+        "id": "k20",
+        "kana": "サラダ",
+        "type": "katakana",
+        "romaji": "sarada",
+        "english": "salad",
+        "italian": "insalata",
+        "imageKeyword": "salad"
+    },
+    {
+        "id": "k21",
+        "kana": "スープ",
+        "type": "katakana",
+        "romaji": "suupu",
+        "english": "soup",
+        "italian": "zuppa",
+        "imageKeyword": "soup"
+    },
+    {
+        "id": "k22",
+        "kana": "カレー",
+        "type": "katakana",
+        "romaji": "karee",
+        "english": "curry",
+        "italian": "curry",
+        "imageKeyword": "bowl-soup"
+    },
+    {
+        "id": "k23",
+        "kana": "ステーキ",
+        "type": "katakana",
+        "romaji": "suteeki",
+        "english": "steak",
+        "italian": "bistecca",
+        "imageKeyword": "beef"
+    },
+    {
+        "id": "k24",
+        "kana": "ピアノ",
+        "type": "katakana",
+        "romaji": "piano",
+        "english": "piano",
+        "italian": "pianoforte",
+        "imageKeyword": "music-4"
+    },
+    {
+        "id": "k25",
+        "kana": "ギター",
+        "type": "katakana",
+        "romaji": "gitaa",
+        "english": "guitar",
+        "italian": "chitarra",
+        "imageKeyword": "guitar"
+    },
+    {
+        "id": "k26",
+        "kana": "ダンス",
+        "type": "katakana",
+        "romaji": "dansu",
+        "english": "dance",
+        "italian": "danza",
+        "imageKeyword": "party-popper"
+    },
+    {
+        "id": "k27",
+        "kana": "テニス",
+        "type": "katakana",
+        "romaji": "tenisu",
+        "english": "tennis",
+        "italian": "tennis",
+        "imageKeyword": "diameter"
+    },
+    {
+        "id": "k28",
+        "kana": "サッカー",
+        "type": "katakana",
+        "romaji": "sakkaa",
+        "english": "soccer",
+        "italian": "calcio",
+        "imageKeyword": "activity"
+    },
+    {
+        "id": "k29",
+        "kana": "バス",
+        "type": "katakana",
+        "romaji": "basu",
+        "english": "bus",
+        "italian": "autobus",
+        "imageKeyword": "bus"
+    },
+    {
+        "id": "k30",
+        "kana": "タクシー",
+        "type": "katakana",
+        "romaji": "takushii",
+        "english": "taxi",
+        "italian": "taxi",
+        "imageKeyword": "car-front"
+    },
+    {
+        "id": "k31",
+        "kana": "ホテル",
+        "type": "katakana",
+        "romaji": "hoteru",
+        "english": "hotel",
+        "italian": "hotel",
+        "imageKeyword": "hotel"
+    },
+    {
+        "id": "k32",
+        "kana": "ビル",
+        "type": "katakana",
+        "romaji": "biru",
+        "english": "building",
+        "italian": "edificio",
+        "imageKeyword": "building"
+    },
+    {
+        "id": "k33",
+        "kana": "プール",
+        "type": "katakana",
+        "romaji": "puuru",
+        "english": "pool",
+        "italian": "piscina",
+        "imageKeyword": "spline"
+    },
+    {
+        "id": "k34",
+        "kana": "ガラス",
+        "type": "katakana",
+        "romaji": "garasu",
+        "english": "glass",
+        "italian": "vetro",
+        "imageKeyword": "square"
+    },
+    {
+        "id": "k35",
+        "kana": "スプーン",
+        "type": "katakana",
+        "romaji": "supuun",
+        "english": "spoon",
+        "italian": "cucchiaio",
+        "imageKeyword": "utensils-crossed"
+    },
+    {
+        "id": "k36",
+        "kana": "フォーク",
+        "type": "katakana",
+        "romaji": "fooku",
+        "english": "fork",
+        "italian": "forchetta",
+        "imageKeyword": "utensils"
+    },
+    {
+        "id": "k37",
+        "kana": "ナイフ",
+        "type": "katakana",
+        "romaji": "naifu",
+        "english": "knife",
+        "italian": "coltello",
+        "imageKeyword": "sword"
+    },
+    {
+        "id": "k38",
+        "kana": "コップ",
+        "type": "katakana",
+        "romaji": "koppu",
+        "english": "cup",
+        "italian": "bicchiere",
+        "imageKeyword": "cup-soda"
+    },
+    {
+        "id": "k39",
+        "kana": "バッグ",
+        "type": "katakana",
+        "baggu": "bag",
+        "english": "bag",
+        "italian": "borsa",
+        "imageKeyword": "shopping-bag"
+    },
+    {
+        "id": "k40",
+        "kana": "シャツ",
+        "type": "katakana",
+        "romaji": "shatsu",
+        "english": "shirt",
+        "italian": "camicia",
+        "imageKeyword": "shirt"
+    },
+    {
+        "id": "k41",
+        "kana": "スカート",
+        "type": "katakana",
+        "romaji": "sukaato",
+        "english": "skirt",
+        "italian": "gonna",
+        "imageKeyword": "footprints"
+    },
+    {
+        "id": "k42",
+        "kana": "コート",
+        "type": "katakana",
+        "romaji": "kooto",
+        "english": "coat",
+        "italian": "capotto",
+        "imageKeyword": "clover"
+    },
+    {
+        "id": "k43",
+        "kana": "クラス",
+        "type": "katakana",
+        "romaji": "kurasu",
+        "english": "class",
+        "italian": "classe",
+        "imageKeyword": "presentation"
+    },
+    {
+        "id": "k44",
+        "kana": "テスト",
+        "type": "katakana",
+        "romaji": "tesuto",
+        "english": "test",
+        "italian": "esame",
+        "imageKeyword": "clipboard-check"
+    },
+    {
+        "id": "k45",
+        "kana": "ニュース",
+        "type": "katakana",
+        "romaji": "nyuusu",
+        "english": "news",
+        "italian": "notizie",
+        "imageKeyword": "newspaper"
+    },
+    {
+        "id": "k46",
+        "kana": "プレゼント",
+        "type": "katakana",
+        "romaji": "purezento",
+        "english": "gift",
+        "italian": "regalo",
+        "imageKeyword": "gift"
+    },
+    {
+        "id": "k47",
+        "kana": "カレンダー",
+        "type": "katakana",
+        "romaji": "karendaa",
+        "english": "calendar",
+        "italian": "calendario",
+        "imageKeyword": "calendar"
+    },
+    {
+        "id": "k48",
+        "kana": "カード",
+        "type": "katakana",
+        "romaji": "kaado",
+        "english": "card",
+        "italian": "carta",
+        "imageKeyword": "credit-card"
+    },
+    {
+        "id": "k49",
+        "kana": "ページ",
+        "type": "katakana",
+        "romaji": "peeji",
+        "english": "page",
+        "italian": "pagina",
+        "imageKeyword": "file-text"
+    },
+    {
+        "id": "k50",
+        "kana": "サービス",
+        "type": "katakana",
+        "romaji": "saabisu",
+        "english": "service",
+        "italian": "servizio",
+        "imageKeyword": "concierge-bell"
+    }
+]

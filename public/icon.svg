@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <rect width="512" height="512" rx="128" fill="#38656f"/>
+  <rect x="32" y="32" width="448" height="448" rx="96" fill="#a0ced9" opacity="0.2"/>
+  <text x="256" y="320" font-family="'Literata', Georgia, serif" font-size="240" font-weight="600" fill="#ffffff" text-anchor="middle">あ</text>
+  <circle cx="390" cy="120" r="32" fill="#feb6c4" opacity="0.8"/>
+</svg>

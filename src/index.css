@@ -1,0 +1,123 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    @apply min-h-full bg-zen-surface dark:bg-zen-dark-bg;
+    overflow-x: hidden;
+  }
+
+  body {
+    @apply min-h-screen bg-zen-surface text-zen-text antialiased font-sans select-none dark:bg-zen-dark-bg dark:text-zen-dark-text;
+    -webkit-tap-highlight-color: transparent;
+    overflow-x: hidden;
+    width: 100%;
+  }
+
+  #root {
+    @apply min-h-screen;
+    overflow-x: hidden;
+  }
+}
+:root {
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-left: env(safe-area-inset-left, 0px);
+  --safe-right: env(safe-area-inset-right, 0px);
+}
+
+.safe-area {
+  padding-top: var(--safe-top);
+  padding-left: var(--safe-left);
+  padding-right: var(--safe-right);
+}
+
+.safe-bottom {
+  padding-bottom: var(--safe-bottom);
+}
+/* Custom 3D Flip Card Animation */
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.transform-style-3d {
+  transform-style: preserve-3d;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.rotate-y-180 {
+  transform: rotateY(180deg);
+}
+
+/* Zen Glassmorphism & Diffused Elevation */
+.zen-card {
+  background: #ffffff;
+  border-radius: 1rem;
+  box-shadow: 0px 4px 20px rgba(45, 52, 70, 0.05);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.dark .zen-card {
+  background: #121827;
+  color: #f8fafc;
+  box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.5);
+  border-color: #222d46;
+}
+
+.zen-card:hover {
+  box-shadow: 0px 12px 32px rgba(45, 52, 70, 0.09);
+}
+
+.dark .zen-card:hover {
+  box-shadow: 0px 12px 36px rgba(0, 0, 0, 0.7);
+  border-color: #36d399;
+}
+
+.flashcard-hover {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.flashcard-hover:hover {
+  transform: scale(1.015);
+}
+
+.zen-card-active:active {
+  transform: scale(0.98);
+  box-shadow: 0px 2px 8px rgba(45, 52, 70, 0.04);
+}
+
+/* Material Symbols Outlined styling */
+.material-symbols-outlined {
+  font-variation-settings:
+    'FILL' 0,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 24;
+}
+
+/* Custom Scrollbar for Zen Minimal Aesthetics */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #eef5f7;
+}
+.dark ::-webkit-scrollbar-track {
+  background: #0b0f19;
+}
+::-webkit-scrollbar-thumb {
+  background: #a0ced9;
+  border-radius: 999px;
+}
+.dark ::-webkit-scrollbar-thumb {
+  background: #36d399;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #2bba84;
+}
