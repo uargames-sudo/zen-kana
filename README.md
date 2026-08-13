@@ -75,4 +75,4 @@ Since this is a PWA, it can be easily hosted on static web hosting services like
 
 ## ⚖️ License
 
-This project is private.
+This project is licensed under the [MIT License](LICENSE).
