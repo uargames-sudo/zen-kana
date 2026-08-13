@@ -114,7 +114,7 @@ export default function App() {
       />
 
       {/* Main Content View Container */}
-      <main className="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 pt-6">
+      <main className="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 pt-6 pb-24 lg:pb-8">
         {renderActiveComponent()}
       </main>
 
