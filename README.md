@@ -1,77 +1,113 @@
 # Zen Kana 🎌
 
-A calm, focused, and intuitive Japanese character learning studio designed as a Progressive Web App (PWA). Master Hiragana and Katakana through visual, auditory, and kinesthetic learning modules.
+A calm, focused, and intuitive Japanese character learning studio designed as a Progressive Web App (PWA) and Desktop Application powered by Tauri v2. Master Hiragana and Katakana through visual, auditory, and kinesthetic learning modules.
+
+![License](https://img.shields.io/badge/license-MIT-blue.svg)
+![React](https://img.shields.io/badge/React-18-61DAFB?logo=react)
+![Vite](https://img.shields.io/badge/Vite-6-646CFF?logo=vite)
+![Tauri](https://img.shields.io/badge/Tauri-v2-FFC131?logo=tauri)
+![PWA Ready](https://img.shields.io/badge/PWA-Ready-5A0FC8?logo=pwa)
+
+---
 
 ## ✨ Features
 
-- **Multi-Sensory Learning**: Combine sight (flashcards), sound (native pronunciation), and touch (handwriting practice) for maximum retention.
-- **Progressive Web App (PWA)**: Installable on mobile and desktop, works offline, and feels like a native application.
-- **Structured Curriculum**: A guided 10-day learning path to take you from beginner to proficient.
-- **Interactive Writing**: Practice your stroke order on an interactive drawing canvas.
-- **Zen UI/UX**: A minimalist, distraction-free interface with support for Dark Mode to provide a peaceful study environment.
+- **🧠 Multi-Sensory Learning**: Combines visual flashcards, native Japanese audio pronunciation, and interactive handwriting canvas for maximum retention.
+- **📱 Progressive Web App (PWA)**: Fully installable on mobile devices (Android/iOS) and desktop browsers. Works offline with Service Worker caching.
+- **🖥️ Cross-Platform Desktop Support**: Packaged with **Tauri v2** for lightweight, ultra-fast native Windows, macOS, and Linux desktop builds.
+- **🔊 Hybrid Speech Engine**: Uses native Web Speech API (`window.speechSynthesis`) with automatic fallback to online TTS audio when local speech packs are missing.
+- **📅 10-Day Guided Curriculum**: Step-by-step daily lessons covering 5 Kana characters per day with integrated writing practice, vocabulary, and reviews.
+- **🎨 Zen Minimalist UI/UX**: Dark Mode support with a distraction-free, elegant visual design tailored for comfortable study sessions.
+- **🌐 Local Network Testing**: Built-in support to run and test on your local Wi-Fi network from any smartphone or tablet.
+
+---
 
 ## 📚 Learning Modules
 
 | Module | Description |
 | :--- | :--- |
-| **Flashcards** | Master characters using 3D flip animations and spaced repetition principles. |
-| **Writing Canvas** | Practice handwriting with real-time stroke guidance on a digital canvas. |
-| **Structured Lessons** | A 10-day curriculum covering five kana per day, including vocabulary and writing. |
-| **Vocabulary** | Explore 100+ Japanese words accompanied by icons, translations, and audio. |
-| **Listening Quiz** | Test your ability to recognize Japanese characters through audio playback. |
-| **Kana Reference** | A comprehensive grid covering Basic, Dakuten (voiced), and Combination characters. |
-| **Verification Quiz** | Comprehensive testing to assess your mastery and track progress. |
+| **📊 Dashboard** | Overview of your study stats, daily streak, progress metrics, and quick navigation to all study tools. |
+| **🎴 Flashcards** | Practice Hiragana and Katakana with 3D flip card animations, audio pronunciation, and *Mastered / Needs Practice* sorting. |
+| **✍️ Writing Canvas** | Practice handwriting Kana with stroke order guides, clear canvas, and real-time visual feedback. |
+| **📖 Structured Lessons** | 10-day step-by-step curriculum covering 5 Kana characters daily, including character writing and vocabulary practice. |
+| **💬 Vocabulary Studio** | Explore 100+ Japanese vocabulary words categorized with Romaji, English translations, Kana breakdowns, and audio playback. |
+| **🎧 Listening Quiz** | Train your auditory recognition: listen to native Japanese audio and select the matching Kana character. |
+| **🎯 Verification Quiz** | Test your character recognition (Kana to Romaji and Romaji to Kana) with score tracking and celebration animations. |
+| **📑 Kana Reference** | Interactive grid of all Basic, Dakuten (voiced), and Yoon (combination) Hiragana & Katakana characters with instant audio. |
+
+---
 
 ## 🛠️ Tech Stack
 
-- **Frontend**: [React.js](https://reactjs.org/)
-- **Build Tool**: [Vite](https://vitejs.dev/)
+- **Frontend**: [React 18](https://reactjs.org/)
+- **Build Tool**: [Vite 6](https://vitejs.dev/)
+- **Desktop Framework**: [Tauri v2](https://tauri.app/) (Rust-backed lightweight native app container)
 - **Styling**: [Tailwind CSS](https://tailwindcss.com/)
 - **Icons**: [Lucide React](https://lucide.dev/)
-- **Animations**: [Canvas Confetti](https://github.com/lukePeavey/canvas-confetti) (for celebrations)
-- **PWA Support**: Service Workers and Web App Manifest
+- **Animations**: [Canvas Confetti](https://github.com/lukePeavey/canvas-confetti)
+- **PWA Capabilities**: Custom Service Worker & Web App Manifest
+
+---
 
 ## 🚀 Getting Started
 
 ### Prerequisites
 
 - [Node.js](https://nodejs.org/) (v18 or higher recommended)
-- npm or yarn
+- [Rust](https://www.rust-lang.org/) *(only required if building Tauri desktop binaries)*
 
-### Installation & Development
+### Installation
 
-1. **Clone the repository:**
+```bash
+# Clone the repository
+git clone https://github.com/<your-username>/pwa-kana.git
+cd pwa-kana
+
+# Install dependencies
+npm install
+```
+
+### NPM Scripts
+
+| Command | Description |
+| :--- | :--- |
+| `npm run dev` | Starts Vite local development server (`http://localhost:3000`) |
+| `npm run dev:host` | Starts Vite server listening on local Wi-Fi network (for smartphone testing) |
+| `npm run build` | Builds production web bundle in `dist/` |
+| `npm run tauri:dev` | Launches Tauri native desktop app in development mode |
+| `npm run tauri:build` | Compiles production native desktop installer (`.msi` / `.exe` / `.app`) |
+
+---
+
+## 🔊 Audio System & Voice Diagnostics
+
+Zen Kana includes a resilient hybrid audio system:
+1. It first attempts to use native Web Speech API (`ja-JP`).
+2. If no native Japanese TTS voice is found (e.g. in WebView2 without installed language packs), it automatically falls back to online TTS.
+
+### Voice Check Command
+
+You can verify which system voices are detected by opening the browser DevTools (`F12`) in the app and running:
+
+```javascript
+window.__checkKanaVoices()
+```
+
+---
+
+## 🌐 Deployment to GitHub Pages
+
+This project includes a **GitHub Actions workflow** (`.github/workflows/deploy.yml`) for automatic deployment.
+
+1. Push your code to the `main` branch on GitHub:
    ```bash
-   git clone <repository-url>
-   cd pwa-kana
+   git remote add origin https://github.com/<your-username>/pwa-kana.git
+   git push -u origin main
    ```
+2. On GitHub, go to **Settings** $\rightarrow$ **Pages** $\rightarrow$ set **Source** to **GitHub Actions**.
+3. Your PWA will be live at: `https://<your-username>.github.io/pwa-kana/`
 
-2. **Install dependencies:**
-   ```bash
-   npm install
-   ```
-
-3. **Start the development server:**
-   ```bash
-   npm run dev
-   ```
-
-4. **Build for production:**
-   ```bash
-   npm run build
-   ```
-
-5. **Preview production build:**
-   ```bash
-   npm run preview
-   ```
-
-## 📱 Deployment
-
-Since this is a PWA, it can be easily hosted on static web hosting services like:
-- Vercel
-- Netlify
-- GitHub Pages
+---
 
 ## ⚖️ License
 
