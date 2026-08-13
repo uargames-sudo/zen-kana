@@ -1,8 +1,7 @@
 import React from 'react';
 import { Layers, PenTool, Volume2, Award, Grid, Flame, CheckCircle, TrendingUp, Play, BookOpen, ListChecks } from 'lucide-react';
 import { playKanaSound } from '../utils/audio';
-
-export default function Dashboard({ setActiveTab, scriptMode, stats }) {
+export default function Dashboard({ setActiveTab, scriptMode, stats, resetStats }) {
   const isHiragana = scriptMode === 'hiragana';
   const sampleKana = isHiragana ? 'あ' : 'ア';
 
@@ -62,6 +61,14 @@ export default function Dashboard({ setActiveTab, scriptMode, stats }) {
       icon: Award,
       badge: 'Test',
       color: 'bg-zen-secondary-dark dark:bg-zen-dark-surface-high text-white dark:text-zen-dark-secondary',
+    },
+    {
+      id: 'activeStudy',
+      title: 'Active Study',
+      description: 'Practice transliterating between Japanese and Romaji with immediate feedback.',
+      icon: PenTool,
+      badge: 'New',
+      color: 'bg-zen-accent dark:bg-zen-dark-primary text-white dark:text-zen-dark-on-primary',
     }
   ];
 
@@ -117,13 +124,23 @@ export default function Dashboard({ setActiveTab, scriptMode, stats }) {
       </div>
 
       {/* Progress & Stats Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+      <div>
+        <div className="flex items-center justify-between mb-4">
+          <h3 className="text-xl font-headline font-bold text-zen-text dark:text-zen-dark-text">Your Progress</h3>
+          <button 
+            onClick={resetStats}
+            className="text-xs font-bold text-zen-text-muted dark:text-zen-dark-text-muted hover:text-rose-500 dark:hover:text-rose-400 transition-colors px-3 py-1 border border-zen-border/40 dark:border-zen-dark-border rounded-lg"
+          >
+            Reset Stats
+          </button>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <div className="zen-card p-5 border border-zen-surface-high dark:border-zen-dark-border flex items-center gap-4">
           <div className="w-12 h-12 rounded-2xl bg-zen-primary/10 dark:bg-zen-dark-primary/20 text-zen-primary dark:text-zen-dark-primary flex items-center justify-center">
             <CheckCircle className="w-6 h-6" />
           </div>
           <div>
-            <div className="text-2xl font-bold text-zen-text dark:text-zen-dark-text">{stats?.reviewedCount || 28} / 46</div>
+            <div className="text-2xl font-bold text-zen-text dark:text-zen-dark-text">{stats?.reviewedCount ?? 0} / 46</div>
             <div className="text-xs text-zen-text-muted dark:text-zen-dark-text-muted">Characters Mastered</div>
           </div>
         </div>
@@ -133,7 +150,7 @@ export default function Dashboard({ setActiveTab, scriptMode, stats }) {
             <TrendingUp className="w-6 h-6" />
           </div>
           <div>
-            <div className="text-2xl font-bold text-zen-text dark:text-zen-dark-text">{stats?.accuracy || 94}%</div>
+            <div className="text-2xl font-bold text-zen-text dark:text-zen-dark-text">{stats?.accuracy ?? 0}%</div>
             <div className="text-xs text-zen-text-muted dark:text-zen-dark-text-muted">Quiz Accuracy Rate</div>
           </div>
         </div>
@@ -143,11 +160,13 @@ export default function Dashboard({ setActiveTab, scriptMode, stats }) {
             <Flame className="w-6 h-6" />
           </div>
           <div>
-            <div className="text-2xl font-bold text-zen-text dark:text-zen-dark-text">7 Days</div>
+            <div className="text-2xl font-bold text-zen-text dark:text-zen-dark-text">{stats?.streakDays ?? 0} Days</div>
             <div className="text-xs text-zen-text-muted dark:text-zen-dark-text-muted">Consecutive Streak</div>
           </div>
         </div>
       </div>
+      </div>
+
 
       {/* Quick Action Navigation Grid */}
       <div>

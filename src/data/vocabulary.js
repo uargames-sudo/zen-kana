@@ -17,5 +17,5 @@ export function getVocabularyIcon(keyword) {
 }
 
 export function getVocabularyByScript(scriptMode) {
-  return VOCABULARY.filter((word) => word.type === scriptMode);
+  return VOCABULARY.filter((word) => word.script === scriptMode);
 }

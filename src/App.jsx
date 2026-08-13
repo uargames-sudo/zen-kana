@@ -9,6 +9,8 @@ import VerificationQuiz from './components/VerificationQuiz';
 import PwaInstaller from './components/PwaInstaller';
 import Vocabulary from './components/Vocabulary';
 import StructuredLessons from './components/StructuredLessons';
+import ActiveStudy from './components/ActiveStudy/ActiveStudy';
+import vocabularyData from '../vocabulary.json';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState('dashboard');
@@ -81,12 +83,18 @@ export default function App() {
     });
   };
 
+  const resetStats = () => {
+    setStats({ reviewedCount: 0, correctCount: 0, totalAttempts: 0, accuracy: 0 });
+  };
+
   const renderActiveComponent = () => {
     switch (activeTab) {
       case 'table':
         return <KanaTable scriptMode={scriptMode} />;
       case 'flashcards':
         return <Flashcards scriptMode={scriptMode} updateStats={updateStats} />;
+      case 'activeStudy':
+        return <ActiveStudy vocabularyData={vocabularyData} />;
       case 'vocabulary':
         return <Vocabulary />;
       case 'lessons':
@@ -98,7 +106,7 @@ export default function App() {
       case 'quiz':
         return <VerificationQuiz scriptMode={scriptMode} updateStats={updateStats} />;
       default:
-        return <Dashboard setActiveTab={setActiveTab} scriptMode={scriptMode} stats={stats} />;
+        return <Dashboard setActiveTab={setActiveTab} scriptMode={scriptMode} stats={stats} resetStats={resetStats} />;
     }
   };
 

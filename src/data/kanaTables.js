@@ -1,0 +1,45 @@
+// src/data/kanaTables.js
+
+export const HIRAGANA_GRID = [
+    [{ k: 'あ', r: 'a' }, { k: 'い', r: 'i' }, { k: 'う', r: 'u' }, { k: 'え', r: 'e' }, { k: 'お', r: 'o' }],
+    [{ k: 'か', r: 'ka' }, { k: 'き', r: 'ki' }, { k: 'く', r: 'ku' }, { k: 'け', r: 'ke' }, { k: 'こ', r: 'ko' }],
+    [{ k: 'さ', r: 'sa' }, { k: 'し', r: 'shi' }, { k: 'す', r: 'su' }, { k: 'せ', r: 'se' }, { k: 'そ', r: 'so' }],
+    [{ k: 'た', r: 'ta' }, { k: 'ち', r: 'chi' }, { k: 'つ', r: 'tsu' }, { k: 'て', r: 'te' }, { k: 'と', r: 'to' }],
+    [{ k: 'な', r: 'na' }, { k: 'に', r: 'ni' }, { k: 'ぬ', r: 'nu' }, { k: 'ね', r: 'ne' }, { k: 'の', r: 'no' }],
+    [{ k: 'は', r: 'ha' }, { k: 'ひ', r: 'hi' }, { k: 'ふ', r: 'fu' }, { k: 'へ', r: 'he' }, { k: 'ほ', r: 'ho' }],
+    [{ k: 'ま', r: 'ma' }, { k: 'み', r: 'mi' }, { k: 'む', r: 'mu' }, { k: 'め', r: 'me' }, { k: 'も', r: 'mo' }],
+    [{ k: 'や', r: 'ya' }, null, { k: 'ゆ', r: 'yu' }, null, { k: 'よ', r: 'yo' }],
+    [{ k: 'ら', r: 'ra' }, { k: 'り', r: 'ri' }, { k: 'る', r: 'ru' }, { k: 'れ', r: 're' }, { k: 'ろ', r: 'ro' }],
+    [{ k: 'わ', r: 'wa' }, null, null, null, { k: 'を', r: 'wo' }],
+    [{ k: 'ん', r: 'n' }, null, null, null, null]
+];
+
+export const KATAKANA_GRID = [
+    [{ k: 'ア', r: 'a' }, { k: 'イ', r: 'i' }, { k: 'ウ', r: 'u' }, { k: 'エ', r: 'e' }, { k: 'オ', r: 'o' }],
+    [{ k: 'カ', r: 'ka' }, { k: 'キ', r: 'ki' }, { k: 'ク', r: 'ku' }, { k: 'ケ', r: 'ke' }, { k: 'コ', r: 'ko' }],
+    [{ k: 'サ', r: 'sa' }, { k: 'シ', r: 'shi' }, { k: 'ス', r: 'su' }, { k: 'セ', r: 'se' }, { k: 'ソ', r: 'so' }],
+    [{ k: 'タ', r: 'ta' }, { k: 'チ', r: 'chi' }, { k: 'ツ', r: 'tsu' }, { k: 'テ', r: 'te' }, { k: 'ト', r: 'to' }],
+    [{ k: 'ナ', r: 'na' }, { k: 'ニ', r: 'ni' }, { k: 'ヌ', r: 'nu' }, { k: 'ネ', r: 'ne' }, { k: 'ノ', r: 'no' }],
+    [{ k: 'ハ', r: 'ha' }, { k: 'ヒ', r: 'hi' }, { k: 'フ', r: 'fu' }, { k: 'ヘ', r: 'he' }, { k: 'ホ', r: 'ho' }],
+    [{ k: 'マ', r: 'ma' }, { k: 'ミ', r: 'mi' }, { k: 'ム', r: 'mu' }, { k: 'メ', r: 'me' }, { k: 'モ', r: 'mo' }],
+    [{ k: 'ヤ', r: 'ya' }, null, { k: 'ユ', r: 'yu' }, null, { k: 'ヨ', r: 'yo' }],
+    [{ k: 'ラ', r: 'ra' }, { k: 'リ', r: 'ri' }, { k: 'ル', r: 'ru' }, { k: 'レ', r: 're' }, { k: 'ロ', r: 'ro' }],
+    [{ k: 'ワ', r: 'wa' }, null, null, null, { k: 'ヲ', r: 'wo' }],
+    [{ k: 'ン', r: 'n' }, null, null, null, null]
+];
+
+export const DAKUTEN_HIRAGANA_GRID = [
+    [{ k: 'が', r: 'ga' }, { k: 'ぎ', r: 'gi' }, { k: 'ぐ', r: 'gu' }, { k: 'げ', r: 'ge' }, { k: 'ご', r: 'go' }],
+    [{ k: 'ざ', r: 'za' }, { k: 'じ', r: 'ji' }, { k: 'ず', r: 'zu' }, { k: 'ぜ', r: 'ze' }, { k: 'ぞ', r: 'zo' }],
+    [{ k: 'だ', r: 'da' }, { k: 'ぢ', r: 'ji' }, { k: 'づ', r: 'zu' }, { k: 'で', r: 'de' }, { k: 'ど', r: 'do' }],
+    [{ k: 'ば', r: 'ba' }, { k: 'び', r: 'bi' }, { k: 'ぶ', r: 'bu' }, { k: 'べ', r: 'be' }, { k: 'ぼ', r: 'bo' }],
+    [{ k: 'ぱ', r: 'pa' }, { k: 'ぴ', r: 'pi' }, { k: 'ぷ', r: 'pu' }, { k: 'ぺ', r: 'pe' }, { k: 'ぽ', r: 'po' }]
+];
+
+export const DAKUTEN_KATAKANA_GRID = [
+    [{ k: 'ガ', r: 'ga' }, { k: 'ギ', r: 'gi' }, { k: 'グ', r: 'gu' }, { k: 'ゲ', r: 'ge' }, { k: 'ゴ', r: 'go' }],
+    [{ k: 'ザ', r: 'za' }, { k: 'ジ', r: 'ji' }, { k: 'ズ', r: 'zu' }, { k: 'ゼ', r: 'ze' }, { k: 'ゾ', r: 'zo' }],
+    [{ k: 'ダ', r: 'da' }, { k: 'ヂ', r: 'ji' }, { k: 'ヅ', r: 'zu' }, { k: 'デ', r: 'de' }, { k: 'ド', r: 'do' }],
+    [{ k: 'バ', r: 'ba' }, { k: 'ビ', r: 'bi' }, { k: 'ブ', r: 'bu' }, { k: 'ベ', r: 'be' }, { k: 'ボ', r: 'bo' }],
+    [{ k: 'パ', r: 'pa' }, { k: 'ピ', r: 'pi' }, { k: 'プ', r: 'pu' }, { k: 'ペ', r: 'pe' }, { k: 'ポ', r: 'po' }]
+];
