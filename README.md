@@ -13,6 +13,7 @@ A calm, focused, and intuitive Japanese character learning studio designed as a 
 ## ✨ Features
 
 - **🧠 Multi-Sensory Learning**: Combines visual flashcards, native Japanese audio pronunciation, and interactive handwriting canvas for maximum retention.
+- **⚡ Active Study Studio**: Train muscle memory and script-to-romaji transliteration with immediate visual feedback and spaced-repetition logic.
 - **📱 Progressive Web App (PWA)**: Fully installable on mobile devices (Android/iOS) and desktop browsers. Works offline with Service Worker caching.
 - **🖥️ Cross-Platform Desktop Support**: Packaged with **Tauri v2** for lightweight, ultra-fast native Windows, macOS, and Linux desktop builds.
 - **🔊 Hybrid Speech Engine**: Uses native Web Speech API (`window.speechSynthesis`) with automatic fallback to online TTS audio when local speech packs are missing.
@@ -33,6 +34,7 @@ A calm, focused, and intuitive Japanese character learning studio designed as a 
 | **💬 Vocabulary Studio** | Explore 100+ Japanese vocabulary words categorized with Romaji, English translations, Kana breakdowns, and audio playback. |
 | **🎧 Listening Quiz** | Train your auditory recognition: listen to native Japanese audio and select the matching Kana character. |
 | **🎯 Verification Quiz** | Test your character recognition (Kana to Romaji and Romaji to Kana) with score tracking and celebration animations. |
+| **⚡ Active Study** | Intensive transliteration training module supporting Read Kana, Write Kana, and Mixed modes with variable session lengths and difficulty settings. |
 | **📑 Kana Reference** | Interactive grid of all Basic, Dakuten (voiced), and Yoon (combination) Hiragana & Katakana characters with instant audio. |
 
 ---
