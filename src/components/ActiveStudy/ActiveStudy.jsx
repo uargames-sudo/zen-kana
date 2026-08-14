@@ -359,26 +359,14 @@ export default function ActiveStudy({ vocabularyData }) {
 
                     {/* Mode Write Kana (ro-to-ja): Virtual Keyboard for input */}
                     {mode === 'ro-to-ja' && (
-                        <>
-                            <VirtualKeyboard 
-                                onKeyPress={handleKeyboardPress}
-                                onBackspace={handleBackspace}
-                                disabled={status !== 'playing'}
-                                readOnly={false}
-                                showRomaji={difficulty === 'easy'}
-                                allowToggleRomaji={difficulty === 'medium'}
-                            />
-                            
-                            <div className="flex justify-center mt-6">
-                                <button
-                                    onClick={handleSubmit}
-                                    disabled={!userInput.trim() || status !== 'playing'}
-                                    className="px-8 py-3.5 rounded-2xl bg-zen-primary hover:bg-zen-primary-dark dark:bg-zen-dark-primary dark:hover:bg-zen-dark-primary-hover text-white dark:text-zen-dark-on-primary font-bold text-xs uppercase tracking-widest transition-all disabled:opacity-40 shadow-zen-md"
-                                >
-                                    {t('activeStudy.submitAnswer')}
-                                </button>
-                            </div>
-                        </>
+                        <VirtualKeyboard 
+                            onKeyPress={handleKeyboardPress}
+                            onBackspace={handleBackspace}
+                            disabled={status !== 'playing'}
+                            readOnly={false}
+                            showRomaji={difficulty === 'easy'}
+                            allowToggleRomaji={difficulty === 'medium'}
+                        />
                     )}
 
                     {/* Mode Read Kana (ja-to-ro): Consultation Virtual Keyboard */}

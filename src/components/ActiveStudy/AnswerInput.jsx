@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import { CornerDownLeft } from 'lucide-react';
 import { useLanguage } from '../../context/LanguageContext';
 
 export default function AnswerInput({ value, onChange, onSubmit, diff, disabled, mode }) {
@@ -36,18 +37,31 @@ export default function AnswerInput({ value, onChange, onSubmit, diff, disabled,
                 }}
                 className="relative"
             >
-                <input
-                    ref={inputRef}
-                    type="text"
-                    value={value}
-                    onChange={(e) => onChange(e.target.value)}
-                    disabled={disabled || mode === 'ro-to-ja'}
-                    placeholder={mode === 'ja-to-ro' ? t('activeStudy.inputPlaceholderJaToRo') : t('activeStudy.inputPlaceholderRoToJa')}
-                    className="w-full bg-white dark:bg-zen-dark-surface border-2 border-zen-border/60 dark:border-zen-dark-border rounded-2xl py-3.5 px-6 text-xl text-center text-zen-text dark:text-zen-dark-text placeholder:text-zen-text-muted dark:placeholder:text-zen-dark-text-muted focus:outline-none focus:border-zen-primary dark:focus:border-zen-dark-primary transition-colors disabled:opacity-50 font-mono shadow-zen-sm"
-                    autoComplete="off"
-                    autoCorrect="off"
-                    spellCheck="false"
-                />
+                <div className="relative w-full">
+                    <input
+                        ref={inputRef}
+                        type="text"
+                        value={value}
+                        onChange={(e) => onChange(e.target.value)}
+                        disabled={disabled || mode === 'ro-to-ja'}
+                        placeholder={mode === 'ja-to-ro' ? t('activeStudy.inputPlaceholderJaToRo') : t('activeStudy.inputPlaceholderRoToJa')}
+                        className="w-full bg-white dark:bg-zen-dark-surface border-2 border-zen-border/60 dark:border-zen-dark-border rounded-2xl py-3.5 pl-6 pr-14 text-xl text-center text-zen-text dark:text-zen-dark-text placeholder:text-zen-text-muted dark:placeholder:text-zen-dark-text-muted focus:outline-none focus:border-zen-primary dark:focus:border-zen-dark-primary transition-colors disabled:opacity-75 font-mono shadow-zen-sm"
+                        autoComplete="off"
+                        autoCorrect="off"
+                        spellCheck="false"
+                    />
+
+                    {/* Integrated Submit / Enter Icon Button */}
+                    <button
+                        type="submit"
+                        disabled={disabled || !value.trim()}
+                        className="absolute right-2 top-1/2 -translate-y-1/2 p-2.5 rounded-xl bg-zen-primary hover:bg-zen-primary-dark dark:bg-zen-dark-primary dark:hover:bg-zen-dark-primary-hover text-white dark:text-zen-dark-on-primary shadow-zen-sm transition-all disabled:opacity-30 disabled:pointer-events-none active:scale-95 flex items-center justify-center"
+                        title={t('activeStudy.submitAnswer')}
+                        aria-label={t('activeStudy.submitAnswer')}
+                    >
+                        <CornerDownLeft className="w-4 h-4 stroke-[2.5]" />
+                    </button>
+                </div>
                 
                 {renderDiff()}
             </form>
