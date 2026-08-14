@@ -118,17 +118,17 @@ export default function Navigation({
 
           {/* ===================== DESKTOP NAVIGATION HEADER ===================== */}
 
-          <div className="hidden h-16 items-center justify-between gap-3 lg:flex">
+          <div className="hidden h-16 items-center justify-between gap-3 xl:flex flex-nowrap">
             {/* Logo */}
             <div
               onClick={() => setActiveTab('dashboard')}
               className="group flex shrink-0 cursor-pointer items-center gap-2"
             >
-              <div className="w-8 h-8 rounded-xl bg-zen-primary dark:bg-zen-dark-primary text-white dark:text-zen-dark-on-primary flex items-center justify-center font-kana font-bold text-base shadow-zen-sm group-hover:scale-105 transition-transform">
+              <div className="w-8 h-8 rounded-xl bg-zen-primary dark:bg-zen-dark-primary text-white dark:text-zen-dark-on-primary flex items-center justify-center font-kana font-bold text-base shadow-zen-sm group-hover:scale-105 transition-transform shrink-0">
                 あ
               </div>
 
-              <div className="hidden xl:block">
+              <div className="hidden 2xl:block shrink-0">
                 <h1 className="font-headline font-bold text-sm text-zen-text dark:text-zen-dark-primary leading-tight tracking-tight flex items-center gap-1">
                   {t('nav.appName')}
                   <Sparkles className="w-3 h-3 text-zen-secondary dark:text-zen-dark-primary" />
@@ -141,7 +141,7 @@ export default function Navigation({
 
             {/* Desktop Navigation Links */}
             <nav className="min-w-0 flex-1 flex items-center justify-center px-1">
-              <div className="flex items-center gap-0.5 xl:gap-1">
+              <div className="flex items-center gap-1 flex-nowrap">
                 {navItems.map((item) => {
                   const Icon = item.icon;
                   const isActive = activeTab === item.id;
@@ -150,7 +150,7 @@ export default function Navigation({
                     <button
                       key={item.id}
                       onClick={() => setActiveTab(item.id)}
-                      className={`flex items-center gap-1.5 whitespace-nowrap rounded-xl px-2 py-1.5 xl:px-2.5 text-xs font-medium transition-all ${
+                      className={`flex items-center gap-1.5 whitespace-nowrap rounded-xl px-2.5 py-1.5 text-xs font-medium transition-all shrink-0 ${
                         isActive
                           ? 'bg-zen-primary/10 dark:bg-zen-dark-surface-high text-zen-primary dark:text-zen-dark-primary font-bold border border-zen-primary/20 dark:border-zen-dark-border shadow-sm'
                           : 'text-zen-text-muted dark:text-zen-dark-text-muted hover:bg-zen-surface-high dark:hover:bg-zen-dark-surface hover:text-zen-text dark:hover:text-zen-dark-text'
@@ -163,8 +163,7 @@ export default function Navigation({
                             : ''
                         }`}
                       />
-                      <span className="hidden xl:inline">{item.label}</span>
-                      <span className="inline xl:hidden">{item.shortLabel}</span>
+                      <span>{item.label}</span>
                     </button>
                   );
                 })}
@@ -174,7 +173,7 @@ export default function Navigation({
             {/* Top Bar Actions (Script switch, Language, Install PWA & Theme) */}
             <div className="flex shrink-0 items-center gap-2">
               {/* Script Switcher */}
-              <div className="flex items-center bg-zen-surface-container dark:bg-zen-dark-surface p-0.5 rounded-full border border-zen-border/40 dark:border-zen-dark-border">
+              <div className="flex items-center bg-zen-surface-container dark:bg-zen-dark-surface p-0.5 rounded-full border border-zen-border/40 dark:border-zen-dark-border shrink-0">
                 <button
                   onClick={() => setScriptMode('hiragana')}
                   className={`px-2.5 py-1 rounded-full text-xs font-semibold transition-all ${
@@ -184,21 +183,19 @@ export default function Navigation({
                   }`}
                   title={t('nav.scriptHiragana')}
                 >
-                  <span className="xl:hidden">{t('nav.scriptHiraganaShort')}</span>
-                  <span className="hidden xl:inline">{t('nav.scriptHiragana')}</span>
+                  <span>{t('nav.scriptHiragana')}</span>
                 </button>
 
                 <button
                   onClick={() => setScriptMode('katakana')}
                   className={`px-2.5 py-1 rounded-full text-xs font-semibold transition-all ${
                     scriptMode === 'katakana'
-                      ? 'bg-zen-secondary dark:bg-zen-dark-secondary text-white dark:text-zen-dark-on-primary shadow-zen-sm'
+                      ? 'bg-zen-primary dark:bg-zen-dark-primary text-white dark:text-zen-dark-on-primary shadow-zen-sm'
                       : 'text-zen-text-muted dark:text-zen-dark-text-muted hover:text-zen-text dark:hover:text-zen-dark-text'
                   }`}
                   title={t('nav.scriptKatakana')}
                 >
-                  <span className="xl:hidden">{t('nav.scriptKatakanaShort')}</span>
-                  <span className="hidden xl:inline">{t('nav.scriptKatakana')}</span>
+                  <span>{t('nav.scriptKatakana')}</span>
                 </button>
               </div>
 
@@ -244,10 +241,10 @@ export default function Navigation({
             </div>
           </div>
 
-          {/* ===================== MOBILE HEADER TOP BAR ===================== */}
+          {/* ===================== TABLET & MOBILE HEADER TOP BAR ===================== */}
 
           <div
-            className="flex h-14 items-center justify-between lg:hidden"
+            className="flex h-14 items-center justify-between xl:hidden"
             style={{
               paddingLeft: 'max(0.25rem, env(safe-area-inset-left))',
               paddingRight: 'max(0.25rem, env(safe-area-inset-right))',
@@ -378,7 +375,7 @@ export default function Navigation({
       {/* ===================== MOBILE HAMBURGER MENU DRAWER OVERLAY ===================== */}
 
       {isMobileMenuOpen && (
-        <div className="fixed inset-0 z-50 lg:hidden flex">
+        <div className="fixed inset-0 z-50 xl:hidden flex">
           {/* Backdrop Blur Overlay */}
           <div
             className="fixed inset-0 bg-black/60 backdrop-blur-sm transition-opacity duration-300 animate-fadeIn"
@@ -391,91 +388,89 @@ export default function Navigation({
             {/* Drawer Header */}
             <div className="p-4 border-b border-zen-surface-high dark:border-zen-dark-border flex items-center justify-between bg-zen-surface dark:bg-zen-dark-surface">
               <div className="flex items-center gap-3">
-                <div className="w-9 h-9 rounded-xl bg-zen-primary dark:bg-zen-dark-primary text-white dark:text-zen-dark-on-primary flex items-center justify-center font-kana font-bold text-lg shadow-zen-sm">
+                <div className="w-8 h-8 rounded-xl bg-zen-primary dark:bg-zen-dark-primary text-white dark:text-zen-dark-on-primary flex items-center justify-center font-kana font-bold text-base shadow-zen-sm">
                   あ
                 </div>
                 <div>
-                  <h2 className="font-headline font-bold text-base text-zen-text dark:text-zen-dark-text leading-tight">
+                  <h2 className="font-headline font-bold text-base text-zen-primary dark:text-zen-dark-primary leading-tight">
                     {t('nav.appName')}
                   </h2>
-                  <p className="text-[11px] text-zen-text-muted dark:text-zen-dark-text-muted">
-                    {t('nav.studySections')}
+                  <p className="text-[10px] text-zen-text-muted dark:text-zen-dark-text-muted">
+                    {t('nav.appSubtitle')}
                   </p>
                 </div>
               </div>
 
               <button
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="p-2 rounded-xl text-zen-text-muted dark:text-zen-dark-text-muted hover:bg-zen-surface-container dark:hover:bg-zen-dark-surface-high transition-colors"
+                className="p-1.5 rounded-lg text-zen-text-muted hover:text-zen-text dark:text-zen-dark-text-muted dark:hover:text-zen-dark-text bg-zen-surface-container dark:bg-zen-dark-surface"
                 aria-label="Chiudi menu"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
 
-            {/* Language Selector Inside Drawer */}
-            <div className="p-4 border-b border-zen-surface-high dark:border-zen-dark-border bg-zen-surface-container/50 dark:bg-zen-dark-surface/40">
-              <p className="text-[11px] font-bold uppercase tracking-wider text-zen-text-muted dark:text-zen-dark-text-muted mb-2">
-                {t('nav.language')}
-              </p>
-              <div className="grid grid-cols-2 gap-2 bg-zen-surface-container dark:bg-zen-dark-surface p-1 rounded-xl border border-zen-border/40 dark:border-zen-dark-border">
-                <button
-                  onClick={() => setLang('it')}
-                  className={`py-2 px-3 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 ${
-                    lang === 'it'
-                      ? 'bg-zen-primary text-white dark:bg-zen-dark-primary dark:text-zen-dark-on-primary shadow-zen-sm'
-                      : 'text-zen-text-muted dark:text-zen-dark-text-muted hover:text-zen-text dark:hover:text-zen-dark-text'
-                  }`}
-                >
-                  <span>🇮🇹</span> Italiano
-                </button>
-
-                <button
-                  onClick={() => setLang('en')}
-                  className={`py-2 px-3 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 ${
-                    lang === 'en'
-                      ? 'bg-zen-primary text-white dark:bg-zen-dark-primary dark:text-zen-dark-on-primary shadow-zen-sm'
-                      : 'text-zen-text-muted dark:text-zen-dark-text-muted hover:text-zen-text dark:hover:text-zen-dark-text'
-                  }`}
-                >
-                  <span>🇬🇧</span> English
-                </button>
-              </div>
-            </div>
-
-            {/* Writing System Selector Inside Drawer */}
-            <div className="p-4 border-b border-zen-surface-high dark:border-zen-dark-border bg-zen-surface-container/50 dark:bg-zen-dark-surface/40">
-              <p className="text-[11px] font-bold uppercase tracking-wider text-zen-text-muted dark:text-zen-dark-text-muted mb-2">
+            {/* Script Selector in Drawer */}
+            <div className="p-4 border-b border-zen-surface-high dark:border-zen-dark-border bg-zen-surface-container/30 dark:bg-zen-dark-surface-high/30">
+              <span className="block text-[11px] font-semibold text-zen-text-muted dark:text-zen-dark-text-muted mb-2 uppercase tracking-wider">
                 {t('nav.writingSystem')}
-              </p>
+              </span>
               <div className="grid grid-cols-2 gap-2 bg-zen-surface-container dark:bg-zen-dark-surface p-1 rounded-xl border border-zen-border/40 dark:border-zen-dark-border">
                 <button
                   onClick={() => setScriptMode('hiragana')}
-                  className={`py-2 px-3 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 ${
+                  className={`py-2 rounded-lg text-xs font-bold transition-all ${
                     scriptMode === 'hiragana'
-                      ? 'bg-zen-primary text-white dark:bg-zen-dark-primary dark:text-zen-dark-on-primary shadow-zen-sm'
-                      : 'text-zen-text-muted dark:text-zen-dark-text-muted hover:text-zen-text dark:hover:text-zen-dark-text'
+                      ? 'bg-zen-primary dark:bg-zen-dark-primary text-white dark:text-zen-dark-on-primary shadow-zen-sm'
+                      : 'text-zen-text-muted dark:text-zen-dark-text-muted'
                   }`}
                 >
-                  <span className="font-kana font-normal text-sm">あ</span> Hiragana
+                  Hiragana (あ)
                 </button>
-
                 <button
                   onClick={() => setScriptMode('katakana')}
-                  className={`py-2 px-3 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 ${
+                  className={`py-2 rounded-lg text-xs font-bold transition-all ${
                     scriptMode === 'katakana'
-                      ? 'bg-zen-secondary text-white dark:bg-zen-dark-secondary dark:text-zen-dark-on-primary shadow-zen-sm'
+                      ? 'bg-zen-primary dark:bg-zen-dark-primary text-white dark:text-zen-dark-on-primary shadow-zen-sm'
                       : 'text-zen-text-muted dark:text-zen-dark-text-muted hover:text-zen-text dark:hover:text-zen-dark-text'
                   }`}
                 >
-                  <span className="font-kana font-normal text-sm">ア</span> Katakana
+                  Katakana (ア)
                 </button>
               </div>
             </div>
 
-            {/* Navigation Section Links List */}
-            <div className="p-3 flex-1 space-y-1">
-              <p className="px-3 pt-2 pb-1 text-[11px] font-bold uppercase tracking-wider text-zen-text-muted dark:text-zen-dark-text-muted">
+            {/* Language Selector in Drawer */}
+            <div className="p-4 border-b border-zen-surface-high dark:border-zen-dark-border bg-zen-surface-container/30 dark:bg-zen-dark-surface-high/30">
+              <span className="block text-[11px] font-semibold text-zen-text-muted dark:text-zen-dark-text-muted mb-2 uppercase tracking-wider">
+                {t('nav.language')}
+              </span>
+              <div className="grid grid-cols-2 gap-2 bg-zen-surface-container dark:bg-zen-dark-surface p-1 rounded-xl border border-zen-border/40 dark:border-zen-dark-border">
+                <button
+                  onClick={() => setLang('it')}
+                  className={`py-2 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 ${
+                    lang === 'it'
+                      ? 'bg-zen-primary dark:bg-zen-dark-primary text-white dark:text-zen-dark-on-primary shadow-zen-sm'
+                      : 'text-zen-text-muted dark:text-zen-dark-text-muted hover:text-zen-text dark:hover:text-zen-dark-text'
+                  }`}
+                >
+                  🇮🇹 Italiano
+                </button>
+                <button
+                  onClick={() => setLang('en')}
+                  className={`py-2 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 ${
+                    lang === 'en'
+                      ? 'bg-zen-primary dark:bg-zen-dark-primary text-white dark:text-zen-dark-on-primary shadow-zen-sm'
+                      : 'text-zen-text-muted dark:text-zen-dark-text-muted hover:text-zen-text dark:hover:text-zen-dark-text'
+                  }`}
+                >
+                  🇬🇧 English
+                </button>
+              </div>
+            </div>
+
+            {/* Navigation Modules Links */}
+            <div className="flex-1 p-3 space-y-1 overflow-y-auto">
+              <p className="px-3 py-1.5 text-[11px] font-semibold text-zen-text-muted dark:text-zen-dark-text-muted uppercase tracking-wider">
                 {t('nav.studySections')}
               </p>
 
@@ -555,7 +550,7 @@ export default function Navigation({
       {/* ===================== MOBILE BOTTOM NAVIGATION BAR ===================== */}
 
       <nav
-        className="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 dark:bg-zen-dark-surface/95 backdrop-blur-lg border-t border-zen-surface-high dark:border-zen-dark-border px-2 py-1.5 shadow-lg"
+        className="xl:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 dark:bg-zen-dark-surface/95 backdrop-blur-lg border-t border-zen-surface-high dark:border-zen-dark-border px-2 py-1.5 shadow-lg"
         style={{
           paddingBottom: 'max(0.5rem, env(safe-area-inset-bottom))',
         }}

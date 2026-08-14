@@ -36,7 +36,7 @@ export default function KanaDrawingPad({ kana, romaji, onScore }) {
     context.setTransform(ratio, 0, 0, ratio, 0, 0);
     context.lineCap = 'round';
     context.lineJoin = 'round';
-    context.lineWidth = 8;
+    context.lineWidth = 22;
     context.strokeStyle = document.documentElement.classList.contains('dark') ? '#36d399' : '#38656f';
     contextRef.current = context;
   };

@@ -66,25 +66,25 @@ export default function VirtualKeyboard({
     ];
 
     return (
-        <div className="w-full max-w-2xl mx-auto mt-6 bg-slate-800/90 p-4 rounded-2xl shadow-xl border border-slate-700/80 select-none">
+        <div className="w-full max-w-2xl mx-auto mt-6 zen-card bg-white dark:bg-zen-dark-surface-high p-4 sm:p-5 rounded-3xl shadow-zen-lg dark:shadow-zen-dark-lg border-2 border-zen-surface-high dark:border-zen-dark-border select-none">
             
             {readOnly && (
-                <div className="flex items-center justify-center gap-2 mb-3 py-1.5 px-3 bg-indigo-950/50 border border-indigo-500/30 rounded-lg text-indigo-300 text-xs font-bold uppercase tracking-wider">
+                <div className="flex items-center justify-center gap-2 mb-3 py-2 px-3 bg-zen-primary/10 dark:bg-zen-dark-primary/20 border border-zen-primary/20 dark:border-zen-dark-border rounded-xl text-zen-primary dark:text-zen-dark-primary text-xs font-bold uppercase tracking-wider">
                     <BookOpen className="w-3.5 h-3.5" />
                     <span>{t('keyboard.consultationNotice')}</span>
                 </div>
             )}
 
             {/* Top Toolbar: Script switch & Controls */}
-            <div className="flex flex-col sm:flex-row justify-between items-center mb-3 px-1 gap-3">
-                <div className="flex space-x-2">
+            <div className="flex flex-col sm:flex-row justify-between items-center mb-3 px-1 gap-2.5">
+                <div className="flex space-x-2 bg-zen-surface-container/60 dark:bg-zen-dark-surface p-1 rounded-xl border border-zen-border/40 dark:border-zen-dark-border">
                     <button
                         type="button"
                         onClick={() => setScript('hiragana')}
-                        className={`px-3.5 py-1.5 rounded-lg font-bold text-xs uppercase tracking-widest transition-all ${
+                        className={`px-3 py-1.5 rounded-lg font-bold text-xs uppercase tracking-widest transition-all ${
                             script === 'hiragana' 
-                                ? 'bg-indigo-600 text-white shadow-md shadow-indigo-900/30' 
-                                : 'bg-slate-700 text-slate-400 hover:bg-slate-600 hover:text-slate-200'
+                                ? 'bg-zen-primary dark:bg-zen-dark-primary text-white dark:text-zen-dark-on-primary shadow-zen-sm' 
+                                : 'text-zen-text-muted dark:text-zen-dark-text-muted hover:text-zen-text dark:hover:text-zen-dark-text'
                         }`}
                     >
                         {t('keyboard.hiragana')}
@@ -92,25 +92,25 @@ export default function VirtualKeyboard({
                     <button
                         type="button"
                         onClick={() => setScript('katakana')}
-                        className={`px-3.5 py-1.5 rounded-lg font-bold text-xs uppercase tracking-widest transition-all ${
+                        className={`px-3 py-1.5 rounded-lg font-bold text-xs uppercase tracking-widest transition-all ${
                             script === 'katakana' 
-                                ? 'bg-indigo-600 text-white shadow-md shadow-indigo-900/30' 
-                                : 'bg-slate-700 text-slate-400 hover:bg-slate-600 hover:text-slate-200'
+                                ? 'bg-zen-primary dark:bg-zen-dark-primary text-white dark:text-zen-dark-on-primary shadow-zen-sm' 
+                                : 'text-zen-text-muted dark:text-zen-dark-text-muted hover:text-zen-text dark:hover:text-zen-dark-text'
                         }`}
                     >
                         {t('keyboard.katakana')}
                     </button>
                 </div>
                 
-                <div className="flex flex-wrap items-center gap-2 sm:gap-3">
+                <div className="flex flex-wrap items-center gap-2">
                     {allowToggleRomaji && (
                         <button
                             type="button"
                             onClick={() => setRomajiToggled(!romajiToggled)}
-                            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg font-bold text-xs uppercase tracking-wider transition-all border ${
+                            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-all border ${
                                 romajiToggled
-                                    ? 'bg-amber-500/20 text-amber-300 border-amber-500/40 shadow-sm'
-                                    : 'bg-slate-700/60 text-slate-400 border-slate-600 hover:bg-slate-700 hover:text-slate-200'
+                                    ? 'bg-amber-500/15 text-amber-700 dark:text-amber-300 border-amber-500/40 shadow-sm'
+                                    : 'bg-zen-surface-container dark:bg-zen-dark-surface text-zen-text-muted dark:text-zen-dark-text-muted border-zen-border/40 dark:border-zen-dark-border hover:text-zen-text'
                             }`}
                             title="Toggle Romaji sub-labels"
                         >
@@ -124,7 +124,7 @@ export default function VirtualKeyboard({
                             type="button"
                             onClick={onBackspace}
                             disabled={disabled}
-                            className="px-3.5 py-1.5 bg-rose-600/20 text-rose-300 rounded-lg hover:bg-rose-600/40 transition-colors font-bold text-xs uppercase tracking-widest border border-rose-500/30 disabled:opacity-50"
+                            className="px-3.5 py-1.5 bg-rose-500/10 text-rose-600 dark:text-rose-300 rounded-xl hover:bg-rose-500/20 transition-colors font-bold text-xs uppercase tracking-widest border border-rose-500/30 disabled:opacity-50"
                         >
                             {t('keyboard.del')}
                         </button>
@@ -133,16 +133,16 @@ export default function VirtualKeyboard({
             </div>
 
             {/* Category Navigation Pills */}
-            <div className="flex flex-wrap gap-1.5 mb-4 p-1 bg-slate-900/60 rounded-xl border border-slate-700/50">
+            <div className="flex flex-wrap gap-1 mb-4 p-1 bg-zen-surface-container/60 dark:bg-zen-dark-surface rounded-2xl border border-zen-border/40 dark:border-zen-dark-border">
                 {categories.map(cat => (
                     <button
                         key={cat.id}
                         type="button"
                         onClick={() => setCategory(cat.id)}
-                        className={`flex-1 min-w-[80px] py-1.5 px-2 rounded-lg text-xs font-bold transition-all text-center ${
+                        className={`flex-1 min-w-[70px] py-1.5 px-2 rounded-xl text-xs font-bold transition-all text-center ${
                             category === cat.id
-                                ? 'bg-indigo-600 text-white shadow-sm'
-                                : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800'
+                                ? 'bg-white dark:bg-zen-dark-primary text-zen-primary dark:text-zen-dark-on-primary shadow-zen-sm'
+                                : 'text-zen-text-muted dark:text-zen-dark-text-muted hover:text-zen-text dark:hover:text-zen-dark-text'
                         }`}
                     >
                         {cat.label}
@@ -162,20 +162,20 @@ export default function VirtualKeyboard({
                                 disabled={!item || (disabled && !readOnly)}
                                 tabIndex={readOnly ? -1 : 0}
                                 className={`
-                                    h-14 sm:h-16 rounded-xl flex flex-col items-center justify-center transition-all
+                                    h-14 sm:h-16 rounded-2xl flex flex-col items-center justify-center transition-all
                                     ${item 
                                         ? readOnly
-                                            ? 'bg-slate-700/80 text-slate-100 border border-slate-600/60 cursor-default'
-                                            : 'bg-slate-700 hover:bg-slate-600 text-slate-100 shadow-sm active:scale-95 border-b-2 border-slate-900 active:border-t-2 active:border-b-0 cursor-pointer'
+                                            ? 'bg-zen-surface-container/50 dark:bg-zen-dark-surface/60 text-zen-text dark:text-zen-dark-text border border-zen-border/40 dark:border-zen-dark-border/40 cursor-default'
+                                            : 'bg-white dark:bg-zen-dark-surface hover:bg-zen-surface-container dark:hover:bg-zen-dark-surface-high text-zen-text dark:text-zen-dark-text shadow-zen-sm active:scale-95 border border-zen-border/60 dark:border-zen-dark-border cursor-pointer'
                                         : 'invisible'}
-                                    disabled:opacity-50 disabled:active:scale-100 disabled:active:border-b-2
+                                    disabled:opacity-50 disabled:active:scale-100
                                 `}
                             >
                                 {item ? (
                                     <>
-                                        <span className="font-japanese text-xl sm:text-2xl font-bold leading-tight">{item.k}</span>
+                                        <span className="font-kana text-xl sm:text-2xl font-bold leading-tight text-zen-primary dark:text-white">{item.k}</span>
                                         {isRomajiVisible && (
-                                            <span className="text-[10px] sm:text-xs text-slate-400 font-mono tracking-wider leading-none mt-0.5">
+                                            <span className="text-[10px] sm:text-xs text-zen-text-muted dark:text-zen-dark-text-muted font-mono tracking-wider leading-none mt-0.5">
                                                 {item.r}
                                             </span>
                                         )}

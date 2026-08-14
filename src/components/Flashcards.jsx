@@ -56,7 +56,7 @@ export default function Flashcards({ scriptMode, updateStats }) {
   const progressPercent = Math.round(((currentIndex + 1) / fullDeck.length) * 100);
 
   return (
-    <div className="mx-auto max-w-2xl space-y-6 pb-20 lg:pb-8">
+    <div className="mx-auto max-w-2xl space-y-6 pb-20 xl:pb-8">
       <div className="flex rounded-2xl border border-zen-surface-high bg-white p-1 dark:border-zen-dark-border dark:bg-zen-dark-surface">
         <button onClick={() => changeDeck('kana')} className={`flex flex-1 items-center justify-center gap-2 rounded-xl px-3 py-2.5 text-sm font-bold transition-all ${deckType === 'kana' ? 'bg-zen-primary text-white dark:bg-zen-dark-primary dark:text-zen-dark-on-primary' : 'text-zen-text-muted dark:text-zen-dark-text-muted'}`}>
           <Layers className="h-4 w-4" /> Kana

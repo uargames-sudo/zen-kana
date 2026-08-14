@@ -82,7 +82,7 @@ export default function Dashboard({ setActiveTab, scriptMode, stats, resetStats 
   };
 
   return (
-    <div className="space-y-8 pb-20 lg:pb-8">
+    <div className="space-y-8 pb-20 xl:pb-8">
       {/* Hero Zen Banner */}
       <div className="zen-card p-6 sm:p-8 bg-gradient-to-br from-zen-surface-lowest via-zen-surface-container/50 to-zen-surface-high/60 dark:from-zen-dark-surface dark:via-zen-dark-surface-high/40 dark:to-zen-dark-bg border border-zen-surface-high dark:border-zen-dark-border">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">

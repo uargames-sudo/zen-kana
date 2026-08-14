@@ -80,7 +80,7 @@ export default function StructuredLessons({ scriptMode, updateStats }) {
   };
 
   return (
-    <section className="mx-auto max-w-4xl space-y-6 pb-20 lg:pb-8">
+    <section className="mx-auto max-w-4xl space-y-6 pb-20 xl:pb-8">
       <div className="zen-card border border-zen-surface-high p-5 dark:border-zen-dark-border">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div>

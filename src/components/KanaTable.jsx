@@ -30,7 +30,7 @@ export default function KanaTable({ scriptMode }) {
   };
 
   return (
-    <div className="space-y-6 pb-20 lg:pb-8">
+    <div className="space-y-6 pb-20 xl:pb-8">
       {/* Header & Tabs */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>

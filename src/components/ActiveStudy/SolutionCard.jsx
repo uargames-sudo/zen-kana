@@ -26,10 +26,10 @@ export default function SolutionCard({ item, onNext }) {
         <motion.div 
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="w-full max-w-md mx-auto mt-8 bg-slate-800 rounded-2xl shadow-2xl border border-slate-700 overflow-hidden"
+            className="w-full max-w-md mx-auto mt-6 zen-card bg-white dark:bg-zen-dark-surface-high rounded-3xl shadow-zen-xl dark:shadow-zen-dark-lg border-2 border-zen-surface-high dark:border-zen-dark-border overflow-hidden"
         >
-            <div className="bg-slate-900/50 p-6 text-center border-b border-slate-700">
-                <h3 className="text-sm font-bold text-slate-400 uppercase tracking-widest mb-4">
+            <div className="bg-zen-surface-container/40 dark:bg-zen-dark-surface p-6 text-center border-b border-zen-border/40 dark:border-zen-dark-border">
+                <h3 className="text-xs font-bold text-zen-text-muted dark:text-zen-dark-text-muted uppercase tracking-widest mb-4">
                     {t('activeStudy.solutionTitle')}
                 </h3>
                 
@@ -39,13 +39,13 @@ export default function SolutionCard({ item, onNext }) {
                         <div className="flex justify-center items-end space-x-1">
                             {item.furigana.map((f, i) => (
                                 <div key={i} className="flex flex-col items-center">
-                                    <span className="text-slate-400 text-sm h-5">{f.reading || ''}</span>
-                                    <span className="text-5xl font-japanese font-bold text-slate-100">{f.text}</span>
+                                    <span className="text-zen-text-muted dark:text-zen-dark-text-muted text-sm h-5">{f.reading || ''}</span>
+                                    <span className="text-5xl font-kana font-bold text-zen-primary dark:text-white">{f.text}</span>
                                 </div>
                             ))}
                         </div>
                     ) : (
-                        <div className="text-5xl font-japanese font-bold text-slate-100">
+                        <div className="text-5xl font-kana font-bold text-zen-primary dark:text-white">
                             {item.japanese || item.kana}
                         </div>
                     )}
@@ -53,24 +53,24 @@ export default function SolutionCard({ item, onNext }) {
                     <button
                         type="button"
                         onClick={handlePlayAudio}
-                        className="p-3 bg-indigo-600/20 text-indigo-400 hover:bg-indigo-600/40 hover:text-indigo-200 rounded-full border border-indigo-500/30 transition-all active:scale-95 shadow-sm"
+                        className="p-2.5 bg-zen-primary/10 dark:bg-zen-dark-primary/20 text-zen-primary dark:text-zen-dark-primary hover:bg-zen-primary/20 rounded-full border border-zen-primary/20 dark:border-zen-dark-border transition-all active:scale-95 shadow-sm"
                         title="Pronounce word"
                         aria-label="Pronounce word"
                     >
-                        <Volume2 className="w-6 h-6" />
+                        <Volume2 className="w-5 h-5" />
                     </button>
                 </div>
                 
-                <div className="text-2xl font-mono text-indigo-400 font-bold mt-3">
+                <div className="text-2xl font-headline font-bold text-zen-text dark:text-zen-dark-primary mt-2">
                     {item.romaji}
                 </div>
             </div>
 
-            <div className="p-6 space-y-4">
+            <div className="p-6 space-y-3.5">
                 {item.acceptedRomaji && item.acceptedRomaji.length > 1 && (
-                    <div className="flex justify-between items-center text-sm border-b border-slate-700/50 pb-2">
-                        <span className="text-slate-500">{t('activeStudy.acceptedVariants')}</span>
-                        <span className="text-slate-300 font-mono">
+                    <div className="flex justify-between items-center text-xs border-b border-zen-border/30 dark:border-zen-dark-border/40 pb-2">
+                        <span className="text-zen-text-muted dark:text-zen-dark-text-muted">{t('activeStudy.acceptedVariants')}</span>
+                        <span className="text-zen-text dark:text-zen-dark-text font-mono font-bold">
                             {item.acceptedRomaji.filter(r => r !== item.romaji).join(', ')}
                         </span>
                     </div>
@@ -78,34 +78,36 @@ export default function SolutionCard({ item, onNext }) {
                 
                 {lang === 'it' ? (
                     <>
-                        <div className="flex justify-between items-center text-sm border-b border-slate-700/50 pb-2">
-                            <span className="text-slate-500">{t('activeStudy.italianTranslation')}</span>
-                            <span className="text-slate-200 font-semibold">{item.italian}</span>
+                        <div className="flex justify-between items-center text-xs border-b border-zen-border/30 dark:border-zen-dark-border/40 pb-2">
+                            <span className="text-zen-text-muted dark:text-zen-dark-text-muted">{t('activeStudy.italianTranslation')}</span>
+                            <span className="text-zen-text dark:text-zen-dark-text font-bold">{item.italian}</span>
                         </div>
-                        <div className="flex justify-between items-center text-sm border-b border-slate-700/50 pb-2">
-                            <span className="text-slate-500">{t('activeStudy.englishTranslation')}</span>
-                            <span className="text-slate-300">{item.english}</span>
+                        <div className="flex justify-between items-center text-xs border-b border-zen-border/30 dark:border-zen-dark-border/40 pb-2">
+                            <span className="text-zen-text-muted dark:text-zen-dark-text-muted">{t('activeStudy.englishTranslation')}</span>
+                            <span className="text-zen-text-muted dark:text-zen-dark-text-muted">{item.english}</span>
                         </div>
                     </>
                 ) : (
                     <>
-                        <div className="flex justify-between items-center text-sm border-b border-slate-700/50 pb-2">
-                            <span className="text-slate-500">{t('activeStudy.englishTranslation')}</span>
-                            <span className="text-slate-200 font-semibold">{item.english}</span>
+                        <div className="flex justify-between items-center text-xs border-b border-zen-border/30 dark:border-zen-dark-border/40 pb-2">
+                            <span className="text-zen-text-muted dark:text-zen-dark-text-muted">{t('activeStudy.englishTranslation')}</span>
+                            <span className="text-zen-text dark:text-zen-dark-text font-bold">{item.english}</span>
                         </div>
-                        <div className="flex justify-between items-center text-sm border-b border-slate-700/50 pb-2">
-                            <span className="text-slate-500">{t('activeStudy.italianTranslation')}</span>
-                            <span className="text-slate-300">{item.italian}</span>
+                        <div className="flex justify-between items-center text-xs border-b border-zen-border/30 dark:border-zen-dark-border/40 pb-2">
+                            <span className="text-zen-text-muted dark:text-zen-dark-text-muted">{t('activeStudy.italianTranslation')}</span>
+                            <span className="text-zen-text-muted dark:text-zen-dark-text-muted">{item.italian}</span>
                         </div>
                     </>
                 )}
 
-                <button
-                    onClick={onNext}
-                    className="w-full mt-6 py-4 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl font-bold uppercase tracking-widest transition-colors shadow-lg shadow-indigo-900/20 active:scale-95"
-                >
-                    {t('activeStudy.nextQuestion')}
-                </button>
+                <div className="pt-2">
+                    <button
+                        onClick={onNext}
+                        className="w-full py-3.5 rounded-2xl bg-zen-primary hover:bg-zen-primary-dark dark:bg-zen-dark-primary dark:hover:bg-zen-dark-primary-hover text-white dark:text-zen-dark-on-primary font-bold text-xs uppercase tracking-widest transition-all shadow-zen-sm active:scale-95"
+                    >
+                        {t('activeStudy.continueNext')}
+                    </button>
+                </div>
             </div>
         </motion.div>
     );

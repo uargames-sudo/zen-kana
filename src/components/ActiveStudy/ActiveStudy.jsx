@@ -4,7 +4,7 @@ import AnswerInput from './AnswerInput';
 import VirtualKeyboard from './VirtualKeyboard';
 import SolutionCard from './SolutionCard';
 import { checkRomajiMatch, getRomajiDiff } from '../../utils/romajiVariants';
-import { Layers, Activity, Keyboard } from 'lucide-react';
+import { Layers, Sparkles, Keyboard, CheckCircle, XCircle } from 'lucide-react';
 import { useLanguage } from '../../context/LanguageContext';
 
 export default function ActiveStudy({ vocabularyData }) {
@@ -121,27 +121,37 @@ export default function ActiveStudy({ vocabularyData }) {
     };
     
     if (vocabularyData.length === 0) {
-        return <div className="text-white text-center p-8">No vocabulary data available.</div>;
+        return <div className="text-zen-text dark:text-zen-dark-text text-center p-8">No vocabulary data available.</div>;
     }
 
     if (phase === 'setup') {
         return (
-            <div className="w-full max-w-2xl mx-auto p-4 flex flex-col pt-12 pb-20">
-                <div className="bg-slate-800 rounded-2xl shadow-xl border border-slate-700 p-8">
+            <div className="w-full max-w-2xl mx-auto p-4 flex flex-col pt-6 pb-20">
+                <div className="zen-card bg-white dark:bg-zen-dark-surface border-2 border-zen-surface-high dark:border-zen-dark-border rounded-3xl shadow-zen-lg dark:shadow-zen-dark-lg p-6 sm:p-8">
                     <div className="flex items-center justify-center mb-8 gap-3">
-                        <Activity className="w-8 h-8 text-indigo-400" />
-                        <h2 className="text-3xl font-bold text-slate-100">{t('activeStudy.setupTitle')}</h2>
+                        <div className="w-10 h-10 rounded-2xl bg-zen-primary/10 dark:bg-zen-dark-primary/20 text-zen-primary dark:text-zen-dark-primary flex items-center justify-center">
+                            <Sparkles className="w-6 h-6" />
+                        </div>
+                        <h2 className="text-2xl sm:text-3xl font-headline font-bold text-zen-text dark:text-zen-dark-text">
+                            {t('activeStudy.setupTitle')}
+                        </h2>
                     </div>
                     
                     <div className="space-y-8">
                         <div>
-                            <h3 className="text-lg font-bold text-slate-300 mb-4 uppercase tracking-wider">{t('activeStudy.questionCount')}</h3>
-                            <div className="flex flex-wrap gap-3">
+                            <h3 className="text-xs font-bold text-zen-text-muted dark:text-zen-dark-text-muted mb-3 uppercase tracking-wider">
+                                {t('activeStudy.questionCount')}
+                            </h3>
+                            <div className="flex flex-wrap gap-2.5 sm:gap-3">
                                 {[5, 10, 20, 50].map(num => (
                                     <button 
                                         key={num}
                                         onClick={() => setTargetCount(num)}
-                                        className={`px-6 py-3 rounded-xl font-bold transition-all ${targetCount === num ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-900/30' : 'bg-slate-900 text-slate-400 hover:bg-slate-700'}`}
+                                        className={`px-5 py-2.5 sm:px-6 sm:py-3 rounded-xl font-bold text-sm transition-all ${
+                                            targetCount === num 
+                                                ? 'bg-zen-primary dark:bg-zen-dark-primary text-white dark:text-zen-dark-on-primary shadow-zen-sm' 
+                                                : 'bg-zen-surface-container dark:bg-zen-dark-surface-high text-zen-text-muted dark:text-zen-dark-text-muted hover:text-zen-text dark:hover:text-zen-dark-text border border-zen-border/40 dark:border-zen-dark-border'
+                                        }`}
                                     >
                                         {num}
                                     </button>
@@ -150,48 +160,64 @@ export default function ActiveStudy({ vocabularyData }) {
                         </div>
 
                         <div>
-                            <h3 className="text-lg font-bold text-slate-300 mb-4 uppercase tracking-wider">{t('activeStudy.studyMode')}</h3>
+                            <h3 className="text-xs font-bold text-zen-text-muted dark:text-zen-dark-text-muted mb-3 uppercase tracking-wider">
+                                {t('activeStudy.studyMode')}
+                            </h3>
                             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                                 <button 
                                     onClick={() => setStudyMode('ja-to-ro')}
-                                    className={`p-4 rounded-xl font-bold transition-all flex flex-col items-center gap-2 ${studyMode === 'ja-to-ro' ? 'bg-indigo-600 text-white shadow-lg' : 'bg-slate-900 text-slate-400 hover:bg-slate-700'}`}
+                                    className={`p-4 rounded-2xl font-bold transition-all flex flex-col items-center gap-1.5 border ${
+                                        studyMode === 'ja-to-ro' 
+                                            ? 'bg-zen-primary dark:bg-zen-dark-primary text-white dark:text-zen-dark-on-primary border-zen-primary shadow-zen-sm' 
+                                            : 'bg-zen-surface-container/60 dark:bg-zen-dark-surface-high text-zen-text dark:text-zen-dark-text border-zen-border/40 dark:border-zen-dark-border hover:border-zen-primary/40'
+                                    }`}
                                 >
-                                    <span className="text-xl">あ ➔ a</span>
-                                    <span className="text-sm">{t('activeStudy.modeReadKana')}</span>
+                                    <span className="text-xl font-kana">あ ➔ a</span>
+                                    <span className="text-xs">{t('activeStudy.modeReadKana')}</span>
                                 </button>
                                 <button 
                                     onClick={() => setStudyMode('ro-to-ja')}
-                                    className={`p-4 rounded-xl font-bold transition-all flex flex-col items-center gap-2 ${studyMode === 'ro-to-ja' ? 'bg-indigo-600 text-white shadow-lg' : 'bg-slate-900 text-slate-400 hover:bg-slate-700'}`}
+                                    className={`p-4 rounded-2xl font-bold transition-all flex flex-col items-center gap-1.5 border ${
+                                        studyMode === 'ro-to-ja' 
+                                            ? 'bg-zen-primary dark:bg-zen-dark-primary text-white dark:text-zen-dark-on-primary border-zen-primary shadow-zen-sm' 
+                                            : 'bg-zen-surface-container/60 dark:bg-zen-dark-surface-high text-zen-text dark:text-zen-dark-text border-zen-border/40 dark:border-zen-dark-border hover:border-zen-primary/40'
+                                    }`}
                                 >
-                                    <span className="text-xl">a ➔ あ</span>
-                                    <span className="text-sm">{t('activeStudy.modeWriteKana')}</span>
+                                    <span className="text-xl font-kana">a ➔ あ</span>
+                                    <span className="text-xs">{t('activeStudy.modeWriteKana')}</span>
                                 </button>
                                 <button 
                                     onClick={() => setStudyMode('mixed')}
-                                    className={`p-4 rounded-xl font-bold transition-all flex flex-col items-center gap-2 ${studyMode === 'mixed' ? 'bg-indigo-600 text-white shadow-lg' : 'bg-slate-900 text-slate-400 hover:bg-slate-700'}`}
+                                    className={`p-4 rounded-2xl font-bold transition-all flex flex-col items-center gap-1.5 border ${
+                                        studyMode === 'mixed' 
+                                            ? 'bg-zen-primary dark:bg-zen-dark-primary text-white dark:text-zen-dark-on-primary border-zen-primary shadow-zen-sm' 
+                                            : 'bg-zen-surface-container/60 dark:bg-zen-dark-surface-high text-zen-text dark:text-zen-dark-text border-zen-border/40 dark:border-zen-dark-border hover:border-zen-primary/40'
+                                    }`}
                                 >
-                                    <Layers className="w-6 h-6" />
-                                    <span className="text-sm">{t('activeStudy.modeMixed')}</span>
+                                    <Layers className="w-5 h-5" />
+                                    <span className="text-xs">{t('activeStudy.modeMixed')}</span>
                                 </button>
                             </div>
                         </div>
 
                         <div>
-                            <h3 className="text-lg font-bold text-slate-300 mb-4 uppercase tracking-wider">{t('activeStudy.difficulty')}</h3>
+                            <h3 className="text-xs font-bold text-zen-text-muted dark:text-zen-dark-text-muted mb-3 uppercase tracking-wider">
+                                {t('activeStudy.difficulty')}
+                            </h3>
                             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                                 <button 
                                     type="button"
                                     onClick={() => setDifficulty('easy')}
-                                    className={`p-4 rounded-xl font-bold transition-all flex flex-col items-start gap-1 border text-left ${
+                                    className={`p-4 rounded-2xl font-bold transition-all flex flex-col items-start gap-1 border text-left ${
                                         difficulty === 'easy'
-                                            ? 'bg-indigo-600/30 border-indigo-500 text-white shadow-lg shadow-indigo-900/20'
-                                            : 'bg-slate-900/80 border-slate-700 text-slate-400 hover:bg-slate-700/50 hover:text-slate-200'
+                                            ? 'bg-emerald-500/10 border-emerald-500 text-emerald-800 dark:text-emerald-300 ring-2 ring-emerald-500/30'
+                                            : 'bg-zen-surface-container/60 dark:bg-zen-dark-surface-high border-zen-border/40 dark:border-zen-dark-border text-zen-text dark:text-zen-dark-text hover:border-zen-border'
                                     }`}
                                 >
-                                    <div className="flex items-center gap-2">
-                                        <span className="text-sm uppercase tracking-wider font-extrabold text-emerald-400">{t('activeStudy.difficultyEasy')}</span>
-                                    </div>
-                                    <p className="text-xs text-slate-400 font-normal mt-1 leading-relaxed">
+                                    <span className="text-xs uppercase tracking-wider font-extrabold text-emerald-600 dark:text-emerald-400">
+                                        {t('activeStudy.difficultyEasy')}
+                                    </span>
+                                    <p className="text-[11px] text-zen-text-muted dark:text-zen-dark-text-muted font-normal mt-0.5 leading-relaxed">
                                         {t('activeStudy.difficultyEasyDesc')}
                                     </p>
                                 </button>
@@ -199,16 +225,16 @@ export default function ActiveStudy({ vocabularyData }) {
                                 <button 
                                     type="button"
                                     onClick={() => setDifficulty('medium')}
-                                    className={`p-4 rounded-xl font-bold transition-all flex flex-col items-start gap-1 border text-left ${
+                                    className={`p-4 rounded-2xl font-bold transition-all flex flex-col items-start gap-1 border text-left ${
                                         difficulty === 'medium'
-                                            ? 'bg-indigo-600/30 border-indigo-500 text-white shadow-lg shadow-indigo-900/20'
-                                            : 'bg-slate-900/80 border-slate-700 text-slate-400 hover:bg-slate-700/50 hover:text-slate-200'
+                                            ? 'bg-amber-500/10 border-amber-500 text-amber-800 dark:text-amber-300 ring-2 ring-amber-500/30'
+                                            : 'bg-zen-surface-container/60 dark:bg-zen-dark-surface-high border-zen-border/40 dark:border-zen-dark-border text-zen-text dark:text-zen-dark-text hover:border-zen-border'
                                     }`}
                                 >
-                                    <div className="flex items-center gap-2">
-                                        <span className="text-sm uppercase tracking-wider font-extrabold text-amber-400">{t('activeStudy.difficultyMedium')}</span>
-                                    </div>
-                                    <p className="text-xs text-slate-400 font-normal mt-1 leading-relaxed">
+                                    <span className="text-xs uppercase tracking-wider font-extrabold text-amber-600 dark:text-amber-400">
+                                        {t('activeStudy.difficultyMedium')}
+                                    </span>
+                                    <p className="text-[11px] text-zen-text-muted dark:text-zen-dark-text-muted font-normal mt-0.5 leading-relaxed">
                                         {t('activeStudy.difficultyMediumDesc')}
                                     </p>
                                 </button>
@@ -216,16 +242,16 @@ export default function ActiveStudy({ vocabularyData }) {
                                 <button 
                                     type="button"
                                     onClick={() => setDifficulty('hard')}
-                                    className={`p-4 rounded-xl font-bold transition-all flex flex-col items-start gap-1 border text-left ${
+                                    className={`p-4 rounded-2xl font-bold transition-all flex flex-col items-start gap-1 border text-left ${
                                         difficulty === 'hard'
-                                            ? 'bg-indigo-600/30 border-indigo-500 text-white shadow-lg shadow-indigo-900/20'
-                                            : 'bg-slate-900/80 border-slate-700 text-slate-400 hover:bg-slate-700/50 hover:text-slate-200'
+                                            ? 'bg-rose-500/10 border-rose-500 text-rose-800 dark:text-rose-300 ring-2 ring-rose-500/30'
+                                            : 'bg-zen-surface-container/60 dark:bg-zen-dark-surface-high border-zen-border/40 dark:border-zen-dark-border text-zen-text dark:text-zen-dark-text hover:border-zen-border'
                                     }`}
                                 >
-                                    <div className="flex items-center gap-2">
-                                        <span className="text-sm uppercase tracking-wider font-extrabold text-rose-400">{t('activeStudy.difficultyHard')}</span>
-                                    </div>
-                                    <p className="text-xs text-slate-400 font-normal mt-1 leading-relaxed">
+                                    <span className="text-xs uppercase tracking-wider font-extrabold text-rose-600 dark:text-rose-400">
+                                        {t('activeStudy.difficultyHard')}
+                                    </span>
+                                    <p className="text-[11px] text-zen-text-muted dark:text-zen-dark-text-muted font-normal mt-0.5 leading-relaxed">
                                         {t('activeStudy.difficultyHardDesc')}
                                     </p>
                                 </button>
@@ -234,7 +260,7 @@ export default function ActiveStudy({ vocabularyData }) {
 
                         <button
                             onClick={startSession}
-                            className="w-full mt-8 py-5 bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-500 hover:to-violet-500 text-white rounded-xl font-bold text-lg uppercase tracking-widest transition-all shadow-xl shadow-indigo-900/40 active:scale-95"
+                            className="w-full mt-4 py-4 rounded-2xl bg-zen-primary hover:bg-zen-primary-dark dark:bg-zen-dark-primary dark:hover:bg-zen-dark-primary-hover text-white dark:text-zen-dark-on-primary font-bold text-sm uppercase tracking-widest transition-all shadow-zen-md active:scale-95"
                         >
                             {t('activeStudy.startSession')}
                         </button>
@@ -246,25 +272,29 @@ export default function ActiveStudy({ vocabularyData }) {
 
     if (phase === 'summary') {
         return (
-            <div className="w-full max-w-md mx-auto p-4 flex flex-col pt-24 pb-20 text-center">
-                <div className="bg-slate-800 rounded-2xl shadow-xl border border-slate-700 p-8">
-                    <h2 className="text-3xl font-bold text-slate-100 mb-2">{t('activeStudy.sessionComplete')}</h2>
-                    <p className="text-slate-400 mb-8">{t('activeStudy.sessionSummaryText')}</p>
+            <div className="w-full max-w-md mx-auto p-4 flex flex-col pt-12 pb-20 text-center">
+                <div className="zen-card bg-white dark:bg-zen-dark-surface border-2 border-zen-surface-high dark:border-zen-dark-border rounded-3xl shadow-zen-lg dark:shadow-zen-dark-lg p-8">
+                    <h2 className="text-2xl sm:text-3xl font-headline font-bold text-zen-text dark:text-zen-dark-text mb-2">
+                        {t('activeStudy.sessionComplete')}
+                    </h2>
+                    <p className="text-sm text-zen-text-muted dark:text-zen-dark-text-muted mb-8">
+                        {t('activeStudy.sessionSummaryText')}
+                    </p>
                     
                     <div className="grid grid-cols-2 gap-4 mb-8">
-                        <div className="bg-slate-900 p-4 rounded-xl border border-emerald-500/20">
-                            <div className="text-4xl font-bold text-emerald-400 mb-1">{stats.correct}</div>
-                            <div className="text-xs uppercase tracking-widest text-slate-500 font-bold">{t('activeStudy.correctCount')}</div>
+                        <div className="bg-emerald-500/10 p-4 rounded-2xl border border-emerald-500/30">
+                            <div className="text-4xl font-bold text-emerald-600 dark:text-emerald-400 mb-1">{stats.correct}</div>
+                            <div className="text-xs uppercase tracking-widest text-emerald-700 dark:text-emerald-300 font-bold">{t('activeStudy.correctCount')}</div>
                         </div>
-                        <div className="bg-slate-900 p-4 rounded-xl border border-rose-500/20">
-                            <div className="text-4xl font-bold text-rose-400 mb-1">{stats.failed}</div>
-                            <div className="text-xs uppercase tracking-widest text-slate-500 font-bold">{t('activeStudy.failedCount')}</div>
+                        <div className="bg-rose-500/10 p-4 rounded-2xl border border-rose-500/30">
+                            <div className="text-4xl font-bold text-rose-600 dark:text-rose-400 mb-1">{stats.failed}</div>
+                            <div className="text-xs uppercase tracking-widest text-rose-700 dark:text-rose-300 font-bold">{t('activeStudy.failedCount')}</div>
                         </div>
                     </div>
                     
                     <button
                         onClick={() => setPhase('setup')}
-                        className="w-full py-4 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl font-bold uppercase tracking-widest transition-all shadow-lg active:scale-95"
+                        className="w-full py-3.5 rounded-2xl bg-zen-primary hover:bg-zen-primary-dark dark:bg-zen-dark-primary dark:hover:bg-zen-dark-primary-hover text-white dark:text-zen-dark-on-primary font-bold uppercase tracking-widest transition-all shadow-zen-sm active:scale-95 text-xs"
                     >
                         {t('activeStudy.backToSetup')}
                     </button>
@@ -275,19 +305,19 @@ export default function ActiveStudy({ vocabularyData }) {
 
     // Playing phase
     return (
-        <div className="w-full max-w-4xl mx-auto p-4 flex flex-col h-full overflow-y-auto pt-6 pb-20">
+        <div className="w-full max-w-4xl mx-auto p-4 flex flex-col h-full overflow-y-auto pt-4 pb-20">
             
             {/* Header controls & Progress */}
             <div className="flex justify-between items-center mb-6">
                 <div className="flex items-center gap-3">
                     <button 
                         onClick={() => setPhase('setup')}
-                        className="p-2 bg-slate-800 text-slate-400 hover:text-slate-100 rounded-lg transition-colors border border-slate-700 text-xs font-bold uppercase tracking-wider"
+                        className="px-3 py-1.5 rounded-xl bg-white dark:bg-zen-dark-surface border border-zen-border/60 dark:border-zen-dark-border text-zen-text-muted hover:text-zen-text dark:text-zen-dark-text-muted dark:hover:text-zen-dark-text text-xs font-bold uppercase tracking-wider transition-colors shadow-zen-sm"
                         title="Quit Session"
                     >
                         {t('activeStudy.exitSession')}
                     </button>
-                    <div className="text-sm font-bold text-slate-400 uppercase tracking-widest">
+                    <div className="text-xs font-bold text-zen-text-muted dark:text-zen-dark-text-muted uppercase tracking-widest">
                         {t('activeStudy.questionProgress')} {questionsDone + 1} / {targetCount}
                     </div>
                 </div>
@@ -295,10 +325,10 @@ export default function ActiveStudy({ vocabularyData }) {
                 <div className="flex items-center gap-2">
                     <span className={`px-3 py-1 rounded-full text-xs font-extrabold uppercase tracking-wider border ${
                         difficulty === 'easy' 
-                            ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/30' 
+                            ? 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/30' 
                             : difficulty === 'medium'
-                            ? 'bg-amber-500/10 text-amber-400 border-amber-500/30'
-                            : 'bg-rose-500/10 text-rose-400 border-rose-500/30'
+                            ? 'bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-500/30'
+                            : 'bg-rose-500/10 text-rose-600 dark:text-rose-400 border-rose-500/30'
                     }`}>
                         {difficulty === 'easy' ? t('activeStudy.difficultyEasy') : difficulty === 'medium' ? t('activeStudy.difficultyMedium') : t('activeStudy.difficultyHard')}
                     </span>
@@ -314,7 +344,7 @@ export default function ActiveStudy({ vocabularyData }) {
                         difficulty={difficulty}
                     />
                     
-                    <div className="text-center mt-6 text-sm text-slate-500 font-bold uppercase tracking-widest">
+                    <div className="text-center mt-4 text-xs text-zen-text-muted dark:text-zen-dark-text-muted font-bold uppercase tracking-widest">
                         {t('activeStudy.attemptsRemaining')} {maxAttempts - attempts}
                     </div>
                     
@@ -343,7 +373,7 @@ export default function ActiveStudy({ vocabularyData }) {
                                 <button
                                     onClick={handleSubmit}
                                     disabled={!userInput.trim() || status !== 'playing'}
-                                    className="px-8 py-4 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl font-bold uppercase tracking-widest transition-all disabled:opacity-50 shadow-lg"
+                                    className="px-8 py-3.5 rounded-2xl bg-zen-primary hover:bg-zen-primary-dark dark:bg-zen-dark-primary dark:hover:bg-zen-dark-primary-hover text-white dark:text-zen-dark-on-primary font-bold text-xs uppercase tracking-widest transition-all disabled:opacity-40 shadow-zen-md"
                                 >
                                     {t('activeStudy.submitAnswer')}
                                 </button>
@@ -371,9 +401,9 @@ export default function ActiveStudy({ vocabularyData }) {
                                         <button
                                             type="button"
                                             onClick={() => setShowConsultationKeyboard(!showConsultationKeyboard)}
-                                            className="flex items-center gap-2 px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-xl text-xs font-bold uppercase tracking-wider border border-slate-700 transition-colors shadow-sm"
+                                            className="flex items-center gap-2 px-4 py-2 rounded-xl bg-white dark:bg-zen-dark-surface border border-zen-border/60 dark:border-zen-dark-border text-zen-text dark:text-zen-dark-text text-xs font-bold uppercase tracking-wider hover:bg-zen-surface-container dark:hover:bg-zen-dark-surface-high transition-colors shadow-zen-sm"
                                         >
-                                            <Keyboard className="w-4 h-4 text-indigo-400" />
+                                            <Keyboard className="w-4 h-4 text-zen-primary dark:text-zen-dark-primary" />
                                             <span>{showConsultationKeyboard ? t('activeStudy.hideRefKeyboard') : t('activeStudy.showRefKeyboard')}</span>
                                         </button>
                                     </div>
@@ -395,7 +425,7 @@ export default function ActiveStudy({ vocabularyData }) {
                 </>
             ) : (
                 <div className="flex flex-col items-center">
-                    <div className={`text-2xl font-bold mb-4 uppercase tracking-widest ${status === 'success' ? 'text-emerald-400' : 'text-rose-400'}`}>
+                    <div className={`text-xl font-bold mb-4 uppercase tracking-widest ${status === 'success' ? 'text-emerald-600 dark:text-emerald-400' : 'text-rose-600 dark:text-rose-400'}`}>
                         {status === 'success' ? t('activeStudy.correct') : t('activeStudy.wrong')}
                     </div>
                     <SolutionCard item={currentQuestion} onNext={handleNextClick} />

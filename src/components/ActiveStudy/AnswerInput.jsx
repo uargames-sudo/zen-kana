@@ -14,11 +14,11 @@ export default function AnswerInput({ value, onChange, onSubmit, diff, disabled,
     const renderDiff = () => {
         if (!diff || diff.length === 0) return null;
         return (
-            <div className="mt-2 text-lg font-mono tracking-widest flex justify-center space-x-[2px] bg-slate-900 p-2 rounded-lg border border-slate-700">
+            <div className="mt-2 text-lg font-mono tracking-widest flex justify-center space-x-[2px] bg-zen-surface-container dark:bg-zen-dark-surface p-2.5 rounded-xl border border-zen-border/40 dark:border-zen-dark-border shadow-zen-sm">
                 {diff.map((token, idx) => (
                     <span 
                         key={idx} 
-                        className={token.err ? "text-red-400 font-bold underline decoration-red-400/50" : "text-emerald-400 opacity-50"}
+                        className={token.err ? "text-rose-500 font-bold underline decoration-rose-500/50" : "text-emerald-600 dark:text-emerald-400 opacity-60"}
                     >
                         {token.err ? `[${token.char}]` : token.char}
                     </span>
@@ -28,7 +28,7 @@ export default function AnswerInput({ value, onChange, onSubmit, diff, disabled,
     };
 
     return (
-        <div className="w-full max-w-md mx-auto mt-8">
+        <div className="w-full max-w-md mx-auto mt-6">
             <form 
                 onSubmit={(e) => {
                     e.preventDefault();
@@ -43,7 +43,7 @@ export default function AnswerInput({ value, onChange, onSubmit, diff, disabled,
                     onChange={(e) => onChange(e.target.value)}
                     disabled={disabled || mode === 'ro-to-ja'}
                     placeholder={mode === 'ja-to-ro' ? t('activeStudy.inputPlaceholderJaToRo') : t('activeStudy.inputPlaceholderRoToJa')}
-                    className="w-full bg-slate-900 border-2 border-slate-700 rounded-xl py-4 px-6 text-xl text-center text-slate-100 placeholder-slate-500 focus:outline-none focus:border-indigo-500 transition-colors disabled:opacity-50 font-mono"
+                    className="w-full bg-white dark:bg-zen-dark-surface border-2 border-zen-border/60 dark:border-zen-dark-border rounded-2xl py-3.5 px-6 text-xl text-center text-zen-text dark:text-zen-dark-text placeholder:text-zen-text-muted dark:placeholder:text-zen-dark-text-muted focus:outline-none focus:border-zen-primary dark:focus:border-zen-dark-primary transition-colors disabled:opacity-50 font-mono shadow-zen-sm"
                     autoComplete="off"
                     autoCorrect="off"
                     spellCheck="false"

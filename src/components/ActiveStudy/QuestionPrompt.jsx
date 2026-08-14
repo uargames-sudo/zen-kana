@@ -11,7 +11,7 @@ export default function QuestionPrompt({ currentWord, mode, difficulty, easyMode
     const showScriptHint = difficulty === 'easy' || easyMode;
     
     return (
-        <div className="flex flex-col items-center justify-center p-8 bg-slate-800/50 rounded-2xl shadow-inner border border-slate-700/50 min-h-[200px]">
+        <div className="flex flex-col items-center justify-center p-8 zen-card bg-white dark:bg-zen-dark-surface-high rounded-3xl shadow-zen-lg dark:shadow-zen-dark-lg border-2 border-zen-surface-high dark:border-zen-dark-border min-h-[220px]">
             <motion.div 
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -24,30 +24,30 @@ export default function QuestionPrompt({ currentWord, mode, difficulty, easyMode
                             <div className="flex justify-center items-end space-x-1 mb-2">
                                 {currentWord.furigana.map((f, i) => (
                                     <div key={i} className="flex flex-col items-center">
-                                        <span className="text-slate-400 text-sm h-5">{f.reading || ''}</span>
-                                        <span className="text-5xl font-japanese font-bold text-slate-100">{f.text}</span>
+                                        <span className="text-zen-text-muted dark:text-zen-dark-text-muted text-sm h-5">{f.reading || ''}</span>
+                                        <span className="text-5xl font-kana font-bold text-zen-text dark:text-white">{f.text}</span>
                                     </div>
                                 ))}
                             </div>
                         ) : (
-                            <div className="text-6xl font-japanese font-bold text-slate-100 tracking-wider">
+                            <div className="text-6xl sm:text-7xl font-kana font-bold text-zen-primary dark:text-white tracking-wider">
                                 {currentWord.japanese || currentWord.kana}
                             </div>
                         )}
-                        <div className="mt-4 text-slate-400 text-sm font-medium uppercase tracking-widest">
+                        <div className="mt-4 text-zen-text-muted dark:text-zen-dark-text-muted text-xs font-semibold uppercase tracking-widest">
                             {t('activeStudy.translateToRomaji')}
                         </div>
                     </>
                 ) : (
                     <>
-                        <div className="text-6xl font-bold text-slate-100 tracking-wider font-mono">
+                        <div className="text-5xl sm:text-6xl font-headline font-bold text-zen-text dark:text-white tracking-wider">
                             {currentWord.romaji}
                         </div>
-                        <div className="mt-4 text-slate-400 text-sm font-medium uppercase tracking-widest">
+                        <div className="mt-4 text-zen-text-muted dark:text-zen-dark-text-muted text-xs font-semibold uppercase tracking-widest">
                             {t('activeStudy.writeInJapanese')}
                         </div>
                         {showScriptHint && (
-                            <div className="mt-2 inline-block px-3 py-1 bg-indigo-900/50 text-indigo-300 rounded-full text-xs font-bold uppercase tracking-widest border border-indigo-500/30">
+                            <div className="mt-2.5 inline-block px-3 py-1 bg-zen-primary/10 dark:bg-zen-dark-primary/20 text-zen-primary dark:text-zen-dark-primary rounded-full text-xs font-bold uppercase tracking-widest border border-zen-primary/20 dark:border-zen-dark-border">
                                 {t('activeStudy.scriptHint')} {currentWord.script || 'hiragana'}
                             </div>
                         )}
