@@ -12,6 +12,7 @@ import {
     SMALL_KATAKANA_GRID
 } from '../../data/kanaTables';
 import { Eye, EyeOff, BookOpen } from 'lucide-react';
+import { useLanguage } from '../../context/LanguageContext';
 
 export default function VirtualKeyboard({ 
     onKeyPress, 
@@ -21,6 +22,7 @@ export default function VirtualKeyboard({
     showRomaji = false,
     allowToggleRomaji = false
 }) {
+    const { t } = useLanguage();
     const [script, setScript] = useState('hiragana'); // 'hiragana' or 'katakana'
     const [category, setCategory] = useState('basic'); // 'basic', 'dakuten', 'handakuten', 'yoon', 'small'
     const [romajiToggled, setRomajiToggled] = useState(false);
@@ -56,11 +58,11 @@ export default function VirtualKeyboard({
     const isRomajiVisible = showRomaji || (allowToggleRomaji && romajiToggled);
 
     const categories = [
-        { id: 'basic', label: 'Basic' },
-        { id: 'dakuten', label: 'Dakuten (゛)' },
-        { id: 'handakuten', label: 'Handakuten (゜)' },
-        { id: 'yoon', label: 'Yōon / Comb.' },
-        { id: 'small', label: 'Sokuon (っ)' }
+        { id: 'basic', label: t('keyboard.basic') },
+        { id: 'dakuten', label: t('keyboard.dakuten') },
+        { id: 'handakuten', label: t('keyboard.handakuten') },
+        { id: 'yoon', label: t('keyboard.yoon') },
+        { id: 'small', label: t('keyboard.small') }
     ];
 
     return (
@@ -69,7 +71,7 @@ export default function VirtualKeyboard({
             {readOnly && (
                 <div className="flex items-center justify-center gap-2 mb-3 py-1.5 px-3 bg-indigo-950/50 border border-indigo-500/30 rounded-lg text-indigo-300 text-xs font-bold uppercase tracking-wider">
                     <BookOpen className="w-3.5 h-3.5" />
-                    <span>Consultation Keyboard (Type answer with your keyboard)</span>
+                    <span>{t('keyboard.consultationNotice')}</span>
                 </div>
             )}
 
@@ -85,7 +87,7 @@ export default function VirtualKeyboard({
                                 : 'bg-slate-700 text-slate-400 hover:bg-slate-600 hover:text-slate-200'
                         }`}
                     >
-                        Hiragana
+                        {t('keyboard.hiragana')}
                     </button>
                     <button
                         type="button"
@@ -96,7 +98,7 @@ export default function VirtualKeyboard({
                                 : 'bg-slate-700 text-slate-400 hover:bg-slate-600 hover:text-slate-200'
                         }`}
                     >
-                        Katakana
+                        {t('keyboard.katakana')}
                     </button>
                 </div>
                 
@@ -113,7 +115,7 @@ export default function VirtualKeyboard({
                             title="Toggle Romaji sub-labels"
                         >
                             {romajiToggled ? <Eye className="w-3.5 h-3.5" /> : <EyeOff className="w-3.5 h-3.5" />}
-                            <span>{romajiToggled ? 'Romaji ON' : 'Romaji OFF'}</span>
+                            <span>{romajiToggled ? t('activeStudy.romajiOn') : t('activeStudy.romajiOff')}</span>
                         </button>
                     )}
                     
@@ -124,7 +126,7 @@ export default function VirtualKeyboard({
                             disabled={disabled}
                             className="px-3.5 py-1.5 bg-rose-600/20 text-rose-300 rounded-lg hover:bg-rose-600/40 transition-colors font-bold text-xs uppercase tracking-widest border border-rose-500/30 disabled:opacity-50"
                         >
-                            Del
+                            {t('keyboard.del')}
                         </button>
                     )}
                 </div>

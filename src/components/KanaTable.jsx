@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { Volume2, Info } from 'lucide-react';
-import { HIRAGANA_BASIC, KANA_DAKUTEN, KANA_COMBINATION } from '../data/kanaData';
+import { HIRAGANA_BASIC, KANA_DAKUTEN, KANA_COMBINATION, getKanaExample } from '../data/kanaData';
 import { playKanaSound } from '../utils/audio';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function KanaTable({ scriptMode }) {
+  const { lang, t } = useLanguage();
   const [activeTab, setActiveTab] = useState('basic');
   const [selectedKana, setSelectedKana] = useState(null);
 
@@ -33,10 +35,10 @@ export default function KanaTable({ scriptMode }) {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <h2 className="text-2xl sm:text-3xl font-headline font-bold text-zen-text dark:text-zen-dark-text">
-            {isHiragana ? 'Hiragana (ひらがな)' : 'Katakana (カタカナ)'} Table
+            {isHiragana ? 'Hiragana (ひらがな)' : 'Katakana (カタカナ)'} {t('table.title')}
           </h2>
           <p className="text-sm text-zen-text-muted dark:text-zen-dark-text-muted mt-1">
-            Click any character card to hear native Japanese Web Speech audio pronunciation.
+            {t('table.subtitle')}
           </p>
         </div>
 
@@ -50,7 +52,7 @@ export default function KanaTable({ scriptMode }) {
                 : 'text-zen-text-muted dark:text-zen-dark-text-muted hover:text-zen-text dark:hover:text-zen-dark-text'
             }`}
           >
-            Basic (46)
+            {t('table.tabBasic')}
           </button>
           <button
             onClick={() => setActiveTab('dakuten')}
@@ -60,7 +62,7 @@ export default function KanaTable({ scriptMode }) {
                 : 'text-zen-text-muted dark:text-zen-dark-text-muted hover:text-zen-text dark:hover:text-zen-dark-text'
             }`}
           >
-            Dakuten (゛/゜)
+            {t('table.tabDakuten')}
           </button>
           <button
             onClick={() => setActiveTab('combination')}
@@ -70,7 +72,7 @@ export default function KanaTable({ scriptMode }) {
                 : 'text-zen-text-muted dark:text-zen-dark-text-muted hover:text-zen-text dark:hover:text-zen-dark-text'
             }`}
           >
-            Combination (拗音)
+            {t('table.tabCombination')}
           </button>
         </div>
       </div>
@@ -128,7 +130,7 @@ export default function KanaTable({ scriptMode }) {
                 Romaji: <span className="text-zen-primary dark:text-zen-dark-primary">{selectedKana.romaji}</span>
               </div>
               <div className="text-xs text-zen-text-muted dark:text-zen-dark-text-muted flex items-center gap-1.5 mt-0.5">
-                <Info className="w-3.5 h-3.5 text-zen-secondary dark:text-zen-dark-secondary" /> Example: {selectedKana.example}
+                <Info className="w-3.5 h-3.5 text-zen-secondary dark:text-zen-dark-secondary" /> {t('table.exampleWord')}: {getKanaExample(selectedKana, lang)}
               </div>
             </div>
           </div>
@@ -137,7 +139,7 @@ export default function KanaTable({ scriptMode }) {
             onClick={() => playKanaSound(isHiragana ? selectedKana.hiragana : selectedKana.katakana)}
             className="px-4 py-2.5 rounded-xl bg-zen-primary dark:bg-zen-dark-primary hover:bg-zen-primary-dark dark:hover:bg-zen-dark-primary-hover text-white dark:text-zen-dark-on-primary font-bold text-xs flex items-center gap-2 shadow-zen-sm"
           >
-            <Volume2 className="w-4 h-4" /> Replay Sound
+            <Volume2 className="w-4 h-4" /> Audio
           </button>
         </div>
       )}

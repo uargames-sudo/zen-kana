@@ -1,16 +1,14 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useLanguage } from '../../context/LanguageContext';
 
 export default function QuestionPrompt({ currentWord, mode, difficulty, easyMode }) {
+    const { t } = useLanguage();
     if (!currentWord) return null;
 
     // mode: 'ja-to-ro' or 'ro-to-ja'
     const isJaToRo = mode === 'ja-to-ro';
     const showScriptHint = difficulty === 'easy' || easyMode;
-    
-    // For MVP, furigana might be an array of objects or just null, as per spec.
-    // The normalized data doesn't have furigana for MVP (just hiragana/katakana words), 
-    // but we can prepare it for the future.
     
     return (
         <div className="flex flex-col items-center justify-center p-8 bg-slate-800/50 rounded-2xl shadow-inner border border-slate-700/50 min-h-[200px]">
@@ -37,7 +35,7 @@ export default function QuestionPrompt({ currentWord, mode, difficulty, easyMode
                             </div>
                         )}
                         <div className="mt-4 text-slate-400 text-sm font-medium uppercase tracking-widest">
-                            Translate to Romaji
+                            {t('activeStudy.translateToRomaji')}
                         </div>
                     </>
                 ) : (
@@ -46,11 +44,11 @@ export default function QuestionPrompt({ currentWord, mode, difficulty, easyMode
                             {currentWord.romaji}
                         </div>
                         <div className="mt-4 text-slate-400 text-sm font-medium uppercase tracking-widest">
-                            Write in Japanese (Kana)
+                            {t('activeStudy.writeInJapanese')}
                         </div>
                         {showScriptHint && (
                             <div className="mt-2 inline-block px-3 py-1 bg-indigo-900/50 text-indigo-300 rounded-full text-xs font-bold uppercase tracking-widest border border-indigo-500/30">
-                                Hint: {currentWord.script || 'hiragana'}
+                                {t('activeStudy.scriptHint')} {currentWord.script || 'hiragana'}
                             </div>
                         )}
                     </>

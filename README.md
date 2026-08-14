@@ -7,18 +7,21 @@ A calm, focused, and intuitive Japanese character learning studio designed as a 
 ![Vite](https://img.shields.io/badge/Vite-6-646CFF?logo=vite)
 ![Tauri](https://img.shields.io/badge/Tauri-v2-FFC131?logo=tauri)
 ![PWA Ready](https://img.shields.io/badge/PWA-Ready-5A0FC8?logo=pwa)
+![Bilingual](https://img.shields.io/badge/i18n-IT%20%7C%20EN-emerald)
 
 ---
 
 ## ✨ Features
 
+- **🌍 Bilingual Interface (i18n)**: Full support for **Italian** and **English** with seamless in-app language switcher (`IT` / `EN`) across all learning modules and menus.
 - **🧠 Multi-Sensory Learning**: Combines visual flashcards, native Japanese audio pronunciation, and interactive handwriting canvas for maximum retention.
-- **⚡ Active Study Studio**: Train muscle memory and script-to-romaji transliteration with immediate visual feedback and spaced-repetition logic.
-- **📱 Progressive Web App (PWA)**: Fully installable on mobile devices (Android/iOS) and desktop browsers. Works offline with Service Worker caching.
+- **⚡ Advanced Active Study**: Train muscle memory and script-to-romaji transliteration with immediate visual feedback, 3 difficulty tiers (Easy, Medium, Hard), and automatic audio playback.
+- **⌨️ Enhanced Virtual Kana Keyboard**: Includes Basic, Dakuten (`゛`), Handakuten (`゜`), Yōon (`拗音`), and Sokuon (`っ`), plus Katakana vowel extender (`ー`) and toggleable Romaji sub-labels.
+- **📱 Progressive Web App (PWA)**: Fully installable on mobile devices (Android/iOS) and desktop browsers with header install button and offline Service Worker caching.
 - **🖥️ Cross-Platform Desktop Support**: Packaged with **Tauri v2** for lightweight, ultra-fast native Windows, macOS, and Linux desktop builds.
-- **🔊 Hybrid Speech Engine**: Uses native Web Speech API (`window.speechSynthesis`) with automatic fallback to online TTS audio when local speech packs are missing.
+- **🔊 Hybrid Speech Engine**: Uses native Web Speech API (`ja-JP`) with automatic fallback to online TTS audio when local speech packs are missing.
 - **📅 10-Day Guided Curriculum**: Step-by-step daily lessons covering 5 Kana characters per day with integrated writing practice, vocabulary, and reviews.
-- **🎨 Zen Minimalist UI/UX**: Dark Mode support with a distraction-free, elegant visual design tailored for comfortable study sessions.
+- **🎨 Zen Minimalist UI/UX**: Dark Mode support with a distraction-free, elegant visual design tailored for comfortable study sessions across all screen sizes.
 - **🌐 Local Network Testing**: Built-in support to run and test on your local Wi-Fi network from any smartphone or tablet.
 
 ---
@@ -28,14 +31,14 @@ A calm, focused, and intuitive Japanese character learning studio designed as a 
 | Module | Description |
 | :--- | :--- |
 | **📊 Dashboard** | Overview of your study stats, daily streak, progress metrics, and quick navigation to all study tools. |
-| **🎴 Flashcards** | Practice Hiragana and Katakana with 3D flip card animations, audio pronunciation, and *Mastered / Needs Practice* sorting. |
+| **🎴 Flashcards (Schede di Memoria)** | Practice Hiragana and Katakana with 3D flip card animations, bilingual example words (IT/EN), audio pronunciation, and *Mastered / Needs Practice* sorting. |
+| **⚡ Active Study** | Transliteration training supporting Read Kana, Write Kana, and Mixed modes with 3 difficulty levels, virtual keyboard consultation, and accepted Romaji variants. |
 | **✍️ Writing Canvas** | Practice handwriting Kana with stroke order guides, clear canvas, and real-time visual feedback. |
 | **📖 Structured Lessons** | 10-day step-by-step curriculum covering 5 Kana characters daily, including character writing and vocabulary practice. |
-| **💬 Vocabulary Studio** | Explore 100+ Japanese vocabulary words categorized with Romaji, English translations, Kana breakdowns, and audio playback. |
+| **💬 Vocabulary Studio** | Explore 100+ Japanese vocabulary words categorized with Romaji, Italian and English translations, Kana breakdowns, and audio playback. |
 | **🎧 Listening Quiz** | Train your auditory recognition: listen to native Japanese audio and select the matching Kana character. |
 | **🎯 Verification Quiz** | Test your character recognition (Kana to Romaji and Romaji to Kana) with score tracking and celebration animations. |
-| **⚡ Active Study** | Intensive transliteration training module supporting Read Kana, Write Kana, and Mixed modes with variable session lengths and difficulty settings. |
-| **📑 Kana Reference** | Interactive grid of all Basic, Dakuten (voiced), and Yoon (combination) Hiragana & Katakana characters with instant audio. |
+| **📑 Kana Reference** | Interactive grid of all Basic, Dakuten (voiced), and Yoon (combination) Hiragana & Katakana characters with instant audio and bilingual examples. |
 
 ---
 
@@ -46,7 +49,7 @@ A calm, focused, and intuitive Japanese character learning studio designed as a 
 - **Desktop Framework**: [Tauri v2](https://tauri.app/) (Rust-backed lightweight native app container)
 - **Styling**: [Tailwind CSS](https://tailwindcss.com/)
 - **Icons**: [Lucide React](https://lucide.dev/)
-- **Animations**: [Canvas Confetti](https://github.com/lukePeavey/canvas-confetti)
+- **Animations & Interaction**: [Framer Motion](https://www.framer.com/motion/) & [Canvas Confetti](https://github.com/lukePeavey/canvas-confetti)
 - **PWA Capabilities**: Custom Service Worker & Web App Manifest
 
 ---
@@ -103,7 +106,6 @@ This project includes a **GitHub Actions workflow** (`.github/workflows/deploy.y
 
 1. Push your code to the `main` branch on GitHub:
    ```bash
-   git remote add origin https://github.com/<your-username>/pwa-kana.git
    git push -u origin main
    ```
 2. On GitHub, go to **Settings** $\rightarrow$ **Pages** $\rightarrow$ set **Source** to **GitHub Actions**.

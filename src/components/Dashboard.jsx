@@ -1,76 +1,85 @@
 import React from 'react';
-import { Layers, PenTool, Volume2, Award, Grid, Flame, CheckCircle, TrendingUp, Play, BookOpen, ListChecks } from 'lucide-react';
+import { Layers, PenTool, Volume2, Award, Grid, Flame, CheckCircle, TrendingUp, Play, BookOpen, ListChecks, Sparkles } from 'lucide-react';
 import { playKanaSound } from '../utils/audio';
+import { useLanguage } from '../context/LanguageContext';
+
 export default function Dashboard({ setActiveTab, scriptMode, stats, resetStats }) {
+  const { lang, t } = useLanguage();
   const isHiragana = scriptMode === 'hiragana';
   const sampleKana = isHiragana ? 'あ' : 'ア';
 
   const quickActionCards = [
     {
       id: 'flashcards',
-      title: 'Study Flashcards',
-      description: 'Master characters with 3D flip flashcards & spaced repetition.',
+      title: t('nav.flashcards'),
+      description: t('nav.flashcardsDesc'),
       icon: Layers,
-      badge: 'Recommended',
+      badge: lang === 'it' ? 'Consigliato' : 'Recommended',
       color: 'bg-zen-primary dark:bg-zen-dark-primary text-white dark:text-zen-dark-on-primary',
     },
     {
+      id: 'activeStudy',
+      title: t('nav.activeStudy'),
+      description: t('nav.activeStudyDesc'),
+      icon: Sparkles,
+      badge: lang === 'it' ? 'Allenamento' : 'Training',
+      color: 'bg-zen-accent dark:bg-zen-dark-primary text-white dark:text-zen-dark-on-primary',
+    },
+    {
       id: 'writing',
-      title: 'Stroke Practice',
-      description: 'Draw Kana with stroke guidance on interactive canvas.',
+      title: t('nav.writing'),
+      description: t('nav.writingDesc'),
       icon: PenTool,
-      badge: 'Interactive',
+      badge: lang === 'it' ? 'Interattivo' : 'Interactive',
       color: 'bg-zen-secondary dark:bg-zen-dark-secondary text-white dark:text-zen-dark-on-primary',
     },
     {
       id: 'vocabulary',
-      title: 'Vocabulary',
-      description: 'Explore 100 Japanese words with icons, translations, and native pronunciation.',
+      title: t('nav.vocabulary'),
+      description: t('nav.vocabularyDesc'),
       icon: BookOpen,
       badge: '100 words',
       color: 'bg-zen-primary dark:bg-zen-dark-primary text-white dark:text-zen-dark-on-primary',
     },
     {
       id: 'lessons',
-      title: 'Structured Lessons',
-      description: 'Follow a 10-day curriculum with five kana, vocabulary, writing, and verification each day.',
+      title: t('nav.lessons'),
+      description: t('nav.lessonsDesc'),
       icon: ListChecks,
       badge: '10 days',
       color: 'bg-zen-secondary dark:bg-zen-dark-secondary text-white dark:text-zen-dark-on-primary',
     },
     {
       id: 'listening',
-      title: 'Listening Quiz',
-      description: 'Test your Japanese speech recognition audio skills.',
+      title: t('nav.listening'),
+      description: t('nav.listeningDesc'),
       icon: Volume2,
       badge: 'Audio',
       color: 'bg-zen-accent dark:bg-zen-dark-primary text-white dark:text-zen-dark-on-primary',
     },
     {
       id: 'table',
-      title: 'Kana Reference Grid',
-      description: 'Explore the full grid of basic, dakuten & combination characters.',
+      title: t('nav.table'),
+      description: t('nav.tableDesc'),
       icon: Grid,
-      badge: 'Reference',
+      badge: lang === 'it' ? 'Consultazione' : 'Reference',
       color: 'bg-zen-primary-dark dark:bg-zen-dark-surface-high text-white dark:text-zen-dark-primary',
     },
     {
       id: 'quiz',
-      title: 'Verification Exercises',
-      description: 'Take a comprehensive test to verify your learning accuracy.',
+      title: t('nav.quiz'),
+      description: t('nav.quizDesc'),
       icon: Award,
       badge: 'Test',
       color: 'bg-zen-secondary-dark dark:bg-zen-dark-surface-high text-white dark:text-zen-dark-secondary',
-    },
-    {
-      id: 'activeStudy',
-      title: 'Active Study',
-      description: 'Practice transliterating between Japanese and Romaji with immediate feedback.',
-      icon: PenTool,
-      badge: 'New',
-      color: 'bg-zen-accent dark:bg-zen-dark-primary text-white dark:text-zen-dark-on-primary',
     }
   ];
+
+  const handleReset = () => {
+    if (window.confirm(t('dashboard.resetConfirm'))) {
+      resetStats();
+    }
+  };
 
   return (
     <div className="space-y-8 pb-20 lg:pb-8">
@@ -79,28 +88,28 @@ export default function Dashboard({ setActiveTab, scriptMode, stats, resetStats 
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="space-y-3 text-center md:text-left">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-zen-secondary/15 dark:bg-zen-dark-primary/20 text-zen-secondary dark:text-zen-dark-primary text-xs font-semibold">
-              <Flame className="w-4 h-4 fill-current" /> 7 Day Study Streak Active
+              <Flame className="w-4 h-4 fill-current" /> {lang === 'it' ? 'Serie di Studio Attiva' : 'Study Streak Active'}
             </div>
             <h2 className="text-3xl sm:text-4xl font-headline font-bold text-zen-text dark:text-zen-dark-text leading-tight">
-              Master <span className="text-zen-primary dark:text-zen-dark-primary">{isHiragana ? 'Hiragana' : 'Katakana'}</span> with Zen Mind
+              {t('dashboard.welcome')}
             </h2>
             <p className="text-zen-text-muted dark:text-zen-dark-text-muted text-sm sm:text-base max-w-xl">
-              Calm, focused, and intuitive Japanese character learning studio. Hear sounds, write strokes, and test your memory.
+              {t('dashboard.welcomeSubtitle')}
             </p>
 
             <div className="pt-2 flex flex-wrap items-center justify-center md:justify-start gap-4">
               <button
-                onClick={() => setActiveTab('flashcards')}
+                onClick={() => setActiveTab('activeStudy')}
                 className="px-6 py-3 rounded-xl bg-zen-primary dark:bg-zen-dark-primary hover:bg-zen-primary-dark dark:hover:bg-zen-dark-primary-hover text-white dark:text-zen-dark-on-primary font-bold text-sm shadow-zen-md transition-all flex items-center gap-2"
               >
-                <Play className="w-4 h-4 fill-current" /> Start Practice Deck
+                <Play className="w-4 h-4 fill-current" /> {t('dashboard.startActiveStudy')}
               </button>
 
               <button
                 onClick={() => playKanaSound(sampleKana)}
                 className="px-5 py-3 rounded-xl bg-white dark:bg-zen-dark-surface-high hover:bg-zen-surface-container dark:hover:bg-zen-dark-surface text-zen-primary dark:text-zen-dark-text font-medium text-sm border border-zen-border/60 dark:border-zen-dark-border transition-all flex items-center gap-2"
               >
-                <Volume2 className="w-4 h-4 text-zen-primary dark:text-zen-dark-primary" /> Hear '{sampleKana}' Sound
+                <Volume2 className="w-4 h-4 text-zen-primary dark:text-zen-dark-primary" /> {sampleKana} (Audio)
               </button>
             </div>
           </div>
@@ -126,55 +135,54 @@ export default function Dashboard({ setActiveTab, scriptMode, stats, resetStats 
       {/* Progress & Stats Cards */}
       <div>
         <div className="flex items-center justify-between mb-4">
-          <h3 className="text-xl font-headline font-bold text-zen-text dark:text-zen-dark-text">Your Progress</h3>
+          <h3 className="text-xl font-headline font-bold text-zen-text dark:text-zen-dark-text">{t('dashboard.statsOverview')}</h3>
           <button 
-            onClick={resetStats}
+            onClick={handleReset}
             className="text-xs font-bold text-zen-text-muted dark:text-zen-dark-text-muted hover:text-rose-500 dark:hover:text-rose-400 transition-colors px-3 py-1 border border-zen-border/40 dark:border-zen-dark-border rounded-lg"
           >
-            Reset Stats
+            {t('dashboard.resetStats')}
           </button>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <div className="zen-card p-5 border border-zen-surface-high dark:border-zen-dark-border flex items-center gap-4">
-          <div className="w-12 h-12 rounded-2xl bg-zen-primary/10 dark:bg-zen-dark-primary/20 text-zen-primary dark:text-zen-dark-primary flex items-center justify-center">
-            <CheckCircle className="w-6 h-6" />
+          <div className="zen-card p-5 border border-zen-surface-high dark:border-zen-dark-border flex items-center gap-4">
+            <div className="w-12 h-12 rounded-2xl bg-zen-primary/10 dark:bg-zen-dark-primary/20 text-zen-primary dark:text-zen-dark-primary flex items-center justify-center">
+              <CheckCircle className="w-6 h-6" />
+            </div>
+            <div>
+              <div className="text-2xl font-bold text-zen-text dark:text-zen-dark-text">{stats?.reviewedCount ?? 0} / 46</div>
+              <div className="text-xs text-zen-text-muted dark:text-zen-dark-text-muted">{t('dashboard.reviewedKana')}</div>
+            </div>
           </div>
-          <div>
-            <div className="text-2xl font-bold text-zen-text dark:text-zen-dark-text">{stats?.reviewedCount ?? 0} / 46</div>
-            <div className="text-xs text-zen-text-muted dark:text-zen-dark-text-muted">Characters Mastered</div>
-          </div>
-        </div>
 
-        <div className="zen-card p-5 border border-zen-surface-high dark:border-zen-dark-border flex items-center gap-4">
-          <div className="w-12 h-12 rounded-2xl bg-zen-secondary/10 dark:bg-zen-dark-secondary/20 text-zen-secondary dark:text-zen-dark-secondary flex items-center justify-center">
-            <TrendingUp className="w-6 h-6" />
+          <div className="zen-card p-5 border border-zen-surface-high dark:border-zen-dark-border flex items-center gap-4">
+            <div className="w-12 h-12 rounded-2xl bg-zen-secondary/10 dark:bg-zen-dark-secondary/20 text-zen-secondary dark:text-zen-dark-secondary flex items-center justify-center">
+              <TrendingUp className="w-6 h-6" />
+            </div>
+            <div>
+              <div className="text-2xl font-bold text-zen-text dark:text-zen-dark-text">{stats?.accuracy ?? 0}%</div>
+              <div className="text-xs text-zen-text-muted dark:text-zen-dark-text-muted">{t('dashboard.accuracy')}</div>
+            </div>
           </div>
-          <div>
-            <div className="text-2xl font-bold text-zen-text dark:text-zen-dark-text">{stats?.accuracy ?? 0}%</div>
-            <div className="text-xs text-zen-text-muted dark:text-zen-dark-text-muted">Quiz Accuracy Rate</div>
-          </div>
-        </div>
 
-        <div className="zen-card p-5 border border-zen-surface-high dark:border-zen-dark-border flex items-center gap-4">
-          <div className="w-12 h-12 rounded-2xl bg-zen-accent/10 dark:bg-zen-dark-primary/20 text-zen-accent dark:text-zen-dark-primary flex items-center justify-center">
-            <Flame className="w-6 h-6" />
-          </div>
-          <div>
-            <div className="text-2xl font-bold text-zen-text dark:text-zen-dark-text">{stats?.streakDays ?? 0} Days</div>
-            <div className="text-xs text-zen-text-muted dark:text-zen-dark-text-muted">Consecutive Streak</div>
+          <div className="zen-card p-5 border border-zen-surface-high dark:border-zen-dark-border flex items-center gap-4">
+            <div className="w-12 h-12 rounded-2xl bg-zen-accent/10 dark:bg-zen-dark-primary/20 text-zen-accent dark:text-zen-dark-primary flex items-center justify-center">
+              <Flame className="w-6 h-6" />
+            </div>
+            <div>
+              <div className="text-2xl font-bold text-zen-text dark:text-zen-dark-text">{stats?.totalAttempts ?? 0}</div>
+              <div className="text-xs text-zen-text-muted dark:text-zen-dark-text-muted">{t('dashboard.totalAttempts')}</div>
+            </div>
           </div>
         </div>
       </div>
-      </div>
-
 
       {/* Quick Action Navigation Grid */}
       <div>
         <h3 className="text-xl font-headline font-bold text-zen-text dark:text-zen-dark-text mb-4 flex items-center gap-2">
-          Study Modules
+          {t('dashboard.quickActions')}
         </h3>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
           {quickActionCards.map((card) => {
             const Icon = card.icon;
             return (
@@ -203,7 +211,7 @@ export default function Dashboard({ setActiveTab, scriptMode, stats, resetStats 
                 </div>
 
                 <div className="pt-4 mt-4 border-t border-zen-surface-high dark:border-zen-dark-border flex items-center justify-between text-xs font-semibold text-zen-primary dark:text-zen-dark-primary group-hover:translate-x-1 transition-transform">
-                  <span>Open Module</span>
+                  <span>{lang === 'it' ? 'Apri modulo' : 'Open Module'}</span>
                   <span>→</span>
                 </div>
               </div>

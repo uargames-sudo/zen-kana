@@ -2,8 +2,10 @@ import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Volume2 } from 'lucide-react';
 import { playKanaSound } from '../../utils/audio';
+import { useLanguage } from '../../context/LanguageContext';
 
 export default function SolutionCard({ item, onNext }) {
+    const { lang, t } = useLanguage();
     if (!item) return null;
 
     const japaneseText = item.japanese || item.kana || item.romaji;
@@ -27,7 +29,9 @@ export default function SolutionCard({ item, onNext }) {
             className="w-full max-w-md mx-auto mt-8 bg-slate-800 rounded-2xl shadow-2xl border border-slate-700 overflow-hidden"
         >
             <div className="bg-slate-900/50 p-6 text-center border-b border-slate-700">
-                <h3 className="text-sm font-bold text-slate-400 uppercase tracking-widest mb-4">Solution</h3>
+                <h3 className="text-sm font-bold text-slate-400 uppercase tracking-widest mb-4">
+                    {t('activeStudy.solutionTitle')}
+                </h3>
                 
                 {/* Furigana + Kanji/Kana & Audio button */}
                 <div className="flex items-center justify-center gap-3 mb-2">
@@ -65,28 +69,42 @@ export default function SolutionCard({ item, onNext }) {
             <div className="p-6 space-y-4">
                 {item.acceptedRomaji && item.acceptedRomaji.length > 1 && (
                     <div className="flex justify-between items-center text-sm border-b border-slate-700/50 pb-2">
-                        <span className="text-slate-500">Accepted Variants</span>
+                        <span className="text-slate-500">{t('activeStudy.acceptedVariants')}</span>
                         <span className="text-slate-300 font-mono">
                             {item.acceptedRomaji.filter(r => r !== item.romaji).join(', ')}
                         </span>
                     </div>
                 )}
                 
-                <div className="flex justify-between items-center text-sm border-b border-slate-700/50 pb-2">
-                    <span className="text-slate-500">Italian</span>
-                    <span className="text-slate-200 font-semibold">{item.italian}</span>
-                </div>
-                
-                <div className="flex justify-between items-center text-sm border-b border-slate-700/50 pb-2">
-                    <span className="text-slate-500">English</span>
-                    <span className="text-slate-200 font-semibold">{item.english}</span>
-                </div>
+                {lang === 'it' ? (
+                    <>
+                        <div className="flex justify-between items-center text-sm border-b border-slate-700/50 pb-2">
+                            <span className="text-slate-500">{t('activeStudy.italianTranslation')}</span>
+                            <span className="text-slate-200 font-semibold">{item.italian}</span>
+                        </div>
+                        <div className="flex justify-between items-center text-sm border-b border-slate-700/50 pb-2">
+                            <span className="text-slate-500">{t('activeStudy.englishTranslation')}</span>
+                            <span className="text-slate-300">{item.english}</span>
+                        </div>
+                    </>
+                ) : (
+                    <>
+                        <div className="flex justify-between items-center text-sm border-b border-slate-700/50 pb-2">
+                            <span className="text-slate-500">{t('activeStudy.englishTranslation')}</span>
+                            <span className="text-slate-200 font-semibold">{item.english}</span>
+                        </div>
+                        <div className="flex justify-between items-center text-sm border-b border-slate-700/50 pb-2">
+                            <span className="text-slate-500">{t('activeStudy.italianTranslation')}</span>
+                            <span className="text-slate-300">{item.italian}</span>
+                        </div>
+                    </>
+                )}
 
                 <button
                     onClick={onNext}
                     className="w-full mt-6 py-4 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl font-bold uppercase tracking-widest transition-colors shadow-lg shadow-indigo-900/20 active:scale-95"
                 >
-                    Next
+                    {t('activeStudy.nextQuestion')}
                 </button>
             </div>
         </motion.div>

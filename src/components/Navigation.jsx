@@ -17,7 +17,9 @@ import {
   Download,
   Share,
   CheckCircle2,
+  Globe,
 } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function Navigation({
   activeTab,
@@ -27,6 +29,7 @@ export default function Navigation({
   theme,
   toggleTheme,
 }) {
+  const { lang, setLang, toggleLang, t } = useLanguage();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [deferredPrompt, setDeferredPrompt] = useState(null);
   const [isIos, setIsIos] = useState(false);
@@ -81,24 +84,24 @@ export default function Navigation({
   };
 
   const navItems = [
-    { id: 'dashboard', label: 'Dashboard', shortLabel: 'Dashboard', icon: LayoutDashboard, desc: 'Overview & Study Stats' },
-    { id: 'table', label: 'Kana Table', shortLabel: 'Kana', icon: Grid, desc: 'Interactive Syllabary' },
-    { id: 'flashcards', label: 'Flashcards', shortLabel: 'Cards', icon: Layers, desc: 'Space Repetition Memory' },
-    { id: 'activeStudy', label: 'Active Study', shortLabel: 'Active Study', icon: Sparkles, desc: 'Transliteration Training' },
-    { id: 'vocabulary', label: 'Vocabulary', shortLabel: 'Vocab', icon: BookOpen, desc: 'Words & Pronunciation' },
-    { id: 'lessons', label: 'Lessons', shortLabel: 'Lessons', icon: ListChecks, desc: 'Guided Study Path' },
-    { id: 'writing', label: 'Writing', shortLabel: 'Writing', icon: PenTool, desc: 'Stroke Order & Canvas' },
-    { id: 'listening', label: 'Listening', shortLabel: 'Listening', icon: Volume2, desc: 'Audio Recognition' },
-    { id: 'quiz', label: 'Quiz', shortLabel: 'Quiz', icon: Award, desc: 'Knowledge Assessment' },
+    { id: 'dashboard', label: t('nav.dashboard'), shortLabel: t('nav.dashboard'), icon: LayoutDashboard, desc: t('nav.dashboardDesc') },
+    { id: 'table', label: t('nav.table'), shortLabel: t('nav.tableShort'), icon: Grid, desc: t('nav.tableDesc') },
+    { id: 'flashcards', label: t('nav.flashcards'), shortLabel: t('nav.flashcardsShort'), icon: Layers, desc: t('nav.flashcardsDesc') },
+    { id: 'activeStudy', label: t('nav.activeStudy'), shortLabel: t('nav.activeStudyShort'), icon: Sparkles, desc: t('nav.activeStudyDesc') },
+    { id: 'vocabulary', label: t('nav.vocabulary'), shortLabel: t('nav.vocabularyShort'), icon: BookOpen, desc: t('nav.vocabularyDesc') },
+    { id: 'lessons', label: t('nav.lessons'), shortLabel: t('nav.lessonsShort'), icon: ListChecks, desc: t('nav.lessonsDesc') },
+    { id: 'writing', label: t('nav.writing'), shortLabel: t('nav.writingShort'), icon: PenTool, desc: t('nav.writingDesc') },
+    { id: 'listening', label: t('nav.listening'), shortLabel: t('nav.listeningShort'), icon: Volume2, desc: t('nav.listeningDesc') },
+    { id: 'quiz', label: t('nav.quiz'), shortLabel: t('nav.quizShort'), icon: Award, desc: t('nav.quizDesc') },
   ];
 
-  // 4 Primary items for the mobile bottom nav + Menu toggle
+  // 5 Primary items for the mobile bottom nav + Menu toggle
   const primaryBottomNavItems = [
-    { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
-    { id: 'table', label: 'Kana', icon: Grid },
-    { id: 'flashcards', label: 'Cards', icon: Layers },
-    { id: 'activeStudy', label: 'Active', icon: Sparkles },
-    { id: 'lessons', label: 'Lessons', icon: ListChecks },
+    { id: 'dashboard', label: t('nav.dashboard'), icon: LayoutDashboard },
+    { id: 'table', label: t('nav.tableShort'), icon: Grid },
+    { id: 'flashcards', label: t('nav.flashcardsShort'), icon: Layers },
+    { id: 'activeStudy', label: t('nav.activeStudyShort'), icon: Sparkles },
+    { id: 'lessons', label: t('nav.lessonsShort'), icon: ListChecks },
   ];
 
   const isDark = theme === 'dark';
@@ -115,30 +118,30 @@ export default function Navigation({
 
           {/* ===================== DESKTOP NAVIGATION HEADER ===================== */}
 
-          <div className="hidden h-16 items-center justify-between gap-2 xl:gap-4 lg:flex">
+          <div className="hidden h-16 items-center justify-between gap-3 lg:flex">
             {/* Logo */}
             <div
               onClick={() => setActiveTab('dashboard')}
-              className="group flex shrink-0 cursor-pointer items-center gap-2.5"
+              className="group flex shrink-0 cursor-pointer items-center gap-2"
             >
-              <div className="w-9 h-9 2xl:w-10 2xl:h-10 rounded-xl bg-zen-primary dark:bg-zen-dark-primary text-white dark:text-zen-dark-on-primary flex items-center justify-center font-kana font-bold text-lg 2xl:text-xl shadow-zen-sm group-hover:scale-105 transition-transform">
+              <div className="w-8 h-8 rounded-xl bg-zen-primary dark:bg-zen-dark-primary text-white dark:text-zen-dark-on-primary flex items-center justify-center font-kana font-bold text-base shadow-zen-sm group-hover:scale-105 transition-transform">
                 あ
               </div>
 
-              <div className="hidden 2xl:block">
-                <h1 className="font-headline font-semibold text-base 2xl:text-lg text-zen-text dark:text-zen-dark-primary leading-tight tracking-tight flex items-center gap-1.5">
-                  Zen Kana
-                  <Sparkles className="w-3.5 h-3.5 text-zen-secondary dark:text-zen-dark-primary animate-pulse" />
+              <div className="hidden xl:block">
+                <h1 className="font-headline font-bold text-sm text-zen-text dark:text-zen-dark-primary leading-tight tracking-tight flex items-center gap-1">
+                  {t('nav.appName')}
+                  <Sparkles className="w-3 h-3 text-zen-secondary dark:text-zen-dark-primary" />
                 </h1>
-                <p className="text-[11px] text-zen-text-muted dark:text-zen-dark-text-muted">
-                  Kana Study Studio
+                <p className="text-[10px] text-zen-text-muted dark:text-zen-dark-text-muted">
+                  {t('nav.appSubtitle')}
                 </p>
               </div>
             </div>
 
             {/* Desktop Navigation Links */}
-            <nav className="min-w-0 flex-1 overflow-x-auto no-scrollbar py-1">
-              <div className="flex items-center justify-center gap-1 px-1">
+            <nav className="min-w-0 flex-1 flex items-center justify-center px-1">
+              <div className="flex items-center gap-0.5 xl:gap-1">
                 {navItems.map((item) => {
                   const Icon = item.icon;
                   const isActive = activeTab === item.id;
@@ -147,67 +150,78 @@ export default function Navigation({
                     <button
                       key={item.id}
                       onClick={() => setActiveTab(item.id)}
-                      className={`flex items-center gap-1.5 whitespace-nowrap rounded-xl px-2 py-1.5 2xl:px-3 2xl:py-2 text-xs 2xl:text-sm font-medium transition-all ${
+                      className={`flex items-center gap-1.5 whitespace-nowrap rounded-xl px-2 py-1.5 xl:px-2.5 text-xs font-medium transition-all ${
                         isActive
                           ? 'bg-zen-primary/10 dark:bg-zen-dark-surface-high text-zen-primary dark:text-zen-dark-primary font-bold border border-zen-primary/20 dark:border-zen-dark-border shadow-sm'
                           : 'text-zen-text-muted dark:text-zen-dark-text-muted hover:bg-zen-surface-high dark:hover:bg-zen-dark-surface hover:text-zen-text dark:hover:text-zen-dark-text'
                       }`}
                     >
                       <Icon
-                        className={`w-4 h-4 shrink-0 ${
+                        className={`w-3.5 h-3.5 shrink-0 ${
                           isActive
                             ? 'text-zen-primary dark:text-zen-dark-primary'
                             : ''
                         }`}
                       />
-                      <span className="hidden 2xl:inline">{item.label}</span>
-                      <span className="inline 2xl:hidden">{item.shortLabel}</span>
+                      <span className="hidden xl:inline">{item.label}</span>
+                      <span className="inline xl:hidden">{item.shortLabel}</span>
                     </button>
                   );
                 })}
               </div>
             </nav>
 
-            {/* Top Bar Actions (Script switch, Install PWA & Theme) */}
+            {/* Top Bar Actions (Script switch, Language, Install PWA & Theme) */}
             <div className="flex shrink-0 items-center gap-2">
               {/* Script Switcher */}
-              <div className="flex items-center bg-zen-surface-container dark:bg-zen-dark-surface p-1 rounded-full border border-zen-border/40 dark:border-zen-dark-border">
+              <div className="flex items-center bg-zen-surface-container dark:bg-zen-dark-surface p-0.5 rounded-full border border-zen-border/40 dark:border-zen-dark-border">
                 <button
                   onClick={() => setScriptMode('hiragana')}
-                  className={`px-2.5 py-1 2xl:px-3 2xl:py-1.5 rounded-full text-xs font-semibold transition-all ${
+                  className={`px-2.5 py-1 rounded-full text-xs font-semibold transition-all ${
                     scriptMode === 'hiragana'
                       ? 'bg-zen-primary dark:bg-zen-dark-primary text-white dark:text-zen-dark-on-primary shadow-zen-sm'
                       : 'text-zen-text-muted dark:text-zen-dark-text-muted hover:text-zen-text dark:hover:text-zen-dark-text'
                   }`}
-                  title="Switch to Hiragana"
+                  title={t('nav.scriptHiragana')}
                 >
-                  <span className="2xl:hidden">あ Hira</span>
-                  <span className="hidden 2xl:inline">Hiragana (あ)</span>
+                  <span className="xl:hidden">{t('nav.scriptHiraganaShort')}</span>
+                  <span className="hidden xl:inline">{t('nav.scriptHiragana')}</span>
                 </button>
 
                 <button
                   onClick={() => setScriptMode('katakana')}
-                  className={`px-2.5 py-1 2xl:px-3 2xl:py-1.5 rounded-full text-xs font-semibold transition-all ${
+                  className={`px-2.5 py-1 rounded-full text-xs font-semibold transition-all ${
                     scriptMode === 'katakana'
                       ? 'bg-zen-secondary dark:bg-zen-dark-secondary text-white dark:text-zen-dark-on-primary shadow-zen-sm'
                       : 'text-zen-text-muted dark:text-zen-dark-text-muted hover:text-zen-text dark:hover:text-zen-dark-text'
                   }`}
-                  title="Switch to Katakana"
+                  title={t('nav.scriptKatakana')}
                 >
-                  <span className="2xl:hidden">ア Kata</span>
-                  <span className="hidden 2xl:inline">Katakana (ア)</span>
+                  <span className="xl:hidden">{t('nav.scriptKatakanaShort')}</span>
+                  <span className="hidden xl:inline">{t('nav.scriptKatakana')}</span>
                 </button>
               </div>
+
+              {/* Language Switcher */}
+              <button
+                onClick={toggleLang}
+                className="shrink-0 px-2.5 py-1.5 rounded-xl bg-zen-surface-container dark:bg-zen-dark-surface border border-zen-border/40 dark:border-zen-dark-border text-zen-primary dark:text-zen-dark-primary hover:scale-105 active:scale-95 transition-all shadow-zen-sm font-bold text-xs flex items-center gap-1.5"
+                title={lang === 'it' ? 'Switch to English' : 'Passa all\'Italiano'}
+                aria-label="Toggle Language"
+              >
+                <Globe className="w-3.5 h-3.5" />
+                <span className="uppercase font-mono">{lang}</span>
+              </button>
 
               {/* Install PWA Icon Button */}
               {!isStandalone && (
                 <button
                   onClick={handleInstallClick}
                   className="relative shrink-0 p-2 rounded-xl bg-zen-surface-container dark:bg-zen-dark-surface border border-zen-border/40 dark:border-zen-dark-border text-zen-primary dark:text-zen-dark-primary hover:scale-105 active:scale-95 transition-all shadow-zen-sm"
-                  title="Install Zen Kana PWA"
-                  aria-label="Install Zen Kana PWA"
+                  title={t('nav.installApp')}
+                  aria-label={t('nav.installApp')}
                 >
-                  <Download className="w-4 h-4 2xl:w-5 2xl:h-5 text-zen-primary dark:text-zen-dark-primary" />
+                  <Download className="w-4 h-4 text-zen-primary dark:text-zen-dark-primary" />
                   {deferredPrompt && (
                     <span className="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full bg-emerald-500 ring-2 ring-white dark:ring-zen-dark-bg animate-pulse" />
                   )}
@@ -222,9 +236,9 @@ export default function Navigation({
                 aria-label={isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
               >
                 {isDark ? (
-                  <Sun className="w-4 h-4 2xl:w-5 2xl:h-5 fill-zen-dark-primary text-zen-dark-primary" />
+                  <Sun className="w-4 h-4 fill-zen-dark-primary text-zen-dark-primary" />
                 ) : (
-                  <Moon className="w-4 h-4 2xl:w-5 2xl:h-5 fill-zen-primary text-zen-primary" />
+                  <Moon className="w-4 h-4 fill-zen-primary text-zen-primary" />
                 )}
               </button>
             </div>
@@ -253,34 +267,43 @@ export default function Navigation({
             {/* Brand Logo & Name */}
             <button
               onClick={() => setActiveTab('dashboard')}
-              className="flex items-center gap-2 px-2 text-center"
+              className="flex items-center gap-2 px-1 text-center"
             >
               <div className="w-7 h-7 rounded-lg bg-zen-primary dark:bg-zen-dark-primary text-white dark:text-zen-dark-on-primary flex items-center justify-center font-kana font-bold text-sm shadow-zen-sm">
                 あ
               </div>
               <span className="font-headline text-lg font-bold text-zen-primary dark:text-zen-dark-primary tracking-tight">
-                Zen Kana
+                {t('nav.appName')}
               </span>
             </button>
 
-            {/* Actions: Script mode badge, Install icon & Theme toggle */}
+            {/* Actions: Script mode badge, Language, Install icon & Theme toggle */}
             <div className="flex items-center gap-1.5">
               <button
                 onClick={() =>
                   setScriptMode((prev) => (prev === 'hiragana' ? 'katakana' : 'hiragana'))
                 }
                 className="px-2 py-1 rounded-full text-[11px] font-bold bg-zen-primary/10 dark:bg-zen-dark-primary/20 text-zen-primary dark:text-zen-dark-primary border border-zen-primary/20 dark:border-zen-dark-primary/30 transition-all active:scale-95"
-                title="Cambia sistema di scrittura"
+                title={t('nav.writingSystem')}
               >
-                {scriptMode === 'hiragana' ? 'あ Hira' : 'ア Kata'}
+                {scriptMode === 'hiragana' ? t('nav.scriptHiraganaShort') : t('nav.scriptKatakanaShort')}
+              </button>
+
+              <button
+                onClick={toggleLang}
+                className="flex h-8 px-2 items-center justify-center rounded-xl bg-zen-surface-container dark:bg-zen-dark-surface border border-zen-border/40 dark:border-zen-dark-border text-zen-primary dark:text-zen-dark-primary active:scale-95 transition-transform font-bold text-[11px] uppercase gap-1"
+                title={t('nav.language')}
+              >
+                <Globe className="h-3 w-3" />
+                <span>{lang}</span>
               </button>
 
               {!isStandalone && (
                 <button
                   onClick={handleInstallClick}
                   className="flex h-8 w-8 items-center justify-center rounded-xl bg-zen-surface-container dark:bg-zen-dark-surface border border-zen-border/40 dark:border-zen-dark-border text-zen-primary dark:text-zen-dark-primary active:scale-95 transition-transform"
-                  title="Installa Zen Kana PWA"
-                  aria-label="Installa Zen Kana PWA"
+                  title={t('nav.installApp')}
+                  aria-label={t('nav.installApp')}
                 >
                   <Download className="h-4 w-4 text-zen-primary dark:text-zen-dark-primary" />
                 </button>
@@ -315,29 +338,29 @@ export default function Navigation({
             </div>
 
             <h3 className="font-headline text-lg font-bold text-zen-text dark:text-zen-dark-text">
-              Installa Zen Kana PWA
+              {t('nav.installModalTitle')}
             </h3>
 
             {isIos ? (
               <div className="space-y-3 text-xs text-zen-text-muted dark:text-zen-dark-text-muted text-left bg-zen-surface-container/50 dark:bg-zen-dark-surface-high/50 p-4 rounded-xl border border-zen-border/30">
                 <div className="flex items-center gap-2 text-zen-text dark:text-zen-dark-text font-semibold">
                   <Share className="w-4 h-4 text-zen-primary dark:text-zen-dark-primary" />
-                  <span>Istruzioni per iOS Safari:</span>
+                  <span>{t('nav.installModalIosTitle')}</span>
                 </div>
                 <ol className="list-decimal list-inside space-y-1.5">
-                  <li>Tocca l'icona <strong>Condividi</strong> (Share) nella barra del browser.</li>
-                  <li>Scorri e tocca <strong>"Aggiungi a schermata Home"</strong>.</li>
-                  <li>Conferma toccando <strong>Aggiungi</strong> in alto a destra.</li>
+                  <li>{t('nav.installModalIos1')}</li>
+                  <li>{t('nav.installModalIos2')}</li>
+                  <li>{t('nav.installModalIos3')}</li>
                 </ol>
               </div>
             ) : (
               <div className="text-xs text-zen-text-muted dark:text-zen-dark-text-muted space-y-2 text-left bg-zen-surface-container/50 dark:bg-zen-dark-surface-high/50 p-4 rounded-xl border border-zen-border/30">
                 <div className="flex items-center gap-2 text-zen-text dark:text-zen-dark-text font-semibold">
                   <CheckCircle2 className="w-4 h-4 text-zen-primary dark:text-zen-dark-primary" />
-                  <span>Browser Desktop / Android:</span>
+                  <span>{t('nav.installModalDesktopTitle')}</span>
                 </div>
                 <p>
-                  Clicca sull'icona di installazione nella barra degli indirizzi del browser oppure dal menu del browser seleziona <strong>"Installa app"</strong>.
+                  {t('nav.installModalDesktopText')}
                 </p>
               </div>
             )}
@@ -346,7 +369,7 @@ export default function Navigation({
               onClick={() => setShowInstallModal(false)}
               className="w-full py-2.5 bg-zen-primary dark:bg-zen-dark-primary text-white dark:text-zen-dark-on-primary rounded-xl font-bold text-xs uppercase tracking-wider shadow-sm hover:opacity-90 transition-opacity"
             >
-              Ho capito
+              {t('nav.gotIt')}
             </button>
           </div>
         </div>
@@ -373,10 +396,10 @@ export default function Navigation({
                 </div>
                 <div>
                   <h2 className="font-headline font-bold text-base text-zen-text dark:text-zen-dark-text leading-tight">
-                    Zen Kana Studio
+                    {t('nav.appName')}
                   </h2>
                   <p className="text-[11px] text-zen-text-muted dark:text-zen-dark-text-muted">
-                    Menu di Navigazione
+                    {t('nav.studySections')}
                   </p>
                 </div>
               </div>
@@ -390,10 +413,40 @@ export default function Navigation({
               </button>
             </div>
 
+            {/* Language Selector Inside Drawer */}
+            <div className="p-4 border-b border-zen-surface-high dark:border-zen-dark-border bg-zen-surface-container/50 dark:bg-zen-dark-surface/40">
+              <p className="text-[11px] font-bold uppercase tracking-wider text-zen-text-muted dark:text-zen-dark-text-muted mb-2">
+                {t('nav.language')}
+              </p>
+              <div className="grid grid-cols-2 gap-2 bg-zen-surface-container dark:bg-zen-dark-surface p-1 rounded-xl border border-zen-border/40 dark:border-zen-dark-border">
+                <button
+                  onClick={() => setLang('it')}
+                  className={`py-2 px-3 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 ${
+                    lang === 'it'
+                      ? 'bg-zen-primary text-white dark:bg-zen-dark-primary dark:text-zen-dark-on-primary shadow-zen-sm'
+                      : 'text-zen-text-muted dark:text-zen-dark-text-muted hover:text-zen-text dark:hover:text-zen-dark-text'
+                  }`}
+                >
+                  <span>🇮🇹</span> Italiano
+                </button>
+
+                <button
+                  onClick={() => setLang('en')}
+                  className={`py-2 px-3 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 ${
+                    lang === 'en'
+                      ? 'bg-zen-primary text-white dark:bg-zen-dark-primary dark:text-zen-dark-on-primary shadow-zen-sm'
+                      : 'text-zen-text-muted dark:text-zen-dark-text-muted hover:text-zen-text dark:hover:text-zen-dark-text'
+                  }`}
+                >
+                  <span>🇬🇧</span> English
+                </button>
+              </div>
+            </div>
+
             {/* Writing System Selector Inside Drawer */}
             <div className="p-4 border-b border-zen-surface-high dark:border-zen-dark-border bg-zen-surface-container/50 dark:bg-zen-dark-surface/40">
               <p className="text-[11px] font-bold uppercase tracking-wider text-zen-text-muted dark:text-zen-dark-text-muted mb-2">
-                Sistema di Scrittura
+                {t('nav.writingSystem')}
               </p>
               <div className="grid grid-cols-2 gap-2 bg-zen-surface-container dark:bg-zen-dark-surface p-1 rounded-xl border border-zen-border/40 dark:border-zen-dark-border">
                 <button
@@ -423,7 +476,7 @@ export default function Navigation({
             {/* Navigation Section Links List */}
             <div className="p-3 flex-1 space-y-1">
               <p className="px-3 pt-2 pb-1 text-[11px] font-bold uppercase tracking-wider text-zen-text-muted dark:text-zen-dark-text-muted">
-                Sezioni di Studio
+                {t('nav.studySections')}
               </p>
 
               {navItems.map((item) => {
@@ -476,9 +529,9 @@ export default function Navigation({
                 >
                   <div className="flex items-center gap-2">
                     <Download className="w-4 h-4" />
-                    <span>Installa Applicazione PWA</span>
+                    <span>{t('nav.installApp')}</span>
                   </div>
-                  <span className="text-[10px] font-bold uppercase tracking-wider">Installa</span>
+                  <span className="text-[10px] font-bold uppercase tracking-wider">PWA</span>
                 </button>
               )}
 
@@ -488,10 +541,10 @@ export default function Navigation({
               >
                 <div className="flex items-center gap-2">
                   {isDark ? <Sun className="w-4 h-4 text-zen-dark-primary" /> : <Moon className="w-4 h-4 text-zen-primary" />}
-                  <span>Modalità Tema</span>
+                  <span>{t('nav.themeMode')}</span>
                 </div>
                 <span className="text-[11px] text-zen-text-muted dark:text-zen-dark-text-muted">
-                  {isDark ? 'Scuro' : 'Chiaro'}
+                  {isDark ? t('nav.themeDark') : t('nav.themeLight')}
                 </span>
               </button>
             </div>
@@ -517,7 +570,7 @@ export default function Navigation({
               <button
                 key={item.id}
                 onClick={() => setActiveTab(item.id)}
-                className={`flex flex-col items-center justify-center py-1 px-2.5 rounded-xl transition-all ${
+                className={`flex flex-col items-center justify-center py-1 px-2 rounded-xl transition-all ${
                   isActive
                     ? 'text-zen-primary dark:text-zen-dark-primary font-bold scale-105'
                     : 'text-zen-text-muted dark:text-zen-dark-text-muted hover:text-zen-text dark:hover:text-zen-dark-text font-medium'
@@ -534,7 +587,7 @@ export default function Navigation({
           {/* Menu Hamburger Trigger Button in Bottom Bar */}
           <button
             onClick={() => setIsMobileMenuOpen(true)}
-            className="flex flex-col items-center justify-center py-1 px-2.5 rounded-xl text-zen-text-muted dark:text-zen-dark-text-muted hover:text-zen-text dark:hover:text-zen-dark-text font-medium transition-all"
+            className="flex flex-col items-center justify-center py-1 px-2 rounded-xl text-zen-text-muted dark:text-zen-dark-text-muted hover:text-zen-text dark:hover:text-zen-dark-text font-medium transition-all"
             aria-label="Apri menu completo"
           >
             <Menu className="w-5 h-5 stroke-2" />

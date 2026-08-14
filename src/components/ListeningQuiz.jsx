@@ -2,8 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { Volume2, Sparkles, CheckCircle2, XCircle, Play } from 'lucide-react';
 import { HIRAGANA_BASIC, KANA_DAKUTEN } from '../data/kanaData';
 import { playKanaSound } from '../utils/audio';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function ListeningQuiz({ scriptMode, updateStats }) {
+  const { lang, t } = useLanguage();
   const isHiragana = scriptMode === 'hiragana';
   const pool = [...HIRAGANA_BASIC.filter(k => k.hiragana), ...KANA_DAKUTEN];
 
@@ -80,15 +82,15 @@ export default function ListeningQuiz({ scriptMode, updateStats }) {
       <div className="flex items-center justify-between">
         <div>
           <h2 className="text-2xl font-headline font-bold text-zen-text dark:text-zen-dark-text">
-            Quiz di Ascolto
+            {t('listening.title')}
           </h2>
           <p className="text-xs text-zen-text-muted dark:text-zen-dark-text-muted">
-            Listen to the sound and select the matching Kana.
+            {t('listening.subtitle')}
           </p>
         </div>
 
         <div className="px-4 py-2 rounded-2xl bg-white dark:bg-zen-dark-surface border border-zen-surface-high dark:border-zen-dark-border shadow-zen-sm flex items-center gap-3">
-          <span className="text-xs text-zen-text-muted dark:text-zen-dark-text-muted font-semibold">Score:</span>
+          <span className="text-xs text-zen-text-muted dark:text-zen-dark-text-muted font-semibold">{t('listening.score')}:</span>
           <span className="text-lg font-bold text-zen-primary dark:text-zen-dark-primary">{score} / {totalAsked}</span>
         </div>
       </div>
@@ -97,10 +99,10 @@ export default function ListeningQuiz({ scriptMode, updateStats }) {
       <div className="zen-card p-8 border-2 border-zen-surface-high dark:border-zen-dark-border flex flex-col items-center justify-center space-y-6 bg-white dark:bg-zen-dark-surface-high shadow-zen-lg dark:shadow-zen-dark-lg">
         <div className="text-center space-y-2">
           <span className="px-3.5 py-1 rounded-full bg-zen-secondary/15 dark:bg-zen-dark-primary/20 text-zen-secondary dark:text-zen-dark-primary text-xs font-semibold">
-            Listening Practice
+            {lang === 'it' ? 'Esercizio di Ascolto' : 'Listening Practice'}
           </span>
           <h3 className="text-xl font-headline font-bold text-zen-text dark:text-zen-dark-text">
-            Listen to the sound and select the matching Kana
+            {t('listening.whichKana')}
           </h3>
         </div>
 
@@ -116,7 +118,7 @@ export default function ListeningQuiz({ scriptMode, updateStats }) {
         </button>
 
         <p className="text-xs text-zen-text-muted dark:text-zen-dark-text-muted font-medium">
-          {audioPlayed ? 'Ascolto eseguito' : 'Premi per ascoltare'}
+          {audioPlayed ? (lang === 'it' ? 'Ascolto eseguito' : 'Audio played') : (lang === 'it' ? 'Premi per ascoltare' : 'Click to play sound')}
         </p>
       </div>
 
@@ -161,9 +163,11 @@ export default function ListeningQuiz({ scriptMode, updateStats }) {
               <>
                 <CheckCircle2 className="w-8 h-8 text-zen-primary dark:text-zen-dark-primary" />
                 <div>
-                  <h4 className="font-bold text-zen-primary dark:text-zen-dark-primary">Subarashii! Correct Answer!</h4>
+                  <h4 className="font-bold text-zen-primary dark:text-zen-dark-primary">
+                    {lang === 'it' ? 'Subarashii! Risposta Corretta!' : 'Subarashii! Correct Answer!'}
+                  </h4>
                   <p className="text-xs text-zen-text-muted dark:text-zen-dark-text-muted">
-                    '{targetChar}' is pronounced '{currentQuestion.romaji}'.
+                    '{targetChar}' {lang === 'it' ? 'si pronuncia' : 'is pronounced'} '{currentQuestion.romaji}'.
                   </p>
                 </div>
               </>
@@ -171,9 +175,11 @@ export default function ListeningQuiz({ scriptMode, updateStats }) {
               <>
                 <XCircle className="w-8 h-8 text-zen-secondary dark:text-zen-dark-secondary" />
                 <div>
-                  <h4 className="font-bold text-zen-secondary dark:text-zen-dark-secondary">Not quite right</h4>
+                  <h4 className="font-bold text-zen-secondary dark:text-zen-dark-secondary">
+                    {lang === 'it' ? 'Non è corretto' : 'Not quite right'}
+                  </h4>
                   <p className="text-xs text-zen-text-muted dark:text-zen-dark-text-muted">
-                    The correct Kana was '{targetChar}' ({currentQuestion.romaji}).
+                    {lang === 'it' ? 'Il Kana corretto era' : 'The correct Kana was'} '{targetChar}' ({currentQuestion.romaji}).
                   </p>
                 </div>
               </>
@@ -184,7 +190,7 @@ export default function ListeningQuiz({ scriptMode, updateStats }) {
             onClick={handleNextQuestion}
             className="px-5 py-3 rounded-xl bg-zen-primary dark:bg-zen-dark-primary hover:bg-zen-primary-dark dark:hover:bg-zen-dark-primary-hover text-white dark:text-zen-dark-on-primary font-bold text-xs shadow-zen-sm flex items-center gap-1.5"
           >
-            Next Sound <Sparkles className="w-3.5 h-3.5" />
+            {t('listening.next')} <Sparkles className="w-3.5 h-3.5" />
           </button>
         </div>
       )}

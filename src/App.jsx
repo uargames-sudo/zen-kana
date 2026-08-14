@@ -10,8 +10,10 @@ import Vocabulary from './components/Vocabulary';
 import StructuredLessons from './components/StructuredLessons';
 import ActiveStudy from './components/ActiveStudy/ActiveStudy';
 import vocabularyData from '../vocabulary.json';
+import { useLanguage } from './context/LanguageContext';
 
 export default function App() {
+  const { t } = useLanguage();
   const [activeTab, setActiveTab] = useState('dashboard');
   const [scriptMode, setScriptMode] = useState('hiragana'); // 'hiragana' | 'katakana'
 
@@ -128,7 +130,7 @@ export default function App() {
 
       {/* Footer */}
       <footer className="border-t border-zen-surface-high dark:border-zen-dark-border py-6 text-center text-xs text-zen-text-muted dark:text-zen-dark-text-muted hidden lg:block">
-        <p>Zen Kana PWA Studio — Built with Vite, React & Tailwind CSS. Japanese Audio powered by Web Speech API.</p>
+        <p>{t('nav.footerText')}</p>
       </footer>
     </div>
   );

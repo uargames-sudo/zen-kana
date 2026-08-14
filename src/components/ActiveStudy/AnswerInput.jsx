@@ -1,7 +1,8 @@
 import React, { useEffect, useRef } from 'react';
-import { motion } from 'framer-motion';
+import { useLanguage } from '../../context/LanguageContext';
 
 export default function AnswerInput({ value, onChange, onSubmit, diff, disabled, mode }) {
+    const { t } = useLanguage();
     const inputRef = useRef(null);
     
     useEffect(() => {
@@ -41,14 +42,13 @@ export default function AnswerInput({ value, onChange, onSubmit, diff, disabled,
                     value={value}
                     onChange={(e) => onChange(e.target.value)}
                     disabled={disabled || mode === 'ro-to-ja'}
-                    placeholder={mode === 'ja-to-ro' ? "Type romaji here..." : "Use the keyboard below..."}
+                    placeholder={mode === 'ja-to-ro' ? t('activeStudy.inputPlaceholderJaToRo') : t('activeStudy.inputPlaceholderRoToJa')}
                     className="w-full bg-slate-900 border-2 border-slate-700 rounded-xl py-4 px-6 text-xl text-center text-slate-100 placeholder-slate-500 focus:outline-none focus:border-indigo-500 transition-colors disabled:opacity-50 font-mono"
                     autoComplete="off"
                     autoCorrect="off"
                     spellCheck="false"
                 />
                 
-                {/* Shake animation on error can be handled by wrapping this component, or simply diff display */}
                 {renderDiff()}
             </form>
         </div>
