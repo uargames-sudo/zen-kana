@@ -1,19 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import QuestionPrompt from './QuestionPrompt';
 import AnswerInput from './AnswerInput';
 import VirtualKeyboard from './VirtualKeyboard';
 import SolutionCard from './SolutionCard';
-import KanaSidePanel from './KanaSidePanel';
 import { checkRomajiMatch, getRomajiDiff } from '../../utils/romajiVariants';
-import { Layers, ListChecks, Activity } from 'lucide-react';
+import { Layers, Activity, Keyboard } from 'lucide-react';
 
 export default function ActiveStudy({ vocabularyData }) {
     const [phase, setPhase] = useState('setup'); // 'setup', 'playing', 'summary'
     
     // Setup state
-    const [targetCount, setTargetCount] = useState(10); // 5, 10, 20, or Infinity
+    const [targetCount, setTargetCount] = useState(10); // 5, 10, 20, or 50
     const [studyMode, setStudyMode] = useState('mixed'); // 'ja-to-ro', 'ro-to-ja', 'mixed'
-    const [easyMode, setEasyMode] = useState(false);
+    const [difficulty, setDifficulty] = useState('easy'); // 'easy', 'medium', 'hard'
     
     // Playing state
     const [mode, setMode] = useState('ja-to-ro');
@@ -26,7 +25,7 @@ export default function ActiveStudy({ vocabularyData }) {
     const [maxAttempts] = useState(3);
     const [status, setStatus] = useState('playing'); // 'playing', 'success', 'failed'
     const [diff, setDiff] = useState(null);
-    const [isPanelOpen, setIsPanelOpen] = useState(false);
+    const [showConsultationKeyboard, setShowConsultationKeyboard] = useState(false);
     
     const getRandomQuestion = () => {
         const validItems = vocabularyData.filter(item => item.japanese && item.romaji);
@@ -90,11 +89,6 @@ export default function ActiveStudy({ vocabularyData }) {
     };
 
     const handleNextClick = () => {
-        setQuestionsDone(prev => prev + 1);
-        // nextQuestion is called via effect or we just call it directly. 
-        // Actually it's better to call it immediately.
-        // But wait, the state `questionsDone` needs to be updated before `nextQuestion` checks it.
-        // Let's just do:
         const nextDoneCount = questionsDone + 1;
         if (nextDoneCount >= targetCount) {
             setPhase('summary');
@@ -158,21 +152,21 @@ export default function ActiveStudy({ vocabularyData }) {
                             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                                 <button 
                                     onClick={() => setStudyMode('ja-to-ro')}
-                                    className={`p-4 rounded-xl font-bold transition-all flex flex-col items-center gap-2 ${studyMode === 'ja-to-ro' ? 'bg-indigo-600 text-white shadow-lg' : 'bg-slate-900 text-slate-400 hover:bg-slate-700'}`}
+                                    className={`p-4 rounded-xl font-bold transition-all flex flex-col items-center gap-2 ${studyMode === 'ja-to-ro' ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-900/30' : 'bg-slate-900 text-slate-400 hover:bg-slate-700'}`}
                                 >
                                     <span className="text-xl">あ ➔ a</span>
                                     <span className="text-sm">Read Kana</span>
                                 </button>
                                 <button 
                                     onClick={() => setStudyMode('ro-to-ja')}
-                                    className={`p-4 rounded-xl font-bold transition-all flex flex-col items-center gap-2 ${studyMode === 'ro-to-ja' ? 'bg-indigo-600 text-white shadow-lg' : 'bg-slate-900 text-slate-400 hover:bg-slate-700'}`}
+                                    className={`p-4 rounded-xl font-bold transition-all flex flex-col items-center gap-2 ${studyMode === 'ro-to-ja' ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-900/30' : 'bg-slate-900 text-slate-400 hover:bg-slate-700'}`}
                                 >
                                     <span className="text-xl">a ➔ あ</span>
                                     <span className="text-sm">Write Kana</span>
                                 </button>
                                 <button 
                                     onClick={() => setStudyMode('mixed')}
-                                    className={`p-4 rounded-xl font-bold transition-all flex flex-col items-center gap-2 ${studyMode === 'mixed' ? 'bg-indigo-600 text-white shadow-lg' : 'bg-slate-900 text-slate-400 hover:bg-slate-700'}`}
+                                    className={`p-4 rounded-xl font-bold transition-all flex flex-col items-center gap-2 ${studyMode === 'mixed' ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-900/30' : 'bg-slate-900 text-slate-400 hover:bg-slate-700'}`}
                                 >
                                     <Layers className="w-6 h-6" />
                                     <span className="text-sm">Mixed</span>
@@ -182,22 +176,58 @@ export default function ActiveStudy({ vocabularyData }) {
 
                         <div>
                             <h3 className="text-lg font-bold text-slate-300 mb-4 uppercase tracking-wider">Difficulty</h3>
-                            <label className="flex items-center cursor-pointer space-x-3">
-                                <div className="relative">
-                                    <input 
-                                        type="checkbox" 
-                                        className="sr-only" 
-                                        checked={easyMode}
-                                        onChange={() => setEasyMode(!easyMode)}
-                                    />
-                                    <div className={`block w-12 h-7 rounded-full transition-colors ${easyMode ? 'bg-indigo-500' : 'bg-slate-700'}`}></div>
-                                    <div className={`dot absolute left-1 top-1 bg-white w-5 h-5 rounded-full transition-transform ${easyMode ? 'transform translate-x-5' : ''}`}></div>
-                                </div>
-                                <div>
-                                    <span className="text-slate-200 font-bold">Easy Mode</span>
-                                    <p className="text-slate-400 text-xs">Shows if a word uses Hiragana or Katakana in Write mode</p>
-                                </div>
-                            </label>
+                            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                                <button 
+                                    type="button"
+                                    onClick={() => setDifficulty('easy')}
+                                    className={`p-4 rounded-xl font-bold transition-all flex flex-col items-start gap-1 border text-left ${
+                                        difficulty === 'easy'
+                                            ? 'bg-indigo-600/30 border-indigo-500 text-white shadow-lg shadow-indigo-900/20'
+                                            : 'bg-slate-900/80 border-slate-700 text-slate-400 hover:bg-slate-700/50 hover:text-slate-200'
+                                    }`}
+                                >
+                                    <div className="flex items-center gap-2">
+                                        <span className="text-sm uppercase tracking-wider font-extrabold text-emerald-400">Easy</span>
+                                    </div>
+                                    <p className="text-xs text-slate-400 font-normal mt-1 leading-relaxed">
+                                        Romaji always visible. Consultation keyboard auto-shown in Read mode.
+                                    </p>
+                                </button>
+
+                                <button 
+                                    type="button"
+                                    onClick={() => setDifficulty('medium')}
+                                    className={`p-4 rounded-xl font-bold transition-all flex flex-col items-start gap-1 border text-left ${
+                                        difficulty === 'medium'
+                                            ? 'bg-indigo-600/30 border-indigo-500 text-white shadow-lg shadow-indigo-900/20'
+                                            : 'bg-slate-900/80 border-slate-700 text-slate-400 hover:bg-slate-700/50 hover:text-slate-200'
+                                    }`}
+                                >
+                                    <div className="flex items-center gap-2">
+                                        <span className="text-sm uppercase tracking-wider font-extrabold text-amber-400">Medium</span>
+                                    </div>
+                                    <p className="text-xs text-slate-400 font-normal mt-1 leading-relaxed">
+                                        Toggle Romaji hints on keyboard. Toggleable consultation keyboard in Read mode.
+                                    </p>
+                                </button>
+
+                                <button 
+                                    type="button"
+                                    onClick={() => setDifficulty('hard')}
+                                    className={`p-4 rounded-xl font-bold transition-all flex flex-col items-start gap-1 border text-left ${
+                                        difficulty === 'hard'
+                                            ? 'bg-indigo-600/30 border-indigo-500 text-white shadow-lg shadow-indigo-900/20'
+                                            : 'bg-slate-900/80 border-slate-700 text-slate-400 hover:bg-slate-700/50 hover:text-slate-200'
+                                    }`}
+                                >
+                                    <div className="flex items-center gap-2">
+                                        <span className="text-sm uppercase tracking-wider font-extrabold text-rose-400">Hard</span>
+                                    </div>
+                                    <p className="text-xs text-slate-400 font-normal mt-1 leading-relaxed">
+                                        Kana only without Romaji. No consultation keyboard in Read mode.
+                                    </p>
+                                </button>
+                            </div>
                         </div>
 
                         <button
@@ -259,13 +289,18 @@ export default function ActiveStudy({ vocabularyData }) {
                         Q {questionsDone + 1} / {targetCount}
                     </div>
                 </div>
-                
-                <button 
-                    onClick={() => setIsPanelOpen(true)}
-                    className="px-4 py-2 bg-indigo-600/20 text-indigo-400 hover:bg-indigo-600/40 rounded-lg text-sm font-bold tracking-widest uppercase border border-indigo-500/30 transition-colors"
-                >
-                    Kana Table
-                </button>
+
+                <div className="flex items-center gap-2">
+                    <span className={`px-3 py-1 rounded-full text-xs font-extrabold uppercase tracking-wider border ${
+                        difficulty === 'easy' 
+                            ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/30' 
+                            : difficulty === 'medium'
+                            ? 'bg-amber-500/10 text-amber-400 border-amber-500/30'
+                            : 'bg-rose-500/10 text-rose-400 border-rose-500/30'
+                    }`}>
+                        {difficulty} mode
+                    </span>
+                </div>
             </div>
             
             {/* Main Area */}
@@ -274,7 +309,7 @@ export default function ActiveStudy({ vocabularyData }) {
                     <QuestionPrompt 
                         currentWord={currentQuestion} 
                         mode={mode} 
-                        easyMode={easyMode} 
+                        difficulty={difficulty}
                     />
                     
                     <div className="text-center mt-6 text-sm text-slate-500 font-bold uppercase tracking-widest">
@@ -290,24 +325,70 @@ export default function ActiveStudy({ vocabularyData }) {
                         mode={mode}
                     />
 
+                    {/* Mode Write Kana (ro-to-ja): Virtual Keyboard for input */}
                     {mode === 'ro-to-ja' && (
-                        <VirtualKeyboard 
-                            onKeyPress={handleKeyboardPress}
-                            onBackspace={handleBackspace}
-                            disabled={status !== 'playing'}
-                        />
+                        <>
+                            <VirtualKeyboard 
+                                onKeyPress={handleKeyboardPress}
+                                onBackspace={handleBackspace}
+                                disabled={status !== 'playing'}
+                                readOnly={false}
+                                showRomaji={difficulty === 'easy'}
+                                allowToggleRomaji={difficulty === 'medium'}
+                            />
+                            
+                            <div className="flex justify-center mt-6">
+                                <button
+                                    onClick={handleSubmit}
+                                    disabled={!userInput.trim() || status !== 'playing'}
+                                    className="px-8 py-4 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl font-bold uppercase tracking-widest transition-all disabled:opacity-50 shadow-lg"
+                                >
+                                    Submit Answer
+                                </button>
+                            </div>
+                        </>
                     )}
-                    
-                    {mode === 'ro-to-ja' && (
-                        <div className="flex justify-center mt-6">
-                            <button
-                                onClick={handleSubmit}
-                                disabled={!userInput.trim() || status !== 'playing'}
-                                className="px-8 py-4 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl font-bold uppercase tracking-widest transition-all disabled:opacity-50 shadow-lg"
-                            >
-                                Submit Answer
-                            </button>
-                        </div>
+
+                    {/* Mode Read Kana (ja-to-ro): Consultation Virtual Keyboard */}
+                    {mode === 'ja-to-ro' && (
+                        <>
+                            {/* Easy mode: auto-shown consultation keyboard with romaji */}
+                            {difficulty === 'easy' && (
+                                <VirtualKeyboard 
+                                    readOnly={true}
+                                    showRomaji={true}
+                                    allowToggleRomaji={false}
+                                    disabled={status !== 'playing'}
+                                />
+                            )}
+
+                            {/* Medium mode: toggleable consultation keyboard */}
+                            {difficulty === 'medium' && (
+                                <div className="mt-4">
+                                    <div className="flex justify-center">
+                                        <button
+                                            type="button"
+                                            onClick={() => setShowConsultationKeyboard(!showConsultationKeyboard)}
+                                            className="flex items-center gap-2 px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-xl text-xs font-bold uppercase tracking-wider border border-slate-700 transition-colors shadow-sm"
+                                        >
+                                            <Keyboard className="w-4 h-4 text-indigo-400" />
+                                            <span>{showConsultationKeyboard ? 'Hide Reference Keyboard' : 'Show Reference Keyboard'}</span>
+                                        </button>
+                                    </div>
+
+                                    {showConsultationKeyboard && (
+                                        <VirtualKeyboard 
+                                            readOnly={true}
+                                            showRomaji={false}
+                                            allowToggleRomaji={true}
+                                            disabled={status !== 'playing'}
+                                        />
+                                    )}
+                                </div>
+                            )}
+
+                            {/* Hard mode: no consultation keyboard available */}
+                        </>
                     )}
                 </>
             ) : (
@@ -318,8 +399,6 @@ export default function ActiveStudy({ vocabularyData }) {
                     <SolutionCard item={currentQuestion} onNext={handleNextClick} />
                 </div>
             )}
-            
-            <KanaSidePanel isOpen={isPanelOpen} onClose={() => setIsPanelOpen(false)} />
             
         </div>
     );

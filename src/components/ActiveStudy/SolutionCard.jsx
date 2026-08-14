@@ -1,8 +1,24 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { Volume2 } from 'lucide-react';
+import { playKanaSound } from '../../utils/audio';
 
 export default function SolutionCard({ item, onNext }) {
     if (!item) return null;
+
+    const japaneseText = item.japanese || item.kana || item.romaji;
+
+    useEffect(() => {
+        if (japaneseText) {
+            playKanaSound(japaneseText);
+        }
+    }, [item]);
+
+    const handlePlayAudio = () => {
+        if (japaneseText) {
+            playKanaSound(japaneseText);
+        }
+    };
 
     return (
         <motion.div 
@@ -13,23 +29,35 @@ export default function SolutionCard({ item, onNext }) {
             <div className="bg-slate-900/50 p-6 text-center border-b border-slate-700">
                 <h3 className="text-sm font-bold text-slate-400 uppercase tracking-widest mb-4">Solution</h3>
                 
-                {/* Furigana + Kanji/Kana */}
-                {item.furigana && Array.isArray(item.furigana) ? (
-                    <div className="flex justify-center items-end space-x-1 mb-2">
-                        {item.furigana.map((f, i) => (
-                            <div key={i} className="flex flex-col items-center">
-                                <span className="text-slate-400 text-sm h-5">{f.reading || ''}</span>
-                                <span className="text-5xl font-japanese font-bold text-slate-100">{f.text}</span>
-                            </div>
-                        ))}
-                    </div>
-                ) : (
-                    <div className="text-5xl font-japanese font-bold text-slate-100 mb-2">
-                        {item.japanese || item.kana}
-                    </div>
-                )}
+                {/* Furigana + Kanji/Kana & Audio button */}
+                <div className="flex items-center justify-center gap-3 mb-2">
+                    {item.furigana && Array.isArray(item.furigana) ? (
+                        <div className="flex justify-center items-end space-x-1">
+                            {item.furigana.map((f, i) => (
+                                <div key={i} className="flex flex-col items-center">
+                                    <span className="text-slate-400 text-sm h-5">{f.reading || ''}</span>
+                                    <span className="text-5xl font-japanese font-bold text-slate-100">{f.text}</span>
+                                </div>
+                            ))}
+                        </div>
+                    ) : (
+                        <div className="text-5xl font-japanese font-bold text-slate-100">
+                            {item.japanese || item.kana}
+                        </div>
+                    )}
+                    
+                    <button
+                        type="button"
+                        onClick={handlePlayAudio}
+                        className="p-3 bg-indigo-600/20 text-indigo-400 hover:bg-indigo-600/40 hover:text-indigo-200 rounded-full border border-indigo-500/30 transition-all active:scale-95 shadow-sm"
+                        title="Pronounce word"
+                        aria-label="Pronounce word"
+                    >
+                        <Volume2 className="w-6 h-6" />
+                    </button>
+                </div>
                 
-                <div className="text-2xl font-mono text-indigo-400 font-bold mt-4">
+                <div className="text-2xl font-mono text-indigo-400 font-bold mt-3">
                     {item.romaji}
                 </div>
             </div>

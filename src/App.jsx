@@ -6,7 +6,6 @@ import Flashcards from './components/Flashcards';
 import WritingCanvas from './components/WritingCanvas';
 import ListeningQuiz from './components/ListeningQuiz';
 import VerificationQuiz from './components/VerificationQuiz';
-import PwaInstaller from './components/PwaInstaller';
 import Vocabulary from './components/Vocabulary';
 import StructuredLessons from './components/StructuredLessons';
 import ActiveStudy from './components/ActiveStudy/ActiveStudy';
@@ -126,9 +125,6 @@ export default function App() {
       <main className="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 pt-6 pb-24 lg:pb-8">
         {renderActiveComponent()}
       </main>
-
-      {/* PWA Installer Prompt */}
-      <PwaInstaller />
 
       {/* Footer */}
       <footer className="border-t border-zen-surface-high dark:border-zen-dark-border py-6 text-center text-xs text-zen-text-muted dark:text-zen-dark-text-muted hidden lg:block">
