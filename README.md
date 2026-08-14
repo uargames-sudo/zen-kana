@@ -31,7 +31,7 @@ A calm, focused, and intuitive Japanese character learning studio designed as a 
 | Module | Description |
 | :--- | :--- |
 | **📊 Dashboard** | Overview of your study stats, daily streak, progress metrics, and quick navigation to all study tools. |
-| **🎴 Flashcards (Schede di Memoria)** | Practice Hiragana and Katakana with 3D flip card animations, bilingual example words (IT/EN), audio pronunciation, and *Mastered / Needs Practice* sorting. |
+| **🎴 Flashcards** | Practice Hiragana and Katakana with 3D flip card animations, bilingual example words (IT/EN), audio pronunciation, and *Mastered / Needs Practice* sorting. |
 | **⚡ Active Study** | Transliteration training supporting Read Kana, Write Kana, and Mixed modes with 3 difficulty levels, virtual keyboard consultation, and accepted Romaji variants. |
 | **✍️ Writing Canvas** | Practice handwriting Kana with stroke order guides, clear canvas, and real-time visual feedback. |
 | **📖 Structured Lessons** | 10-day step-by-step curriculum covering 5 Kana characters daily, including character writing and vocabulary practice. |
@@ -65,8 +65,8 @@ A calm, focused, and intuitive Japanese character learning studio designed as a 
 
 ```bash
 # Clone the repository
-git clone https://github.com/<your-username>/pwa-kana.git
-cd pwa-kana
+git clone https://github.com/uargames-sudo/zen-kana
+cd zen-kana
 
 # Install dependencies
 npm install
@@ -109,7 +109,7 @@ This project includes a **GitHub Actions workflow** (`.github/workflows/deploy.y
    git push -u origin main
    ```
 2. On GitHub, go to **Settings** $\rightarrow$ **Pages** $\rightarrow$ set **Source** to **GitHub Actions**.
-3. Your PWA will be live at: `https://<your-username>.github.io/pwa-kana/`
+3. Your PWA will be live at: `https://uargames-sudo.github.io/zen-kana/`
 
 ---
 
