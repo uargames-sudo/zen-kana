@@ -12,22 +12,31 @@ export default function Flashcards({ scriptMode, updateStats }) {
   const [isFlipped, setIsFlipped] = useState(false);
   const [masteredCount, setMasteredCount] = useState(0);
   const [needPracticeCount, setNeedPracticeCount] = useState(0);
+  const [failedItems, setFailedItems] = useState([]);
+  const [isReviewOnly, setIsReviewOnly] = useState(false);
 
-  const fullDeck = useMemo(() => {
+  const rawDeck = useMemo(() => {
     if (deckType === 'vocabulary') return VOCABULARY;
     return [...HIRAGANA_BASIC.filter((item) => item.hiragana), ...KANA_DAKUTEN];
   }, [deckType]);
 
-  const currentItem = fullDeck[currentIndex];
+  const fullDeck = useMemo(() => {
+    if (isReviewOnly && failedItems.length > 0) return failedItems;
+    return rawDeck;
+  }, [isReviewOnly, failedItems, rawDeck]);
+
+  const currentItem = fullDeck[currentIndex] || fullDeck[0];
   const isVocabulary = deckType === 'vocabulary';
-  const char = isVocabulary ? currentItem.kana : (scriptMode === 'hiragana' ? currentItem.hiragana : currentItem.katakana);
-  const Icon = isVocabulary ? getVocabularyIcon(currentItem.imageKeyword) : null;
+  const char = currentItem ? (isVocabulary ? currentItem.kana : (scriptMode === 'hiragana' ? currentItem.hiragana : currentItem.katakana)) : '';
+  const Icon = isVocabulary && currentItem ? getVocabularyIcon(currentItem.imageKeyword) : null;
 
   const resetDeck = () => {
     setCurrentIndex(0);
     setIsFlipped(false);
     setMasteredCount(0);
     setNeedPracticeCount(0);
+    setFailedItems([]);
+    setIsReviewOnly(false);
   };
 
   const changeDeck = (nextDeck) => {
@@ -36,13 +45,20 @@ export default function Flashcards({ scriptMode, updateStats }) {
   };
 
   const handleCardClick = () => {
+    if (!char) return;
     setIsFlipped((flipped) => !flipped);
     playKanaSound(char);
   };
 
   const handleRating = (gotIt) => {
-    if (gotIt) setMasteredCount((count) => count + 1);
-    else setNeedPracticeCount((count) => count + 1);
+    if (gotIt) {
+      setMasteredCount((count) => count + 1);
+    } else {
+      setNeedPracticeCount((count) => count + 1);
+      if (currentItem && !failedItems.some(item => (item.id || item.romaji) === (currentItem.id || currentItem.romaji))) {
+        setFailedItems(prev => [...prev, currentItem]);
+      }
+    }
     updateStats?.(gotIt);
     setIsFlipped(false);
     if (currentIndex < fullDeck.length - 1) setCurrentIndex((index) => index + 1);
@@ -53,11 +69,40 @@ export default function Flashcards({ scriptMode, updateStats }) {
     setCurrentIndex((index) => Math.max(0, Math.min(fullDeck.length - 1, index + direction)));
   };
 
+  // Keyboard navigation for Flashcards (Space/Enter to flip, 1/2 or Arrows to rate/move)
+  React.useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === ' ' || e.key === 'Enter') {
+        e.preventDefault();
+        handleCardClick();
+      } else if (isFlipped) {
+        if (e.key === '1' || e.key === 'ArrowLeft') {
+          e.preventDefault();
+          handleRating(false);
+        } else if (e.key === '2' || e.key === 'ArrowRight') {
+          e.preventDefault();
+          handleRating(true);
+        }
+      } else {
+        if (e.key === 'ArrowLeft') {
+          e.preventDefault();
+          move(-1);
+        } else if (e.key === 'ArrowRight') {
+          e.preventDefault();
+          move(1);
+        }
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isFlipped, currentIndex, fullDeck, char]);
+
   const progressPercent = Math.round(((currentIndex + 1) / fullDeck.length) * 100);
 
   return (
     <div className="mx-auto max-w-2xl space-y-6 pb-20 xl:pb-8">
-      <div className="flex rounded-2xl border border-zen-surface-high bg-white p-1 dark:border-zen-dark-border dark:bg-zen-dark-surface">
+      <div className="flex rounded-2xl border border-zen-border/40 bg-zen-surface-lowest p-1 dark:border-zen-dark-border dark:bg-zen-dark-surface">
         <button onClick={() => changeDeck('kana')} className={`flex flex-1 items-center justify-center gap-2 rounded-xl px-3 py-2.5 text-sm font-bold transition-all ${deckType === 'kana' ? 'bg-zen-primary text-white dark:bg-zen-dark-primary dark:text-zen-dark-on-primary' : 'text-zen-text-muted dark:text-zen-dark-text-muted'}`}>
           <Layers className="h-4 w-4" /> Kana
         </button>
@@ -66,10 +111,38 @@ export default function Flashcards({ scriptMode, updateStats }) {
         </button>
       </div>
 
+      {/* Review mistakes filter pill */}
+      {failedItems.length > 0 && (
+        <div className="flex items-center justify-between p-3.5 rounded-2xl bg-zen-secondary/10 dark:bg-zen-dark-secondary/20 border border-zen-secondary/20 dark:border-zen-dark-secondary/30 animate-fadeIn">
+          <div className="flex items-center gap-2 text-xs font-bold text-zen-secondary dark:text-zen-dark-secondary">
+            <XCircle className="w-4 h-4" />
+            <span>
+              {lang === 'it' 
+                ? `${failedItems.length} carte da rivedere` 
+                : `${failedItems.length} cards need review`}
+            </span>
+          </div>
+          <button
+            onClick={() => {
+              setIsReviewOnly(!isReviewOnly);
+              setCurrentIndex(0);
+              setIsFlipped(false);
+            }}
+            className="px-3 py-1.5 rounded-xl bg-zen-secondary dark:bg-zen-dark-secondary text-white dark:text-zen-dark-bg text-xs font-bold shadow-zen-sm transition-all hover:opacity-90 active:scale-95"
+          >
+            {isReviewOnly 
+              ? (lang === 'it' ? 'Mostra Tutte' : 'Show All')
+              : (lang === 'it' ? 'Ripeti Solo Errori' : 'Review Errors Only')}
+          </button>
+        </div>
+      )}
+
       <div className="space-y-2">
         <div className="flex items-center justify-between text-sm">
           <span className="font-headline font-bold text-zen-text dark:text-zen-dark-text">
-            {isVocabulary ? `${t('nav.vocabulary')} Flashcards` : `${t('nav.flashcards')} (${scriptMode.toUpperCase()})`}
+            {isReviewOnly
+              ? (lang === 'it' ? 'Revisione Errori' : 'Mistakes Review')
+              : (isVocabulary ? `${t('nav.vocabulary')} Flashcards` : `${t('nav.flashcards')} (${scriptMode.toUpperCase()})`)}
           </span>
           <span className="font-semibold text-zen-text-muted dark:text-zen-dark-text-muted">
             {currentIndex + 1} / {fullDeck.length}
@@ -83,9 +156,9 @@ export default function Flashcards({ scriptMode, updateStats }) {
       <div className="perspective-1000 min-h-[340px] w-full sm:min-h-[400px]">
         <div className="flashcard-hover h-[340px] w-full rounded-3xl sm:h-[400px]">
           <div onClick={handleCardClick} className={`relative h-full w-full cursor-pointer rounded-3xl transition-transform duration-500 transform-style-3d shadow-zen-lg dark:shadow-zen-dark-lg ${isFlipped ? 'rotate-y-180' : ''}`}>
-            <div className="absolute inset-0 flex flex-col items-center justify-between border-2 border-zen-surface-high bg-white p-8 backface-hidden zen-card dark:border-zen-dark-border dark:bg-zen-dark-surface-high">
+            <div className="absolute inset-0 flex flex-col items-center justify-between border-2 border-zen-border/40 bg-zen-surface-lowest p-8 backface-hidden zen-card dark:border-zen-dark-border dark:bg-zen-dark-surface">
               <div className="flex w-full items-center justify-between text-xs text-zen-text-muted dark:text-zen-dark-text-muted">
-                <span className="rounded-full bg-zen-surface-container px-3 py-1 font-semibold dark:bg-zen-dark-surface">
+                <span className="rounded-full bg-zen-surface-container px-3 py-1 font-semibold dark:bg-zen-dark-surface-high">
                   {t('flashcards.flipHint')}
                 </span>
                 <button onClick={(event) => { event.stopPropagation(); playKanaSound(char); }} className="rounded-full bg-zen-primary/10 p-2.5 text-zen-primary dark:bg-zen-dark-primary/20 dark:text-zen-dark-primary" title="Play Japanese audio">
@@ -93,7 +166,7 @@ export default function Flashcards({ scriptMode, updateStats }) {
                 </button>
               </div>
               <div className="my-auto text-center">
-                <span className="font-kana text-8xl font-bold tracking-tight text-zen-primary dark:text-white sm:text-9xl">{char}</span>
+                <span className="font-kana text-8xl font-bold tracking-tight text-zen-primary dark:text-zen-dark-primary sm:text-9xl">{char}</span>
                 {isVocabulary && <div className="mt-4 text-xl font-headline font-bold text-zen-text dark:text-zen-dark-text">{currentItem.romaji}</div>}
               </div>
               <div className="flex items-center gap-1.5 text-xs font-medium text-zen-text-muted dark:text-zen-dark-text-muted">
@@ -101,9 +174,9 @@ export default function Flashcards({ scriptMode, updateStats }) {
               </div>
             </div>
 
-            <div className="absolute inset-0 flex flex-col items-center justify-between border-2 border-zen-primary-light bg-gradient-to-b from-zen-surface-lowest to-zen-surface-container/30 p-8 backface-hidden rotate-y-180 zen-card dark:border-zen-dark-primary/60 dark:from-zen-dark-surface-high dark:to-zen-dark-surface">
+            <div className="absolute inset-0 flex flex-col items-center justify-between border-2 border-zen-border/60 bg-zen-surface-lowest p-8 backface-hidden rotate-y-180 zen-card dark:border-zen-dark-border dark:bg-zen-dark-surface">
               <div className="flex w-full items-center justify-between text-xs text-zen-text-muted dark:text-zen-dark-text-muted">
-                <span className="rounded-full bg-zen-primary/10 px-3 py-1 font-semibold text-zen-primary dark:bg-zen-dark-primary/20 dark:text-zen-dark-primary">
+                <span className="rounded-full bg-zen-primary/15 px-3 py-1 font-semibold text-zen-primary dark:bg-zen-dark-primary/20 dark:text-zen-dark-primary">
                   {lang === 'it' ? 'Risultato' : 'Answer'}
                 </span>
                 <button onClick={(event) => { event.stopPropagation(); playKanaSound(char); }} className="rounded-full bg-zen-primary p-2.5 text-white shadow-zen-sm dark:bg-zen-dark-primary dark:text-zen-dark-on-primary">

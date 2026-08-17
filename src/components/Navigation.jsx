@@ -18,6 +18,7 @@ import {
   Share,
   CheckCircle2,
   Globe,
+  HelpCircle,
 } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 
@@ -35,6 +36,7 @@ export default function Navigation({
   const [isIos, setIsIos] = useState(false);
   const [isStandalone, setIsStandalone] = useState(false);
   const [showInstallModal, setShowInstallModal] = useState(false);
+  const [showGuideModal, setShowGuideModal] = useState(false);
 
   // Detect iOS and Standalone PWA mode
   useEffect(() => {
@@ -113,7 +115,7 @@ export default function Navigation({
 
   return (
     <>
-      <header className="sticky top-0 z-40 bg-zen-surface/95 dark:bg-zen-dark-bg/95 backdrop-blur-md border-b border-zen-surface-high dark:border-zen-dark-border shadow-zen-sm transition-colors duration-300">
+      <header className="sticky top-0 z-40 bg-zen-surface dark:bg-zen-dark-bg border-b border-zen-border/40 dark:border-zen-dark-border shadow-zen-sm transition-colors duration-300">
         <div className="mx-auto max-w-[1600px] px-3 sm:px-5">
 
           {/* ===================== DESKTOP NAVIGATION HEADER ===================== */}
@@ -133,7 +135,7 @@ export default function Navigation({
                   {t('nav.appName')}
                   <Sparkles className="w-3 h-3 text-zen-secondary dark:text-zen-dark-primary" />
                 </h1>
-                <p className="text-[10px] text-zen-text-muted dark:text-zen-dark-text-muted">
+                <p className="text-2xs text-zen-text-muted dark:text-zen-dark-text-muted">
                   {t('nav.appSubtitle')}
                 </p>
               </div>
@@ -198,6 +200,16 @@ export default function Navigation({
                   <span>{t('nav.scriptKatakana')}</span>
                 </button>
               </div>
+
+              {/* Syllabary Guide Info Button */}
+              <button
+                onClick={() => setShowGuideModal(true)}
+                className="shrink-0 p-2 rounded-xl bg-zen-surface-container dark:bg-zen-dark-surface border border-zen-border/40 dark:border-zen-dark-border text-zen-primary dark:text-zen-dark-primary hover:scale-105 active:scale-95 transition-all shadow-zen-sm"
+                title={t('nav.guideButton')}
+                aria-label={t('nav.guideButton')}
+              >
+                <HelpCircle className="w-4 h-4" />
+              </button>
 
               {/* Language Switcher */}
               <button
@@ -274,13 +286,22 @@ export default function Navigation({
               </span>
             </button>
 
-            {/* Actions: Script mode badge, Language, Install icon & Theme toggle */}
+            {/* Actions: Guide, Script mode badge, Language, Install icon & Theme toggle */}
             <div className="flex items-center gap-1.5">
+              <button
+                onClick={() => setShowGuideModal(true)}
+                className="flex h-8 w-8 items-center justify-center rounded-xl bg-zen-surface-container dark:bg-zen-dark-surface border border-zen-border/40 dark:border-zen-dark-border text-zen-primary dark:text-zen-dark-primary active:scale-95 transition-transform"
+                title={t('nav.guideButton')}
+                aria-label={t('nav.guideButton')}
+              >
+                <HelpCircle className="h-4 w-4" />
+              </button>
+
               <button
                 onClick={() =>
                   setScriptMode((prev) => (prev === 'hiragana' ? 'katakana' : 'hiragana'))
                 }
-                className="px-2 py-1 rounded-full text-[11px] font-bold bg-zen-primary/10 dark:bg-zen-dark-primary/20 text-zen-primary dark:text-zen-dark-primary border border-zen-primary/20 dark:border-zen-dark-primary/30 transition-all active:scale-95"
+                className="px-2 py-1 rounded-full text-xs-plus font-bold bg-zen-primary/10 dark:bg-zen-dark-primary/20 text-zen-primary dark:text-zen-dark-primary border border-zen-primary/20 dark:border-zen-dark-primary/30 transition-all active:scale-95"
                 title={t('nav.writingSystem')}
               >
                 {scriptMode === 'hiragana' ? t('nav.scriptHiraganaShort') : t('nav.scriptKatakanaShort')}
@@ -288,7 +309,7 @@ export default function Navigation({
 
               <button
                 onClick={toggleLang}
-                className="flex h-8 px-2 items-center justify-center rounded-xl bg-zen-surface-container dark:bg-zen-dark-surface border border-zen-border/40 dark:border-zen-dark-border text-zen-primary dark:text-zen-dark-primary active:scale-95 transition-transform font-bold text-[11px] uppercase gap-1"
+                className="flex h-8 px-2 items-center justify-center rounded-xl bg-zen-surface-container dark:bg-zen-dark-surface border border-zen-border/40 dark:border-zen-dark-border text-zen-primary dark:text-zen-dark-primary active:scale-95 transition-transform font-bold text-xs-plus uppercase gap-1"
                 title={t('nav.language')}
               >
                 <Globe className="h-3 w-3" />
@@ -372,6 +393,105 @@ export default function Navigation({
         </div>
       )}
 
+      {/* ===================== KANA SYLLABARY GUIDE MODAL ===================== */}
+
+      {showGuideModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-fadeIn">
+          <div className="relative w-full max-w-lg bg-white dark:bg-zen-dark-surface rounded-3xl p-6 shadow-2xl border border-zen-surface-high dark:border-zen-dark-border max-h-[90vh] overflow-y-auto space-y-5">
+            <button
+              onClick={() => setShowGuideModal(false)}
+              aria-label={t('nav.closeGuide')}
+              className="absolute top-4 right-4 p-2 rounded-xl text-zen-text-muted hover:bg-zen-surface-container dark:hover:bg-zen-dark-surface-high transition-colors"
+            >
+              <X className="w-5 h-5" />
+            </button>
+
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-2xl bg-zen-primary/10 dark:bg-zen-dark-primary/20 text-zen-primary dark:text-zen-dark-primary flex items-center justify-center">
+                <HelpCircle className="w-5 h-5" />
+              </div>
+              <div>
+                <h3 className="font-headline text-lg font-bold text-zen-text dark:text-zen-dark-text leading-tight">
+                  {t('nav.guideTitle')}
+                </h3>
+                <p className="text-xs text-zen-text-muted dark:text-zen-dark-text-muted">
+                  {t('nav.guideSubtitle')}
+                </p>
+              </div>
+            </div>
+
+            <div className="space-y-3.5">
+              {/* Hiragana Card */}
+              <div className="p-4 rounded-2xl bg-zen-surface dark:bg-zen-dark-surface-high/60 border border-zen-border/40 dark:border-zen-dark-border">
+                <div className="flex items-center gap-2 mb-1">
+                  <span className="w-7 h-7 rounded-lg bg-zen-primary text-white flex items-center justify-center font-kana font-bold text-sm">
+                    あ
+                  </span>
+                  <h4 className="font-bold text-sm text-zen-text dark:text-zen-dark-text">
+                    {t('nav.guideHiraganaTitle')}
+                  </h4>
+                </div>
+                <p className="text-xs text-zen-text-muted dark:text-zen-dark-text-muted leading-relaxed">
+                  {t('nav.guideHiraganaDesc')}
+                </p>
+              </div>
+
+              {/* Katakana Card */}
+              <div className="p-4 rounded-2xl bg-zen-surface dark:bg-zen-dark-surface-high/60 border border-zen-border/40 dark:border-zen-dark-border">
+                <div className="flex items-center gap-2 mb-1">
+                  <span className="w-7 h-7 rounded-lg bg-zen-secondary text-white flex items-center justify-center font-kana font-bold text-sm">
+                    ア
+                  </span>
+                  <h4 className="font-bold text-sm text-zen-text dark:text-zen-dark-text">
+                    {t('nav.guideKatakanaTitle')}
+                  </h4>
+                </div>
+                <p className="text-xs text-zen-text-muted dark:text-zen-dark-text-muted leading-relaxed">
+                  {t('nav.guideKatakanaDesc')}
+                </p>
+              </div>
+
+              {/* Dakuten Card */}
+              <div className="p-4 rounded-2xl bg-zen-surface dark:bg-zen-dark-surface-high/60 border border-zen-border/40 dark:border-zen-dark-border">
+                <div className="flex items-center gap-2 mb-1">
+                  <span className="w-7 h-7 rounded-lg bg-zen-accent text-white flex items-center justify-center font-kana font-bold text-sm">
+                    が
+                  </span>
+                  <h4 className="font-bold text-sm text-zen-text dark:text-zen-dark-text">
+                    {t('nav.guideDakutenTitle')}
+                  </h4>
+                </div>
+                <p className="text-xs text-zen-text-muted dark:text-zen-dark-text-muted leading-relaxed">
+                  {t('nav.guideDakutenDesc')}
+                </p>
+              </div>
+
+              {/* Yoon Card */}
+              <div className="p-4 rounded-2xl bg-zen-surface dark:bg-zen-dark-surface-high/60 border border-zen-border/40 dark:border-zen-dark-border">
+                <div className="flex items-center gap-2 mb-1">
+                  <span className="w-7 h-7 rounded-lg bg-emerald-600 text-white flex items-center justify-center font-kana font-bold text-sm">
+                    きゃ
+                  </span>
+                  <h4 className="font-bold text-sm text-zen-text dark:text-zen-dark-text">
+                    {t('nav.guideYoonTitle')}
+                  </h4>
+                </div>
+                <p className="text-xs text-zen-text-muted dark:text-zen-dark-text-muted leading-relaxed">
+                  {t('nav.guideYoonDesc')}
+                </p>
+              </div>
+            </div>
+
+            <button
+              onClick={() => setShowGuideModal(false)}
+              className="w-full py-3 bg-zen-primary dark:bg-zen-dark-primary text-white dark:text-zen-dark-on-primary rounded-xl font-bold text-xs uppercase tracking-wider shadow-sm hover:opacity-90 transition-opacity min-h-[44px]"
+            >
+              {t('nav.closeGuide')}
+            </button>
+          </div>
+        </div>
+      )}
+
       {/* ===================== MOBILE HAMBURGER MENU DRAWER OVERLAY ===================== */}
 
       {isMobileMenuOpen && (
@@ -384,9 +504,9 @@ export default function Navigation({
           />
 
           {/* Sliding Drawer Container */}
-          <aside className="relative z-50 w-full max-w-[310px] bg-white dark:bg-zen-dark-bg border-r border-zen-surface-high dark:border-zen-dark-border flex flex-col h-full shadow-2xl overflow-y-auto animate-slideRight">
+          <aside className="relative z-50 w-full max-w-[310px] bg-zen-surface-lowest dark:bg-zen-dark-surface border-r border-zen-border/40 dark:border-zen-dark-border flex flex-col h-full shadow-2xl overflow-y-auto animate-slideRight">
             {/* Drawer Header */}
-            <div className="p-4 border-b border-zen-surface-high dark:border-zen-dark-border flex items-center justify-between bg-zen-surface dark:bg-zen-dark-surface">
+            <div className="p-4 border-b border-zen-border/40 dark:border-zen-dark-border flex items-center justify-between bg-zen-surface dark:bg-zen-dark-bg">
               <div className="flex items-center gap-3">
                 <div className="w-8 h-8 rounded-xl bg-zen-primary dark:bg-zen-dark-primary text-white dark:text-zen-dark-on-primary flex items-center justify-center font-kana font-bold text-base shadow-zen-sm">
                   あ
@@ -395,7 +515,7 @@ export default function Navigation({
                   <h2 className="font-headline font-bold text-base text-zen-primary dark:text-zen-dark-primary leading-tight">
                     {t('nav.appName')}
                   </h2>
-                  <p className="text-[10px] text-zen-text-muted dark:text-zen-dark-text-muted">
+                  <p className="text-2xs text-zen-text-muted dark:text-zen-dark-text-muted">
                     {t('nav.appSubtitle')}
                   </p>
                 </div>
@@ -412,7 +532,7 @@ export default function Navigation({
 
             {/* Script Selector in Drawer */}
             <div className="p-4 border-b border-zen-surface-high dark:border-zen-dark-border bg-zen-surface-container/30 dark:bg-zen-dark-surface-high/30">
-              <span className="block text-[11px] font-semibold text-zen-text-muted dark:text-zen-dark-text-muted mb-2 uppercase tracking-wider">
+              <span className="block text-xs-plus font-semibold text-zen-text-muted dark:text-zen-dark-text-muted mb-2 uppercase tracking-wider">
                 {t('nav.writingSystem')}
               </span>
               <div className="grid grid-cols-2 gap-2 bg-zen-surface-container dark:bg-zen-dark-surface p-1 rounded-xl border border-zen-border/40 dark:border-zen-dark-border">
@@ -441,7 +561,7 @@ export default function Navigation({
 
             {/* Language Selector in Drawer */}
             <div className="p-4 border-b border-zen-surface-high dark:border-zen-dark-border bg-zen-surface-container/30 dark:bg-zen-dark-surface-high/30">
-              <span className="block text-[11px] font-semibold text-zen-text-muted dark:text-zen-dark-text-muted mb-2 uppercase tracking-wider">
+              <span className="block text-xs-plus font-semibold text-zen-text-muted dark:text-zen-dark-text-muted mb-2 uppercase tracking-wider">
                 {t('nav.language')}
               </span>
               <div className="grid grid-cols-2 gap-2 bg-zen-surface-container dark:bg-zen-dark-surface p-1 rounded-xl border border-zen-border/40 dark:border-zen-dark-border">
@@ -470,7 +590,7 @@ export default function Navigation({
 
             {/* Navigation Modules Links */}
             <div className="flex-1 p-3 space-y-1 overflow-y-auto">
-              <p className="px-3 py-1.5 text-[11px] font-semibold text-zen-text-muted dark:text-zen-dark-text-muted uppercase tracking-wider">
+              <p className="px-3 py-1.5 text-xs-plus font-semibold text-zen-text-muted dark:text-zen-dark-text-muted uppercase tracking-wider">
                 {t('nav.studySections')}
               </p>
 
@@ -484,8 +604,8 @@ export default function Navigation({
                     onClick={() => handleNavClick(item.id)}
                     className={`w-full flex items-center justify-between p-3 rounded-xl transition-all ${
                       isActive
-                        ? 'bg-zen-primary/10 dark:bg-zen-dark-surface-high text-zen-primary dark:text-zen-dark-primary font-bold border-l-4 border-zen-primary dark:border-zen-dark-primary'
-                        : 'text-zen-text dark:text-zen-dark-text hover:bg-zen-surface-container dark:hover:bg-zen-dark-surface font-medium'
+                        ? 'bg-zen-primary/10 dark:bg-zen-dark-surface-high text-zen-primary dark:text-zen-dark-primary font-bold border border-zen-primary/30 dark:border-zen-dark-primary/40 shadow-zen-sm'
+                        : 'text-zen-text dark:text-zen-dark-text hover:bg-zen-surface-container dark:hover:bg-zen-dark-surface font-medium border border-transparent'
                     }`}
                   >
                     <div className="flex items-center gap-3">
@@ -500,7 +620,7 @@ export default function Navigation({
                       </div>
                       <div className="text-left">
                         <span className="block text-sm leading-tight">{item.label}</span>
-                        <span className="block text-[10px] text-zen-text-muted dark:text-zen-dark-text-muted font-normal mt-0.5">
+                        <span className="block text-2xs text-zen-text-muted dark:text-zen-dark-text-muted font-normal mt-0.5">
                           {item.desc}
                         </span>
                       </div>
@@ -514,6 +634,20 @@ export default function Navigation({
 
             {/* Drawer Footer Controls */}
             <div className="p-4 border-t border-zen-surface-high dark:border-zen-dark-border bg-zen-surface dark:bg-zen-dark-surface space-y-2.5">
+              <button
+                onClick={() => {
+                  setIsMobileMenuOpen(false);
+                  setShowGuideModal(true);
+                }}
+                className="w-full flex items-center justify-between p-3 rounded-xl bg-zen-surface-container dark:bg-zen-dark-surface border border-zen-border/40 dark:border-zen-dark-border text-zen-text dark:text-zen-dark-text text-xs font-semibold"
+              >
+                <div className="flex items-center gap-2">
+                  <HelpCircle className="w-4 h-4 text-zen-primary dark:text-zen-dark-primary" />
+                  <span>{t('nav.guideButton')}</span>
+                </div>
+                <ChevronRight className="w-4 h-4 text-zen-text-muted/60" />
+              </button>
+
               {!isStandalone && (
                 <button
                   onClick={() => {
@@ -526,7 +660,7 @@ export default function Navigation({
                     <Download className="w-4 h-4" />
                     <span>{t('nav.installApp')}</span>
                   </div>
-                  <span className="text-[10px] font-bold uppercase tracking-wider">PWA</span>
+                  <span className="text-2xs font-bold uppercase tracking-wider">PWA</span>
                 </button>
               )}
 
@@ -538,7 +672,7 @@ export default function Navigation({
                   {isDark ? <Sun className="w-4 h-4 text-zen-dark-primary" /> : <Moon className="w-4 h-4 text-zen-primary" />}
                   <span>{t('nav.themeMode')}</span>
                 </div>
-                <span className="text-[11px] text-zen-text-muted dark:text-zen-dark-text-muted">
+                <span className="text-xs-plus text-zen-text-muted dark:text-zen-dark-text-muted">
                   {isDark ? t('nav.themeDark') : t('nav.themeLight')}
                 </span>
               </button>
@@ -550,7 +684,7 @@ export default function Navigation({
       {/* ===================== MOBILE BOTTOM NAVIGATION BAR ===================== */}
 
       <nav
-        className="xl:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 dark:bg-zen-dark-surface/95 backdrop-blur-lg border-t border-zen-surface-high dark:border-zen-dark-border px-2 py-1.5 shadow-lg"
+        className="xl:hidden fixed bottom-0 left-0 right-0 z-40 bg-zen-surface dark:bg-zen-dark-bg border-t border-zen-border/40 dark:border-zen-dark-border px-2 py-1.5 shadow-lg transition-colors duration-300"
         style={{
           paddingBottom: 'max(0.5rem, env(safe-area-inset-bottom))',
         }}
@@ -572,7 +706,7 @@ export default function Navigation({
                 }`}
               >
                 <Icon className={`w-5 h-5 ${isActive ? 'stroke-[2.5]' : 'stroke-2'}`} />
-                <span className="text-[10px] mt-0.5 tracking-tight text-center leading-tight">
+                <span className="text-2xs mt-0.5 tracking-tight text-center leading-tight">
                   {item.label}
                 </span>
               </button>
@@ -586,7 +720,7 @@ export default function Navigation({
             aria-label="Apri menu completo"
           >
             <Menu className="w-5 h-5 stroke-2" />
-            <span className="text-[10px] mt-0.5 tracking-tight text-center leading-tight">
+            <span className="text-2xs mt-0.5 tracking-tight text-center leading-tight">
               Menu
             </span>
           </button>

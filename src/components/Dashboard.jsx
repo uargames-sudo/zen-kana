@@ -84,7 +84,7 @@ export default function Dashboard({ setActiveTab, scriptMode, stats, resetStats 
   return (
     <div className="space-y-8 pb-20 xl:pb-8">
       {/* Hero Zen Banner */}
-      <div className="zen-card p-6 sm:p-8 bg-gradient-to-br from-zen-surface-lowest via-zen-surface-container/50 to-zen-surface-high/60 dark:from-zen-dark-surface dark:via-zen-dark-surface-high/40 dark:to-zen-dark-bg border border-zen-surface-high dark:border-zen-dark-border">
+      <div className="zen-card p-6 sm:p-8 bg-zen-surface-lowest dark:bg-zen-dark-surface border border-zen-border/40 dark:border-zen-dark-border">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="space-y-3 text-center md:text-left">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-zen-secondary/15 dark:bg-zen-dark-primary/20 text-zen-secondary dark:text-zen-dark-primary text-xs font-semibold">
@@ -107,7 +107,7 @@ export default function Dashboard({ setActiveTab, scriptMode, stats, resetStats 
 
               <button
                 onClick={() => playKanaSound(sampleKana)}
-                className="px-5 py-3 rounded-xl bg-white dark:bg-zen-dark-surface-high hover:bg-zen-surface-container dark:hover:bg-zen-dark-surface text-zen-primary dark:text-zen-dark-text font-medium text-sm border border-zen-border/60 dark:border-zen-dark-border transition-all flex items-center gap-2"
+                className="px-5 py-3 rounded-xl bg-zen-surface-lowest dark:bg-zen-dark-surface hover:bg-zen-surface-container dark:hover:bg-zen-dark-surface-high text-zen-primary dark:text-zen-dark-primary font-medium text-sm border border-zen-border dark:border-zen-dark-border transition-all flex items-center gap-2"
               >
                 <Volume2 className="w-4 h-4 text-zen-primary dark:text-zen-dark-primary" /> {sampleKana} (Audio)
               </button>
@@ -116,16 +116,20 @@ export default function Dashboard({ setActiveTab, scriptMode, stats, resetStats 
 
           {/* Featured Kana Display Badge */}
           <div 
-            className="w-36 h-36 sm:w-44 sm:h-44 rounded-3xl bg-white dark:bg-zen-dark-surface-high shadow-zen-lg border border-zen-primary-light/40 dark:border-zen-dark-border flex flex-col items-center justify-center relative group cursor-pointer"
+            className="w-36 h-36 sm:w-44 sm:h-44 rounded-3xl bg-zen-surface-lowest dark:bg-zen-dark-surface border border-zen-border/60 dark:border-zen-dark-border shadow-zen-md flex flex-col items-center justify-center relative group cursor-pointer"
             onClick={() => playKanaSound(sampleKana)}
+            role="button"
+            tabIndex={0}
+            onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && playKanaSound(sampleKana)}
+            aria-label={`${sampleKana} specimen - click to hear pronunciation`}
           >
-            <span className="text-6xl sm:text-7xl font-kana font-bold text-zen-primary dark:text-zen-dark-text group-hover:scale-110 transition-transform">
+            <span className="text-6xl sm:text-7xl font-kana font-bold text-zen-primary dark:text-zen-dark-primary group-hover:scale-110 transition-transform">
               {sampleKana}
             </span>
             <span className="text-xs font-semibold text-zen-text-muted dark:text-zen-dark-text-muted mt-1 uppercase tracking-widest">
               {isHiragana ? 'hiragana - a' : 'katakana - a'}
             </span>
-            <div className="absolute top-3 right-3 p-1.5 rounded-full bg-zen-surface-container dark:bg-zen-dark-surface text-zen-primary dark:text-zen-dark-primary opacity-0 group-hover:opacity-100 transition-opacity">
+            <div className="absolute top-3 right-3 p-1.5 rounded-full bg-zen-surface-container dark:bg-zen-dark-surface-high text-zen-primary dark:text-zen-dark-primary opacity-0 group-hover:opacity-100 transition-opacity">
               <Volume2 className="w-4 h-4" />
             </div>
           </div>
@@ -138,14 +142,15 @@ export default function Dashboard({ setActiveTab, scriptMode, stats, resetStats 
           <h3 className="text-xl font-headline font-bold text-zen-text dark:text-zen-dark-text">{t('dashboard.statsOverview')}</h3>
           <button 
             onClick={handleReset}
-            className="text-xs font-bold text-zen-text-muted dark:text-zen-dark-text-muted hover:text-rose-500 dark:hover:text-rose-400 transition-colors px-3 py-1 border border-zen-border/40 dark:border-zen-dark-border rounded-lg"
+            aria-label={t('dashboard.resetStats')}
+            className="text-xs font-bold text-zen-text-muted dark:text-zen-dark-text-muted hover:text-rose-500 dark:hover:text-rose-400 transition-colors px-3 py-1.5 border border-zen-border/40 dark:border-zen-dark-border rounded-lg min-h-[36px] flex items-center bg-zen-surface-lowest dark:bg-zen-dark-surface"
           >
             {t('dashboard.resetStats')}
           </button>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          <div className="zen-card p-5 border border-zen-surface-high dark:border-zen-dark-border flex items-center gap-4">
-            <div className="w-12 h-12 rounded-2xl bg-zen-primary/10 dark:bg-zen-dark-primary/20 text-zen-primary dark:text-zen-dark-primary flex items-center justify-center">
+          <div className="zen-card p-5 border border-zen-border/40 dark:border-zen-dark-border flex items-center gap-4 bg-zen-surface-lowest dark:bg-zen-dark-surface">
+            <div className="w-12 h-12 rounded-2xl bg-zen-primary/15 dark:bg-zen-dark-primary/20 text-zen-primary dark:text-zen-dark-primary flex items-center justify-center">
               <CheckCircle className="w-6 h-6" />
             </div>
             <div>
@@ -154,8 +159,8 @@ export default function Dashboard({ setActiveTab, scriptMode, stats, resetStats 
             </div>
           </div>
 
-          <div className="zen-card p-5 border border-zen-surface-high dark:border-zen-dark-border flex items-center gap-4">
-            <div className="w-12 h-12 rounded-2xl bg-zen-secondary/10 dark:bg-zen-dark-secondary/20 text-zen-secondary dark:text-zen-dark-secondary flex items-center justify-center">
+          <div className="zen-card p-5 border border-zen-border/40 dark:border-zen-dark-border flex items-center gap-4 bg-zen-surface-lowest dark:bg-zen-dark-surface">
+            <div className="w-12 h-12 rounded-2xl bg-zen-secondary/15 dark:bg-zen-dark-secondary/20 text-zen-secondary dark:text-zen-dark-secondary flex items-center justify-center">
               <TrendingUp className="w-6 h-6" />
             </div>
             <div>
@@ -164,8 +169,8 @@ export default function Dashboard({ setActiveTab, scriptMode, stats, resetStats 
             </div>
           </div>
 
-          <div className="zen-card p-5 border border-zen-surface-high dark:border-zen-dark-border flex items-center gap-4">
-            <div className="w-12 h-12 rounded-2xl bg-zen-accent/10 dark:bg-zen-dark-primary/20 text-zen-accent dark:text-zen-dark-primary flex items-center justify-center">
+          <div className="zen-card p-5 border border-zen-border/40 dark:border-zen-dark-border flex items-center gap-4 bg-zen-surface-lowest dark:bg-zen-dark-surface">
+            <div className="w-12 h-12 rounded-2xl bg-zen-accent/15 dark:bg-zen-dark-primary/20 text-zen-accent dark:text-zen-dark-primary flex items-center justify-center">
               <Flame className="w-6 h-6" />
             </div>
             <div>
@@ -189,14 +194,14 @@ export default function Dashboard({ setActiveTab, scriptMode, stats, resetStats 
               <div
                 key={card.id}
                 onClick={() => setActiveTab(card.id)}
-                className="zen-card p-6 border border-zen-surface-high dark:border-zen-dark-border hover:border-zen-primary-light dark:hover:border-zen-dark-primary cursor-pointer group flex flex-col justify-between"
+                className="zen-card p-6 border border-zen-border/40 dark:border-zen-dark-border bg-zen-surface-lowest dark:bg-zen-dark-surface hover:border-zen-primary dark:hover:border-zen-dark-primary cursor-pointer group flex flex-col justify-between"
               >
                 <div className="space-y-3">
                   <div className="flex items-center justify-between">
                     <div className={`w-12 h-12 rounded-2xl ${card.color} flex items-center justify-center shadow-zen-sm group-hover:scale-105 transition-transform`}>
                       <Icon className="w-6 h-6" />
                     </div>
-                    <span className="text-[11px] font-semibold px-2.5 py-1 rounded-full bg-zen-surface-container dark:bg-zen-dark-surface-high text-zen-text-muted dark:text-zen-dark-text-muted">
+                    <span className="text-xs-plus font-semibold px-2.5 py-1 rounded-full bg-zen-surface-container dark:bg-zen-dark-surface-high text-zen-text-muted dark:text-zen-dark-text-muted">
                       {card.badge}
                     </span>
                   </div>
@@ -210,7 +215,7 @@ export default function Dashboard({ setActiveTab, scriptMode, stats, resetStats 
                   </div>
                 </div>
 
-                <div className="pt-4 mt-4 border-t border-zen-surface-high dark:border-zen-dark-border flex items-center justify-between text-xs font-semibold text-zen-primary dark:text-zen-dark-primary group-hover:translate-x-1 transition-transform">
+                <div className="pt-4 mt-4 border-t border-zen-border/40 dark:border-zen-dark-border flex items-center justify-between text-xs font-semibold text-zen-primary dark:text-zen-dark-primary group-hover:translate-x-1 transition-transform">
                   <span>{lang === 'it' ? 'Apri modulo' : 'Open Module'}</span>
                   <span>→</span>
                 </div>

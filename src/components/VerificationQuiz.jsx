@@ -36,6 +36,23 @@ export default function VerificationQuiz({ scriptMode, updateStats }) {
     ? choice.romaji === question.target.romaji
     : choice.id === question.target.id;
 
+  // Keyboard navigation for options (1-4)
+  React.useEffect(() => {
+    if (isFinished) return;
+
+    const handleKeyDown = (e) => {
+      if (['1', '2', '3', '4'].includes(e.key)) {
+        const choiceIndex = parseInt(e.key, 10) - 1;
+        if (testQuestions[currentStep]?.choices[choiceIndex] && !userAnswers[currentStep]) {
+          handleAnswerSelect(testQuestions[currentStep].choices[choiceIndex]);
+        }
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isFinished, currentStep, testQuestions, userAnswers]);
+
   const handleAnswerSelect = (choice) => {
     if (isFinished || userAnswers[currentStep]) return;
     const question = testQuestions[currentStep];
@@ -189,30 +206,38 @@ export default function VerificationQuiz({ scriptMode, updateStats }) {
           <div className="h-full rounded-full bg-zen-primary transition-all duration-300 dark:bg-zen-dark-primary" style={{ width: `${progressPercent}%` }} />
         </div>
       </div>
-      <div className="zen-card flex flex-col items-center space-y-4 border-2 border-zen-surface-high bg-white p-10 text-center shadow-zen-lg dark:border-zen-dark-border dark:bg-zen-dark-surface-high dark:shadow-zen-dark-lg">
+      <div className="zen-card flex flex-col items-center space-y-4 border-2 border-zen-border/40 bg-zen-surface-lowest p-10 text-center shadow-zen-lg dark:border-zen-dark-border dark:bg-zen-dark-surface dark:shadow-zen-dark-lg">
         <div className="flex w-full items-center justify-between">
-          <span className="rounded-full bg-zen-surface-container px-3 py-1 text-xs font-semibold text-zen-text-muted dark:bg-zen-dark-surface dark:text-zen-dark-text-muted">{prompt}</span>
+          <span className="rounded-full bg-zen-surface-container px-3 py-1 text-xs font-semibold text-zen-text-muted dark:bg-zen-dark-surface-high dark:text-zen-dark-text-muted">{prompt}</span>
           <button onClick={() => playKanaSound(targetKana)} className="rounded-full bg-zen-primary/10 p-2.5 text-zen-primary dark:bg-zen-dark-primary/20 dark:text-zen-dark-primary" title="Play Japanese audio">
             <Volume2 className="h-5 w-5" />
           </button>
         </div>
-        <div className="font-kana py-4 text-8xl font-bold text-zen-primary dark:text-white sm:text-9xl">{targetKana}</div>
+        <div className="font-kana py-4 text-8xl font-bold text-zen-primary dark:text-zen-dark-primary sm:text-9xl">{targetKana}</div>
         {!isKanaQuestion && <div className="text-lg font-bold text-zen-text dark:text-zen-dark-text">{currentQ.target.romaji}</div>}
       </div>
       <div className="grid grid-cols-2 gap-4">
         {currentQ.choices.map((choice, index) => {
-          const isSelected = userAnswers[currentStep]?.id === choice.id || (isKanaQuestion && userAnswers[currentStep]?.romaji === choice.romaji);
+          const selectedAnswer = userAnswers[currentStep];
+          const isSelected = !!selectedAnswer && (
+            isKanaQuestion 
+              ? selectedAnswer.romaji === choice.romaji 
+              : selectedAnswer.id === choice.id
+          );
           return (
             <button
               key={`${choice.id || choice.romaji}-${index}`}
               onClick={() => handleAnswerSelect(choice)}
-              className={`rounded-2xl border-2 p-5 font-headline font-bold transition-all duration-200 ${
+              className={`relative rounded-2xl border-2 p-5 font-headline font-bold transition-all duration-200 min-h-[72px] flex items-center justify-center ${
                 isSelected
                   ? 'border-zen-primary bg-zen-primary text-white shadow-zen-md dark:bg-zen-dark-primary dark:text-zen-dark-on-primary'
-                  : 'border-zen-surface-high bg-white text-zen-text hover:border-zen-primary-light dark:border-zen-dark-border dark:bg-zen-dark-surface dark:text-zen-dark-text dark:hover:border-zen-dark-primary'
+                  : 'border-zen-border/40 bg-zen-surface-lowest text-zen-text hover:border-zen-primary dark:border-zen-dark-border dark:bg-zen-dark-surface dark:text-zen-dark-text dark:hover:border-zen-dark-primary'
               } text-xl capitalize`}
             >
-              {isKanaQuestion ? choice.romaji : (lang === 'it' ? choice.italian : choice.english)}
+              <span className="absolute top-2.5 left-2.5 w-5 h-5 rounded-md bg-zen-surface-container/80 dark:bg-zen-dark-surface-high/80 border border-zen-border/40 dark:border-zen-dark-border/60 text-2xs font-mono font-bold flex items-center justify-center text-zen-text-muted dark:text-zen-dark-text-muted">
+                {index + 1}
+              </span>
+              <span>{isKanaQuestion ? choice.romaji : (lang === 'it' ? choice.italian : choice.english)}</span>
             </button>
           );
         })}

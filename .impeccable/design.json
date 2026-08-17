@@ -1,0 +1,82 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-17T11:38:40.000Z",
+  "title": "Design System: Zen Kana",
+  "extensions": {
+    "colorMeta": {
+      "primary": { "role": "primary", "displayName": "Slate Teal", "canonical": "#38656f", "tonalRamp": ["#16282c", "#244047", "#32575f", "#38656f", "#558691", "#78a7b1", "#a6c8cf", "#d8e7eb"] },
+      "primary-light": { "role": "primary", "displayName": "Soft Teal", "canonical": "#a0ced9", "tonalRamp": ["#36545b", "#517a84", "#72a2ad", "#a0ced9", "#b9dde4", "#d3ecf1", "#ebf7f9", "#f5fbfa"] },
+      "secondary": { "role": "secondary", "displayName": "Rosewood Plum", "canonical": "#864e5a", "tonalRamp": ["#331c22", "#4f2b34", "#6b3b47", "#864e5a", "#a26b77", "#be8b96", "#dab0b9", "#f2dbe0"] },
+      "dark-primary": { "role": "primary", "displayName": "Mint Teal", "canonical": "#36d399", "tonalRamp": ["#0b3827", "#13543b", "#1c7352", "#27946a", "#36d399", "#63deb0", "#94eac9", "#cef5e4"] },
+      "neutral-bg": { "role": "neutral", "displayName": "Porcelain Surface", "canonical": "#f4fafd", "tonalRamp": ["#111a1e", "#25343a", "#455a62", "#738c96", "#a6bdc5", "#d2e0e5", "#eaf2f5", "#f4fafd"] },
+      "dark-bg": { "role": "neutral", "displayName": "Midnight Navy", "canonical": "#0b0f19", "tonalRamp": ["#05070c", "#0b0f19", "#121827", "#1c253b", "#2a3756", "#3f5079", "#6477a3", "#9fb0d4"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display / Kana", "purpose": "Hero titles and Kana specimens in Literata serif." },
+      "headline": { "displayName": "Headline", "purpose": "Section headings in Literata serif." },
+      "body": { "displayName": "Body", "purpose": "Multilingual learning text in Inter sans." }
+    },
+    "shadows": [
+      { "name": "zen-ambient", "value": "0px 4px 16px rgba(45, 52, 70, 0.04)", "purpose": "Resting card elevation." },
+      { "name": "zen-hover", "value": "0px 12px 32px rgba(45, 52, 70, 0.1)", "purpose": "Lifted elevation on card hover." }
+    ],
+    "motion": [
+      { "name": "ease-zen", "value": "cubic-bezier(0.4, 0, 0.2, 1)", "purpose": "Smooth organic easing for transitions and flips." }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" },
+      { "name": "md", "value": "768px" },
+      { "name": "lg", "value": "1024px" },
+      { "name": "xl", "value": "1280px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Primary action button with soft rounded corners and subtle shadow.",
+      "html": "<button class=\"ds-btn-primary\">START PRACTICE</button>",
+      "css": ".ds-btn-primary { background: #38656f; color: #ffffff; padding: 12px 24px; font-family: 'Inter', sans-serif; font-size: 0.875rem; font-weight: 600; border: none; border-radius: 12px; box-shadow: 0px 4px 12px rgba(56, 101, 111, 0.2); cursor: pointer; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); } .ds-btn-primary:hover { background: #1d4d56; transform: translateY(-1px); box-shadow: 0px 6px 16px rgba(56, 101, 111, 0.3); }"
+    },
+    {
+      "name": "Zen Card",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "Organic rounded container with diffused elevation.",
+      "html": "<div class=\"ds-zen-card\"><h3>あ [a]</h3><p>Hiragana practice item</p></div>",
+      "css": ".ds-zen-card { background: #ffffff; border-radius: 16px; padding: 20px; box-shadow: 0px 4px 20px rgba(45, 52, 70, 0.05); border: 1px solid #c0c8ca; font-family: 'Inter', sans-serif; transition: all 0.25s ease; } .ds-zen-card:hover { transform: translateY(-2px); box-shadow: 0px 12px 32px rgba(45, 52, 70, 0.09); }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Zen Botanical Sanctuary",
+    "overview": "Zen Kana blends the calm, disciplined balance of Japanese traditional aesthetics with the clarity of modern educational tools. The interface evokes a serene Kyoto study atmosphere in light mode—using soft slate teals, rosewood accents, and porcelain-tinted surfaces—and transitions into an immersive Midnight Navy and Mint Teal sanctuary in dark mode.",
+    "keyCharacteristics": [
+      "Organic, softly rounded cards (rounded-zen / 16px radius) paired with gentle diffused elevation.",
+      "Dual-font typography: Literata for elegant, authoritative Japanese Kana display and hero headlines; Inter for crisp, effortless multilingual reading.",
+      "Tactile, friendly micro-interactions with smooth 3D card flips and active scale presses."
+    ],
+    "rules": [
+      {
+        "name": "The Sanctuary Balance Rule",
+        "body": "Color accents never overpower content. Surfaces remain neutral and expansive; teal and mint are reserved for actionable targets and meaningful feedback.",
+        "section": "colors"
+      },
+      {
+        "name": "The Soft Lift Rule",
+        "body": "Cards lift subtly on hover (translateY(-2px) or scale(1.015)) with an accompanying shadow diffusion, creating an organic tactile feel.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do maintain rounded radii (rounded-xl to rounded-2xl) for a soft, welcoming feel.",
+      "Do use Literata for Japanese glyphs to preserve traditional stroke aesthetics.",
+      "Do keep animations smooth, peaceful, and easing-based (cubic-bezier(0.4, 0, 0.2, 1))."
+    ],
+    "donts": [
+      "Don't use harsh zero-radius boxy corners.",
+      "Don't flood screens with saturated neon backgrounds.",
+      "Don't use pure #000000 pitch black backgrounds in dark mode; use Midnight Navy #0b0f19."
+    ]
+  }
+}

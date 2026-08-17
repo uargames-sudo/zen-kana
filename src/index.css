@@ -3,21 +3,22 @@
 @tailwind utilities;
 
 @layer base {
-  html {
-    @apply min-h-full bg-zen-surface dark:bg-zen-dark-bg;
+  html, body, #root, .app-root {
+    background-color: var(--zen-surface);
+    color: var(--zen-text);
+    min-height: 100%;
     overflow-x: hidden;
+  }
+
+  .dark html, .dark body, .dark #root, .dark .app-root {
+    background-color: var(--zen-dark-bg);
+    color: var(--zen-dark-text);
   }
 
   body {
-    @apply min-h-screen bg-zen-surface text-zen-text antialiased font-sans select-none dark:bg-zen-dark-bg dark:text-zen-dark-text;
     -webkit-tap-highlight-color: transparent;
-    overflow-x: hidden;
     width: 100%;
-  }
-
-  #root {
-    @apply min-h-screen;
-    overflow-x: hidden;
+    font-family: 'Inter', sans-serif;
   }
 }
 :root {
@@ -25,6 +26,28 @@
   --safe-bottom: env(safe-area-inset-bottom, 0px);
   --safe-left: env(safe-area-inset-left, 0px);
   --safe-right: env(safe-area-inset-right, 0px);
+
+  /* Live Theme Tokens - Light Mode (Lacquer Red & Warm Rice Paper) */
+  --zen-primary: #981701;
+  --zen-surface: #f6f4ee;
+  --zen-surface-container: #ebe7dd;
+  --zen-surface-high: #e0dacd;
+  --zen-surface-lowest: #ffffff;
+  --zen-text: #161d1f;
+  --zen-text-muted: #5c574f;
+  --zen-border: #d4cdc0;
+
+  /* Live Theme Tokens - Dark Mode (Warm Charcoal & Golden Sun Amber) */
+  --zen-dark-bg: #141517;
+  --zen-dark-surface: #1a1b1e;
+  --zen-dark-surface-high: #24252a;
+  --zen-dark-surface-lowest: #0d0e10;
+  --zen-dark-text: #f4f3f0;
+  --zen-dark-text-muted: #9a9994;
+  --zen-dark-border: #31333a;
+  --zen-dark-primary: #f0b000;
+  --zen-dark-on-primary: #141517;
+  --zen-dark-secondary: #fbbf24;
 }
 
 .safe-area {
@@ -56,17 +79,17 @@
 
 /* Zen Glassmorphism & Diffused Elevation */
 .zen-card {
-  background: #ffffff;
+  background: var(--zen-surface-lowest, #ffffff);
   border-radius: 1rem;
   box-shadow: 0px 4px 20px rgba(45, 52, 70, 0.05);
   transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .dark .zen-card {
-  background: #121827;
-  color: #f8fafc;
+  background: var(--zen-dark-surface, #1a1b1e);
+  color: var(--zen-dark-text, #f4f3f0);
   box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.5);
-  border-color: #222d46;
+  border-color: var(--zen-dark-border, #31333a);
 }
 
 .zen-card:hover {
@@ -75,7 +98,7 @@
 
 .dark .zen-card:hover {
   box-shadow: 0px 12px 36px rgba(0, 0, 0, 0.7);
-  border-color: #36d399;
+  border-color: var(--zen-dark-primary, #f0b000);
 }
 
 .flashcard-hover {
@@ -106,20 +129,20 @@
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #eef5f7;
+  background: var(--zen-surface-container, #ebe7dd);
 }
 .dark ::-webkit-scrollbar-track {
-  background: #0b0f19;
+  background: var(--zen-dark-bg, #141517);
 }
 ::-webkit-scrollbar-thumb {
-  background: #a0ced9;
+  background: var(--zen-primary, #981701);
   border-radius: 999px;
 }
 .dark ::-webkit-scrollbar-thumb {
-  background: #36d399;
+  background: var(--zen-dark-primary, #f0b000);
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #2bba84;
+  background: var(--zen-dark-primary, #f0b000);
 }
 
 /* Animations for Mobile Drawer */
@@ -139,6 +162,36 @@
 
 .animate-slideRight {
   animation: slideRight 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Focus Rings */
+:focus-visible {
+  outline: 2px solid var(--zen-primary, #981701);
+  outline-offset: 2px;
+}
+.dark :focus-visible {
+  outline: 2px solid var(--zen-dark-primary, #f0b000);
+  outline-offset: 2px;
+}
+
+/* Custom Text Selection */
+::selection {
+  background-color: var(--zen-primary, #981701);
+  color: #ffffff;
+}
+.dark ::selection {
+  background-color: var(--zen-dark-primary, #f0b000);
+  color: var(--zen-dark-on-primary, #141517);
+}
+
+/* Motion Accessibility Support */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */

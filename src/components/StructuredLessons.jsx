@@ -109,7 +109,7 @@ export default function StructuredLessons({ scriptMode, updateStats }) {
             <button
               key={label}
               onClick={() => setStep(index)}
-              className={`rounded-lg px-2 py-2 text-[10px] font-bold sm:text-xs transition-all ${
+              className={`rounded-lg px-2 py-2 text-2xs font-bold sm:text-xs transition-all ${
                 step === index
                   ? 'bg-zen-primary text-white dark:bg-zen-dark-primary dark:text-zen-dark-on-primary'
                   : 'bg-zen-surface-container text-zen-text-muted dark:bg-zen-dark-surface-high dark:text-zen-dark-text-muted'

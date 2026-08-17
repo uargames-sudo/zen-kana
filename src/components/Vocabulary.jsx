@@ -26,7 +26,7 @@ export default function Vocabulary() {
 
   return (
     <section className="space-y-6 pb-20 xl:pb-8">
-      <div className="zen-card p-6 sm:p-8 border border-zen-surface-high dark:border-zen-dark-border bg-gradient-to-br from-zen-surface-lowest via-zen-surface-container/50 to-zen-surface-high/60 dark:from-zen-dark-surface dark:via-zen-dark-surface-high/40 dark:to-zen-dark-bg">
+      <div className="zen-card p-6 sm:p-8 border border-zen-border/40 dark:border-zen-dark-border bg-zen-surface-lowest dark:bg-zen-dark-surface">
         <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
           <div>
             <div className="inline-flex items-center gap-2 rounded-full bg-zen-primary/10 dark:bg-zen-dark-primary/20 px-3 py-1 text-xs font-semibold text-zen-primary dark:text-zen-dark-primary">
@@ -37,7 +37,7 @@ export default function Vocabulary() {
           </div>
           <label className="relative block w-full md:w-72">
             <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-zen-text-muted dark:text-zen-dark-text-muted" />
-            <input value={query} onChange={(event) => setQuery(event.target.value)} placeholder={t('vocabulary.searchPlaceholder')} className="w-full rounded-xl border border-zen-border/60 bg-white py-3 pl-10 pr-3 text-sm text-zen-text outline-none placeholder:text-zen-text-muted focus:border-zen-primary dark:border-zen-dark-border dark:bg-zen-dark-surface dark:text-zen-dark-text dark:focus:border-zen-dark-primary" />
+            <input value={query} onChange={(event) => setQuery(event.target.value)} placeholder={t('vocabulary.searchPlaceholder')} className="w-full rounded-xl border border-zen-border/60 bg-zen-surface-lowest py-3 pl-10 pr-3 text-sm text-zen-text outline-none placeholder:text-zen-text-muted focus:border-zen-primary dark:border-zen-dark-border dark:bg-zen-dark-surface-high dark:text-zen-dark-text dark:focus:border-zen-dark-primary" />
           </label>
         </div>
         <div className="mt-5 flex flex-wrap gap-2">
@@ -54,9 +54,9 @@ export default function Vocabulary() {
         {visibleWords.map((word) => {
           const Icon = getVocabularyIcon(word.imageKeyword);
           return (
-            <button key={word.id} onClick={() => playKanaSound(word.kana)} className="zen-card zen-card-active flex min-h-44 flex-col rounded-2xl border border-zen-surface-high p-5 text-left dark:border-zen-dark-border">
+            <button key={word.id} onClick={() => playKanaSound(word.kana)} className="zen-card zen-card-active flex min-h-44 flex-col rounded-2xl border border-zen-border/40 p-5 text-left dark:border-zen-dark-border bg-zen-surface-lowest dark:bg-zen-dark-surface">
               <div className="flex items-start justify-between">
-                <span className="rounded-full bg-zen-surface-container px-2.5 py-1 text-[11px] font-bold capitalize text-zen-text-muted dark:bg-zen-dark-surface-high dark:text-zen-dark-text-muted">{word.script}</span>
+                <span className="rounded-full bg-zen-surface-container px-2.5 py-1 text-xs-plus font-bold capitalize text-zen-text-muted dark:bg-zen-dark-surface-high dark:text-zen-dark-text-muted">{word.script}</span>
                 <span className="rounded-xl bg-zen-primary/10 p-2 text-zen-primary dark:bg-zen-dark-primary/20 dark:text-zen-dark-primary"><Icon className="h-6 w-6" /></span>
               </div>
               <div className="mt-auto flex items-end justify-between gap-3">

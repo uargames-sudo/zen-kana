@@ -138,6 +138,30 @@ export default function ListeningQuiz({ scriptMode, updateStats }) {
     }
   }, [phase, currentIndex, questions]);
 
+  // Keyboard navigation for Desktop / Power Users (1-4, Space, Enter)
+  useEffect(() => {
+    if (phase !== 'playing') return;
+
+    const handleKeyDown = (e) => {
+      if (['1', '2', '3', '4'].includes(e.key)) {
+        const optionIndex = parseInt(e.key, 10) - 1;
+        if (questions[currentIndex]?.options[optionIndex] && !isAnswered) {
+          handleSelectOption(questions[currentIndex].options[optionIndex]);
+        }
+      } else if (e.key === ' ' || e.key === 'Enter') {
+        e.preventDefault();
+        if (isAnswered) {
+          handleNext();
+        } else {
+          handlePlayAudio();
+        }
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [phase, currentIndex, questions, isAnswered, selectedOption]);
+
   const handlePlayAudio = () => {
     if (!questions[currentIndex]) return;
     playKanaSound(questions[currentIndex].target.audioText);
@@ -442,7 +466,7 @@ export default function ListeningQuiz({ scriptMode, updateStats }) {
             <button
               type="button"
               onClick={() => setPhase('setup')}
-              className="px-3 py-1 rounded-lg bg-white dark:bg-zen-dark-surface border border-zen-border/60 dark:border-zen-dark-border text-zen-text-muted hover:text-zen-text dark:text-zen-dark-text-muted transition-colors uppercase tracking-wider font-bold shadow-zen-sm text-[11px]"
+              className="px-3 py-1 rounded-lg bg-zen-surface-lowest dark:bg-zen-dark-surface border border-zen-border/60 dark:border-zen-dark-border text-zen-text-muted hover:text-zen-text dark:text-zen-dark-text-muted transition-colors uppercase tracking-wider font-bold shadow-zen-sm text-xs-plus"
             >
               {t('listening.exit')}
             </button>
@@ -464,7 +488,7 @@ export default function ListeningQuiz({ scriptMode, updateStats }) {
       </div>
 
       {/* Audio Trigger Card */}
-      <div className="zen-card p-6 sm:p-8 border-2 border-zen-surface-high dark:border-zen-dark-border flex flex-col items-center justify-center space-y-5 bg-white dark:bg-zen-dark-surface-high shadow-zen-lg dark:shadow-zen-dark-lg rounded-3xl">
+      <div className="zen-card p-6 sm:p-8 border-2 border-zen-border/40 dark:border-zen-dark-border flex flex-col items-center justify-center space-y-5 bg-zen-surface-lowest dark:bg-zen-dark-surface shadow-zen-lg dark:shadow-zen-dark-lg rounded-3xl">
         <div className="text-center space-y-1">
           <span className="px-3.5 py-1 rounded-full bg-zen-primary/10 dark:bg-zen-dark-primary/20 text-zen-primary dark:text-zen-dark-primary text-xs font-bold uppercase tracking-wider">
             {lang === 'it' ? 'Esercizio di Ascolto' : 'Listening Exercise'}
@@ -494,17 +518,21 @@ export default function ListeningQuiz({ scriptMode, updateStats }) {
       {/* 4 Options Grid */}
       <div className={`grid gap-4 ${isWordQuestion ? 'grid-cols-2' : 'grid-cols-2 sm:grid-cols-4'}`}>
         {currentQ.options.map((option, idx) => {
-          const isSelected = selectedOption?.id === option.id;
+          const isSelected = !!selectedOption && (
+            option.id !== undefined
+              ? selectedOption.id === option.id
+              : selectedOption.label === option.label
+          );
           const isCorrect = option.id === currentQ.target.id || option.label === currentQ.target.label;
 
-          let btnStyle = 'bg-white dark:bg-zen-dark-surface-high border-zen-surface-high dark:border-zen-dark-border text-zen-text dark:text-white hover:border-zen-primary-light dark:hover:border-zen-dark-primary';
+          let btnStyle = 'bg-zen-surface-lowest dark:bg-zen-dark-surface border-zen-border/40 dark:border-zen-dark-border text-zen-text dark:text-zen-dark-text hover:border-zen-primary dark:hover:border-zen-dark-primary';
           if (isAnswered) {
             if (isCorrect) {
               btnStyle = 'bg-emerald-500 text-white border-emerald-600 ring-2 ring-emerald-300 dark:ring-emerald-500/40 shadow-zen-md';
             } else if (isSelected && !isCorrect) {
               btnStyle = 'bg-rose-500 text-white border-rose-600';
             } else {
-              btnStyle = 'bg-zen-surface-container/40 dark:bg-zen-dark-surface/40 text-zen-text-muted dark:text-zen-dark-text-muted border-transparent opacity-50';
+              btnStyle = 'bg-zen-surface-container/40 dark:bg-zen-dark-surface-high/40 text-zen-text-muted dark:text-zen-dark-text-muted border-transparent opacity-50';
             }
           }
 
@@ -513,13 +541,16 @@ export default function ListeningQuiz({ scriptMode, updateStats }) {
               key={`${option.id || option.label}-${idx}`}
               onClick={() => handleSelectOption(option)}
               disabled={isAnswered}
-              className={`p-4 sm:p-5 rounded-2xl border-2 flex flex-col items-center justify-center transition-all duration-200 min-h-[90px] ${btnStyle}`}
+              className={`relative p-4 sm:p-5 rounded-2xl border-2 flex flex-col items-center justify-center transition-all duration-200 min-h-[90px] ${btnStyle}`}
             >
+              <span className="absolute top-2.5 left-2.5 w-5 h-5 rounded-md bg-zen-surface-container/80 dark:bg-zen-dark-surface-high/80 border border-zen-border/40 dark:border-zen-dark-border/60 text-2xs font-mono font-bold flex items-center justify-center text-zen-text-muted dark:text-zen-dark-text-muted">
+                {idx + 1}
+              </span>
               <span className={`font-kana font-bold ${isWordQuestion ? 'text-2xl sm:text-3xl' : 'text-4xl sm:text-5xl'}`}>
                 {option.label}
               </span>
               {isAnswered && (
-                <span className="text-[11px] font-mono mt-1 opacity-90">
+                <span className="text-xs-plus font-mono mt-1 opacity-90">
                   {option.romaji} {option.translation && option.translation !== option.romaji ? `· ${option.translation}` : ''}
                 </span>
               )}

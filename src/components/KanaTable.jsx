@@ -11,23 +11,50 @@ export default function KanaTable({ scriptMode }) {
 
   const isHiragana = scriptMode === 'hiragana';
 
-  const getKanaList = () => {
+  const getTableData = () => {
     switch (activeTab) {
       case 'dakuten':
-        return KANA_DAKUTEN;
+        return {
+          columns: ['A', 'I', 'U', 'E', 'O'],
+          rowLabels: ['G', 'Z', 'D', 'B', 'P'],
+          colCount: 5,
+          list: KANA_DAKUTEN
+        };
       case 'combination':
-        return KANA_COMBINATION;
+        return {
+          columns: ['A', 'U', 'O'],
+          rowLabels: ['KY', 'SH', 'CH', 'NY', 'HY', 'MY', 'RY'],
+          colCount: 3,
+          list: KANA_COMBINATION
+        };
       default:
-        return HIRAGANA_BASIC;
+        return {
+          columns: ['A', 'I', 'U', 'E', 'O'],
+          rowLabels: ['—', 'K', 'S', 'T', 'N', 'H', 'M', 'Y', 'R', 'W', 'N'],
+          colCount: 5,
+          list: HIRAGANA_BASIC
+        };
     }
   };
 
+  const { columns, rowLabels, colCount, list } = getTableData();
+
+  // Group into rows
+  const rows = [];
+  for (let i = 0; i < list.length; i += colCount) {
+    rows.push(list.slice(i, i + colCount));
+  }
+
   const handleCardClick = (item) => {
-    if (!item.hiragana && !item.katakana) return;
+    if (!item || (!item.hiragana && !item.katakana)) return;
     const char = isHiragana ? item.hiragana : item.katakana;
     setSelectedKana(item);
     playKanaSound(char);
   };
+
+  const gridColsClass = colCount === 3 
+    ? 'grid-cols-[36px_repeat(3,1fr)] sm:grid-cols-[48px_repeat(3,1fr)]' 
+    : 'grid-cols-[36px_repeat(5,1fr)] sm:grid-cols-[48px_repeat(5,1fr)]';
 
   return (
     <div className="space-y-6 pb-20 xl:pb-8">
@@ -45,30 +72,33 @@ export default function KanaTable({ scriptMode }) {
         {/* Sub-tabs: Basic, Dakuten, Combination */}
         <div className="flex items-center bg-zen-surface-container dark:bg-zen-dark-surface p-1 rounded-xl border border-zen-border/40 dark:border-zen-dark-border self-start sm:self-auto">
           <button
-            onClick={() => setActiveTab('basic')}
-            className={`px-4 py-2 rounded-lg text-xs font-semibold transition-all ${
+            onClick={() => { setActiveTab('basic'); setSelectedKana(null); }}
+            aria-label={t('table.tabBasic')}
+            className={`px-4 py-2.5 rounded-lg text-xs font-semibold transition-all min-h-[40px] flex items-center ${
               activeTab === 'basic'
-                ? 'bg-white dark:bg-zen-dark-primary text-zen-primary dark:text-zen-dark-on-primary shadow-zen-sm'
+                ? 'bg-zen-surface-lowest dark:bg-zen-dark-primary text-zen-primary dark:text-zen-dark-on-primary shadow-zen-sm'
                 : 'text-zen-text-muted dark:text-zen-dark-text-muted hover:text-zen-text dark:hover:text-zen-dark-text'
             }`}
           >
             {t('table.tabBasic')}
           </button>
           <button
-            onClick={() => setActiveTab('dakuten')}
-            className={`px-4 py-2 rounded-lg text-xs font-semibold transition-all ${
+            onClick={() => { setActiveTab('dakuten'); setSelectedKana(null); }}
+            aria-label={t('table.tabDakuten')}
+            className={`px-4 py-2.5 rounded-lg text-xs font-semibold transition-all min-h-[40px] flex items-center ${
               activeTab === 'dakuten'
-                ? 'bg-white dark:bg-zen-dark-primary text-zen-primary dark:text-zen-dark-on-primary shadow-zen-sm'
+                ? 'bg-zen-surface-lowest dark:bg-zen-dark-primary text-zen-primary dark:text-zen-dark-on-primary shadow-zen-sm'
                 : 'text-zen-text-muted dark:text-zen-dark-text-muted hover:text-zen-text dark:hover:text-zen-dark-text'
             }`}
           >
             {t('table.tabDakuten')}
           </button>
           <button
-            onClick={() => setActiveTab('combination')}
-            className={`px-4 py-2 rounded-lg text-xs font-semibold transition-all ${
+            onClick={() => { setActiveTab('combination'); setSelectedKana(null); }}
+            aria-label={t('table.tabCombination')}
+            className={`px-4 py-2.5 rounded-lg text-xs font-semibold transition-all min-h-[40px] flex items-center ${
               activeTab === 'combination'
-                ? 'bg-white dark:bg-zen-dark-primary text-zen-primary dark:text-zen-dark-on-primary shadow-zen-sm'
+                ? 'bg-zen-surface-lowest dark:bg-zen-dark-primary text-zen-primary dark:text-zen-dark-on-primary shadow-zen-sm'
                 : 'text-zen-text-muted dark:text-zen-dark-text-muted hover:text-zen-text dark:hover:text-zen-dark-text'
             }`}
           >
@@ -77,57 +107,92 @@ export default function KanaTable({ scriptMode }) {
         </div>
       </div>
 
-      {/* Grid of Kana Cards */}
-      <div className="grid grid-cols-5 sm:grid-cols-5 md:grid-cols-5 lg:grid-cols-5 gap-2.5 sm:gap-4">
-        {getKanaList().map((item, idx) => {
-          const char = isHiragana ? item.hiragana : item.katakana;
-          if (!char) {
-            return (
-              <div
-                key={`empty-${idx}`}
-                className="aspect-square rounded-2xl bg-transparent border border-dashed border-zen-surface-high/60 dark:border-zen-dark-border/60"
-              />
-            );
-          }
-
-          const isSelected = selectedKana?.romaji === item.romaji;
-
-          return (
-            <div
-              key={`${char}-${idx}`}
-              onClick={() => handleCardClick(item)}
-              className={`aspect-square rounded-2xl p-2 sm:p-4 flex flex-col items-center justify-between cursor-pointer transition-all duration-200 ${
-                isSelected
-                  ? 'bg-zen-primary dark:bg-zen-dark-primary text-white dark:text-zen-dark-on-primary ring-4 ring-zen-primary-light dark:ring-zen-dark-primary/40 shadow-zen-lg scale-105'
-                  : 'zen-card bg-white dark:bg-zen-dark-surface-high border border-zen-surface-high dark:border-zen-dark-border hover:border-zen-primary-light dark:hover:border-zen-dark-primary hover:scale-102'
-              }`}
+      {/* Coordinate Matrix Container */}
+      <div className="space-y-2.5 sm:space-y-3">
+        {/* Top Header Row: Vowels (A, I, U, E, O) */}
+        <div className={`grid ${gridColsClass} gap-2 sm:gap-3.5 items-center`}>
+          <div className="flex items-center justify-center text-2xs font-bold font-mono text-zen-text-muted/60 dark:text-zen-dark-text-muted/60 uppercase">
+            {/* Corner anchor */}
+          </div>
+          {columns.map((vowel) => (
+            <div 
+              key={vowel} 
+              className="py-2 text-center font-extrabold text-sm sm:text-base font-mono text-zen-text dark:text-zen-dark-primary bg-white dark:bg-zen-dark-surface rounded-xl border-2 border-zen-text/70 dark:border-zen-dark-primary/60 shadow-zen-sm uppercase tracking-wider"
             >
-              <div className="w-full flex justify-end">
-                <Volume2 className={`w-3.5 h-3.5 ${isSelected ? 'text-white dark:text-zen-dark-on-primary' : 'text-zen-primary/50 dark:text-zen-dark-text-muted'}`} />
+              {vowel}
+            </div>
+          ))}
+        </div>
+
+        {/* Matrix Rows with Left Consonant Header */}
+        <div className="space-y-2 sm:space-y-3">
+          {rows.map((rowItems, rIdx) => (
+            <div key={`row-${rIdx}`} className={`grid ${gridColsClass} gap-2 sm:gap-3.5 items-stretch`}>
+              {/* Left Consonant Header Badge */}
+              <div 
+                className="flex items-center justify-center rounded-2xl bg-white dark:bg-zen-dark-surface border-2 border-zen-text/70 dark:border-zen-dark-primary/60 text-zen-text dark:text-zen-dark-primary font-mono font-extrabold text-sm sm:text-base select-none"
+                title={`Riga ${rowLabels[rIdx] || ''}`}
+              >
+                {rowLabels[rIdx] || '—'}
               </div>
 
-              <span className={`font-kana font-bold text-3xl sm:text-5xl ${isSelected ? 'text-white dark:text-zen-dark-on-primary' : 'text-zen-primary dark:text-zen-dark-text'}`}>
-                {char}
-              </span>
+              {/* Kana Cards */}
+              {rowItems.map((item, cIdx) => {
+                const char = isHiragana ? item?.hiragana : item?.katakana;
+                if (!char) {
+                  return (
+                    <div
+                      key={`empty-${rIdx}-${cIdx}`}
+                      className="aspect-square rounded-2xl bg-transparent border border-dashed border-zen-border/30 dark:border-zen-dark-border/40"
+                    />
+                  );
+                }
 
-              <span className={`text-xs sm:text-sm font-semibold tracking-wider ${isSelected ? 'text-white/90 dark:text-zen-dark-on-primary/90' : 'text-zen-text-muted dark:text-zen-dark-text-muted'}`}>
-                {item.romaji}
-              </span>
+                const isSelected = selectedKana?.romaji === item.romaji;
+
+                return (
+                  <div
+                    key={`${char}-${rIdx}-${cIdx}`}
+                    onClick={() => handleCardClick(item)}
+                    role="button"
+                    tabIndex={0}
+                    onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && handleCardClick(item)}
+                    aria-label={`Kana ${char}, romaji ${item.romaji}`}
+                    className={`aspect-square rounded-2xl p-1.5 sm:p-3.5 flex flex-col items-center justify-between cursor-pointer transition-all duration-200 ${
+                      isSelected
+                        ? 'bg-zen-primary dark:bg-zen-dark-primary text-white dark:text-zen-dark-on-primary ring-4 ring-zen-primary/20 dark:ring-zen-dark-primary/40 shadow-zen-lg scale-105'
+                        : 'zen-card bg-zen-surface-lowest dark:bg-zen-dark-surface border border-zen-border/40 dark:border-zen-dark-border hover:border-zen-primary dark:hover:border-zen-dark-primary hover:scale-102'
+                    }`}
+                  >
+                    <div className="w-full flex justify-end">
+                      <Volume2 className={`w-3 h-3 sm:w-3.5 sm:h-3.5 ${isSelected ? 'text-white dark:text-zen-dark-on-primary' : 'text-zen-primary/60 dark:text-zen-dark-text-muted'}`} />
+                    </div>
+
+                    <span className={`font-kana font-bold text-2xl sm:text-4xl md:text-5xl leading-none ${isSelected ? 'text-white dark:text-zen-dark-on-primary' : 'text-zen-primary dark:text-zen-dark-text'}`}>
+                      {char}
+                    </span>
+
+                    <span className={`text-2xs sm:text-xs font-semibold font-mono tracking-wider uppercase ${isSelected ? 'text-white/90 dark:text-zen-dark-on-primary/90' : 'text-zen-text-muted dark:text-zen-dark-text-muted'}`}>
+                      {item.romaji}
+                    </span>
+                  </div>
+                );
+              })}
             </div>
-          );
-        })}
+          ))}
+        </div>
       </div>
 
       {/* Detail info bar when character is selected */}
       {selectedKana && (
-        <div className="zen-card p-4 sm:p-5 border border-zen-primary-light/60 dark:border-zen-dark-border bg-zen-surface-lowest dark:bg-zen-dark-surface flex items-center justify-between gap-4 animate-fade-in">
+        <div className="zen-card p-4 sm:p-5 border border-zen-border/60 dark:border-zen-dark-border bg-zen-surface-lowest dark:bg-zen-dark-surface flex items-center justify-between gap-4 animate-fade-in">
           <div className="flex items-center gap-4">
             <div className="w-14 h-14 rounded-2xl bg-zen-primary dark:bg-zen-dark-primary text-white dark:text-zen-dark-on-primary flex items-center justify-center font-kana text-3xl font-bold">
               {isHiragana ? selectedKana.hiragana : selectedKana.katakana}
             </div>
             <div>
-              <div className="text-lg font-bold font-headline text-zen-text dark:text-zen-dark-text capitalize">
-                Romaji: <span className="text-zen-primary dark:text-zen-dark-primary">{selectedKana.romaji}</span>
+              <div className="text-lg font-bold font-headline text-zen-text dark:text-zen-dark-text">
+                Romaji: <span className="text-zen-primary dark:text-zen-dark-primary uppercase">{selectedKana.romaji}</span>
               </div>
               <div className="text-xs text-zen-text-muted dark:text-zen-dark-text-muted flex items-center gap-1.5 mt-0.5">
                 <Info className="w-3.5 h-3.5 text-zen-secondary dark:text-zen-dark-secondary" /> {t('table.exampleWord')}: {getKanaExample(selectedKana, lang)}

@@ -2,16 +2,16 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '../../context/LanguageContext';
 
-export default function QuestionPrompt({ currentWord, mode, difficulty, easyMode }) {
+export default function QuestionPrompt({ currentWord, mode, difficulty }) {
     const { t } = useLanguage();
     if (!currentWord) return null;
 
     // mode: 'ja-to-ro' or 'ro-to-ja'
     const isJaToRo = mode === 'ja-to-ro';
-    const showScriptHint = difficulty === 'easy' || easyMode;
+    const showScriptHint = difficulty === 'easy';
     
     return (
-        <div className="flex flex-col items-center justify-center p-8 zen-card bg-white dark:bg-zen-dark-surface-high rounded-3xl shadow-zen-lg dark:shadow-zen-dark-lg border-2 border-zen-surface-high dark:border-zen-dark-border min-h-[220px]">
+        <div className="flex flex-col items-center justify-center p-8 zen-card bg-zen-surface-lowest dark:bg-zen-dark-surface rounded-3xl shadow-zen-lg dark:shadow-zen-dark-lg border-2 border-zen-border/40 dark:border-zen-dark-border min-h-[220px]">
             <motion.div 
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -25,12 +25,12 @@ export default function QuestionPrompt({ currentWord, mode, difficulty, easyMode
                                 {currentWord.furigana.map((f, i) => (
                                     <div key={i} className="flex flex-col items-center">
                                         <span className="text-zen-text-muted dark:text-zen-dark-text-muted text-sm h-5">{f.reading || ''}</span>
-                                        <span className="text-5xl font-kana font-bold text-zen-text dark:text-white">{f.text}</span>
+                                        <span className="text-5xl font-kana font-bold text-zen-text dark:text-zen-dark-text">{f.text}</span>
                                     </div>
                                 ))}
                             </div>
                         ) : (
-                            <div className="text-6xl sm:text-7xl font-kana font-bold text-zen-primary dark:text-white tracking-wider">
+                            <div className="text-6xl sm:text-7xl font-kana font-bold text-zen-primary dark:text-zen-dark-primary tracking-wider">
                                 {currentWord.japanese || currentWord.kana}
                             </div>
                         )}
@@ -40,7 +40,7 @@ export default function QuestionPrompt({ currentWord, mode, difficulty, easyMode
                     </>
                 ) : (
                     <>
-                        <div className="text-5xl sm:text-6xl font-headline font-bold text-zen-text dark:text-white tracking-wider">
+                        <div className="text-5xl sm:text-6xl font-headline font-bold text-zen-text dark:text-zen-dark-text tracking-wider">
                             {currentWord.romaji}
                         </div>
                         <div className="mt-4 text-zen-text-muted dark:text-zen-dark-text-muted text-xs font-semibold uppercase tracking-widest">

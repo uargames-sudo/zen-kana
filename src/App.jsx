@@ -1,16 +1,28 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, lazy, Suspense } from 'react';
 import Navigation from './components/Navigation';
 import Dashboard from './components/Dashboard';
-import KanaTable from './components/KanaTable';
-import Flashcards from './components/Flashcards';
-import WritingCanvas from './components/WritingCanvas';
-import ListeningQuiz from './components/ListeningQuiz';
-import VerificationQuiz from './components/VerificationQuiz';
-import Vocabulary from './components/Vocabulary';
-import StructuredLessons from './components/StructuredLessons';
-import ActiveStudy from './components/ActiveStudy/ActiveStudy';
-import vocabularyData from '../vocabulary.json';
 import { useLanguage } from './context/LanguageContext';
+
+// Dynamic Code-Splitting for lightweight initial bundle
+const KanaTable = lazy(() => import('./components/KanaTable'));
+const Flashcards = lazy(() => import('./components/Flashcards'));
+const WritingCanvas = lazy(() => import('./components/WritingCanvas'));
+const ListeningQuiz = lazy(() => import('./components/ListeningQuiz'));
+const VerificationQuiz = lazy(() => import('./components/VerificationQuiz'));
+const Vocabulary = lazy(() => import('./components/Vocabulary'));
+const StructuredLessons = lazy(() => import('./components/StructuredLessons'));
+const ActiveStudy = lazy(() => import('./components/ActiveStudy/ActiveStudy'));
+
+function ModuleLoadingFallback() {
+  return (
+    <div className="flex flex-col items-center justify-center min-h-[45vh] space-y-4 animate-fadeIn">
+      <div className="w-9 h-9 border-3 border-zen-border/40 border-t-zen-primary dark:border-zen-dark-border dark:border-t-zen-dark-primary rounded-full animate-spin" />
+      <span className="text-xs font-bold uppercase tracking-widest text-zen-text-muted dark:text-zen-dark-text-muted">
+        Caricamento...
+      </span>
+    </div>
+  );
+}
 
 export default function App() {
   const { t } = useLanguage();
@@ -95,7 +107,7 @@ export default function App() {
       case 'flashcards':
         return <Flashcards scriptMode={scriptMode} updateStats={updateStats} />;
       case 'activeStudy':
-        return <ActiveStudy vocabularyData={vocabularyData} />;
+        return <ActiveStudy />;
       case 'vocabulary':
         return <Vocabulary />;
       case 'lessons':
@@ -112,7 +124,7 @@ export default function App() {
   };
 
   return (
-    <div className="flex min-h-[100dvh] flex-col bg-zen-surface font-sans text-zen-text antialiased transition-colors duration-300 dark:bg-zen-dark-bg dark:text-zen-dark-text">
+    <div className="app-root flex min-h-[100dvh] flex-col bg-zen-surface font-sans text-zen-text antialiased transition-colors duration-300 dark:bg-zen-dark-bg dark:text-zen-dark-text">
       {/* Top Header & Navigation */}
       <Navigation
         activeTab={activeTab}
@@ -125,11 +137,13 @@ export default function App() {
 
       {/* Main Content View Container */}
       <main className="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 pt-6 pb-24 xl:pb-8">
-        {renderActiveComponent()}
+        <Suspense fallback={<ModuleLoadingFallback />}>
+          {renderActiveComponent()}
+        </Suspense>
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-zen-surface-high dark:border-zen-dark-border py-6 text-center text-xs text-zen-text-muted dark:text-zen-dark-text-muted hidden lg:block">
+      <footer className="border-t border-zen-border/40 dark:border-zen-dark-border bg-zen-surface dark:bg-zen-dark-bg py-6 text-center text-xs text-zen-text-muted dark:text-zen-dark-text-muted hidden lg:block transition-colors duration-300">
         <p>{t('nav.footerText')}</p>
       </footer>
     </div>

@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { CornerDownLeft } from 'lucide-react';
 import { useLanguage } from '../../context/LanguageContext';
 
-export default function AnswerInput({ value, onChange, onSubmit, diff, disabled, mode }) {
+export default function AnswerInput({ value, onChange, onSubmit, diff, disabled, mode, attempts = 0, maxAttempts = 3 }) {
     const { t } = useLanguage();
     const inputRef = useRef(null);
     
@@ -12,10 +12,12 @@ export default function AnswerInput({ value, onChange, onSubmit, diff, disabled,
         }
     }, [disabled, mode]);
 
+    const remainingAttempts = Math.max(0, maxAttempts - attempts);
+
     const renderDiff = () => {
         if (!diff || diff.length === 0) return null;
         return (
-            <div className="mt-2 text-lg font-mono tracking-widest flex justify-center space-x-[2px] bg-zen-surface-container dark:bg-zen-dark-surface p-2.5 rounded-xl border border-zen-border/40 dark:border-zen-dark-border shadow-zen-sm">
+            <div className="mt-2 text-lg font-mono tracking-widest flex justify-center space-x-[2px] bg-zen-surface-container dark:bg-zen-dark-surface-high p-2.5 rounded-xl border border-zen-border/40 dark:border-zen-dark-border shadow-zen-sm">
                 {diff.map((token, idx) => (
                     <span 
                         key={idx} 
@@ -29,7 +31,7 @@ export default function AnswerInput({ value, onChange, onSubmit, diff, disabled,
     };
 
     return (
-        <div className="w-full max-w-md mx-auto mt-6">
+        <div className="w-full max-w-xl mx-auto space-y-2.5">
             <form 
                 onSubmit={(e) => {
                     e.preventDefault();
@@ -45,7 +47,7 @@ export default function AnswerInput({ value, onChange, onSubmit, diff, disabled,
                         onChange={(e) => onChange(e.target.value)}
                         disabled={disabled || mode === 'ro-to-ja'}
                         placeholder={mode === 'ja-to-ro' ? t('activeStudy.inputPlaceholderJaToRo') : t('activeStudy.inputPlaceholderRoToJa')}
-                        className="w-full bg-white dark:bg-zen-dark-surface border-2 border-zen-border/60 dark:border-zen-dark-border rounded-2xl py-3.5 pl-6 pr-14 text-xl text-center text-zen-text dark:text-zen-dark-text placeholder:text-zen-text-muted dark:placeholder:text-zen-dark-text-muted focus:outline-none focus:border-zen-primary dark:focus:border-zen-dark-primary transition-colors disabled:opacity-75 font-mono shadow-zen-sm"
+                        className="w-full bg-zen-surface-lowest dark:bg-zen-dark-surface border-2 border-zen-border/60 dark:border-zen-dark-border rounded-2xl py-3.5 pl-6 pr-14 text-xl text-center text-zen-text dark:text-zen-dark-text placeholder:text-zen-text-muted dark:placeholder:text-zen-dark-text-muted focus:outline-none focus:border-zen-primary dark:focus:border-zen-dark-primary transition-colors disabled:opacity-75 font-mono shadow-zen-sm"
                         autoComplete="off"
                         autoCorrect="off"
                         spellCheck="false"
@@ -65,6 +67,27 @@ export default function AnswerInput({ value, onChange, onSubmit, diff, disabled,
                 
                 {renderDiff()}
             </form>
+
+            {/* Attempts Indicator Bar */}
+            <div className="flex items-center justify-center gap-2 text-2xs uppercase tracking-widest font-bold text-zen-text-muted dark:text-zen-dark-text-muted">
+                <span>{t('activeStudy.attemptsRemaining')}</span>
+                <div className="flex items-center gap-1">
+                    {Array.from({ length: maxAttempts }).map((_, idx) => {
+                        const isAvailable = idx < remainingAttempts;
+                        return (
+                            <span 
+                                key={idx}
+                                className={`w-2 h-2 rounded-full transition-all ${
+                                    isAvailable 
+                                        ? 'bg-zen-primary dark:bg-zen-dark-primary ring-2 ring-zen-primary/20 dark:ring-zen-dark-primary/30' 
+                                        : 'bg-zen-surface-container dark:bg-zen-dark-surface-high border border-zen-border/40 dark:border-zen-dark-border'
+                                }`}
+                                title={`Tentativo ${idx + 1}`}
+                            />
+                        );
+                    })}
+                </div>
+            </div>
         </div>
     );
 }

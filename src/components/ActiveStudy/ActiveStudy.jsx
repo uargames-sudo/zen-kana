@@ -6,8 +6,9 @@ import SolutionCard from './SolutionCard';
 import { checkRomajiMatch, getRomajiDiff } from '../../utils/romajiVariants';
 import { Layers, Sparkles, Keyboard, CheckCircle, XCircle } from 'lucide-react';
 import { useLanguage } from '../../context/LanguageContext';
+import defaultVocabularyData from '../../../vocabulary.json';
 
-export default function ActiveStudy({ vocabularyData }) {
+export default function ActiveStudy({ vocabularyData = defaultVocabularyData }) {
     const { lang, t } = useLanguage();
     const [phase, setPhase] = useState('setup'); // 'setup', 'playing', 'summary'
     
@@ -127,7 +128,7 @@ export default function ActiveStudy({ vocabularyData }) {
     if (phase === 'setup') {
         return (
             <div className="w-full max-w-2xl mx-auto p-4 flex flex-col pt-6 pb-20">
-                <div className="zen-card bg-white dark:bg-zen-dark-surface border-2 border-zen-surface-high dark:border-zen-dark-border rounded-3xl shadow-zen-lg dark:shadow-zen-dark-lg p-6 sm:p-8">
+                <div className="zen-card bg-zen-surface-lowest dark:bg-zen-dark-surface border-2 border-zen-border/40 dark:border-zen-dark-border rounded-3xl shadow-zen-lg dark:shadow-zen-dark-lg p-6 sm:p-8">
                     <div className="flex items-center justify-center mb-8 gap-3">
                         <div className="w-10 h-10 rounded-2xl bg-zen-primary/10 dark:bg-zen-dark-primary/20 text-zen-primary dark:text-zen-dark-primary flex items-center justify-center">
                             <Sparkles className="w-6 h-6" />
@@ -164,39 +165,28 @@ export default function ActiveStudy({ vocabularyData }) {
                                 {t('activeStudy.studyMode')}
                             </h3>
                             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                                <button 
-                                    onClick={() => setStudyMode('ja-to-ro')}
-                                    className={`p-4 rounded-2xl font-bold transition-all flex flex-col items-center gap-1.5 border ${
-                                        studyMode === 'ja-to-ro' 
-                                            ? 'bg-zen-primary dark:bg-zen-dark-primary text-white dark:text-zen-dark-on-primary border-zen-primary shadow-zen-sm' 
-                                            : 'bg-zen-surface-container/60 dark:bg-zen-dark-surface-high text-zen-text dark:text-zen-dark-text border-zen-border/40 dark:border-zen-dark-border hover:border-zen-primary/40'
-                                    }`}
-                                >
-                                    <span className="text-xl font-kana">あ ➔ a</span>
-                                    <span className="text-xs">{t('activeStudy.modeReadKana')}</span>
-                                </button>
-                                <button 
-                                    onClick={() => setStudyMode('ro-to-ja')}
-                                    className={`p-4 rounded-2xl font-bold transition-all flex flex-col items-center gap-1.5 border ${
-                                        studyMode === 'ro-to-ja' 
-                                            ? 'bg-zen-primary dark:bg-zen-dark-primary text-white dark:text-zen-dark-on-primary border-zen-primary shadow-zen-sm' 
-                                            : 'bg-zen-surface-container/60 dark:bg-zen-dark-surface-high text-zen-text dark:text-zen-dark-text border-zen-border/40 dark:border-zen-dark-border hover:border-zen-primary/40'
-                                    }`}
-                                >
-                                    <span className="text-xl font-kana">a ➔ あ</span>
-                                    <span className="text-xs">{t('activeStudy.modeWriteKana')}</span>
-                                </button>
-                                <button 
-                                    onClick={() => setStudyMode('mixed')}
-                                    className={`p-4 rounded-2xl font-bold transition-all flex flex-col items-center gap-1.5 border ${
-                                        studyMode === 'mixed' 
-                                            ? 'bg-zen-primary dark:bg-zen-dark-primary text-white dark:text-zen-dark-on-primary border-zen-primary shadow-zen-sm' 
-                                            : 'bg-zen-surface-container/60 dark:bg-zen-dark-surface-high text-zen-text dark:text-zen-dark-text border-zen-border/40 dark:border-zen-dark-border hover:border-zen-primary/40'
-                                    }`}
-                                >
-                                    <Layers className="w-5 h-5" />
-                                    <span className="text-xs">{t('activeStudy.modeMixed')}</span>
-                                </button>
+                                {[
+                                    { id: 'ja-to-ro', kana: 'あ ➔ A', label: t('activeStudy.modeReadKana') },
+                                    { id: 'ro-to-ja', kana: 'A ➔ あ', label: t('activeStudy.modeWriteKana') },
+                                    { id: 'mixed', icon: Layers, label: t('activeStudy.modeMixed') }
+                                ].map((item) => {
+                                    const Icon = item.icon;
+                                    const isSelected = studyMode === item.id;
+                                    return (
+                                        <button 
+                                            key={item.id}
+                                            onClick={() => setStudyMode(item.id)}
+                                            className={`p-4 rounded-2xl font-bold transition-all flex flex-col items-center gap-1.5 border ${
+                                                isSelected 
+                                                    ? 'bg-zen-primary dark:bg-zen-dark-primary text-white dark:text-zen-dark-on-primary border-zen-primary shadow-zen-sm' 
+                                                    : 'bg-zen-surface-container/60 dark:bg-zen-dark-surface-high text-zen-text dark:text-zen-dark-text border-zen-border/40 dark:border-zen-dark-border hover:border-zen-primary/40'
+                                            }`}
+                                        >
+                                            {item.kana ? <span className="text-xl font-kana">{item.kana}</span> : <Icon className="w-5 h-5" />}
+                                            <span className="text-xs">{item.label}</span>
+                                        </button>
+                                    );
+                                })}
                             </div>
                         </div>
 
@@ -205,62 +195,38 @@ export default function ActiveStudy({ vocabularyData }) {
                                 {t('activeStudy.difficulty')}
                             </h3>
                             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                                <button 
-                                    type="button"
-                                    onClick={() => setDifficulty('easy')}
-                                    className={`p-4 rounded-2xl font-bold transition-all flex flex-col items-start gap-1 border text-left ${
-                                        difficulty === 'easy'
-                                            ? 'bg-emerald-500/10 border-emerald-500 text-emerald-800 dark:text-emerald-300 ring-2 ring-emerald-500/30'
-                                            : 'bg-zen-surface-container/60 dark:bg-zen-dark-surface-high border-zen-border/40 dark:border-zen-dark-border text-zen-text dark:text-zen-dark-text hover:border-zen-border'
-                                    }`}
-                                >
-                                    <span className="text-xs uppercase tracking-wider font-extrabold text-emerald-600 dark:text-emerald-400">
-                                        {t('activeStudy.difficultyEasy')}
-                                    </span>
-                                    <p className="text-[11px] text-zen-text-muted dark:text-zen-dark-text-muted font-normal mt-0.5 leading-relaxed">
-                                        {t('activeStudy.difficultyEasyDesc')}
-                                    </p>
-                                </button>
-
-                                <button 
-                                    type="button"
-                                    onClick={() => setDifficulty('medium')}
-                                    className={`p-4 rounded-2xl font-bold transition-all flex flex-col items-start gap-1 border text-left ${
-                                        difficulty === 'medium'
-                                            ? 'bg-amber-500/10 border-amber-500 text-amber-800 dark:text-amber-300 ring-2 ring-amber-500/30'
-                                            : 'bg-zen-surface-container/60 dark:bg-zen-dark-surface-high border-zen-border/40 dark:border-zen-dark-border text-zen-text dark:text-zen-dark-text hover:border-zen-border'
-                                    }`}
-                                >
-                                    <span className="text-xs uppercase tracking-wider font-extrabold text-amber-600 dark:text-amber-400">
-                                        {t('activeStudy.difficultyMedium')}
-                                    </span>
-                                    <p className="text-[11px] text-zen-text-muted dark:text-zen-dark-text-muted font-normal mt-0.5 leading-relaxed">
-                                        {t('activeStudy.difficultyMediumDesc')}
-                                    </p>
-                                </button>
-
-                                <button 
-                                    type="button"
-                                    onClick={() => setDifficulty('hard')}
-                                    className={`p-4 rounded-2xl font-bold transition-all flex flex-col items-start gap-1 border text-left ${
-                                        difficulty === 'hard'
-                                            ? 'bg-rose-500/10 border-rose-500 text-rose-800 dark:text-rose-300 ring-2 ring-rose-500/30'
-                                            : 'bg-zen-surface-container/60 dark:bg-zen-dark-surface-high border-zen-border/40 dark:border-zen-dark-border text-zen-text dark:text-zen-dark-text hover:border-zen-border'
-                                    }`}
-                                >
-                                    <span className="text-xs uppercase tracking-wider font-extrabold text-rose-600 dark:text-rose-400">
-                                        {t('activeStudy.difficultyHard')}
-                                    </span>
-                                    <p className="text-[11px] text-zen-text-muted dark:text-zen-dark-text-muted font-normal mt-0.5 leading-relaxed">
-                                        {t('activeStudy.difficultyHardDesc')}
-                                    </p>
-                                </button>
+                                {[
+                                    { id: 'easy', label: t('activeStudy.difficultyEasy'), desc: t('activeStudy.difficultyEasyDesc') },
+                                    { id: 'medium', label: t('activeStudy.difficultyMedium'), desc: t('activeStudy.difficultyMediumDesc') },
+                                    { id: 'hard', label: t('activeStudy.difficultyHard'), desc: t('activeStudy.difficultyHardDesc') }
+                                ].map((diffItem) => {
+                                    const isSelected = difficulty === diffItem.id;
+                                    return (
+                                        <button 
+                                            key={diffItem.id}
+                                            type="button"
+                                            onClick={() => setDifficulty(diffItem.id)}
+                                            className={`p-4 rounded-2xl font-bold transition-all flex flex-col items-start gap-1 border text-left ${
+                                                isSelected
+                                                    ? 'bg-zen-primary/10 border-zen-primary text-zen-primary dark:bg-zen-dark-primary/15 dark:border-zen-dark-primary dark:text-zen-dark-primary ring-2 ring-zen-primary/20 dark:ring-zen-dark-primary/30'
+                                                    : 'bg-zen-surface-container/60 dark:bg-zen-dark-surface-high border-zen-border/40 dark:border-zen-dark-border text-zen-text dark:text-zen-dark-text hover:border-zen-border'
+                                            }`}
+                                        >
+                                            <span className="text-xs uppercase tracking-wider font-extrabold text-zen-primary dark:text-zen-dark-primary">
+                                                {diffItem.label}
+                                            </span>
+                                            <p className="text-xs-plus text-zen-text-muted dark:text-zen-dark-text-muted font-normal mt-0.5 leading-relaxed">
+                                                {diffItem.desc}
+                                            </p>
+                                        </button>
+                                    );
+                                })}
                             </div>
                         </div>
 
-                        <button
+                        <button 
                             onClick={startSession}
-                            className="w-full mt-4 py-4 rounded-2xl bg-zen-primary hover:bg-zen-primary-dark dark:bg-zen-dark-primary dark:hover:bg-zen-dark-primary-hover text-white dark:text-zen-dark-on-primary font-bold text-sm uppercase tracking-widest transition-all shadow-zen-md active:scale-95"
+                            className="w-full py-4 rounded-2xl bg-zen-primary hover:bg-zen-primary-dark dark:bg-zen-dark-primary dark:hover:bg-zen-dark-primary-hover text-white dark:text-zen-dark-on-primary font-bold text-sm uppercase tracking-widest shadow-zen-md transition-all active:scale-95"
                         >
                             {t('activeStudy.startSession')}
                         </button>
@@ -273,7 +239,7 @@ export default function ActiveStudy({ vocabularyData }) {
     if (phase === 'summary') {
         return (
             <div className="w-full max-w-md mx-auto p-4 flex flex-col pt-12 pb-20 text-center">
-                <div className="zen-card bg-white dark:bg-zen-dark-surface border-2 border-zen-surface-high dark:border-zen-dark-border rounded-3xl shadow-zen-lg dark:shadow-zen-dark-lg p-8">
+                <div className="zen-card bg-zen-surface-lowest dark:bg-zen-dark-surface border-2 border-zen-border/40 dark:border-zen-dark-border rounded-3xl shadow-zen-lg dark:shadow-zen-dark-lg p-8">
                     <h2 className="text-2xl sm:text-3xl font-headline font-bold text-zen-text dark:text-zen-dark-text mb-2">
                         {t('activeStudy.sessionComplete')}
                     </h2>
@@ -304,49 +270,51 @@ export default function ActiveStudy({ vocabularyData }) {
     }
 
     // Playing phase
+    const progressPercent = Math.round(((questionsDone + 1) / targetCount) * 100);
+
     return (
-        <div className="w-full max-w-4xl mx-auto p-4 flex flex-col h-full overflow-y-auto pt-4 pb-20">
+        <div className="w-full max-w-2xl mx-auto space-y-6 pb-20 xl:pb-8">
             
-            {/* Header controls & Progress */}
-            <div className="flex justify-between items-center mb-6">
-                <div className="flex items-center gap-3">
-                    <button 
-                        onClick={() => setPhase('setup')}
-                        className="px-3 py-1.5 rounded-xl bg-white dark:bg-zen-dark-surface border border-zen-border/60 dark:border-zen-dark-border text-zen-text-muted hover:text-zen-text dark:text-zen-dark-text-muted dark:hover:text-zen-dark-text text-xs font-bold uppercase tracking-wider transition-colors shadow-zen-sm"
-                        title="Quit Session"
-                    >
-                        {t('activeStudy.exitSession')}
-                    </button>
-                    <div className="text-xs font-bold text-zen-text-muted dark:text-zen-dark-text-muted uppercase tracking-widest">
-                        {t('activeStudy.questionProgress')} {questionsDone + 1} / {targetCount}
+            {/* Header controls & Progress Bar */}
+            <div className="space-y-2.5">
+                <div className="flex justify-between items-center text-xs font-bold text-zen-text-muted dark:text-zen-dark-text-muted">
+                    <div className="flex items-center gap-3">
+                        <button 
+                            onClick={() => setPhase('setup')}
+                            className="px-3 py-1 rounded-lg bg-zen-surface-lowest dark:bg-zen-dark-surface border border-zen-border/60 dark:border-zen-dark-border text-zen-text-muted hover:text-zen-text dark:text-zen-dark-text-muted dark:hover:text-zen-dark-text text-xs-plus font-bold uppercase tracking-wider transition-colors shadow-zen-sm"
+                            title="Quit Session"
+                        >
+                            {t('activeStudy.exitSession')}
+                        </button>
+                        <span>
+                            {t('activeStudy.questionProgress')} {questionsDone + 1} / {targetCount}
+                        </span>
+                    </div>
+
+                    <div className="flex items-center gap-2">
+                        <span className="px-2.5 py-0.5 rounded-full text-xs font-extrabold uppercase tracking-wider bg-zen-primary/10 dark:bg-zen-dark-primary/20 text-zen-primary dark:text-zen-dark-primary border border-zen-primary/20 dark:border-zen-dark-primary/30">
+                            {difficulty === 'easy' ? t('activeStudy.difficultyEasy') : difficulty === 'medium' ? t('activeStudy.difficultyMedium') : t('activeStudy.difficultyHard')}
+                        </span>
                     </div>
                 </div>
 
-                <div className="flex items-center gap-2">
-                    <span className={`px-3 py-1 rounded-full text-xs font-extrabold uppercase tracking-wider border ${
-                        difficulty === 'easy' 
-                            ? 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/30' 
-                            : difficulty === 'medium'
-                            ? 'bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-500/30'
-                            : 'bg-rose-500/10 text-rose-600 dark:text-rose-400 border-rose-500/30'
-                    }`}>
-                        {difficulty === 'easy' ? t('activeStudy.difficultyEasy') : difficulty === 'medium' ? t('activeStudy.difficultyMedium') : t('activeStudy.difficultyHard')}
-                    </span>
+                {/* Smooth Progress Bar */}
+                <div className="h-2 w-full overflow-hidden rounded-full bg-zen-surface-container dark:bg-zen-dark-surface-high">
+                    <div 
+                        className="h-full rounded-full bg-zen-primary dark:bg-zen-dark-primary transition-all duration-300"
+                        style={{ width: `${progressPercent}%` }}
+                    />
                 </div>
             </div>
             
-            {/* Main Area */}
+            {/* Main Interactive Stage */}
             {status === 'playing' ? (
-                <>
+                <div className="space-y-5">
                     <QuestionPrompt 
                         currentWord={currentQuestion} 
                         mode={mode} 
                         difficulty={difficulty}
                     />
-                    
-                    <div className="text-center mt-4 text-xs text-zen-text-muted dark:text-zen-dark-text-muted font-bold uppercase tracking-widest">
-                        {t('activeStudy.attemptsRemaining')} {maxAttempts - attempts}
-                    </div>
                     
                     <AnswerInput 
                         value={userInput}
@@ -355,6 +323,8 @@ export default function ActiveStudy({ vocabularyData }) {
                         diff={diff}
                         disabled={status !== 'playing'}
                         mode={mode}
+                        attempts={attempts}
+                        maxAttempts={maxAttempts}
                     />
 
                     {/* Mode Write Kana (ro-to-ja): Virtual Keyboard for input */}
@@ -384,12 +354,12 @@ export default function ActiveStudy({ vocabularyData }) {
 
                             {/* Medium mode: toggleable consultation keyboard */}
                             {difficulty === 'medium' && (
-                                <div className="mt-4">
+                                <div className="mt-4 space-y-3">
                                     <div className="flex justify-center">
                                         <button
                                             type="button"
                                             onClick={() => setShowConsultationKeyboard(!showConsultationKeyboard)}
-                                            className="flex items-center gap-2 px-4 py-2 rounded-xl bg-white dark:bg-zen-dark-surface border border-zen-border/60 dark:border-zen-dark-border text-zen-text dark:text-zen-dark-text text-xs font-bold uppercase tracking-wider hover:bg-zen-surface-container dark:hover:bg-zen-dark-surface-high transition-colors shadow-zen-sm"
+                                            className="flex items-center gap-2 px-4 py-2 rounded-xl bg-zen-surface-lowest dark:bg-zen-dark-surface border border-zen-border/60 dark:border-zen-dark-border text-zen-text dark:text-zen-dark-text text-xs font-bold uppercase tracking-wider hover:bg-zen-surface-container dark:hover:bg-zen-dark-surface-high transition-colors shadow-zen-sm"
                                         >
                                             <Keyboard className="w-4 h-4 text-zen-primary dark:text-zen-dark-primary" />
                                             <span>{showConsultationKeyboard ? t('activeStudy.hideRefKeyboard') : t('activeStudy.showRefKeyboard')}</span>
@@ -410,14 +380,13 @@ export default function ActiveStudy({ vocabularyData }) {
                             {/* Hard mode: no consultation keyboard available */}
                         </>
                     )}
-                </>
-            ) : (
-                <div className="flex flex-col items-center">
-                    <div className={`text-xl font-bold mb-4 uppercase tracking-widest ${status === 'success' ? 'text-emerald-600 dark:text-emerald-400' : 'text-rose-600 dark:text-rose-400'}`}>
-                        {status === 'success' ? t('activeStudy.correct') : t('activeStudy.wrong')}
-                    </div>
-                    <SolutionCard item={currentQuestion} onNext={handleNextClick} />
                 </div>
+            ) : (
+                <SolutionCard 
+                    item={currentQuestion} 
+                    onNext={handleNextClick} 
+                    status={status}
+                />
             )}
             
         </div>
