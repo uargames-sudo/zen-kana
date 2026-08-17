@@ -1,5 +1,5 @@
 import React from 'react';
-import { Layers, PenTool, Volume2, Award, Grid, Flame, CheckCircle, TrendingUp, Play, BookOpen, ListChecks, Sparkles } from 'lucide-react';
+import { Layers, PenTool, Volume2, Award, Grid, Flame, CheckCircle, TrendingUp, Play, BookOpen, ListChecks, Sparkles, Brain } from 'lucide-react';
 import { playKanaSound } from '../utils/audio';
 import { useLanguage } from '../context/LanguageContext';
 
@@ -24,6 +24,14 @@ export default function Dashboard({ setActiveTab, scriptMode, stats, resetStats 
       icon: Sparkles,
       badge: lang === 'it' ? 'Allenamento' : 'Training',
       color: 'bg-zen-accent dark:bg-zen-dark-primary text-white dark:text-zen-dark-on-primary',
+    },
+    {
+      id: 'memory',
+      title: t('nav.memory'),
+      description: t('nav.memoryDesc'),
+      icon: Brain,
+      badge: lang === 'it' ? 'Gioco Zen' : 'Zen Game',
+      color: 'bg-zen-secondary dark:bg-zen-dark-secondary text-white dark:text-zen-dark-on-primary',
     },
     {
       id: 'writing',

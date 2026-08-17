@@ -1,6 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import { BookOpen, Search, Volume2 } from 'lucide-react';
-import { VOCABULARY, getVocabularyIcon } from '../data/vocabulary';
+import { VOCABULARY } from '../data/vocabulary';
+import VocabIllustration from './common/VocabIllustration';
 import { playKanaSound } from '../utils/audio';
 import { useLanguage } from '../context/LanguageContext';
 
@@ -52,22 +53,21 @@ export default function Vocabulary() {
       <p className="text-sm font-semibold text-zen-text-muted dark:text-zen-dark-text-muted">{visibleWords.length} {t('vocabulary.showingWords')}</p>
       <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
         {visibleWords.map((word) => {
-          const Icon = getVocabularyIcon(word.imageKeyword);
           return (
-            <button key={word.id} onClick={() => playKanaSound(word.kana)} className="zen-card zen-card-active flex min-h-44 flex-col rounded-2xl border border-zen-border/40 p-5 text-left dark:border-zen-dark-border bg-zen-surface-lowest dark:bg-zen-dark-surface">
+            <button key={word.id} onClick={() => playKanaSound(word.kana)} className="zen-card zen-card-active flex min-h-44 flex-col rounded-2xl border border-zen-border/40 p-5 text-left dark:border-zen-dark-border bg-zen-surface-lowest dark:bg-zen-dark-surface group">
               <div className="flex items-start justify-between">
                 <span className="rounded-full bg-zen-surface-container px-2.5 py-1 text-xs-plus font-bold capitalize text-zen-text-muted dark:bg-zen-dark-surface-high dark:text-zen-dark-text-muted">{word.script}</span>
-                <span className="rounded-xl bg-zen-primary/10 p-2 text-zen-primary dark:bg-zen-dark-primary/20 dark:text-zen-dark-primary"><Icon className="h-6 w-6" /></span>
+                <VocabIllustration id={word.id} keyword={word.imageKeyword} alt={word.english} className="w-14 h-14" iconClassName="w-7 h-7" />
               </div>
               <div className="mt-auto flex items-end justify-between gap-3">
                 <div>
-                  <div className="font-kana text-4xl font-bold text-zen-primary dark:text-zen-dark-primary">{word.kana}</div>
+                  <div className="font-kana text-4xl font-bold text-zen-primary dark:text-zen-dark-primary group-hover:scale-102 transition-transform">{word.kana}</div>
                   <div className="mt-1 text-sm font-semibold text-zen-text dark:text-zen-dark-text">{word.romaji}</div>
                   <div className="mt-1 text-xs text-zen-text-muted dark:text-zen-dark-text-muted">
                     {lang === 'it' ? `${word.italian} • ${word.english}` : `${word.english} • ${word.italian}`}
                   </div>
                 </div>
-                <Volume2 className="h-5 w-5 shrink-0 text-zen-primary dark:text-zen-dark-primary" />
+                <Volume2 className="h-5 w-5 shrink-0 text-zen-primary dark:text-zen-dark-primary opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all" />
               </div>
             </button>
           );
