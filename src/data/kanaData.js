@@ -126,8 +126,294 @@ export const KANA_COMBINATION = [
   { hiragana: 'りょ', katakana: 'リョ', romaji: 'ryo', example: 'りょこう (ryokou - travel)', exampleIt: 'りょこう (ryokou - viaggio)', exampleEn: 'りょこう (ryokou - travel)' }
 ];
 
+export const KANA_EXAMPLES_MAP = {
+  // Basic
+  'あ': { it: 'あさ (asa - mattina)', en: 'あさ (asa - morning)' },
+  'ア': { it: 'あさ (asa - mattina)', en: 'あさ (asa - morning)' },
+  'い': { it: 'いぬ (inu - cane)', en: 'いぬ (inu - dog)' },
+  'イ': { it: 'いぬ (inu - cane)', en: 'いぬ (inu - dog)' },
+  'う': { it: 'うみ (umi - mare)', en: 'うみ (umi - sea)' },
+  'ウ': { it: 'うみ (umi - mare)', en: 'うみ (umi - sea)' },
+  'え': { it: 'えき (eki - stazione)', en: 'えき (eki - station)' },
+  'エ': { it: 'えき (eki - stazione)', en: 'えき (eki - station)' },
+  'お': { it: 'おかね (okane - soldi)', en: 'おかね (okane - money)' },
+  'オ': { it: 'おかね (okane - soldi)', en: 'おかね (okane - money)' },
+
+  'か': { it: 'かさ (kasa - ombrello)', en: 'かさ (kasa - umbrella)' },
+  'カ': { it: 'かさ (kasa - ombrello)', en: 'かさ (kasa - umbrella)' },
+  'き': { it: 'き (ki - albero)', en: 'き (ki - tree)' },
+  'キ': { it: 'き (ki - albero)', en: 'き (ki - tree)' },
+  'く': { it: 'くるま (kuruma - auto)', en: 'くるま (kuruma - car)' },
+  'ク': { it: 'くるま (kuruma - auto)', en: 'くるま (kuruma - car)' },
+  'け': { it: 'けしごむ (keshigomu - gomma)', en: 'けしごむ (keshigomu - eraser)' },
+  'ケ': { it: 'けしごむ (keshigomu - gomma)', en: 'けしごむ (keshigomu - eraser)' },
+  'こ': { it: 'こども (kodomo - bambino)', en: 'こども (kodomo - child)' },
+  'コ': { it: 'こども (kodomo - bambino)', en: 'こども (kodomo - child)' },
+
+  'さ': { it: 'さくら (sakura - fiore di ciliegio)', en: 'さくら (sakura - cherry blossom)' },
+  'サ': { it: 'さくら (sakura - fiore di ciliegio)', en: 'さくら (sakura - cherry blossom)' },
+  'し': { it: 'しんかんせん (shinkansen - treno proiettile)', en: 'しんかんせん (shinkansen - bullet train)' },
+  'シ': { it: 'しんかんせん (shinkansen - treno proiettile)', en: 'しんかんせん (shinkansen - bullet train)' },
+  'す': { it: 'すし (sushi - sushi)', en: 'すし (sushi - sushi)' },
+  'ス': { it: 'すし (sushi - sushi)', en: 'すし (sushi - sushi)' },
+  'せ': { it: 'せんせい (sensei - maestro)', en: 'せんせい (sensei - teacher)' },
+  'セ': { it: 'せんせい (sensei - maestro)', en: 'せんせい (sensei - teacher)' },
+  'そ': { it: 'そら (sora - cielo)', en: 'そら (sora - sky)' },
+  'ソ': { it: 'そら (sora - cielo)', en: 'そら (sora - sky)' },
+
+  'た': { it: 'たまご (tamago - uovo)', en: 'たまご (tamago - egg)' },
+  'タ': { it: 'たまご (tamago - uovo)', en: 'たまご (tamago - egg)' },
+  'ち': { it: 'ちず (chizu - mappa)', en: 'ちず (chizu - map)' },
+  'チ': { it: 'ちず (chizu - mappa)', en: 'ちず (chizu - map)' },
+  'つ': { it: 'つき (tsuki - luna)', en: 'つき (tsuki - moon)' },
+  'ツ': { it: 'つき (tsuki - luna)', en: 'つき (tsuki - moon)' },
+  'て': { it: 'て (te - mano)', en: 'て (te - hand)' },
+  'テ': { it: 'て (te - mano)', en: 'て (te - hand)' },
+  'と': { it: 'ともだち (tomodachi - amico)', en: 'ともだち (tomodachi - friend)' },
+  'ト': { it: 'ともだち (tomodachi - amico)', en: 'ともだち (tomodachi - friend)' },
+
+  'な': { it: 'なつ (natsu - estate)', en: 'なつ (natsu - summer)' },
+  'ナ': { it: 'なつ (natsu - estate)', en: 'なつ (natsu - summer)' },
+  'に': { it: 'にほん (nihon - Giappone)', en: 'にほん (nihon - Japan)' },
+  'ニ': { it: 'にほん (nihon - Giappone)', en: 'にほん (nihon - Japan)' },
+  'ぬ': { it: 'いぬ (inu - cane)', en: 'いぬ (inu - dog)' },
+  'ヌ': { it: 'いぬ (inu - cane)', en: 'いぬ (inu - dog)' },
+  'ね': { it: 'ねこ (neko - gatto)', en: 'ねこ (neko - cat)' },
+  'ネ': { it: 'ねこ (neko - gatto)', en: 'ねこ (neko - cat)' },
+  'の': { it: 'のりもの (norimono - veicolo)', en: 'のりもの (norimono - vehicle)' },
+  'ノ': { it: 'のりもの (norimono - veicolo)', en: 'のりもの (norimono - vehicle)' },
+
+  'は': { it: 'はな (hana - fiore)', en: 'はな (hana - flower)' },
+  'ハ': { it: 'はな (hana - fiore)', en: 'はな (hana - flower)' },
+  'ひ': { it: 'ひかり (hikari - luce)', en: 'ひかり (hikari - light)' },
+  'ヒ': { it: 'ひかり (hikari - luce)', en: 'ひかり (hikari - light)' },
+  'ふ': { it: 'ふね (fune - nave)', en: 'ふね (fune - ship)' },
+  'フ': { it: 'ふね (fune - nave)', en: 'ふね (fune - ship)' },
+  'へ': { it: 'へや (heya - stanza)', en: 'へや (heya - room)' },
+  'ヘ': { it: 'へや (heya - stanza)', en: 'へや (heya - room)' },
+  'ほ': { it: 'ほし (hoshi - stella)', en: 'ほし (hoshi - star)' },
+  'ホ': { it: 'ほし (hoshi - stella)', en: 'ほし (hoshi - star)' },
+
+  'ま': { it: 'まち (machi - città)', en: 'まち (machi - town)' },
+  'マ': { it: 'まち (machi - città)', en: 'まち (machi - town)' },
+  'み': { it: 'みず (mizu - acqua)', en: 'みず (mizu - water)' },
+  'ミ': { it: 'みず (mizu - acqua)', en: 'みず (mizu - water)' },
+  'む': { it: 'むし (mushi - insetto)', en: 'むし (mushi - insect)' },
+  'ム': { it: 'むし (mushi - insetto)', en: 'むし (mushi - insect)' },
+  'め': { it: 'め (me - occhio)', en: 'め (me - eye)' },
+  'メ': { it: 'め (me - occhio)', en: 'め (me - eye)' },
+  'も': { it: 'もり (mori - foresta)', en: 'もり (mori - forest)' },
+  'モ': { it: 'もり (mori - foresta)', en: 'もり (mori - forest)' },
+
+  'や': { it: 'やま (yama - montagna)', en: 'やま (yama - mountain)' },
+  'ヤ': { it: 'やま (yama - montagna)', en: 'やま (yama - mountain)' },
+  'ゆ': { it: 'ゆき (yuki - neve)', en: 'ゆき (yuki - snow)' },
+  'ユ': { it: 'ゆき (yuki - neve)', en: 'ゆき (yuki - snow)' },
+  'よ': { it: 'よる (yoru - notte)', en: 'よる (yoru - night)' },
+  'ヨ': { it: 'よる (yoru - notte)', en: 'よる (yoru - night)' },
+
+  'ら': { it: 'らいおん (raion - leone)', en: 'らいおん (raion - lion)' },
+  'ラ': { it: 'らいおん (raion - leone)', en: 'らいおん (raion - lion)' },
+  'り': { it: 'りんご (ringo - mela)', en: 'りんご (ringo - apple)' },
+  'リ': { it: 'りんご (ringo - mela)', en: 'りんご (ringo - apple)' },
+  'る': { it: 'るす (rusu - assenza)', en: 'るす (rusu - absence)' },
+  'ル': { it: 'るす (rusu - assenza)', en: 'るす (rusu - absence)' },
+  'れ': { it: 'れいぞうこ (reizouko - frigorifero)', en: 'れいぞうこ (reizouko - fridge)' },
+  'レ': { it: 'れいぞうこ (reizouko - frigorifero)', en: 'れいぞうこ (reizouko - fridge)' },
+  'ろ': { it: 'ろうそく (rousoku - candela)', en: 'ろうそく (rousoku - candle)' },
+  'ロ': { it: 'ろうそく (rousoku - candela)', en: 'ろうそく (rousoku - candle)' },
+
+  'わ': { it: 'わに (wani - coccodrillo)', en: 'わに (wani - crocodile)' },
+  'ワ': { it: 'わに (wani - coccodrillo)', en: 'わに (wani - crocodile)' },
+  'を': { it: 'ほんをよむ (hon wo yomu - leggere un libro)', en: 'ほんをよむ (hon wo yomu - read book)' },
+  'ヲ': { it: 'ほんをよむ (hon wo yomu - leggere un libro)', en: 'ほんをよむ (hon wo yomu - read book)' },
+  'ん': { it: 'ほん (hon - libro)', en: 'ほん (hon - book)' },
+  'ン': { it: 'ほん (hon - libro)', en: 'ほん (hon - book)' },
+
+  // Dakuten
+  'が': { it: 'がっこう (gakkou - scuola)', en: 'がっこう (gakkou - school)' },
+  'ガ': { it: 'がっこう (gakkou - scuola)', en: 'がっこう (gakkou - school)' },
+  'ぎ': { it: 'ぎんこう (ginkou - banca)', en: 'ぎんこう (ginkou - bank)' },
+  'ギ': { it: 'ぎんこう (ginkou - banca)', en: 'ぎんこう (ginkou - bank)' },
+  'ぐ': { it: 'ぐんじん (gunjin - soldato)', en: 'ぐんじん (gunjin - soldier)' },
+  'グ': { it: 'ぐんじん (gunjin - soldato)', en: 'ぐんじん (gunjin - soldier)' },
+  'げ': { it: 'げんき (genki - sano/energico)', en: 'げんき (genki - healthy)' },
+  'ゲ': { it: 'げんき (genki - sano/energico)', en: 'げんき (genki - healthy)' },
+  'ご': { it: 'ごはん (gohan - riso/pasto)', en: 'ごはん (gohan - rice/meal)' },
+  'ゴ': { it: 'ごはん (gohan - riso/pasto)', en: 'ごはん (gohan - rice/meal)' },
+
+  'ざ': { it: 'ざっし (zasshi - rivista)', en: 'ざっし (zasshi - magazine)' },
+  'ザ': { it: 'ざっし (zasshi - rivista)', en: 'ざっし (zasshi - magazine)' },
+  'じ': { it: 'じかん (jikan - tempo/ora)', en: 'じかん (jikan - time)' },
+  'ジ': { it: 'じかん (jikan - tempo/ora)', en: 'じかん (jikan - time)' },
+  'ず': { it: 'ずっと (zutto - sempre)', en: 'ずっと (zutto - always)' },
+  'ズ': { it: 'ずっと (zutto - sempre)', en: 'ずっと (zutto - always)' },
+  'ぜ': { it: 'ぜんぶ (zenbu - tutto)', en: 'ぜんぶ (zenbu - everything)' },
+  'ゼ': { it: 'ぜんぶ (zenbu - tutto)', en: 'ぜんぶ (zenbu - everything)' },
+  'ぞ': { it: 'ぞう (zou - elefante)', en: 'ぞう (zou - elephant)' },
+  'ゾ': { it: 'ぞう (zou - elefante)', en: 'ぞう (zou - elephant)' },
+
+  'だ': { it: 'だいがく (daigaku - università)', en: 'だいがく (daigaku - university)' },
+  'ダ': { it: 'だいがく (daigaku - università)', en: 'だいがく (daigaku - university)' },
+  'ぢ': { it: 'はなぢ (hanaji - sangue dal naso)', en: 'はなぢ (hanaji - nosebleed)' },
+  'ヂ': { it: 'はなぢ (hanaji - sangue dal naso)', en: 'はなぢ (hanaji - nosebleed)' },
+  'づ': { it: 'つづく (tsuzuku - continuare)', en: 'つづく (tsuzuku - to continue)' },
+  'ヅ': { it: 'つづく (tsuzuku - continuare)', en: 'つづく (tsuzuku - to continue)' },
+  'で': { it: 'でんしゃ (densha - treno)', en: 'でんしゃ (densha - train)' },
+  'デ': { it: 'でんしゃ (densha - treno)', en: 'でんしゃ (densha - train)' },
+  'ど': { it: 'どこ (doko - dove)', en: 'どこ (doko - where)' },
+  'ド': { it: 'どこ (doko - dove)', en: 'どこ (doko - where)' },
+
+  'ば': { it: 'ばしょ (basho - luogo)', en: 'ばしょ (basho - place)' },
+  'バ': { it: 'ばしょ (basho - luogo)', en: 'ばしょ (basho - place)' },
+  'び': { it: 'びじゅつかん (bijutsukan - museo)', en: 'びじゅつかん (bijutsukan - museum)' },
+  'ビ': { it: 'びじゅつかん (bijutsukan - museo)', en: 'びじゅつかん (bijutsukan - museum)' },
+  'ぶ': { it: 'ぶた (buta - maiale)', en: 'ぶた (buta - pig)' },
+  'ブ': { it: 'ぶた (buta - maiale)', en: 'ぶた (buta - pig)' },
+  'べ': { it: 'べんきょう (benkyou - studio)', en: 'べんきょう (benkyou - study)' },
+  'ベ': { it: 'べんきょう (benkyou - studio)', en: 'べんきょう (benkyou - study)' },
+  'ぼ': { it: 'ぼうし (boushi - cappello)', en: 'ぼうし (boushi - hat)' },
+  'ボ': { it: 'ぼうし (boushi - cappello)', en: 'ぼうし (boushi - hat)' },
+
+  // Handakuten
+  'ぱ': { it: 'ぱん (pan - pane)', en: 'ぱん (pan - bread)' },
+  'パ': { it: 'ぱん (pan - pane)', en: 'ぱん (pan - bread)' },
+  'ぴ': { it: 'ぴかぴか (pikapika - brillante)', en: 'ぴかぴか (pikapika - shiny)' },
+  'ピ': { it: 'ぴかぴか (pikapika - brillante)', en: 'ぴかぴか (pikapika - shiny)' },
+  'ぷ': { it: 'ぷーる (puuru - piscina)', en: 'ぷーる (puuru - pool)' },
+  'プ': { it: 'ぷーる (puuru - piscina)', en: 'ぷーる (puuru - pool)' },
+  'ぺ': { it: 'ぺん (pen - penna)', en: 'ぺん (pen - pen)' },
+  'ペ': { it: 'ぺん (pen - penna)', en: 'ぺん (pen - pen)' },
+  'ぽ': { it: 'ぽけっと (poketto - tasca)', en: 'ぽけっと (poketto - pocket)' },
+  'ポ': { it: 'ぽけっと (poketto - tasca)', en: 'ぽけっと (poketto - pocket)' },
+
+  // Yoon
+  'きゃ': { it: 'きゃく (kyaku - ospite)', en: 'きゃく (kyaku - guest)' },
+  'キャ': { it: 'きゃく (kyaku - ospite)', en: 'きゃく (kyaku - guest)' },
+  'きゅ': { it: 'きゅうり (kyuuri - cetriolo)', en: 'きゅうり (kyuuri - cucumber)' },
+  'キュ': { it: 'きゅうり (kyuuri - cetriolo)', en: 'きゅうり (kyuuri - cucumber)' },
+  'きょ': { it: 'きょう (kyou - oggi)', en: 'きょう (kyou - today)' },
+  'キョ': { it: 'きょう (kyou - oggi)', en: 'きょう (kyou - today)' },
+
+  'しゃ': { it: 'しゃしん (shashin - foto)', en: 'しゃしん (shashin - photo)' },
+  'シャ': { it: 'しゃしん (shashin - foto)', en: 'しゃしん (shashin - photo)' },
+  'しゅ': { it: 'しゅくだい (shukudai - compiti)', en: 'しゅくだい (shukudai - homework)' },
+  'シュ': { it: 'しゅくだい (shukudai - compiti)', en: 'しゅくだい (shukudai - homework)' },
+  'しょ': { it: 'しょくどう (shokudou - mensa)', en: 'しょくどう (shokudou - dining hall)' },
+  'ショ': { it: 'しょくどう (shokudou - mensa)', en: 'しょくどう (shokudou - dining hall)' },
+
+  'ちゃ': { it: 'おちゃ (ocha - tè verde)', en: 'おちゃ (ocha - green tea)' },
+  'チャ': { it: 'おちゃ (ocha - tè verde)', en: 'おちゃ (ocha - green tea)' },
+  'ちゅ': { it: 'ちゅうしゃじょう (chuushajou - parcheggio)', en: 'ちゅうしゃじょう (chuushajou - parking lot)' },
+  'チュ': { it: 'ちゅうしゃじょう (chuushajou - parking lot)', en: 'ちゅうしゃじょう (chuushajou - parking lot)' },
+  'ちょ': { it: 'ちょっかん (chokkan - intuizione)', en: 'ちょっかん (chokkan - intuition)' },
+  'チョ': { it: 'ちょっかん (chokkan - intuizione)', en: 'ちょっかん (chokkan - intuition)' },
+
+  'にゃ': { it: 'にゃんこ (nyanko - gattino)', en: 'にゃんこ (nyanko - kitty)' },
+  'ニャ': { it: 'にゃんこ (nyanko - gattino)', en: 'にゃんこ (nyanko - kitty)' },
+  'にゅ': { it: 'にゅうがく (nyuugaku - immatricolazione)', en: 'にゅうがく (nyuugaku - school entry)' },
+  'ニュ': { it: 'にゅうがく (nyuugaku - immatricolazione)', en: 'にゅうがく (nyuugaku - school entry)' },
+  'にょ': { it: 'にょうぼう (nyoubou - moglie)', en: 'にょうぼう (nyoubou - wife)' },
+  'ニョ': { it: 'にょうぼう (nyoubou - moglie)', en: 'にょうぼう (nyoubou - wife)' },
+
+  'ひゃ': { it: 'ひゃく (hyaku - cento)', en: 'ひゃく (hyaku - hundred)' },
+  'ヒャ': { it: 'ひゃく (hyaku - cento)', en: 'ひゃく (hyaku - hundred)' },
+  'ひゅ': { it: 'ひゅーず (hyuuzu - fusibile)', en: 'ひゅーず (hyuuzu - fuse)' },
+  'ヒュ': { it: 'ひゅーず (hyuuzu - fusibile)', en: 'ひゅーず (hyuuzu - fuse)' },
+  'ひょ': { it: 'ひょうざん (hyouzan - iceberg)', en: 'ひょうざん (hyouzan - iceberg)' },
+  'ヒョ': { it: 'ひょうざん (hyouzan - iceberg)', en: 'ひょうざん (hyouzan - iceberg)' },
+
+  'みゃ': { it: 'みゃく (myaku - battito/polso)', en: 'みゃく (myaku - pulse)' },
+  'ミャ': { it: 'みゃく (myaku - battito/polso)', en: 'みゃく (myaku - pulse)' },
+  'みゅ': { it: 'みゅーじあむ (myuujiamu - museo)', en: 'みゅーじあむ (myuujiamu - museum)' },
+  'ミュ': { it: 'みゅーじあむ (myuujiamu - museo)', en: 'みゅーじあむ (myuujiamu - museum)' },
+  'みょ': { it: 'みょうじ (myouji - cognome)', en: 'みょうじ (myouji - surname)' },
+  'ミョ': { it: 'みょうじ (myouji - cognome)', en: 'みょうじ (myouji - surname)' },
+
+  'りゃ': { it: 'りゃくそく (ryakusoku - abbreviazione)', en: 'りゃくそく (ryakusoku - abbreviation)' },
+  'リャ': { it: 'りゃくそく (ryakusoku - abbreviazione)', en: 'りゃくそく (ryakusoku - abbreviation)' },
+  'りゅ': { it: 'りゅう (ryuu - drago)', en: 'りゅう (ryuu - dragon)' },
+  'リュ': { it: 'りゅう (ryuu - drago)', en: 'りゅう (ryuu - dragon)' },
+  'りょ': { it: 'りょこう (ryokou - viaggio)', en: 'りょこう (ryokou - travel)' },
+  'リョ': { it: 'りょこう (ryokou - viaggio)', en: 'りょこう (ryokou - travel)' },
+
+  'ぎゃ': { it: 'ぎゃく (gyaku - contrario)', en: 'ぎゃく (gyaku - reverse)' },
+  'ギャ': { it: 'ぎゃく (gyaku - contrario)', en: 'ぎゃく (gyaku - reverse)' },
+  'ぎゅ': { it: 'ぎゅうにゅう (gyuunyuu - latte)', en: 'ぎゅうにゅう (gyuunyuu - milk)' },
+  'ギュ': { it: 'ぎゅうにゅう (gyuunyuu - latte)', en: 'ぎゅうにゅう (gyuunyuu - milk)' },
+  'ぎょ': { it: 'ぎょうざ (gyouza - ravioli gyoza)', en: 'ぎょうざ (gyouza - dumplings)' },
+  'ギョ': { it: 'ぎょうざ (gyouza - ravioli gyoza)', en: 'ぎょうざ (gyouza - dumplings)' },
+
+  'じゃ': { it: 'じゃま (jama - intralcio/disturbo)', en: 'じゃま (jama - obstacle)' },
+  'ジャ': { it: 'じゃま (jama - intralcio/disturbo)', en: 'じゃま (jama - obstacle)' },
+  'じゅ': { it: 'じゅぎょう (jugyou - lezione)', en: 'じゅぎょう (jugyou - lesson)' },
+  'ジュ': { it: 'じゅぎょう (jugyou - lezione)', en: 'じゅぎょう (jugyou - lesson)' },
+  'じょ': { it: 'じょせい (josei - donna)', en: 'じょせい (josei - woman)' },
+  'ジョ': { it: 'じょせい (josei - donna)', en: 'じょせい (josei - woman)' },
+
+  'びゃ': { it: 'びゃくだん (byakudan - sandalo)', en: 'びゃくだん (byakudan - sandalwood)' },
+  'ビャ': { it: 'びゃくだん (byakudan - sandalo)', en: 'びゃくだん (byakudan - sandalwood)' },
+  'びゅ': { it: 'びゅーてぃー (byuutii - bellezza)', en: 'びゅーてぃー (byuutii - beauty)' },
+  'ビュ': { it: 'びゅーてぃー (byuutii - bellezza)', en: 'びゅーてぃー (byuutii - beauty)' },
+  'びょ': { it: 'びょういん (byouin - ospedale)', en: 'びょういん (byouin - hospital)' },
+  'ビョ': { it: 'びょういん (byouin - ospedale)', en: 'びょういん (byouin - hospital)' },
+
+  'ぴゃ': { it: 'ろっぴゃく (roppyaku - seicento)', en: 'ろっぴゃく (roppyaku - six hundred)' },
+  'ピャ': { it: 'ろっぴゃく (roppyaku - seicento)', en: 'ろっぴゃく (roppyaku - six hundred)' },
+  'ぴゅ': { it: 'ぴゅあ (pyua - puro)', en: 'ぴゅあ (pyua - pure)' },
+  'ピュ': { it: 'ぴゅあ (pyua - puro)', en: 'ぴゅあ (pyua - pure)' },
+  'ぴょ': { it: 'ぴょんぴょん (pyonpyon - saltellare)', en: 'ぴょんぴょん (pyonpyon - hopping)' },
+  'ピョ': { it: 'ぴょんぴょん (pyonpyon - saltellare)', en: 'ぴょんぴょん (pyonpyon - hopping)' },
+
+  // Small & Special
+  'っ': { it: 'きっぷ (kippu - biglietto) [Consonante doppia]', en: 'きっぷ (kippu - ticket) [Double consonant]' },
+  'ッ': { it: 'きっぷ (kippu - biglietto) [Consonante doppia]', en: 'きっぷ (kippu - ticket) [Double consonant]' },
+  'ゃ': { it: 'おちゃ (ocha - tè) [Piccolo ya]', en: 'おちゃ (ocha - tea) [Small ya]' },
+  'ャ': { it: 'おちゃ (ocha - tè) [Piccolo ya]', en: 'おちゃ (ocha - tea) [Small ya]' },
+  'ゅ': { it: 'ぎゅうにゅう (gyuunyuu - latte) [Piccolo yu]', en: 'ぎゅうにゅう (gyuunyuu - milk) [Small yu]' },
+  'ュ': { it: 'ぎゅうにゅう (gyuunyuu - latte) [Piccolo yu]', en: 'ぎゅうにゅう (gyuunyuu - milk) [Small yu]' },
+  'ょ': { it: 'きょう (kyou - oggi) [Piccolo yo]', en: 'きょう (kyou - today) [Small yo]' },
+  'ョ': { it: 'きょう (kyou - oggi) [Piccolo yo]', en: 'きょう (kyou - today) [Small yo]' },
+  'ー': { it: 'コーヒー (koohii - caffè) [Suono prolungato]', en: 'コーヒー (koohii - coffee) [Long vowel]' },
+  'ぁ': { it: 'ぁ (piccola a)', en: 'ぁ (small a)' },
+  'ァ': { it: 'ァ (piccola a)', en: 'ァ (small a)' },
+  'ぃ': { it: 'ぃ (piccola i)', en: 'ぃ (small i)' },
+  'ィ': { it: 'ィ (piccola i)', en: 'ィ (small i)' },
+  'ぅ': { it: 'ぅ (piccola u)', en: 'ぅ (small u)' },
+  'ゥ': { it: 'ゥ (piccola u)', en: 'ゥ (small u)' },
+  'ぇ': { it: 'ぇ (piccola e)', en: 'ぇ (small e)' },
+  'ェ': { it: 'ェ (piccola e)', en: 'ェ (small e)' },
+  'ぉ': { it: 'ぉ (piccola o)', en: 'ぉ (small o)' },
+  'ォ': { it: 'ォ (piccola o)', en: 'ォ (small o)' },
+  'ゎ': { it: 'ゎ (piccola wa)', en: 'ゎ (small wa)' },
+  'ヮ': { it: 'ヮ (piccola wa)', en: 'ヮ (small wa)' },
+  'ゔ': { it: 'ヴァイオリン (vaiorin - violino)', en: 'ヴァイオリン (vaiorin - violin)' },
+  'ヴ': { it: 'ヴァイオリン (vaiorin - violino)', en: 'ヴァイオリン (vaiorin - violin)' }
+};
+
 export function getKanaExample(item, lang = 'it') {
   if (!item) return '';
+  if (typeof item === 'string') {
+    const entry = KANA_EXAMPLES_MAP[item];
+    if (entry) return lang === 'it' ? entry.it : entry.en;
+    return '';
+  }
+  if (item.k) {
+    const entry = KANA_EXAMPLES_MAP[item.k];
+    if (entry) return lang === 'it' ? entry.it : entry.en;
+  }
+  if (item.char) {
+    const entry = KANA_EXAMPLES_MAP[item.char];
+    if (entry) return lang === 'it' ? entry.it : entry.en;
+  }
+  if (item.hiragana && KANA_EXAMPLES_MAP[item.hiragana]) {
+    const entry = KANA_EXAMPLES_MAP[item.hiragana];
+    return lang === 'it' ? entry.it : entry.en;
+  }
+  if (item.katakana && KANA_EXAMPLES_MAP[item.katakana]) {
+    const entry = KANA_EXAMPLES_MAP[item.katakana];
+    return lang === 'it' ? entry.it : entry.en;
+  }
   if (lang === 'it') {
     return item.exampleIt || item.example || '';
   }
