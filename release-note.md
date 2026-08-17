@@ -1,5 +1,41 @@
 # Release Notes: Zen Kana
 
+## Version 1.3.0 — Zen Memory Game, Vocabulary Illustrations & High-Fidelity Audio Engine
+
+**Release Date:** August 2026  
+**Status:** Stable Release  
+
+---
+
+### 🌟 Highlights & Major Improvements
+
+#### 1. 🎴 Zen Memory Game Module ("Memory Dojo")
+A brand new interactive game mode to boost Kana and vocabulary recall through active visual and auditory pairing:
+- **3 Game Modes**:
+  - 🖼️ *Vocabolario & Illustrazioni*: Match Kana words with authentic 2D Japanese vector illustrations and bilingual translations.
+  - 🔤 *Sillabario (Kana ↔ Romaji)*: Match Kana characters with their Romaji sound.
+  - 🎧 *Ascolto (Audio ↔ Carta)*: Listen to native Japanese speech to find the corresponding card.
+- **3 Difficulty Tiers**: Easy (6 pairs / 12 cards), Medium (8 pairs / 16 cards), and Hard (12 pairs / 24 cards).
+- **Tactile Polish**: 3D flip card animations with Kyoto Lacquer Red / Golden Amber traditional patterned backs, live moves counter, timer, combo streak multipliers (`x2`, `x3`...), and celebratory confetti upon victory.
+
+---
+
+#### 2. 🎨 2D Japanese Vector Vocabulary Illustrations Pipeline
+- **Dedicated Vector Style**: Standardized Japanese minimalist aesthetic with clean bold outlines, Kyoto lacquer accents, warm cream, and neutral off-white backgrounds.
+- **Resilient `<VocabIllustration />` Component**: Implemented with multi-format progressive fallback (`.jpg` → `.webp` → `.png` → Lucide vector icon), ensuring seamless experience across all 100 vocabulary words.
+- **Integrated Across Views**: Displayed in the Vocabulary Studio, Flashcard answer reveals, and Zen Memory cards.
+- **Full Prompt Catalog**: Created `vocab-prompts.json` covering 100% of vocabulary words.
+
+---
+
+#### 3. 🔊 High-Fidelity Speech & Audio Engine Overhaul
+- **Zero First-Click Latency**: Eager audio pre-warming on user touch/mouse interactions eliminates initial loading delays.
+- **Chromium Garbage Collection Fix**: Global reference tracking prevents Chromium browsers from cutting off short Kana audio.
+- **Learner-Calibrated Cadence & Max Volume**: Single Kana characters calibrated to `0.75` speed and vocabulary words to `0.80` speed with 100% volume for crisp, resonant vowel and consonant clarity.
+- **Intelligent Voice Selection**: Automatically prioritizes natural neural voices (*Google 日本語*, *Microsoft Natural*, *Apple Kyoko/Siri*).
+
+---
+
 ## Version 1.2.0 — Kyoto Lacquer Design & Unified 5-Category Kana System
 
 **Release Date:** August 2026  
