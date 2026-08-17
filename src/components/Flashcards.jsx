@@ -1,7 +1,8 @@
 import React, { useMemo, useState } from 'react';
 import { Volume2, RotateCw, CheckCircle, XCircle, ArrowRight, ArrowLeft, Layers, BookOpen } from 'lucide-react';
 import { HIRAGANA_BASIC, KANA_DAKUTEN, getKanaExample } from '../data/kanaData';
-import { VOCABULARY, getVocabularyIcon } from '../data/vocabulary';
+import { VOCABULARY } from '../data/vocabulary';
+import VocabIllustration from './common/VocabIllustration';
 import { playKanaSound } from '../utils/audio';
 import { useLanguage } from '../context/LanguageContext';
 
@@ -28,7 +29,6 @@ export default function Flashcards({ scriptMode, updateStats }) {
   const currentItem = fullDeck[currentIndex] || fullDeck[0];
   const isVocabulary = deckType === 'vocabulary';
   const char = currentItem ? (isVocabulary ? currentItem.kana : (scriptMode === 'hiragana' ? currentItem.hiragana : currentItem.katakana)) : '';
-  const Icon = isVocabulary && currentItem ? getVocabularyIcon(currentItem.imageKeyword) : null;
 
   const resetDeck = () => {
     setCurrentIndex(0);
@@ -186,10 +186,16 @@ export default function Flashcards({ scriptMode, updateStats }) {
               <div className="my-auto space-y-3 text-center">
                 {isVocabulary ? (
                   <>
-                    <div className="mx-auto w-fit rounded-3xl bg-zen-primary/10 p-5 text-zen-primary dark:bg-zen-dark-primary/20 dark:text-zen-dark-primary"><Icon className="h-14 w-14" /></div>
-                    <div className="font-kana text-5xl font-bold text-zen-primary dark:text-zen-dark-primary">{char}</div>
-                    <div className="text-2xl font-headline font-bold text-zen-text dark:text-zen-dark-text">{lang === 'it' ? currentItem.italian : currentItem.english}</div>
-                    <p className="text-sm text-zen-text-muted dark:text-zen-dark-text-muted">{currentItem.romaji}</p>
+                    <VocabIllustration 
+                      id={currentItem.id} 
+                      keyword={currentItem.imageKeyword} 
+                      alt={currentItem.english} 
+                      className="w-24 h-24 sm:w-28 sm:h-28 mx-auto" 
+                      iconClassName="w-12 h-12"
+                    />
+                    <div className="font-kana text-4xl sm:text-5xl font-bold text-zen-primary dark:text-zen-dark-primary">{char}</div>
+                    <div className="text-xl sm:text-2xl font-headline font-bold text-zen-text dark:text-zen-dark-text">{lang === 'it' ? currentItem.italian : currentItem.english}</div>
+                    <p className="text-sm font-mono text-zen-text-muted dark:text-zen-dark-text-muted uppercase">{currentItem.romaji}</p>
                   </>
                 ) : (
                   <>
