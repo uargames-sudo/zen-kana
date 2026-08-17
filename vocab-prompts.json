@@ -1,0 +1,1002 @@
+[
+  {
+    "id": "h1",
+    "kana": "ねこ",
+    "romaji": "neko",
+    "italian": "gatto",
+    "english": "cat",
+    "script": "hiragana",
+    "filename": "h1.jpg",
+    "prompt": "Minimalist 2D vector flat Japanese style illustration of: cat (gatto). Clean bold outlines, warm minimalist color palette, Kyoto lacquer red accents, warm cream and ink black, solid clean neutral off-white background. No text, no words, no letters."
+  },
+  {
+    "id": "h2",
+    "kana": "いぬ",
+    "romaji": "inu",
+    "italian": "cane",
+    "english": "dog",
+    "script": "hiragana",
+    "filename": "h2.jpg",
+    "prompt": "Minimalist 2D vector flat Japanese style illustration of: dog (cane). Clean bold outlines, warm minimalist color palette, Kyoto lacquer red accents, warm cream and ink black, solid clean neutral off-white background. No text, no words, no letters."
+  },
+  {
+    "id": "h3",
+    "kana": "とり",
+    "romaji": "tori",
+    "italian": "uccello",
+    "english": "bird",
+    "script": "hiragana",
+    "filename": "h3.jpg",
+    "prompt": "Minimalist 2D vector flat Japanese style illustration of: bird (uccello). Clean bold outlines, warm minimalist color palette, Kyoto lacquer red accents, warm cream and ink black, solid clean neutral off-white background. No text, no words, no letters."
+  },
+  {
+    "id": "h4",
+    "kana": "さかな",
+    "romaji": "sakana",
+    "italian": "pesce",
+    "english": "fish",
+    "script": "hiragana",
+    "filename": "h4.jpg",
+    "prompt": "Minimalist 2D vector flat Japanese style illustration of: fish (pesce). Clean bold outlines, warm minimalist color palette, Kyoto lacquer red accents, warm cream and ink black, solid clean neutral off-white background. No text, no words, no letters."
+  },
+  {
+    "id": "h5",
+    "kana": "りんご",
+    "romaji": "ringo",
+    "italian": "mela",
+    "english": "apple",
+    "script": "hiragana",
+    "filename": "h5.jpg",
+    "prompt": "Minimalist 2D vector flat Japanese style illustration of: apple (mela). Clean bold outlines, warm minimalist color palette, Kyoto lacquer red accents, warm cream and ink black, solid clean neutral off-white background. No text, no words, no letters."
+  },
+  {
+    "id": "h6",
+    "kana": "みず",
+    "romaji": "mizu",
+    "italian": "acqua",
+    "english": "water",
+    "script": "hiragana",
+    "filename": "h6.jpg",
+    "prompt": "Minimalist 2D vector flat Japanese style illustration of: water (acqua). Clean bold outlines, warm minimalist color palette, Kyoto lacquer red accents, warm cream and ink black, solid clean neutral off-white background. No text, no words, no letters."
+  },
+  {
+    "id": "h7",
+    "kana": "ほん",
+    "romaji": "hon",
+    "italian": "libro",
+    "english": "book",
+    "script": "hiragana",
+    "filename": "h7.jpg",
+    "prompt": "Minimalist 2D vector flat Japanese style illustration of: book (libro). Clean bold outlines, warm minimalist color palette, Kyoto lacquer red accents, warm cream and ink black, solid clean neutral off-white background. No text, no words, no letters."
+  },
+  {
+    "id": "h8",
+    "kana": "くるま",
+    "romaji": "kuruma",
+    "italian": "auto",
+    "english": "car",
+    "script": "hiragana",
+    "filename": "h8.jpg",
+    "prompt": "Minimalist 2D vector flat Japanese style illustration of: car (auto). Clean bold outlines, warm minimalist color palette, Kyoto lacquer red accents, warm cream and ink black, solid clean neutral off-white background. No text, no words, no letters."
+  },
+  {
+    "id": "h9",
+    "kana": "いえ",
+    "romaji": "ie",
+    "italian": "casa",
+    "english": "house",
+    "script": "hiragana",
+    "filename": "h9.jpg",
+    "prompt": "Minimalist 2D vector flat Japanese style illustration of: house (casa). Clean bold outlines, warm minimalist color palette, Kyoto lacquer red accents, warm cream and ink black, solid clean neutral off-white background. No text, no words, no letters."
+  },
+  {
+    "id": "h10",
+    "kana": "ともだち",
+    "romaji": "tomodachi",
+    "italian": "amico",
+    "english": "friend",
+    "script": "hiragana",
+    "filename": "h10.jpg",
+    "prompt": "Minimalist 2D vector flat Japanese style illustration of: friend (amico). Clean bold outlines, warm minimalist color palette, Kyoto lacquer red accents, warm cream and ink black, solid clean neutral off-white background. No text, no words, no letters."
+  },
+  {
+    "id": "h11",
+    "kana": "せんせい",
+    "romaji": "sensei",
+    "italian": "insegnante",
+    "english": "teacher",
+    "script": "hiragana",
+    "filename": "h11.jpg",
+    "prompt": "Minimalist 2D vector flat Japanese style illustration of: teacher (insegnante). Clean bold outlines, warm minimalist color palette, Kyoto lacquer red accents, warm cream and ink black, solid clean neutral off-white background. No text, no words, no letters."
+  },
+  {
+    "id": "h12",
+    "kana": "がくせい",
+    "romaji": "gakusei",
+    "italian": "studente",
+    "english": "student",
+    "script": "hiragana",
+    "filename": "h12.jpg",
+    "prompt": "Minimalist 2D vector flat Japanese style illustration of: student (studente). Clean bold outlines, warm minimalist color palette, Kyoto lacquer red accents, warm cream and ink black, solid clean neutral off-white background. No text, no words, no letters."
+  },
+  {
+    "id": "h13",
+    "kana": "つき",
+    "romaji": "tsuki",
+    "italian": "luna",
+    "english": "moon",
+    "script": "hiragana",
+    "filename": "h13.jpg",
+    "prompt": "Minimalist 2D vector flat Japanese style illustration of: moon (luna). Clean bold outlines, warm minimalist color palette, Kyoto lacquer red accents, warm cream and ink black, solid clean neutral off-white background. No text, no words, no letters."
+  },
+  {
+    "id": "h14",
+    "kana": "たいよう",
+    "romaji": "taiyou",
+    "italian": "sole",
+    "english": "sun",
+    "script": "hiragana",
+    "filename": "h14.jpg",
+    "prompt": "Minimalist 2D vector flat Japanese style illustration of: sun (sole). Clean bold outlines, warm minimalist color palette, Kyoto lacquer red accents, warm cream and ink black, solid clean neutral off-white background. No text, no words, no letters."
+  },
+  {
+    "id": "h15",
+    "kana": "はな",
+    "romaji": "hana",
+    "italian": "fiore",
+    "english": "flower",
+    "script": "hiragana",
+    "filename": "h15.jpg",
+    "prompt": "Minimalist 2D vector flat Japanese style illustration of: flower (fiore). Clean bold outlines, warm minimalist color palette, Kyoto lacquer red accents, warm cream and ink black, solid clean neutral off-white background. No text, no words, no letters."
+  },
+  {
+    "id": "h16",
+    "kana": "うみ",
+    "romaji": "umi",
+    "italian": "mare",
+    "english": "sea",
+    "script": "hiragana",
+    "filename": "h16.jpg",
+    "prompt": "Minimalist 2D vector flat Japanese style illustration of: sea (mare). Clean bold outlines, warm minimalist color palette, Kyoto lacquer red accents, warm cream and ink black, solid clean neutral off-white background. No text, no words, no letters."
+  },
+  {
+    "id": "h17",
+    "kana": "やま",
+    "romaji": "yama",
+    "italian": "montagna",
+    "english": "mountain",
+    "script": "hiragana",
+    "filename": "h17.jpg",
+    "prompt": "Minimalist 2D vector flat Japanese style illustration of: mountain (montagna). Clean bold outlines, warm minimalist color palette, Kyoto lacquer red accents, warm cream and ink black, solid clean neutral off-white background. No text, no words, no letters."
+  },
+  {
+    "id": "h18",
+    "kana": "かわ",
+    "romaji": "kawa",
+    "italian": "fiume",
+    "english": "river",
+    "script": "hiragana",
+    "filename": "h18.jpg",
+    "prompt": "Minimalist 2D vector flat Japanese style illustration of: river (fiume). Clean bold outlines, warm minimalist color palette, Kyoto lacquer red accents, warm cream and ink black, solid clean neutral off-white background. No text, no words, no letters."
+  },
+  {
+    "id": "h19",
+    "kana": "あめ",
+    "romaji": "ame",
+    "italian": "pioggia",
+    "english": "rain",
+    "script": "hiragana",
+    "filename": "h19.jpg",
+    "prompt": "Minimalist 2D vector flat Japanese style illustration of: rain (pioggia). Clean bold outlines, warm minimalist color palette, Kyoto lacquer red accents, warm cream and ink black, solid clean neutral off-white background. No text, no words, no letters."
+  },
+  {
+    "id": "h20",
+    "kana": "ゆき",
+    "romaji": "yuki",
+    "italian": "neve",
+    "english": "snow",
+    "script": "hiragana",
+    "filename": "h20.jpg",
+    "prompt": "Minimalist 2D vector flat Japanese style illustration of: snow (neve). Clean bold outlines, warm minimalist color palette, Kyoto lacquer red accents, warm cream and ink black, solid clean neutral off-white background. No text, no words, no letters."
+  },
+  {
+    "id": "h21",
+    "kana": "かぜ",
+    "romaji": "kaze",
+    "italian": "vento",
+    "english": "wind",
+    "script": "hiragana",
+    "filename": "h21.jpg",
+    "prompt": "Minimalist 2D vector flat Japanese style illustration of: wind (vento). Clean bold outlines, warm minimalist color palette, Kyoto lacquer red accents, warm cream and ink black, solid clean neutral off-white background. No text, no words, no letters."
+  },
+  {
+    "id": "h22",
+    "kana": "て",
+    "romaji": "te",
+    "italian": "mano",
+    "english": "hand",
+    "script": "hiragana",
+    "filename": "h22.jpg",
+    "prompt": "Minimalist 2D vector flat Japanese style illustration of: hand (mano). Clean bold outlines, warm minimalist color palette, Kyoto lacquer red accents, warm cream and ink black, solid clean neutral off-white background. No text, no words, no letters."
+  },
+  {
+    "id": "h23",
+    "kana": "め",
+    "romaji": "me",
+    "italian": "occhio",
+    "english": "eye",
+    "script": "hiragana",
+    "filename": "h23.jpg",
+    "prompt": "Minimalist 2D vector flat Japanese style illustration of: eye (occhio). Clean bold outlines, warm minimalist color palette, Kyoto lacquer red accents, warm cream and ink black, solid clean neutral off-white background. No text, no words, no letters."
+  },
+  {
+    "id": "h24",
+    "kana": "みみ",
+    "romaji": "mimi",
+    "italian": "orecchio",
+    "english": "ear",
+    "script": "hiragana",
+    "filename": "h24.jpg",
+    "prompt": "Minimalist 2D vector flat Japanese style illustration of: ear (orecchio). Clean bold outlines, warm minimalist color palette, Kyoto lacquer red accents, warm cream and ink black, solid clean neutral off-white background. No text, no words, no letters."
+  },
+  {
+    "id": "h25",
+    "kana": "くち",
+    "romaji": "kuchi",
+    "italian": "bocca",
+    "english": "mouth",
+    "script": "hiragana",
+    "filename": "h25.jpg",
+    "prompt": "Minimalist 2D vector flat Japanese style illustration of: mouth (bocca). Clean bold outlines, warm minimalist color palette, Kyoto lacquer red accents, warm cream and ink black, solid clean neutral off-white background. No text, no words, no letters."
+  },
+  {
+    "id": "h26",
+    "kana": "あし",
+    "romaji": "ashi",
+    "italian": "piede",
+    "english": "foot",
+    "script": "hiragana",
+    "filename": "h26.jpg",
+    "prompt": "Minimalist 2D vector flat Japanese style illustration of: foot (piede). Clean bold outlines, warm minimalist color palette, Kyoto lacquer red accents, warm cream and ink black, solid clean neutral off-white background. No text, no words, no letters."
+  },
+  {
+    "id": "h27",
+    "kana": "こころ",
+    "romaji": "kokoro",
+    "italian": "cuore",
+    "english": "heart",
+    "script": "hiragana",
+    "filename": "h27.jpg",
+    "prompt": "Minimalist 2D vector flat Japanese style illustration of: heart (cuore). Clean bold outlines, warm minimalist color palette, Kyoto lacquer red accents, warm cream and ink black, solid clean neutral off-white background. No text, no words, no letters."
+  },
+  {
+    "id": "h28",
+    "kana": "おかね",
+    "romaji": "okane",
+    "italian": "soldi",
+    "english": "money",
+    "script": "hiragana",
+    "filename": "h28.jpg",
+    "prompt": "Minimalist 2D vector flat Japanese style illustration of: money (soldi). Clean bold outlines, warm minimalist color palette, Kyoto lacquer red accents, warm cream and ink black, solid clean neutral off-white background. No text, no words, no letters."
+  },
+  {
+    "id": "h29",
+    "kana": "じかん",
+    "romaji": "jikan",
+    "italian": "tempo",
+    "english": "time",
+    "script": "hiragana",
+    "filename": "h29.jpg",
+    "prompt": "Minimalist 2D vector flat Japanese style illustration of: time (tempo). Clean bold outlines, warm minimalist color palette, Kyoto lacquer red accents, warm cream and ink black, solid clean neutral off-white background. No text, no words, no letters."
+  },
+  {
+    "id": "h30",
+    "kana": "きょう",
+    "romaji": "kyou",
+    "italian": "oggi",
+    "english": "today",
+    "script": "hiragana",
+    "filename": "h30.jpg",
+    "prompt": "Minimalist 2D vector flat Japanese style illustration of: today (oggi). Clean bold outlines, warm minimalist color palette, Kyoto lacquer red accents, warm cream and ink black, solid clean neutral off-white background. No text, no words, no letters."
+  },
+  {
+    "id": "h31",
+    "kana": "あした",
+    "romaji": "ashita",
+    "italian": "domani",
+    "english": "tomorrow",
+    "script": "hiragana",
+    "filename": "h31.jpg",
+    "prompt": "Minimalist 2D vector flat Japanese style illustration of: tomorrow (domani). Clean bold outlines, warm minimalist color palette, Kyoto lacquer red accents, warm cream and ink black, solid clean neutral off-white background. No text, no words, no letters."
+  },
+  {
+    "id": "h32",
+    "kana": "きのう",
+    "romaji": "kinou",
+    "italian": "ieri",
+    "english": "yesterday",
+    "script": "hiragana",
+    "filename": "h32.jpg",
+    "prompt": "Minimalist 2D vector flat Japanese style illustration of: yesterday (ieri). Clean bold outlines, warm minimalist color palette, Kyoto lacquer red accents, warm cream and ink black, solid clean neutral off-white background. No text, no words, no letters."
+  },
+  {
+    "id": "h33",
+    "kana": "あさ",
+    "romaji": "asa",
+    "italian": "mattina",
+    "english": "morning",
+    "script": "hiragana",
+    "filename": "h33.jpg",
+    "prompt": "Minimalist 2D vector flat Japanese style illustration of: morning (mattina). Clean bold outlines, warm minimalist color palette, Kyoto lacquer red accents, warm cream and ink black, solid clean neutral off-white background. No text, no words, no letters."
+  },
+  {
+    "id": "h34",
+    "kana": "よる",
+    "romaji": "yoru",
+    "italian": "notte",
+    "english": "night",
+    "script": "hiragana",
+    "filename": "h34.jpg",
+    "prompt": "Minimalist 2D vector flat Japanese style illustration of: night (notte). Clean bold outlines, warm minimalist color palette, Kyoto lacquer red accents, warm cream and ink black, solid clean neutral off-white background. No text, no words, no letters."
+  },
+  {
+    "id": "h35",
+    "kana": "き",
+    "romaji": "ki",
+    "italian": "albero",
+    "english": "tree",
+    "script": "hiragana",
+    "filename": "h35.jpg",
+    "prompt": "Minimalist 2D vector flat Japanese style illustration of: tree (albero). Clean bold outlines, warm minimalist color palette, Kyoto lacquer red accents, warm cream and ink black, solid clean neutral off-white background. No text, no words, no letters."
+  },
+  {
+    "id": "h36",
+    "kana": "むし",
+    "romaji": "mushi",
+    "italian": "insetto",
+    "english": "bug",
+    "script": "hiragana",
+    "filename": "h36.jpg",
+    "prompt": "Minimalist 2D vector flat Japanese style illustration of: bug (insetto). Clean bold outlines, warm minimalist color palette, Kyoto lacquer red accents, warm cream and ink black, solid clean neutral off-white background. No text, no words, no letters."
+  },
+  {
+    "id": "h37",
+    "kana": "おと",
+    "romaji": "oto",
+    "italian": "suono",
+    "english": "sound",
+    "script": "hiragana",
+    "filename": "h37.jpg",
+    "prompt": "Minimalist 2D vector flat Japanese style illustration of: sound (suono). Clean bold outlines, warm minimalist color palette, Kyoto lacquer red accents, warm cream and ink black, solid clean neutral off-white background. No text, no words, no letters."
+  },
+  {
+    "id": "h38",
+    "kana": "うた",
+    "romaji": "uta",
+    "italian": "canzone",
+    "english": "song",
+    "script": "hiragana",
+    "filename": "h38.jpg",
+    "prompt": "Minimalist 2D vector flat Japanese style illustration of: song (canzone). Clean bold outlines, warm minimalist color palette, Kyoto lacquer red accents, warm cream and ink black, solid clean neutral off-white background. No text, no words, no letters."
+  },
+  {
+    "id": "h39",
+    "kana": "え",
+    "romaji": "e",
+    "italian": "quadro",
+    "english": "picture",
+    "script": "hiragana",
+    "filename": "h39.jpg",
+    "prompt": "Minimalist 2D vector flat Japanese style illustration of: picture (quadro). Clean bold outlines, warm minimalist color palette, Kyoto lacquer red accents, warm cream and ink black, solid clean neutral off-white background. No text, no words, no letters."
+  },
+  {
+    "id": "h40",
+    "kana": "てがみ",
+    "romaji": "tegami",
+    "italian": "lettera",
+    "english": "letter",
+    "script": "hiragana",
+    "filename": "h40.jpg",
+    "prompt": "Minimalist 2D vector flat Japanese style illustration of: letter (lettera). Clean bold outlines, warm minimalist color palette, Kyoto lacquer red accents, warm cream and ink black, solid clean neutral off-white background. No text, no words, no letters."
+  },
+  {
+    "id": "h41",
+    "kana": "きっぷ",
+    "romaji": "kippu",
+    "italian": "biglietto",
+    "english": "ticket",
+    "script": "hiragana",
+    "filename": "h41.jpg",
+    "prompt": "Minimalist 2D vector flat Japanese style illustration of: ticket (biglietto). Clean bold outlines, warm minimalist color palette, Kyoto lacquer red accents, warm cream and ink black, solid clean neutral off-white background. No text, no words, no letters."
+  },
+  {
+    "id": "h42",
+    "kana": "でんしゃ",
+    "romaji": "densha",
+    "italian": "treno",
+    "english": "train",
+    "script": "hiragana",
+    "filename": "h42.jpg",
+    "prompt": "Minimalist 2D vector flat Japanese style illustration of: train (treno). Clean bold outlines, warm minimalist color palette, Kyoto lacquer red accents, warm cream and ink black, solid clean neutral off-white background. No text, no words, no letters."
+  },
+  {
+    "id": "h43",
+    "kana": "ひこうき",
+    "romaji": "hikouki",
+    "italian": "aereo",
+    "english": "airplane",
+    "script": "hiragana",
+    "filename": "h43.jpg",
+    "prompt": "Minimalist 2D vector flat Japanese style illustration of: airplane (aereo). Clean bold outlines, warm minimalist color palette, Kyoto lacquer red accents, warm cream and ink black, solid clean neutral off-white background. No text, no words, no letters."
+  },
+  {
+    "id": "h44",
+    "kana": "みせ",
+    "romaji": "mise",
+    "italian": "negozio",
+    "english": "shop",
+    "script": "hiragana",
+    "filename": "h44.jpg",
+    "prompt": "Minimalist 2D vector flat Japanese style illustration of: shop (negozio). Clean bold outlines, warm minimalist color palette, Kyoto lacquer red accents, warm cream and ink black, solid clean neutral off-white background. No text, no words, no letters."
+  },
+  {
+    "id": "h45",
+    "kana": "ふく",
+    "romaji": "fuku",
+    "italian": "vestiti",
+    "english": "clothes",
+    "script": "hiragana",
+    "filename": "h45.jpg",
+    "prompt": "Minimalist 2D vector flat Japanese style illustration of: clothes (vestiti). Clean bold outlines, warm minimalist color palette, Kyoto lacquer red accents, warm cream and ink black, solid clean neutral off-white background. No text, no words, no letters."
+  },
+  {
+    "id": "h46",
+    "kana": "くつ",
+    "romaji": "kutsu",
+    "italian": "scarpe",
+    "english": "shoes",
+    "script": "hiragana",
+    "filename": "h46.jpg",
+    "prompt": "Minimalist 2D vector flat Japanese style illustration of: shoes (scarpe). Clean bold outlines, warm minimalist color palette, Kyoto lacquer red accents, warm cream and ink black, solid clean neutral off-white background. No text, no words, no letters."
+  },
+  {
+    "id": "h47",
+    "kana": "かばん",
+    "romaji": "kaban",
+    "italian": "borsa",
+    "english": "bag",
+    "script": "hiragana",
+    "filename": "h47.jpg",
+    "prompt": "Minimalist 2D vector flat Japanese style illustration of: bag (borsa). Clean bold outlines, warm minimalist color palette, Kyoto lacquer red accents, warm cream and ink black, solid clean neutral off-white background. No text, no words, no letters."
+  },
+  {
+    "id": "h48",
+    "kana": "とけい",
+    "romaji": "tokei",
+    "italian": "orologio",
+    "english": "watch",
+    "script": "hiragana",
+    "filename": "h48.jpg",
+    "prompt": "Minimalist 2D vector flat Japanese style illustration of: watch (orologio). Clean bold outlines, warm minimalist color palette, Kyoto lacquer red accents, warm cream and ink black, solid clean neutral off-white background. No text, no words, no letters."
+  },
+  {
+    "id": "h49",
+    "kana": "つくえ",
+    "romaji": "tsukue",
+    "italian": "scrivania",
+    "english": "desk",
+    "script": "hiragana",
+    "filename": "h49.jpg",
+    "prompt": "Minimalist 2D vector flat Japanese style illustration of: desk (scrivania). Clean bold outlines, warm minimalist color palette, Kyoto lacquer red accents, warm cream and ink black, solid clean neutral off-white background. No text, no words, no letters."
+  },
+  {
+    "id": "h50",
+    "kana": "いす",
+    "romaji": "isu",
+    "italian": "sedia",
+    "english": "chair",
+    "script": "hiragana",
+    "filename": "h50.jpg",
+    "prompt": "Minimalist 2D vector flat Japanese style illustration of: chair (sedia). Clean bold outlines, warm minimalist color palette, Kyoto lacquer red accents, warm cream and ink black, solid clean neutral off-white background. No text, no words, no letters."
+  },
+  {
+    "id": "k1",
+    "kana": "カメラ",
+    "romaji": "kamera",
+    "italian": "fotocamera",
+    "english": "camera",
+    "script": "katakana",
+    "filename": "k1.jpg",
+    "prompt": "Minimalist 2D vector flat Japanese style illustration of: camera (fotocamera). Clean bold outlines, warm minimalist color palette, Kyoto lacquer red accents, warm cream and ink black, solid clean neutral off-white background. No text, no words, no letters."
+  },
+  {
+    "id": "k2",
+    "kana": "テレビ",
+    "romaji": "terebi",
+    "italian": "televisione",
+    "english": "TV",
+    "script": "katakana",
+    "filename": "k2.jpg",
+    "prompt": "Minimalist 2D vector flat Japanese style illustration of: TV (televisione). Clean bold outlines, warm minimalist color palette, Kyoto lacquer red accents, warm cream and ink black, solid clean neutral off-white background. No text, no words, no letters."
+  },
+  {
+    "id": "k3",
+    "kana": "ラジオ",
+    "romaji": "rajio",
+    "italian": "radio",
+    "english": "radio",
+    "script": "katakana",
+    "filename": "k3.jpg",
+    "prompt": "Minimalist 2D vector flat Japanese style illustration of: radio (radio). Clean bold outlines, warm minimalist color palette, Kyoto lacquer red accents, warm cream and ink black, solid clean neutral off-white background. No text, no words, no letters."
+  },
+  {
+    "id": "k4",
+    "kana": "パソコン",
+    "romaji": "pasokon",
+    "italian": "computer",
+    "english": "PC",
+    "script": "katakana",
+    "filename": "k4.jpg",
+    "prompt": "Minimalist 2D vector flat Japanese style illustration of: PC (computer). Clean bold outlines, warm minimalist color palette, Kyoto lacquer red accents, warm cream and ink black, solid clean neutral off-white background. No text, no words, no letters."
+  },
+  {
+    "id": "k5",
+    "kana": "スマホ",
+    "romaji": "sumaho",
+    "italian": "cellulare",
+    "english": "smartphone",
+    "script": "katakana",
+    "filename": "k5.jpg",
+    "prompt": "Minimalist 2D vector flat Japanese style illustration of: smartphone (cellulare). Clean bold outlines, warm minimalist color palette, Kyoto lacquer red accents, warm cream and ink black, solid clean neutral off-white background. No text, no words, no letters."
+  },
+  {
+    "id": "k6",
+    "kana": "トイレ",
+    "romaji": "toire",
+    "italian": "bagno",
+    "english": "toilet",
+    "script": "katakana",
+    "filename": "k6.jpg",
+    "prompt": "Minimalist 2D vector flat Japanese style illustration of: toilet (bagno). Clean bold outlines, warm minimalist color palette, Kyoto lacquer red accents, warm cream and ink black, solid clean neutral off-white background. No text, no words, no letters."
+  },
+  {
+    "id": "k7",
+    "kana": "ベッド",
+    "romaji": "beddo",
+    "italian": "letto",
+    "english": "bed",
+    "script": "katakana",
+    "filename": "k7.jpg",
+    "prompt": "Minimalist 2D vector flat Japanese style illustration of: bed (letto). Clean bold outlines, warm minimalist color palette, Kyoto lacquer red accents, warm cream and ink black, solid clean neutral off-white background. No text, no words, no letters."
+  },
+  {
+    "id": "k8",
+    "kana": "ドア",
+    "romaji": "doa",
+    "italian": "porta",
+    "english": "door",
+    "script": "katakana",
+    "filename": "k8.jpg",
+    "prompt": "Minimalist 2D vector flat Japanese style illustration of: door (porta). Clean bold outlines, warm minimalist color palette, Kyoto lacquer red accents, warm cream and ink black, solid clean neutral off-white background. No text, no words, no letters."
+  },
+  {
+    "id": "k9",
+    "kana": "ノート",
+    "romaji": "nooto",
+    "italian": "quaderno",
+    "english": "notebook",
+    "script": "katakana",
+    "filename": "k9.jpg",
+    "prompt": "Minimalist 2D vector flat Japanese style illustration of: notebook (quaderno). Clean bold outlines, warm minimalist color palette, Kyoto lacquer red accents, warm cream and ink black, solid clean neutral off-white background. No text, no words, no letters."
+  },
+  {
+    "id": "k10",
+    "kana": "ペン",
+    "romaji": "pen",
+    "italian": "penna",
+    "english": "pen",
+    "script": "katakana",
+    "filename": "k10.jpg",
+    "prompt": "Minimalist 2D vector flat Japanese style illustration of: pen (penna). Clean bold outlines, warm minimalist color palette, Kyoto lacquer red accents, warm cream and ink black, solid clean neutral off-white background. No text, no words, no letters."
+  },
+  {
+    "id": "k11",
+    "kana": "コーヒー",
+    "romaji": "koohii",
+    "italian": "caffè",
+    "english": "coffee",
+    "script": "katakana",
+    "filename": "k11.jpg",
+    "prompt": "Minimalist 2D vector flat Japanese style illustration of: coffee (caffè). Clean bold outlines, warm minimalist color palette, Kyoto lacquer red accents, warm cream and ink black, solid clean neutral off-white background. No text, no words, no letters."
+  },
+  {
+    "id": "k12",
+    "kana": "ココア",
+    "romaji": "kokoa",
+    "italian": "cioccolata",
+    "english": "cocoa",
+    "script": "katakana",
+    "filename": "k12.jpg",
+    "prompt": "Minimalist 2D vector flat Japanese style illustration of: cocoa (cioccolata). Clean bold outlines, warm minimalist color palette, Kyoto lacquer red accents, warm cream and ink black, solid clean neutral off-white background. No text, no words, no letters."
+  },
+  {
+    "id": "k13",
+    "kana": "ミルク",
+    "romaji": "miruku",
+    "italian": "latte",
+    "english": "milk",
+    "script": "katakana",
+    "filename": "k13.jpg",
+    "prompt": "Minimalist 2D vector flat Japanese style illustration of: milk (latte). Clean bold outlines, warm minimalist color palette, Kyoto lacquer red accents, warm cream and ink black, solid clean neutral off-white background. No text, no words, no letters."
+  },
+  {
+    "id": "k14",
+    "kana": "ジュース",
+    "romaji": "juusu",
+    "italian": "succo",
+    "english": "juice",
+    "script": "katakana",
+    "filename": "k14.jpg",
+    "prompt": "Minimalist 2D vector flat Japanese style illustration of: juice (succo). Clean bold outlines, warm minimalist color palette, Kyoto lacquer red accents, warm cream and ink black, solid clean neutral off-white background. No text, no words, no letters."
+  },
+  {
+    "id": "k15",
+    "kana": "ビール",
+    "romaji": "biiru",
+    "italian": "birra",
+    "english": "beer",
+    "script": "katakana",
+    "filename": "k15.jpg",
+    "prompt": "Minimalist 2D vector flat Japanese style illustration of: beer (birra). Clean bold outlines, warm minimalist color palette, Kyoto lacquer red accents, warm cream and ink black, solid clean neutral off-white background. No text, no words, no letters."
+  },
+  {
+    "id": "k16",
+    "kana": "ワイン",
+    "romaji": "wain",
+    "italian": "vino",
+    "english": "wine",
+    "script": "katakana",
+    "filename": "k16.jpg",
+    "prompt": "Minimalist 2D vector flat Japanese style illustration of: wine (vino). Clean bold outlines, warm minimalist color palette, Kyoto lacquer red accents, warm cream and ink black, solid clean neutral off-white background. No text, no words, no letters."
+  },
+  {
+    "id": "k17",
+    "kana": "ケーキ",
+    "romaji": "keeki",
+    "italian": "torta",
+    "english": "cake",
+    "script": "katakana",
+    "filename": "k17.jpg",
+    "prompt": "Minimalist 2D vector flat Japanese style illustration of: cake (torta). Clean bold outlines, warm minimalist color palette, Kyoto lacquer red accents, warm cream and ink black, solid clean neutral off-white background. No text, no words, no letters."
+  },
+  {
+    "id": "k18",
+    "kana": "パン",
+    "romaji": "pan",
+    "italian": "pane",
+    "english": "bread",
+    "script": "katakana",
+    "filename": "k18.jpg",
+    "prompt": "Minimalist 2D vector flat Japanese style illustration of: bread (pane). Clean bold outlines, warm minimalist color palette, Kyoto lacquer red accents, warm cream and ink black, solid clean neutral off-white background. No text, no words, no letters."
+  },
+  {
+    "id": "k19",
+    "kana": "バター",
+    "romaji": "bataa",
+    "italian": "burro",
+    "english": "butter",
+    "script": "katakana",
+    "filename": "k19.jpg",
+    "prompt": "Minimalist 2D vector flat Japanese style illustration of: butter (burro). Clean bold outlines, warm minimalist color palette, Kyoto lacquer red accents, warm cream and ink black, solid clean neutral off-white background. No text, no words, no letters."
+  },
+  {
+    "id": "k20",
+    "kana": "サラダ",
+    "romaji": "sarada",
+    "italian": "insalata",
+    "english": "salad",
+    "script": "katakana",
+    "filename": "k20.jpg",
+    "prompt": "Minimalist 2D vector flat Japanese style illustration of: salad (insalata). Clean bold outlines, warm minimalist color palette, Kyoto lacquer red accents, warm cream and ink black, solid clean neutral off-white background. No text, no words, no letters."
+  },
+  {
+    "id": "k21",
+    "kana": "スープ",
+    "romaji": "suupu",
+    "italian": "zuppa",
+    "english": "soup",
+    "script": "katakana",
+    "filename": "k21.jpg",
+    "prompt": "Minimalist 2D vector flat Japanese style illustration of: soup (zuppa). Clean bold outlines, warm minimalist color palette, Kyoto lacquer red accents, warm cream and ink black, solid clean neutral off-white background. No text, no words, no letters."
+  },
+  {
+    "id": "k22",
+    "kana": "カレー",
+    "romaji": "karee",
+    "italian": "curry",
+    "english": "curry",
+    "script": "katakana",
+    "filename": "k22.jpg",
+    "prompt": "Minimalist 2D vector flat Japanese style illustration of: curry (curry). Clean bold outlines, warm minimalist color palette, Kyoto lacquer red accents, warm cream and ink black, solid clean neutral off-white background. No text, no words, no letters."
+  },
+  {
+    "id": "k23",
+    "kana": "ステーキ",
+    "romaji": "suteeki",
+    "italian": "bistecca",
+    "english": "steak",
+    "script": "katakana",
+    "filename": "k23.jpg",
+    "prompt": "Minimalist 2D vector flat Japanese style illustration of: steak (bistecca). Clean bold outlines, warm minimalist color palette, Kyoto lacquer red accents, warm cream and ink black, solid clean neutral off-white background. No text, no words, no letters."
+  },
+  {
+    "id": "k24",
+    "kana": "ピアノ",
+    "romaji": "piano",
+    "italian": "pianoforte",
+    "english": "piano",
+    "script": "katakana",
+    "filename": "k24.jpg",
+    "prompt": "Minimalist 2D vector flat Japanese style illustration of: piano (pianoforte). Clean bold outlines, warm minimalist color palette, Kyoto lacquer red accents, warm cream and ink black, solid clean neutral off-white background. No text, no words, no letters."
+  },
+  {
+    "id": "k25",
+    "kana": "ギター",
+    "romaji": "gitaa",
+    "italian": "chitarra",
+    "english": "guitar",
+    "script": "katakana",
+    "filename": "k25.jpg",
+    "prompt": "Minimalist 2D vector flat Japanese style illustration of: guitar (chitarra). Clean bold outlines, warm minimalist color palette, Kyoto lacquer red accents, warm cream and ink black, solid clean neutral off-white background. No text, no words, no letters."
+  },
+  {
+    "id": "k26",
+    "kana": "ダンス",
+    "romaji": "dansu",
+    "italian": "danza",
+    "english": "dance",
+    "script": "katakana",
+    "filename": "k26.jpg",
+    "prompt": "Minimalist 2D vector flat Japanese style illustration of: dance (danza). Clean bold outlines, warm minimalist color palette, Kyoto lacquer red accents, warm cream and ink black, solid clean neutral off-white background. No text, no words, no letters."
+  },
+  {
+    "id": "k27",
+    "kana": "テニス",
+    "romaji": "tenisu",
+    "italian": "tennis",
+    "english": "tennis",
+    "script": "katakana",
+    "filename": "k27.jpg",
+    "prompt": "Minimalist 2D vector flat Japanese style illustration of: tennis (tennis). Clean bold outlines, warm minimalist color palette, Kyoto lacquer red accents, warm cream and ink black, solid clean neutral off-white background. No text, no words, no letters."
+  },
+  {
+    "id": "k28",
+    "kana": "サッカー",
+    "romaji": "sakkaa",
+    "italian": "calcio",
+    "english": "soccer",
+    "script": "katakana",
+    "filename": "k28.jpg",
+    "prompt": "Minimalist 2D vector flat Japanese style illustration of: soccer (calcio). Clean bold outlines, warm minimalist color palette, Kyoto lacquer red accents, warm cream and ink black, solid clean neutral off-white background. No text, no words, no letters."
+  },
+  {
+    "id": "k29",
+    "kana": "バス",
+    "romaji": "basu",
+    "italian": "autobus",
+    "english": "bus",
+    "script": "katakana",
+    "filename": "k29.jpg",
+    "prompt": "Minimalist 2D vector flat Japanese style illustration of: bus (autobus). Clean bold outlines, warm minimalist color palette, Kyoto lacquer red accents, warm cream and ink black, solid clean neutral off-white background. No text, no words, no letters."
+  },
+  {
+    "id": "k30",
+    "kana": "タクシー",
+    "romaji": "takushii",
+    "italian": "taxi",
+    "english": "taxi",
+    "script": "katakana",
+    "filename": "k30.jpg",
+    "prompt": "Minimalist 2D vector flat Japanese style illustration of: taxi (taxi). Clean bold outlines, warm minimalist color palette, Kyoto lacquer red accents, warm cream and ink black, solid clean neutral off-white background. No text, no words, no letters."
+  },
+  {
+    "id": "k31",
+    "kana": "ホテル",
+    "romaji": "hoteru",
+    "italian": "hotel",
+    "english": "hotel",
+    "script": "katakana",
+    "filename": "k31.jpg",
+    "prompt": "Minimalist 2D vector flat Japanese style illustration of: hotel (hotel). Clean bold outlines, warm minimalist color palette, Kyoto lacquer red accents, warm cream and ink black, solid clean neutral off-white background. No text, no words, no letters."
+  },
+  {
+    "id": "k32",
+    "kana": "ビル",
+    "romaji": "biru",
+    "italian": "edificio",
+    "english": "building",
+    "script": "katakana",
+    "filename": "k32.jpg",
+    "prompt": "Minimalist 2D vector flat Japanese style illustration of: building (edificio). Clean bold outlines, warm minimalist color palette, Kyoto lacquer red accents, warm cream and ink black, solid clean neutral off-white background. No text, no words, no letters."
+  },
+  {
+    "id": "k33",
+    "kana": "プール",
+    "romaji": "puuru",
+    "italian": "piscina",
+    "english": "pool",
+    "script": "katakana",
+    "filename": "k33.jpg",
+    "prompt": "Minimalist 2D vector flat Japanese style illustration of: pool (piscina). Clean bold outlines, warm minimalist color palette, Kyoto lacquer red accents, warm cream and ink black, solid clean neutral off-white background. No text, no words, no letters."
+  },
+  {
+    "id": "k34",
+    "kana": "ガラス",
+    "romaji": "garasu",
+    "italian": "vetro",
+    "english": "glass",
+    "script": "katakana",
+    "filename": "k34.jpg",
+    "prompt": "Minimalist 2D vector flat Japanese style illustration of: glass (vetro). Clean bold outlines, warm minimalist color palette, Kyoto lacquer red accents, warm cream and ink black, solid clean neutral off-white background. No text, no words, no letters."
+  },
+  {
+    "id": "k35",
+    "kana": "スプーン",
+    "romaji": "supuun",
+    "italian": "cucchiaio",
+    "english": "spoon",
+    "script": "katakana",
+    "filename": "k35.jpg",
+    "prompt": "Minimalist 2D vector flat Japanese style illustration of: spoon (cucchiaio). Clean bold outlines, warm minimalist color palette, Kyoto lacquer red accents, warm cream and ink black, solid clean neutral off-white background. No text, no words, no letters."
+  },
+  {
+    "id": "k36",
+    "kana": "フォーク",
+    "romaji": "fooku",
+    "italian": "forchetta",
+    "english": "fork",
+    "script": "katakana",
+    "filename": "k36.jpg",
+    "prompt": "Minimalist 2D vector flat Japanese style illustration of: fork (forchetta). Clean bold outlines, warm minimalist color palette, Kyoto lacquer red accents, warm cream and ink black, solid clean neutral off-white background. No text, no words, no letters."
+  },
+  {
+    "id": "k37",
+    "kana": "ナイフ",
+    "romaji": "naifu",
+    "italian": "coltello",
+    "english": "knife",
+    "script": "katakana",
+    "filename": "k37.jpg",
+    "prompt": "Minimalist 2D vector flat Japanese style illustration of: knife (coltello). Clean bold outlines, warm minimalist color palette, Kyoto lacquer red accents, warm cream and ink black, solid clean neutral off-white background. No text, no words, no letters."
+  },
+  {
+    "id": "k38",
+    "kana": "コップ",
+    "romaji": "koppu",
+    "italian": "bicchiere",
+    "english": "cup",
+    "script": "katakana",
+    "filename": "k38.jpg",
+    "prompt": "Minimalist 2D vector flat Japanese style illustration of: cup (bicchiere). Clean bold outlines, warm minimalist color palette, Kyoto lacquer red accents, warm cream and ink black, solid clean neutral off-white background. No text, no words, no letters."
+  },
+  {
+    "id": "k39",
+    "kana": "バッグ",
+    "romaji": "baggu",
+    "italian": "borsa",
+    "english": "bag",
+    "script": "katakana",
+    "filename": "k39.jpg",
+    "prompt": "Minimalist 2D vector flat Japanese style illustration of: bag (borsa). Clean bold outlines, warm minimalist color palette, Kyoto lacquer red accents, warm cream and ink black, solid clean neutral off-white background. No text, no words, no letters."
+  },
+  {
+    "id": "k40",
+    "kana": "シャツ",
+    "romaji": "shatsu",
+    "italian": "camicia",
+    "english": "shirt",
+    "script": "katakana",
+    "filename": "k40.jpg",
+    "prompt": "Minimalist 2D vector flat Japanese style illustration of: shirt (camicia). Clean bold outlines, warm minimalist color palette, Kyoto lacquer red accents, warm cream and ink black, solid clean neutral off-white background. No text, no words, no letters."
+  },
+  {
+    "id": "k41",
+    "kana": "スカート",
+    "romaji": "sukaato",
+    "italian": "gonna",
+    "english": "skirt",
+    "script": "katakana",
+    "filename": "k41.jpg",
+    "prompt": "Minimalist 2D vector flat Japanese style illustration of: skirt (gonna). Clean bold outlines, warm minimalist color palette, Kyoto lacquer red accents, warm cream and ink black, solid clean neutral off-white background. No text, no words, no letters."
+  },
+  {
+    "id": "k42",
+    "kana": "コート",
+    "romaji": "kooto",
+    "italian": "capotto",
+    "english": "coat",
+    "script": "katakana",
+    "filename": "k42.jpg",
+    "prompt": "Minimalist 2D vector flat Japanese style illustration of: coat (capotto). Clean bold outlines, warm minimalist color palette, Kyoto lacquer red accents, warm cream and ink black, solid clean neutral off-white background. No text, no words, no letters."
+  },
+  {
+    "id": "k43",
+    "kana": "クラス",
+    "romaji": "kurasu",
+    "italian": "classe",
+    "english": "class",
+    "script": "katakana",
+    "filename": "k43.jpg",
+    "prompt": "Minimalist 2D vector flat Japanese style illustration of: class (classe). Clean bold outlines, warm minimalist color palette, Kyoto lacquer red accents, warm cream and ink black, solid clean neutral off-white background. No text, no words, no letters."
+  },
+  {
+    "id": "k44",
+    "kana": "テスト",
+    "romaji": "tesuto",
+    "italian": "esame",
+    "english": "test",
+    "script": "katakana",
+    "filename": "k44.jpg",
+    "prompt": "Minimalist 2D vector flat Japanese style illustration of: test (esame). Clean bold outlines, warm minimalist color palette, Kyoto lacquer red accents, warm cream and ink black, solid clean neutral off-white background. No text, no words, no letters."
+  },
+  {
+    "id": "k45",
+    "kana": "ニュース",
+    "romaji": "nyuusu",
+    "italian": "notizie",
+    "english": "news",
+    "script": "katakana",
+    "filename": "k45.jpg",
+    "prompt": "Minimalist 2D vector flat Japanese style illustration of: news (notizie). Clean bold outlines, warm minimalist color palette, Kyoto lacquer red accents, warm cream and ink black, solid clean neutral off-white background. No text, no words, no letters."
+  },
+  {
+    "id": "k46",
+    "kana": "プレゼント",
+    "romaji": "purezento",
+    "italian": "regalo",
+    "english": "gift",
+    "script": "katakana",
+    "filename": "k46.jpg",
+    "prompt": "Minimalist 2D vector flat Japanese style illustration of: gift (regalo). Clean bold outlines, warm minimalist color palette, Kyoto lacquer red accents, warm cream and ink black, solid clean neutral off-white background. No text, no words, no letters."
+  },
+  {
+    "id": "k47",
+    "kana": "カレンダー",
+    "romaji": "karendaa",
+    "italian": "calendario",
+    "english": "calendar",
+    "script": "katakana",
+    "filename": "k47.jpg",
+    "prompt": "Minimalist 2D vector flat Japanese style illustration of: calendar (calendario). Clean bold outlines, warm minimalist color palette, Kyoto lacquer red accents, warm cream and ink black, solid clean neutral off-white background. No text, no words, no letters."
+  },
+  {
+    "id": "k48",
+    "kana": "カード",
+    "romaji": "kaado",
+    "italian": "carta",
+    "english": "card",
+    "script": "katakana",
+    "filename": "k48.jpg",
+    "prompt": "Minimalist 2D vector flat Japanese style illustration of: card (carta). Clean bold outlines, warm minimalist color palette, Kyoto lacquer red accents, warm cream and ink black, solid clean neutral off-white background. No text, no words, no letters."
+  },
+  {
+    "id": "k49",
+    "kana": "ページ",
+    "romaji": "peeji",
+    "italian": "pagina",
+    "english": "page",
+    "script": "katakana",
+    "filename": "k49.jpg",
+    "prompt": "Minimalist 2D vector flat Japanese style illustration of: page (pagina). Clean bold outlines, warm minimalist color palette, Kyoto lacquer red accents, warm cream and ink black, solid clean neutral off-white background. No text, no words, no letters."
+  },
+  {
+    "id": "k50",
+    "kana": "サービス",
+    "romaji": "saabisu",
+    "italian": "servizio",
+    "english": "service",
+    "script": "katakana",
+    "filename": "k50.jpg",
+    "prompt": "Minimalist 2D vector flat Japanese style illustration of: service (servizio). Clean bold outlines, warm minimalist color palette, Kyoto lacquer red accents, warm cream and ink black, solid clean neutral off-white background. No text, no words, no letters."
+  }
+]
