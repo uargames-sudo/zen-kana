@@ -13,7 +13,9 @@ import {
   ArrowRight,
   Flame,
   HelpCircle,
-  Play
+  Play,
+  Heart,
+  AlertCircle
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { VOCABULARY } from '../data/vocabulary';
@@ -39,16 +41,22 @@ export default function KanaPuzzle({ defaultScriptMode = 'hiragana' }) {
   const [currentTokens, setCurrentTokens] = useState([]); // [{ kana, romaji, id, uid }]
   const [availableTiles, setAvailableTiles] = useState([]); // pool of tiles available to click
   const [placedSlots, setPlacedSlots] = useState([]); // array matching token length [tile | null]
+  const [attemptsLeft, setAttemptsLeft] = useState(3);
   const [isSuccess, setIsSuccess] = useState(false);
   const [isError, setIsError] = useState(false);
+  const [isFailed, setIsFailed] = useState(false);
+
+  // Session stats & mistakes
   const [score, setScore] = useState(0);
   const [streak, setStreak] = useState(0);
   const [maxStreak, setMaxStreak] = useState(0);
   const [hintsUsed, setHintsUsed] = useState(0);
+  const [mistakes, setMistakes] = useState([]); // array of { word, expectedTokens, userSlots, gameMode }
   const [timerSeconds, setTimerSeconds] = useState(0);
   const [isTimerRunning, setIsTimerRunning] = useState(false);
 
   const WORDS_PER_SESSION = 10;
+  const MAX_ATTEMPTS = 3;
 
   // Timer Effect
   useEffect(() => {
@@ -89,10 +97,12 @@ export default function KanaPuzzle({ defaultScriptMode = 'hiragana' }) {
     const allTiles = [...tokens, ...distractors].sort(() => Math.random() - 0.5);
     setAvailableTiles(allTiles);
 
-    // Empty slots array
+    // Empty slots array & reset attempts
     setPlacedSlots(new Array(tokens.length).fill(null));
+    setAttemptsLeft(MAX_ATTEMPTS);
     setIsSuccess(false);
     setIsError(false);
+    setIsFailed(false);
   }, [distractorCount]);
 
   // Start new game session
@@ -113,6 +123,7 @@ export default function KanaPuzzle({ defaultScriptMode = 'hiragana' }) {
     setStreak(0);
     setMaxStreak(0);
     setHintsUsed(0);
+    setMistakes([]);
     setTimerSeconds(0);
     setIsTimerRunning(true);
     setGameState('playing');
@@ -126,7 +137,7 @@ export default function KanaPuzzle({ defaultScriptMode = 'hiragana' }) {
 
   // Tile Click -> Place in first empty slot
   const handleTileClick = (tile) => {
-    if (isSuccess) return;
+    if (isSuccess || isFailed) return;
     setIsError(false);
 
     // Find first empty slot
@@ -147,7 +158,7 @@ export default function KanaPuzzle({ defaultScriptMode = 'hiragana' }) {
 
   // Slot Click -> Remove tile from slot back to pool
   const handleSlotClick = (slotIdx) => {
-    if (isSuccess) return;
+    if (isSuccess || isFailed) return;
     const tile = placedSlots[slotIdx];
     if (!tile) return;
 
@@ -164,7 +175,7 @@ export default function KanaPuzzle({ defaultScriptMode = 'hiragana' }) {
 
   // Clear all slots
   const handleClearSlots = () => {
-    if (isSuccess) return;
+    if (isSuccess || isFailed) return;
     const tilesToReturn = placedSlots.filter(Boolean);
     setAvailableTiles(prev => [...prev, ...tilesToReturn]);
     setPlacedSlots(new Array(currentTokens.length).fill(null));
@@ -173,12 +184,25 @@ export default function KanaPuzzle({ defaultScriptMode = 'hiragana' }) {
 
   // Shuffle available pool tiles visually
   const handleShufflePool = () => {
+    if (isSuccess || isFailed) return;
     setAvailableTiles(prev => [...prev].sort(() => Math.random() - 0.5));
   };
 
+  // Advance to next word or finish session
+  const advanceToNextWord = useCallback(() => {
+    if (currentIndex + 1 < wordList.length) {
+      const nextIdx = currentIndex + 1;
+      setCurrentIndex(nextIdx);
+      setupPuzzleWord(wordList[nextIdx]);
+    } else {
+      // Completed all words in session!
+      handleSessionVictory();
+    }
+  }, [currentIndex, wordList, setupPuzzleWord]);
+
   // Hint button -> place next correct tile
   const handleUseHint = () => {
-    if (isSuccess) return;
+    if (isSuccess || isFailed) return;
 
     // Find first incorrectly placed or empty slot
     let targetSlotIdx = -1;
@@ -271,6 +295,7 @@ export default function KanaPuzzle({ defaultScriptMode = 'hiragana' }) {
       // VICTORY ON THIS WORD
       setIsSuccess(true);
       setIsError(false);
+      setIsFailed(false);
       setScore(prev => prev + 100 + streak * 10);
       setStreak(prev => {
         const next = prev + 1;
@@ -285,19 +310,46 @@ export default function KanaPuzzle({ defaultScriptMode = 'hiragana' }) {
 
       // Transition to next word after delay
       setTimeout(() => {
-        if (currentIndex + 1 < wordList.length) {
-          const nextIdx = currentIndex + 1;
-          setCurrentIndex(nextIdx);
-          setupPuzzleWord(wordList[nextIdx]);
-        } else {
-          // Completed all words in session!
-          handleSessionVictory();
-        }
+        advanceToNextWord();
       }, 1100);
     } else {
-      // INCORRECT
-      setIsError(true);
+      // INCORRECT ATTEMPT
+      const nextAttempts = attemptsLeft - 1;
+      setAttemptsLeft(nextAttempts);
       setStreak(0);
+
+      if (nextAttempts <= 0) {
+        // EXHAUSTED ALL 3 ATTEMPTS FOR THIS WORD
+        setIsFailed(true);
+        setIsError(false);
+
+        // Record into mistakes list
+        setMistakes(prev => [
+          ...prev, 
+          {
+            word: currentWord,
+            tokens: currentTokens,
+            userSlots: slots,
+            gameMode
+          }
+        ]);
+
+        // Reveal correct answer in slots
+        setPlacedSlots(currentTokens);
+
+        // Play native voice so user learns pronunciation
+        if (currentWord?.kana) {
+          playKanaSound(currentWord.kana);
+        }
+
+        // Advance to next word after giving time to study correct answer
+        setTimeout(() => {
+          advanceToNextWord();
+        }, 2200);
+      } else {
+        // Still have attempts left
+        setIsError(true);
+      }
     }
   };
 
@@ -308,17 +360,17 @@ export default function KanaPuzzle({ defaultScriptMode = 'hiragana' }) {
 
     try {
       confetti({
-        particleCount: 80,
+        particleCount: 85,
         spread: 70,
         origin: { y: 0.6 }
       });
     } catch {
-      // Safe fallback if confetti isn't supported
+      // Safe fallback
     }
   };
 
   const progressPercent = wordList.length > 0 
-    ? Math.round(((currentIndex + (isSuccess ? 1 : 0)) / wordList.length) * 100) 
+    ? Math.round(((currentIndex + (isSuccess || isFailed ? 1 : 0)) / wordList.length) * 100) 
     : 0;
 
   const formatTime = (totalSeconds) => {
@@ -388,9 +440,9 @@ export default function KanaPuzzle({ defaultScriptMode = 'hiragana' }) {
               </label>
               <div className="grid grid-cols-3 gap-2">
                 {[
-                  { id: 'easy', label: t('puzzle.diffEasy'), desc: t('puzzle.diffEasyDesc'), badge: '+0' },
-                  { id: 'medium', label: t('puzzle.diffMed'), desc: t('puzzle.diffMedDesc'), badge: '+2' },
-                  { id: 'hard', label: t('puzzle.diffHard'), desc: t('puzzle.diffHardDesc'), badge: '+5' }
+                  { id: 'easy', label: t('puzzle.diffEasy'), desc: t('puzzle.diffEasyDesc') },
+                  { id: 'medium', label: t('puzzle.diffMed'), desc: t('puzzle.diffMedDesc') },
+                  { id: 'hard', label: t('puzzle.diffHard'), desc: t('puzzle.diffHardDesc') }
                 ].map((diff) => (
                   <button
                     key={diff.id}
@@ -444,7 +496,7 @@ export default function KanaPuzzle({ defaultScriptMode = 'hiragana' }) {
             <button
               type="button"
               onClick={startSession}
-              className="w-full py-3.5 px-6 rounded-2xl bg-zen-primary dark:bg-zen-dark-primary hover:bg-zen-primary-dark dark:hover:bg-zen-dark-primary-hover text-white dark:text-zen-dark-on-primary font-headline font-bold text-base shadow-zen-md hover:scale-[1.01] active:scale-[0.99] transition-all flex items-center justify-center gap-2"
+              className="w-full py-3.5 px-6 rounded-2xl bg-zen-primary dark:bg-zen-dark-primary hover:bg-zen-primary-dark dark:hover:bg-zen-dark-primary-hover text-white dark:text-zen-dark-on-primary font-headline font-bold text-base shadow-zen-md hover:scale-[1.01] active:scale-[0.99] transition-all flex items-center justify-center gap-2 cursor-pointer"
             >
               <Play className="w-5 h-5 fill-current" />
               <span>{t('puzzle.startBtn')}</span>
@@ -468,7 +520,7 @@ export default function KanaPuzzle({ defaultScriptMode = 'hiragana' }) {
               <button
                 type="button"
                 onClick={() => setGameState('setup')}
-                className="px-3 py-1 rounded-xl bg-zen-surface-lowest dark:bg-zen-dark-surface border border-zen-border/60 dark:border-zen-dark-border text-zen-text-muted hover:text-zen-text transition-colors shadow-zen-sm font-bold text-2xs uppercase tracking-wider"
+                className="px-3 py-1 rounded-xl bg-zen-surface-lowest dark:bg-zen-dark-surface border border-zen-border/60 dark:border-zen-dark-border text-zen-text-muted hover:text-zen-text transition-colors shadow-zen-sm font-bold text-2xs uppercase tracking-wider cursor-pointer"
               >
                 {t('puzzle.exit')}
               </button>
@@ -476,12 +528,27 @@ export default function KanaPuzzle({ defaultScriptMode = 'hiragana' }) {
             </div>
 
             <div className="flex items-center gap-3">
+              {/* Hearts / Attempts Indicators */}
+              <div className="flex items-center gap-1 bg-zen-surface-lowest dark:bg-zen-dark-surface px-2.5 py-1 rounded-full border border-zen-border/40 dark:border-zen-dark-border shadow-zen-sm" title={`${attemptsLeft} / ${MAX_ATTEMPTS} ${t('puzzle.attemptsRemaining')}`}>
+                {[...Array(MAX_ATTEMPTS)].map((_, i) => (
+                  <Heart
+                    key={i}
+                    className={`w-3.5 h-3.5 transition-all ${
+                      i < attemptsLeft 
+                        ? 'fill-rose-500 text-rose-500 scale-100' 
+                        : 'fill-transparent text-zen-border/60 dark:text-zen-dark-border scale-90'
+                    }`}
+                  />
+                ))}
+              </div>
+
               {streak > 1 && (
                 <div className="flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-amber-500/15 border border-amber-500/30 text-amber-600 dark:text-amber-400 font-bold text-2xs animate-pulse">
                   <Flame className="w-3 h-3 fill-current" />
                   <span>x{streak}</span>
                 </div>
               )}
+
               <span className="font-mono text-zen-text dark:text-zen-dark-text">
                 {formatTime(timerSeconds)}
               </span>
@@ -501,6 +568,8 @@ export default function KanaPuzzle({ defaultScriptMode = 'hiragana' }) {
         <div className={`zen-card p-4 sm:p-5 rounded-3xl border-2 transition-all duration-300 flex items-center justify-between gap-4 ${
           isSuccess 
             ? 'bg-emerald-500/10 dark:bg-emerald-500/15 border-emerald-500/60 shadow-zen-lg scale-102' 
+            : isFailed
+            ? 'bg-amber-500/10 dark:bg-amber-500/15 border-amber-500/60 shadow-zen-md'
             : isError 
             ? 'bg-rose-500/10 dark:bg-rose-500/15 border-rose-500/60 animate-shake' 
             : 'bg-zen-surface-lowest dark:bg-zen-dark-surface border-zen-border/40 dark:border-zen-dark-border shadow-zen-md'
@@ -513,7 +582,7 @@ export default function KanaPuzzle({ defaultScriptMode = 'hiragana' }) {
               <button
                 type="button"
                 onClick={() => playKanaSound(currentWord.kana)}
-                className="p-1.5 rounded-lg bg-zen-primary/10 dark:bg-zen-dark-primary/20 text-zen-primary dark:text-zen-dark-primary hover:scale-110 transition-transform"
+                className="p-1.5 rounded-lg bg-zen-primary/10 dark:bg-zen-dark-primary/20 text-zen-primary dark:text-zen-dark-primary hover:scale-110 transition-transform cursor-pointer"
                 title="Ascolta pronuncia giapponese"
               >
                 <Volume2 className="w-3.5 h-3.5" />
@@ -558,11 +627,21 @@ export default function KanaPuzzle({ defaultScriptMode = 'hiragana' }) {
         <div className="space-y-2">
           <div className="flex items-center justify-between text-2xs font-bold text-zen-text-muted uppercase tracking-wider px-1">
             <span>{t('puzzle.slotsLabel')} ({placedSlots.filter(Boolean).length}/{currentTokens.length})</span>
+            
             {isError && (
-              <span className="text-rose-500 dark:text-rose-400 font-bold animate-pulse">
-                {t('puzzle.incorrectTryAgain')}
+              <span className="text-rose-500 dark:text-rose-400 font-bold animate-pulse flex items-center gap-1">
+                <AlertCircle className="w-3.5 h-3.5" />
+                {t('puzzle.incorrectTryAgain')} ({attemptsLeft} {t('puzzle.attemptsRemaining')})
               </span>
             )}
+
+            {isFailed && (
+              <span className="text-amber-600 dark:text-amber-400 font-bold flex items-center gap-1">
+                <AlertCircle className="w-3.5 h-3.5" />
+                {t('puzzle.attemptsExhausted')}
+              </span>
+            )}
+
             {isSuccess && (
               <span className="text-emerald-500 dark:text-emerald-400 font-bold flex items-center gap-1">
                 <CheckCircle2 className="w-3.5 h-3.5" /> {t('puzzle.correct')}!
@@ -587,6 +666,8 @@ export default function KanaPuzzle({ defaultScriptMode = 'hiragana' }) {
                     hasTile
                       ? isSuccess
                         ? 'bg-emerald-500 text-white border-emerald-600 shadow-zen-md scale-105'
+                        : isFailed
+                        ? 'bg-amber-500 text-white border-amber-600 shadow-zen-md scale-102'
                         : isError
                         ? 'bg-rose-500/15 border-rose-500 text-rose-600 dark:text-rose-400'
                         : 'bg-zen-primary dark:bg-zen-dark-primary text-white dark:text-zen-dark-on-primary border-zen-primary shadow-zen-sm scale-102'
@@ -619,7 +700,8 @@ export default function KanaPuzzle({ defaultScriptMode = 'hiragana' }) {
               <button
                 type="button"
                 onClick={handleShufflePool}
-                className="p-1.5 rounded-lg bg-zen-surface-lowest dark:bg-zen-dark-surface text-zen-text-muted hover:text-zen-text transition-colors shadow-zen-sm"
+                disabled={isSuccess || isFailed}
+                className="p-1.5 rounded-lg bg-zen-surface-lowest dark:bg-zen-dark-surface text-zen-text-muted hover:text-zen-text transition-colors shadow-zen-sm disabled:opacity-50 cursor-pointer"
                 title={t('puzzle.shuffle')}
               >
                 <Shuffle className="w-3.5 h-3.5" />
@@ -627,7 +709,8 @@ export default function KanaPuzzle({ defaultScriptMode = 'hiragana' }) {
               <button
                 type="button"
                 onClick={handleClearSlots}
-                className="p-1.5 rounded-lg bg-zen-surface-lowest dark:bg-zen-dark-surface text-zen-text-muted hover:text-rose-500 transition-colors shadow-zen-sm"
+                disabled={isSuccess || isFailed}
+                className="p-1.5 rounded-lg bg-zen-surface-lowest dark:bg-zen-dark-surface text-zen-text-muted hover:text-rose-500 transition-colors shadow-zen-sm disabled:opacity-50 cursor-pointer"
                 title={t('puzzle.clearAll')}
               >
                 <Trash2 className="w-3.5 h-3.5" />
@@ -635,7 +718,8 @@ export default function KanaPuzzle({ defaultScriptMode = 'hiragana' }) {
               <button
                 type="button"
                 onClick={handleUseHint}
-                className="p-1.5 rounded-lg bg-zen-surface-lowest dark:bg-zen-dark-surface text-amber-500 hover:text-amber-600 transition-colors shadow-zen-sm flex items-center gap-1 text-3xs font-bold"
+                disabled={isSuccess || isFailed}
+                className="p-1.5 rounded-lg bg-zen-surface-lowest dark:bg-zen-dark-surface text-amber-500 hover:text-amber-600 transition-colors shadow-zen-sm flex items-center gap-1 text-3xs font-bold disabled:opacity-50 cursor-pointer"
                 title={t('puzzle.hint')}
               >
                 <Lightbulb className="w-3.5 h-3.5" />
@@ -654,7 +738,8 @@ export default function KanaPuzzle({ defaultScriptMode = 'hiragana' }) {
                   key={tile.uid}
                   type="button"
                   onClick={() => handleTileClick(tile)}
-                  className="w-13 h-13 sm:w-14 sm:h-14 rounded-2xl bg-zen-surface-lowest dark:bg-zen-dark-surface border-2 border-zen-border/70 dark:border-zen-dark-border text-zen-text dark:text-zen-dark-text font-bold shadow-zen-sm hover:border-zen-primary dark:hover:border-zen-dark-primary hover:scale-108 active:scale-95 transition-all flex items-center justify-center cursor-pointer"
+                  disabled={isSuccess || isFailed}
+                  className="w-13 h-13 sm:w-14 sm:h-14 rounded-2xl bg-zen-surface-lowest dark:bg-zen-dark-surface border-2 border-zen-border/70 dark:border-zen-dark-border text-zen-text dark:text-zen-dark-text font-bold shadow-zen-sm hover:border-zen-primary dark:hover:border-zen-dark-primary hover:scale-108 active:scale-95 transition-all flex items-center justify-center cursor-pointer disabled:opacity-50 disabled:pointer-events-none"
                 >
                   <span className={isKanaToRomaji ? 'font-headline text-sm sm:text-base uppercase tracking-wider' : 'font-kana text-xl sm:text-2xl font-bold text-zen-primary dark:text-zen-dark-primary'}>
                     {displayText}
@@ -676,55 +761,153 @@ export default function KanaPuzzle({ defaultScriptMode = 'hiragana' }) {
 
   // ======================= COMPLETED SCREEN =======================
   if (gameState === 'completed') {
+    const totalWords = wordList.length;
+    const correctWordsCount = totalWords - mistakes.length;
+    const accuracy = totalWords > 0 ? Math.round((correctWordsCount / totalWords) * 100) : 100;
+
     return (
-      <div className="max-w-md mx-auto zen-card p-6 sm:p-8 border-2 border-emerald-500/40 bg-zen-surface-lowest dark:bg-zen-dark-surface text-center space-y-6 animate-fade-in shadow-zen-xl pb-20 xl:pb-8">
-        <div className="w-20 h-20 rounded-3xl bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 mx-auto flex items-center justify-center border-2 border-emerald-500/30 shadow-zen-md">
-          <Trophy className="w-10 h-10" />
-        </div>
-
-        <div>
-          <h2 className="font-headline text-3xl font-bold text-zen-text dark:text-zen-dark-text">
-            {t('puzzle.victoryTitle')}
-          </h2>
-          <p className="text-sm text-zen-text-muted dark:text-zen-dark-text-muted mt-1">
-            {t('puzzle.victorySubtitle')}
-          </p>
-        </div>
-
-        {/* Stats Grid */}
-        <div className="grid grid-cols-3 gap-3">
-          <div className="p-3 rounded-2xl bg-zen-surface-container/50 dark:bg-zen-dark-surface-high border border-zen-border/40">
-            <span className="text-2xs font-bold text-zen-text-muted uppercase">{t('puzzle.statScore')}</span>
-            <div className="text-xl font-bold font-mono text-zen-primary dark:text-zen-dark-primary mt-0.5">{score}</div>
+      <div className="max-w-xl mx-auto space-y-6 pb-20 xl:pb-8 animate-fade-in">
+        {/* Victory Card */}
+        <div className="zen-card p-6 sm:p-8 border-2 border-emerald-500/40 bg-zen-surface-lowest dark:bg-zen-dark-surface text-center space-y-6 shadow-zen-xl">
+          <div className="w-20 h-20 rounded-3xl bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 mx-auto flex items-center justify-center border-2 border-emerald-500/30 shadow-zen-md">
+            <Trophy className="w-10 h-10" />
           </div>
-          <div className="p-3 rounded-2xl bg-zen-surface-container/50 dark:bg-zen-dark-surface-high border border-zen-border/40">
-            <span className="text-2xs font-bold text-zen-text-muted uppercase">{t('puzzle.statTime')}</span>
-            <div className="text-xl font-bold font-mono text-zen-text dark:text-zen-dark-text mt-0.5">{formatTime(timerSeconds)}</div>
+
+          <div>
+            <h2 className="font-headline text-3xl font-bold text-zen-text dark:text-zen-dark-text">
+              {t('puzzle.victoryTitle')}
+            </h2>
+            <p className="text-sm text-zen-text-muted dark:text-zen-dark-text-muted mt-1">
+              {t('puzzle.victorySubtitle')}
+            </p>
           </div>
-          <div className="p-3 rounded-2xl bg-zen-surface-container/50 dark:bg-zen-dark-surface-high border border-zen-border/40">
-            <span className="text-2xs font-bold text-zen-text-muted uppercase">{t('puzzle.statStreak')}</span>
-            <div className="text-xl font-bold font-mono text-amber-500 mt-0.5">x{maxStreak}</div>
+
+          {/* Stats Grid */}
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+            <div className="p-3 rounded-2xl bg-zen-surface-container/50 dark:bg-zen-dark-surface-high border border-zen-border/40">
+              <span className="text-2xs font-bold text-zen-text-muted uppercase">{t('puzzle.statScore')}</span>
+              <div className="text-xl font-bold font-mono text-zen-primary dark:text-zen-dark-primary mt-0.5">{score}</div>
+            </div>
+
+            <div className="p-3 rounded-2xl bg-zen-surface-container/50 dark:bg-zen-dark-surface-high border border-zen-border/40">
+              <span className="text-2xs font-bold text-zen-text-muted uppercase">{t('puzzle.statAccuracy')}</span>
+              <div className="text-xl font-bold font-mono text-emerald-600 dark:text-emerald-400 mt-0.5">{accuracy}%</div>
+            </div>
+
+            <div className="p-3 rounded-2xl bg-zen-surface-container/50 dark:bg-zen-dark-surface-high border border-zen-border/40">
+              <span className="text-2xs font-bold text-zen-text-muted uppercase">{t('puzzle.statMistakes')}</span>
+              <div className="text-xl font-bold font-mono text-rose-500 mt-0.5">{mistakes.length}</div>
+            </div>
+
+            <div className="p-3 rounded-2xl bg-zen-surface-container/50 dark:bg-zen-dark-surface-high border border-zen-border/40">
+              <span className="text-2xs font-bold text-zen-text-muted uppercase">{t('puzzle.statTime')}</span>
+              <div className="text-xl font-bold font-mono text-zen-text dark:text-zen-dark-text mt-0.5">{formatTime(timerSeconds)}</div>
+            </div>
+          </div>
+
+          <div className="space-y-3 pt-2">
+            <button
+              type="button"
+              onClick={startSession}
+              className="w-full py-3.5 rounded-2xl bg-zen-primary dark:bg-zen-dark-primary hover:bg-zen-primary-dark dark:hover:bg-zen-dark-primary-hover text-white dark:text-zen-dark-on-primary font-bold text-sm shadow-zen-md transition-all flex items-center justify-center gap-2 cursor-pointer"
+            >
+              <RotateCcw className="w-4 h-4" />
+              <span>{t('puzzle.playAgain')}</span>
+            </button>
+
+            <button
+              type="button"
+              onClick={() => setGameState('setup')}
+              className="w-full py-3 rounded-2xl bg-zen-surface-container dark:bg-zen-dark-surface hover:bg-zen-surface-container-high text-zen-text-muted hover:text-zen-text text-xs font-bold transition-all cursor-pointer"
+            >
+              {t('puzzle.changeSettings')}
+            </button>
           </div>
         </div>
 
-        <div className="space-y-3 pt-2">
-          <button
-            type="button"
-            onClick={startSession}
-            className="w-full py-3.5 rounded-2xl bg-zen-primary dark:bg-zen-dark-primary hover:bg-zen-primary-dark dark:hover:bg-zen-dark-primary-hover text-white dark:text-zen-dark-on-primary font-bold text-sm shadow-zen-md transition-all flex items-center justify-center gap-2"
-          >
-            <RotateCcw className="w-4 h-4" />
-            <span>{t('puzzle.playAgain')}</span>
-          </button>
+        {/* ================= Mistakes Review Section ================= */}
+        {mistakes.length > 0 ? (
+          <div className="zen-card p-5 sm:p-6 border border-zen-border/40 dark:border-zen-dark-border bg-zen-surface-lowest dark:bg-zen-dark-surface space-y-4">
+            <div className="flex items-center gap-2 border-b border-zen-border/30 dark:border-zen-dark-border/40 pb-3">
+              <AlertCircle className="w-5 h-5 text-rose-500" />
+              <h3 className="font-headline text-lg font-bold text-zen-text dark:text-zen-dark-text">
+                {t('puzzle.reviewTitle')} ({mistakes.length})
+              </h3>
+            </div>
 
-          <button
-            type="button"
-            onClick={() => setGameState('setup')}
-            className="w-full py-3 rounded-2xl bg-zen-surface-container dark:bg-zen-dark-surface hover:bg-zen-surface-container-high text-zen-text-muted hover:text-zen-text text-xs font-bold transition-all"
-          >
-            {t('puzzle.changeSettings')}
-          </button>
-        </div>
+            <div className="space-y-3">
+              {mistakes.map((item, idx) => {
+                const isKanaToRomaji = item.gameMode === 'kana-to-romaji';
+
+                return (
+                  <div
+                    key={`mistake-${idx}-${item.word.id}`}
+                    className="p-3.5 sm:p-4 rounded-2xl bg-zen-surface-container/30 dark:bg-zen-dark-surface-high/30 border border-zen-border/40 dark:border-zen-dark-border flex items-center justify-between gap-3"
+                  >
+                    <div className="min-w-0 flex-1 space-y-1.5">
+                      <div className="flex items-center gap-2">
+                        <span className="text-3xs font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-zen-surface-container dark:bg-zen-dark-surface text-zen-text-muted">
+                          {item.word.script}
+                        </span>
+                        <span className="text-xs font-bold text-zen-text-muted">
+                          {lang === 'it' ? item.word.italian : item.word.english}
+                        </span>
+                        <button
+                          type="button"
+                          onClick={() => playKanaSound(item.word.kana)}
+                          className="p-1 rounded-lg bg-zen-primary/10 dark:bg-zen-dark-primary/20 text-zen-primary dark:text-zen-dark-primary hover:scale-110 transition-transform cursor-pointer ml-auto"
+                          title="Ascolta pronuncia"
+                        >
+                          <Volume2 className="w-3.5 h-3.5" />
+                        </button>
+                      </div>
+
+                      <div className="flex items-baseline gap-2">
+                        <span className="font-kana text-2xl font-bold text-zen-primary dark:text-zen-dark-primary">
+                          {item.word.kana}
+                        </span>
+                        <span className="text-sm font-bold font-headline text-zen-text dark:text-zen-dark-text">
+                          {item.word.romaji}
+                        </span>
+                      </div>
+
+                      {/* Correct syllable sequence tokens */}
+                      <div className="flex items-center gap-1.5 pt-0.5 flex-wrap">
+                        <span className="text-3xs font-bold text-zen-text-muted uppercase mr-1">
+                          {t('puzzle.correctSequence')}:
+                        </span>
+                        {item.tokens.map((tok, tIdx) => (
+                          <span
+                            key={`tok-${tIdx}`}
+                            className="px-2 py-0.5 rounded-lg bg-emerald-500/15 border border-emerald-500/30 text-emerald-700 dark:text-emerald-400 text-xs font-bold"
+                          >
+                            {isKanaToRomaji ? tok.romaji.toUpperCase() : tok.kana}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Word illustration */}
+                    <div className="shrink-0">
+                      <VocabIllustration
+                        id={item.word.id}
+                        keyword={item.word.imageKeyword}
+                        alt={item.word.english}
+                        className="w-16 h-16 rounded-xl bg-zen-surface-lowest dark:bg-zen-dark-surface p-1 shadow-sm"
+                        iconClassName="w-8 h-8"
+                      />
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        ) : (
+          <div className="zen-card p-5 border border-emerald-500/30 bg-emerald-500/5 text-center flex items-center justify-center gap-2 text-sm font-bold text-emerald-600 dark:text-emerald-400">
+            <Sparkles className="w-4 h-4" />
+            <span>{t('puzzle.noMistakes')}</span>
+          </div>
+        )}
       </div>
     );
   }
