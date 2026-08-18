@@ -236,11 +236,11 @@ export default function StructuredLessons({ scriptMode, updateStats }) {
             </div>
 
             {/* Track 2: Dakuten & Handakuten */}
-            <div className="zen-card p-6 sm:p-7 border-2 border-amber-500/40 dark:border-amber-500/50 bg-zen-surface-lowest dark:bg-zen-dark-surface shadow-zen-md hover:shadow-zen-lg transition-all rounded-3xl group">
+            <div className="zen-card p-6 sm:p-7 border-2 border-zen-primary/40 dark:border-zen-dark-primary/50 bg-zen-surface-lowest dark:bg-zen-dark-surface shadow-zen-md hover:shadow-zen-lg transition-all rounded-3xl group">
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
                 <div className="space-y-3 flex-1">
                   <div className="flex flex-wrap items-center gap-2">
-                    <span className="px-3 py-1 rounded-full bg-amber-500/15 text-amber-600 dark:text-amber-400 text-xs font-bold font-mono">
+                    <span className="px-3 py-1 rounded-full bg-zen-primary/10 dark:bg-zen-dark-primary/20 text-zen-primary dark:text-zen-dark-primary text-xs font-bold font-mono">
                       {t('lessons.trackDakutenBadge') || '5 Giorni • 25 Suoni Sonori'}
                     </span>
                     <span className="px-2.5 py-0.5 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-600 dark:text-emerald-400 text-2xs font-bold">
@@ -252,10 +252,10 @@ export default function StructuredLessons({ scriptMode, updateStats }) {
                   </div>
 
                   <div>
-                    <h4 className="font-headline text-2xl font-bold text-zen-text dark:text-zen-dark-text group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors">
+                    <h4 className="font-headline text-2xl font-bold text-zen-text dark:text-zen-dark-text group-hover:text-zen-primary dark:group-hover:text-zen-dark-primary transition-colors">
                       {t('lessons.trackDakutenTitle') || 'Dakuten & Handakuten'}
                     </h4>
-                    <p className="text-sm font-semibold text-amber-600 dark:text-amber-400 mt-0.5">
+                    <p className="text-sm font-semibold text-zen-primary dark:text-zen-dark-primary mt-0.5">
                       {t('lessons.trackDakutenSubtitle') || 'Suoni sonori e semi-sonori (゛ e ゜)'}
                     </p>
                     <p className="text-xs text-zen-text-muted dark:text-zen-dark-text-muted mt-2 leading-relaxed">
@@ -266,7 +266,7 @@ export default function StructuredLessons({ scriptMode, updateStats }) {
                   {/* Features Mini-badges */}
                   <div className="flex flex-wrap gap-2 pt-1 text-2xs font-bold text-zen-text-muted dark:text-zen-dark-text-muted">
                     <span className="flex items-center gap-1 bg-zen-surface-container/60 dark:bg-zen-dark-surface-high/60 px-2.5 py-1 rounded-lg">
-                      <Zap className="w-3 h-3 text-amber-500" /> Confronto Fonetico
+                      <Zap className="w-3 h-3 text-zen-primary" /> Confronto Fonetico
                     </span>
                     <span className="flex items-center gap-1 bg-zen-surface-container/60 dark:bg-zen-dark-surface-high/60 px-2.5 py-1 rounded-lg">
                       <Layers className="w-3 h-3 text-zen-secondary" /> Flashcards
@@ -291,7 +291,7 @@ export default function StructuredLessons({ scriptMode, updateStats }) {
                   <button
                     type="button"
                     onClick={() => openCourse('course-dakuten')}
-                    className="py-3 px-5 rounded-2xl bg-amber-500 hover:bg-amber-600 dark:bg-amber-500 dark:hover:bg-amber-600 text-white font-bold text-xs shadow-zen-md hover:scale-105 active:scale-95 transition-all flex items-center gap-2 cursor-pointer shrink-0"
+                    className="py-3 px-5 rounded-2xl bg-zen-primary dark:bg-zen-dark-primary hover:bg-zen-primary-dark dark:hover:bg-zen-dark-primary-hover text-white dark:text-zen-dark-on-primary font-bold text-xs shadow-zen-md hover:scale-105 active:scale-95 transition-all flex items-center gap-2 cursor-pointer shrink-0"
                   >
                     <span>{lessonIdDakuten > 1 ? `${t('lessons.continueCourse')} ${lessonIdDakuten}` : t('lessons.startCourse')}</span>
                     <ArrowRight className="w-4 h-4" />
@@ -403,9 +403,7 @@ export default function StructuredLessons({ scriptMode, updateStats }) {
               onClick={() => setStep(index)}
               className={`rounded-xl px-2 py-2 text-2xs font-bold sm:text-xs transition-all cursor-pointer ${
                 step === index
-                  ? isDakutenMode
-                    ? 'bg-amber-500 text-white shadow-zen-sm scale-102 font-bold'
-                    : 'bg-zen-primary text-white dark:bg-zen-dark-primary dark:text-zen-dark-on-primary shadow-zen-sm scale-102'
+                  ? 'bg-zen-primary text-white dark:bg-zen-dark-primary dark:text-zen-dark-on-primary shadow-zen-sm scale-102'
                   : 'text-zen-text-muted hover:text-zen-text dark:text-zen-dark-text-muted'
               }`}
             >
@@ -422,13 +420,13 @@ export default function StructuredLessons({ scriptMode, updateStats }) {
           {isDakutenMode && activeLesson.theory && (() => {
             const theoryData = activeLesson.theory[lang] || activeLesson.theory.it;
             return (
-              <div className="zen-card p-5 sm:p-6 rounded-3xl border-2 border-amber-500/30 dark:border-amber-500/40 bg-gradient-to-br from-amber-500/5 via-zen-surface-lowest to-amber-500/10 dark:from-amber-500/10 dark:via-zen-dark-surface dark:to-amber-500/15 shadow-zen-md space-y-4">
-                <div className="flex items-center gap-3 text-amber-600 dark:text-amber-400">
-                  <div className="p-2.5 rounded-2xl bg-amber-500/15 border border-amber-500/30 shadow-sm">
+              <div className="zen-card p-5 sm:p-6 rounded-3xl border border-zen-border/60 dark:border-zen-dark-border bg-zen-surface-lowest dark:bg-zen-dark-surface shadow-zen-md space-y-4">
+                <div className="flex items-center gap-3 text-zen-primary dark:text-zen-dark-primary">
+                  <div className="p-2.5 rounded-2xl bg-zen-primary/10 dark:bg-zen-dark-primary/20 border border-zen-primary/20 shadow-sm">
                     <Zap className="w-5 h-5 fill-current" />
                   </div>
                   <div>
-                    <span className="text-3xs font-bold uppercase tracking-wider text-amber-600/80 dark:text-amber-400/80">
+                    <span className="text-3xs font-bold uppercase tracking-wider text-zen-primary/80 dark:text-zen-dark-primary/80">
                       {lang === 'it' ? 'Guida Teorica & Fonetica' : 'Theory & Phonetics Guide'}
                     </span>
                     <h3 className="font-headline text-lg sm:text-xl font-bold text-zen-text dark:text-zen-dark-text">
@@ -446,9 +444,9 @@ export default function StructuredLessons({ scriptMode, updateStats }) {
                     {theoryData.points.map((pt, idx) => (
                       <div 
                         key={idx}
-                        className="px-3.5 py-2 rounded-xl bg-zen-surface-lowest/80 dark:bg-zen-dark-surface-high/60 border border-amber-500/20 text-xs text-zen-text dark:text-zen-dark-text font-semibold flex items-center gap-2.5 shadow-2xs"
+                        className="px-3.5 py-2 rounded-xl bg-zen-surface-container/40 dark:bg-zen-dark-surface-high/60 border border-zen-border/40 text-xs text-zen-text dark:text-zen-dark-text font-semibold flex items-center gap-2.5 shadow-2xs"
                       >
-                        <span className="w-2 h-2 rounded-full bg-amber-500 shrink-0" />
+                        <span className="w-2 h-2 rounded-full bg-zen-primary shrink-0" />
                         <span>{pt}</span>
                       </div>
                     ))}
@@ -456,7 +454,7 @@ export default function StructuredLessons({ scriptMode, updateStats }) {
                 )}
 
                 {theoryData.tip && (
-                  <div className="p-3.5 rounded-2xl bg-amber-500/10 dark:bg-amber-500/20 border border-amber-500/30 text-2xs sm:text-xs text-amber-900 dark:text-amber-200 leading-relaxed font-medium">
+                  <div className="p-3.5 rounded-2xl bg-zen-primary/10 dark:bg-zen-dark-primary/20 border border-zen-primary/20 text-2xs sm:text-xs text-zen-text dark:text-zen-dark-text leading-relaxed font-medium">
                     {theoryData.tip}
                   </div>
                 )}
@@ -497,7 +495,7 @@ export default function StructuredLessons({ scriptMode, updateStats }) {
                       className="flex flex-col items-center group my-1 cursor-pointer"
                       title="Ascolta suono modificato"
                     >
-                      <span className="font-kana text-6xl font-extrabold text-amber-600 dark:text-amber-400 group-hover:scale-105 transition-transform">
+                      <span className="font-kana text-6xl font-extrabold text-zen-primary dark:text-zen-dark-primary group-hover:scale-105 transition-transform">
                         {item.char}
                       </span>
                       <span className="mt-2 font-bold font-headline text-base text-zen-text dark:text-zen-dark-text uppercase tracking-wider">
@@ -509,7 +507,7 @@ export default function StructuredLessons({ scriptMode, updateStats }) {
                     <button
                       type="button"
                       onClick={() => playKanaSound(item.char)}
-                      className="w-full mt-2 py-1.5 rounded-xl bg-amber-500/10 dark:bg-amber-500/20 text-amber-600 dark:text-amber-400 text-3xs font-bold flex items-center justify-center gap-1 hover:bg-amber-500/20 cursor-pointer transition-colors"
+                      className="w-full mt-2 py-1.5 rounded-xl bg-zen-primary/10 dark:bg-zen-dark-primary/20 text-zen-primary dark:text-zen-dark-primary text-3xs font-bold flex items-center justify-center gap-1 hover:bg-zen-primary/20 cursor-pointer transition-colors"
                     >
                       <Volume2 className="w-3.5 h-3.5" />
                       <span>{lang === 'it' ? 'Ascolta' : 'Play'}</span>
@@ -549,7 +547,7 @@ export default function StructuredLessons({ scriptMode, updateStats }) {
             }}
             className="flex w-full flex-col items-center cursor-pointer group"
           >
-            <span className={`font-kana text-9xl font-bold group-hover:scale-105 transition-transform ${isDakutenMode ? 'text-amber-600 dark:text-amber-400' : 'text-zen-primary dark:text-zen-dark-primary'}`}>
+            <span className="font-kana text-9xl font-bold group-hover:scale-105 transition-transform text-zen-primary dark:text-zen-dark-primary">
               {flipped ? (currentKana.cleanRomaji || currentKana.romaji)?.toUpperCase() : currentKana.char}
             </span>
             <span className="mt-8 text-xs font-bold text-zen-text-muted dark:text-zen-dark-text-muted uppercase tracking-wider">
@@ -590,9 +588,7 @@ export default function StructuredLessons({ scriptMode, updateStats }) {
                 onClick={() => setCardIndex(index)}
                 className={`rounded-2xl px-4 py-2.5 font-kana text-2xl transition-all cursor-pointer ${
                   currentKana.romaji === item.romaji
-                    ? isDakutenMode
-                      ? 'bg-amber-500 text-white shadow-zen-sm scale-105 font-bold'
-                      : 'bg-zen-primary text-white dark:bg-zen-dark-primary dark:text-zen-dark-on-primary shadow-zen-sm scale-105'
+                    ? 'bg-zen-primary text-white dark:bg-zen-dark-primary dark:text-zen-dark-on-primary shadow-zen-sm scale-105'
                     : 'bg-zen-surface-container text-zen-text dark:bg-zen-dark-surface-high hover:scale-102'
                 }`}
               >
@@ -652,7 +648,7 @@ export default function StructuredLessons({ scriptMode, updateStats }) {
               </div>
 
               <div className="py-4">
-                <span className={`font-kana text-8xl font-bold ${isDakutenMode ? 'text-amber-600 dark:text-amber-400' : 'text-zen-primary dark:text-zen-dark-primary'}`}>
+                <span className="font-kana text-8xl font-bold text-zen-primary dark:text-zen-dark-primary">
                   {isKanaQuiz ? activeKana[quizIndex]?.char : quizWord?.kana}
                 </span>
                 <p className="text-xs text-zen-text-muted mt-2 font-medium">
@@ -697,9 +693,7 @@ export default function StructuredLessons({ scriptMode, updateStats }) {
                   <button
                     type="button"
                     onClick={() => changeLesson(activeLesson.id + 1)}
-                    className={`rounded-xl px-5 py-2.5 text-xs font-bold text-white shadow-zen-sm hover:scale-105 transition-all cursor-pointer ${
-                      isDakutenMode ? 'bg-amber-500 hover:bg-amber-600' : 'bg-zen-primary dark:bg-zen-dark-primary dark:text-zen-dark-on-primary'
-                    }`}
+                    className="rounded-xl px-5 py-2.5 text-xs font-bold text-white shadow-zen-sm hover:scale-105 transition-all cursor-pointer bg-zen-primary dark:bg-zen-dark-primary dark:text-zen-dark-on-primary"
                   >
                     {lang === 'it' ? `Passa a Giorno ${activeLesson.id + 1} →` : `Next: Day ${activeLesson.id + 1} →`}
                   </button>
