@@ -51,23 +51,47 @@ export default function Vocabulary() {
       </div>
 
       <p className="text-sm font-semibold text-zen-text-muted dark:text-zen-dark-text-muted">{visibleWords.length} {t('vocabulary.showingWords')}</p>
-      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {visibleWords.map((word) => {
           return (
-            <button key={word.id} onClick={() => playKanaSound(word.kana)} className="zen-card zen-card-active flex min-h-44 flex-col rounded-2xl border border-zen-border/40 p-5 text-left dark:border-zen-dark-border bg-zen-surface-lowest dark:bg-zen-dark-surface group">
-              <div className="flex items-start justify-between">
-                <span className="rounded-full bg-zen-surface-container px-2.5 py-1 text-xs-plus font-bold capitalize text-zen-text-muted dark:bg-zen-dark-surface-high dark:text-zen-dark-text-muted">{word.script}</span>
-                <VocabIllustration id={word.id} keyword={word.imageKeyword} alt={word.english} className="w-14 h-14" iconClassName="w-7 h-7" />
+            <button 
+              key={word.id} 
+              onClick={() => playKanaSound(word.kana)} 
+              className="zen-card zen-card-active flex flex-col justify-between rounded-2xl border border-zen-border/40 p-4 sm:p-5 text-left dark:border-zen-dark-border bg-zen-surface-lowest dark:bg-zen-dark-surface group relative overflow-hidden transition-all duration-200 hover:shadow-zen-md min-h-[160px]"
+            >
+              {/* Top Row: Script badge + Audio volume icon */}
+              <div className="flex items-center justify-between w-full mb-2">
+                <span className="rounded-full bg-zen-surface-container px-2.5 py-0.5 text-2xs sm:text-xs-plus font-bold capitalize text-zen-text-muted dark:bg-zen-dark-surface-high dark:text-zen-dark-text-muted">
+                  {word.script}
+                </span>
+                <Volume2 className="h-4 w-4 sm:h-5 sm:w-5 text-zen-primary/70 dark:text-zen-dark-primary/70 group-hover:text-zen-primary dark:group-hover:text-zen-dark-primary group-hover:scale-110 transition-all" />
               </div>
-              <div className="mt-auto flex items-end justify-between gap-3">
-                <div>
-                  <div className="font-kana text-4xl font-bold text-zen-primary dark:text-zen-dark-primary group-hover:scale-102 transition-transform">{word.kana}</div>
-                  <div className="mt-1 text-sm font-semibold text-zen-text dark:text-zen-dark-text">{word.romaji}</div>
-                  <div className="mt-1 text-xs text-zen-text-muted dark:text-zen-dark-text-muted">
+
+              {/* Middle Body: Left Text Info + Right Scalable Large Illustration */}
+              <div className="flex items-center justify-between gap-3 sm:gap-4 my-auto w-full">
+                {/* Left Info: Kana + Romaji + Translation */}
+                <div className="min-w-0 flex-1 space-y-1">
+                  <div className="font-kana text-3xl sm:text-4xl font-bold text-zen-primary dark:text-zen-dark-primary group-hover:scale-102 transition-transform leading-tight truncate">
+                    {word.kana}
+                  </div>
+                  <div className="text-sm font-bold font-headline text-zen-text dark:text-zen-dark-text tracking-wide">
+                    {word.romaji}
+                  </div>
+                  <div className="text-xs text-zen-text-muted dark:text-zen-dark-text-muted font-medium truncate">
                     {lang === 'it' ? `${word.italian} • ${word.english}` : `${word.english} • ${word.italian}`}
                   </div>
                 </div>
-                <Volume2 className="h-5 w-5 shrink-0 text-zen-primary dark:text-zen-dark-primary opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all" />
+
+                {/* Right: Generous Scalable Illustration Box */}
+                <div className="shrink-0 flex items-center justify-center">
+                  <VocabIllustration 
+                    id={word.id} 
+                    keyword={word.imageKeyword} 
+                    alt={word.english} 
+                    className="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 rounded-2xl bg-zen-surface-container/30 dark:bg-zen-dark-surface-high/30 p-1 group-hover:scale-105 transition-transform duration-300 shadow-sm" 
+                    iconClassName="w-10 h-10 sm:w-12 sm:h-12" 
+                  />
+                </div>
               </div>
             </button>
           );
