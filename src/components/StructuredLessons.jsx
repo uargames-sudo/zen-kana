@@ -30,27 +30,44 @@ import KanaDrawingPad from './KanaDrawingPad';
 import VocabIllustration from './common/VocabIllustration';
 import { useLanguage } from '../context/LanguageContext';
 
-function HighlightedKana({ text, lesson, scriptMode }) {
+function HighlightedKana({ text = '', targetChars = new Set() }) {
+  const elements = [];
+  let i = 0;
+  while (i < text.length) {
+    const pair = text.slice(i, i + 2);
+    if (targetChars.has(pair)) {
+      elements.push({ str: pair, isTarget: true, key: `${pair}-${i}` });
+      i += 2;
+      continue;
+    }
+
+    const single = text[i];
+    const isTarget = targetChars.has(single);
+    elements.push({ str: single, isTarget, key: `${single}-${i}` });
+    i += 1;
+  }
+
   return (
-    <span className="font-kana text-3xl font-bold">
-      {Array.from(text).map((character, index) => {
-        const type = kanaHighlightType(character, lesson, scriptMode);
-        return (
+    <div className="font-kana text-2xl sm:text-3xl font-extrabold flex items-center flex-wrap gap-1 leading-none py-0.5">
+      {elements.map((item) =>
+        item.isTarget ? (
           <span
-            key={`${character}-${index}`}
-            className={
-              type === 'new'
-                ? 'text-zen-secondary dark:text-zen-dark-secondary'
-                : type === 'known'
-                ? 'text-zen-primary dark:text-zen-dark-primary'
-                : 'text-zen-text-muted dark:text-zen-dark-text-muted'
-            }
+            key={item.key}
+            className="text-zen-primary dark:text-zen-dark-primary font-black bg-zen-primary/15 dark:bg-zen-dark-primary/25 px-1.5 py-0.5 rounded-xl border-2 border-zen-primary/60 dark:border-zen-dark-primary/70 shadow-xs inline-flex items-center justify-center scale-105"
+            title="Carattere studiato in questa lezione"
           >
-            {character}
+            {item.str}
           </span>
-        );
-      })}
-    </span>
+        ) : (
+          <span
+            key={item.key}
+            className="text-zen-primary/80 dark:text-zen-dark-primary/80 font-bold inline-flex items-center justify-center"
+          >
+            {item.str}
+          </span>
+        )
+      )}
+    </div>
   );
 }
 
@@ -92,6 +109,7 @@ export default function StructuredLessons({ scriptMode, updateStats }) {
   const activeLesson = isDakutenMode ? lessonDakuten : lesson5Kana;
   const activeKana = isDakutenMode ? kanaDakuten : kana5Kana;
   const activeVocabulary = isDakutenMode ? vocabularyDakuten : vocabulary5Kana;
+  const targetKanaChars = useMemo(() => new Set(activeKana.map((k) => k.char).filter(Boolean)), [activeKana]);
 
   const currentKana = activeKana[cardIndex % Math.max(activeKana.length, 1)] || {};
   const currentWord = activeVocabulary[vocabIndex % Math.max(activeVocabulary.length, 1)];
@@ -625,7 +643,7 @@ export default function StructuredLessons({ scriptMode, updateStats }) {
                 className="flex items-center justify-between rounded-2xl border border-zen-border/40 p-3.5 sm:p-4 text-left dark:border-zen-dark-border bg-zen-surface-container/20 dark:bg-zen-dark-surface-high/30 hover:border-zen-primary dark:hover:border-zen-dark-primary hover:shadow-zen-sm transition-all group cursor-pointer"
               >
                 <div className="space-y-1 min-w-0 flex-1 pr-3">
-                  <HighlightedKana text={word.kana} lesson={activeLesson} scriptMode={scriptMode} />
+                  <HighlightedKana text={word.kana} targetChars={targetKanaChars} />
                   <div className="text-sm font-bold font-headline text-zen-text dark:text-zen-dark-text">{word.romaji}</div>
                   <div className="text-xs text-zen-text-muted dark:text-zen-dark-text-muted capitalize">
                     {lang === 'it' ? word.italian : word.english}
