@@ -38,22 +38,17 @@ export function getAllowedKana(lesson, scriptMode) {
 
 const isKanaCharacter = (character) => /[\u3040-\u309f\u30a0-\u30ff]/.test(character) && character !== 'ー';
 
-export function getLessonVocabulary(lesson, scriptMode, minimum = 6) {
-  const allowedKana = getAllowedKana(lesson, scriptMode);
+export function getLessonVocabulary(lesson, scriptMode) {
+  const property = scriptMode === 'katakana' ? 'katakana' : 'hiragana';
+  const targetChars = new Set(lesson.romaji.map((romaji) => kanaByRomaji.get(romaji)?.[property]).filter(Boolean));
   const candidates = VOCABULARY.filter((word) => word.script === scriptMode);
-  const strict = candidates.filter((word) => Array.from(word.kana).filter(isKanaCharacter).every((character) => allowedKana.has(character)));
 
-  if (strict.length >= minimum) return strict;
+  // Only words containing at least one character taught in this lesson (max 10)
+  const matching = candidates.filter((word) => 
+    Array.from(word.kana).some((char) => targetChars.has(char))
+  );
 
-  const fallback = candidates
-    .filter((word) => !strict.some((strictWord) => strictWord.id === word.id))
-    .filter((word) => Array.from(word.kana).some((character) => allowedKana.has(character)))
-    .sort((a, b) => {
-      const countKnown = (word) => Array.from(word.kana).filter((character) => allowedKana.has(character)).length;
-      return countKnown(b) - countKnown(a);
-    });
-
-  return [...strict, ...fallback].slice(0, Math.max(minimum, 12));
+  return matching.slice(0, 10);
 }
 
 export function kanaHighlightType(character, lesson, scriptMode) {
@@ -273,33 +268,15 @@ export function getDakutenLessonKana(lesson, scriptMode) {
   }).filter((item) => item.char);
 }
 
-export function getDakutenAllowedKana(lesson, scriptMode) {
-  const property = scriptMode === 'katakana' ? 'katakana' : 'hiragana';
-  const basicKana = new Set(HIRAGANA_BASIC.map(item => item[property]).filter(Boolean));
-  const cumulativeDakuten = new Set(lesson.cumulativeRomaji.map(romaji => dakutenByRomaji.get(romaji)?.[property]).filter(Boolean));
-  return new Set([...basicKana, ...cumulativeDakuten]);
-}
-
-export function getDakutenLessonVocabulary(lesson, scriptMode, minimum = 6) {
-  const allowedKana = getDakutenAllowedKana(lesson, scriptMode);
+export function getDakutenLessonVocabulary(lesson, scriptMode) {
   const property = scriptMode === 'katakana' ? 'katakana' : 'hiragana';
   const targetDakutenChars = new Set(lesson.romaji.map(romaji => dakutenByRomaji.get(romaji)?.[property]).filter(Boolean));
-
   const candidates = VOCABULARY.filter((word) => word.script === scriptMode);
-  
-  // Prefer words that contain the day's specific dakuten characters
-  const containingTarget = candidates.filter(word => 
+
+  // Strictly words containing AT LEAST ONE dakuten/handakuten character of the current lesson (max 10)
+  const matching = candidates.filter(word => 
     Array.from(word.kana).some(char => targetDakutenChars.has(char))
   );
 
-  if (containingTarget.length >= minimum) {
-    return containingTarget.slice(0, 12);
-  }
-
-  // Fallback to words containing any allowed characters
-  const generalAllowed = candidates.filter(word => 
-    Array.from(word.kana).filter(isKanaCharacter).every(char => allowedKana.has(char))
-  );
-
-  return [...new Set([...containingTarget, ...generalAllowed])].slice(0, Math.max(minimum, 10));
+  return matching.slice(0, 10);
 }
