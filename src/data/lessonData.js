@@ -591,3 +591,212 @@ export function getYoonLessonVocabulary(lesson, scriptMode) {
   return combined.slice(0, 10);
 }
 
+
+// ====================================================
+// 4. SPECIAL PHONETICS COURSE (3 Days)
+// ====================================================
+const PHONETICS_SYLLABLES = [
+  {
+    id: 1,
+    topic: 'sokuon',
+    hiraKana: [
+      { char: 'っ', cleanRomaji: 'sokuon (っ)', baseChar: 'つ', modifier: 'piccolo', desc: 'Raddoppia consonante' },
+      { char: 'っき', cleanRomaji: 'kki', baseChar: 'き', modifier: 'っ', desc: 'Doppia K' },
+      { char: 'っし', cleanRomaji: 'sshi', baseChar: 'し', modifier: 'っ', desc: 'Doppia S' },
+      { char: 'って', cleanRomaji: 'tte', baseChar: 'て', modifier: 'っ', desc: 'Doppia T' },
+      { char: 'っぷ', cleanRomaji: 'ppu', baseChar: 'ぷ', modifier: 'っ', desc: 'Doppia P' }
+    ],
+    kataKana: [
+      { char: 'ッ', cleanRomaji: 'sokuon (ッ)', baseChar: 'ツ', modifier: 'small', desc: 'Doubles consonant' },
+      { char: 'ッカ', cleanRomaji: 'kka', baseChar: 'カ', modifier: 'ッ', desc: 'Double K' },
+      { char: 'ッシ', cleanRomaji: 'sshi', baseChar: 'シ', modifier: 'ッ', desc: 'Double S' },
+      { char: 'ット', cleanRomaji: 'tto', baseChar: 'ト', modifier: 'ッ', desc: 'Double T' },
+      { char: 'ップ', cleanRomaji: 'ppu', baseChar: 'プ', modifier: 'ッ', desc: 'Double P' }
+    ],
+    titleIt: 'Sokuon (促音): Piccolo っ/ッ e Consonanti Doppie',
+    titleEn: 'Sokuon: Small っ/ッ & Double Consonants',
+    descIt: 'Il salto di 1 battito (glottal stop) che raddoppia la consonante successiva (K, S, T, P).',
+    descEn: 'The 1-beat glottal pause that doubles the following consonant (K, S, T, P).',
+    theory: {
+      it: {
+        title: 'Come funziona il Piccolo っ / ッ (Sokuon)',
+        intro: 'Il piccolo っ (scritto a circa 1/4 della dimensione normale) NON si pronuncia "tsu". Rappresenta una brevissima pausa di silenzio (glottal stop) che raddoppia la consonante successiva!',
+        points: [
+          'き (ki) + っ (pausa) + ぷ (pu) = きっぷ (kippu, "biglietto")',
+          'べ (be) + ッ (pausa) + ド (do) = ベッド (beddo, "letto")',
+          'さ (sa) + ッ (pausa) + カー (kaa) = サッカー (sakkaa, "calcio")',
+          'Si usa prima di consonanti sorde o sonore (K, S, T, P, G, D, B)'
+        ],
+        tip: '💡 Trucco di Ritmo: Trattieni il respiro per un istante prima di pronunciare la consonante successiva. Conta mentalmente 1 battito sulla pausa!'
+      },
+      en: {
+        title: 'How Small っ / ッ (Sokuon) Works',
+        intro: 'Small っ (written at 1/4 size) is NEVER pronounced as "tsu". It creates a tiny glottal stop (a beat of silence) that doubles the subsequent consonant!',
+        points: [
+          'ki + small tsu + pu = kippu ("ticket")',
+          'be + small tsu + do = beddo ("bed")',
+          'sa + small tsu + kaa = sakkaa ("soccer")',
+          'Used strictly before consonants (K, S, T, P, G, D, B)'
+        ],
+        tip: '💡 Rhythm Tip: Hold your breath for half a second before releasing the next consonant. Count 1 distinct beat on the pause!'
+      }
+    }
+  },
+  {
+    id: 2,
+    topic: 'long-vowels',
+    hiraKana: [
+      { char: 'ああ', cleanRomaji: 'aa (ā)', baseChar: 'あ', modifier: 'あ', desc: 'Allungamento A' },
+      { char: 'いい', cleanRomaji: 'ii (ī)', baseChar: 'い', modifier: 'い', desc: 'Allungamento I' },
+      { char: 'うう', cleanRomaji: 'uu (ū)', baseChar: 'う', modifier: 'う', desc: 'Allungamento U' },
+      { char: 'えい', cleanRomaji: 'ee / ei', baseChar: 'え', modifier: 'い', desc: 'Allungamento E con い' },
+      { char: 'おう', cleanRomaji: 'oo / ou', baseChar: 'お', modifier: 'う', desc: 'Allungamento O con う' }
+    ],
+    kataKana: [
+      { char: 'ー', cleanRomaji: 'chōonpu (ー)', baseChar: 'ー', modifier: 'lungo', desc: 'Allunga di 1 mora' },
+      { char: 'アー', cleanRomaji: 'aa', baseChar: 'ア', modifier: 'ー', desc: 'A allungata' },
+      { char: 'イー', cleanRomaji: 'ii', baseChar: 'イ', modifier: 'ー', desc: 'I allungata' },
+      { char: 'ウー', cleanRomaji: 'uu', baseChar: 'ウ', modifier: 'ー', desc: 'U allungata' },
+      { char: 'エー', cleanRomaji: 'ee', baseChar: 'エ', modifier: 'ー', desc: 'E allungata' },
+      { char: 'オー', cleanRomaji: 'oo', baseChar: 'オ', modifier: 'ー', desc: 'O allungata' }
+    ],
+    titleIt: 'Vocali Lunghe (Chōonpu ー & Allungamenti Hiragana)',
+    titleEn: 'Long Vowels (Chōonpu ー & Hiragana Elongations)',
+    descIt: 'Allungamento vocalico a 2 battiti: il trattino ー in Katakana e le regole おう/えい in Hiragana.',
+    descEn: 'Two-beat vowel lengthening: the ー mark in Katakana and おう/えい rules in Hiragana.',
+    theory: {
+      it: {
+        title: 'Regole delle Vocali Lunghe (Chōon)',
+        intro: 'In giapponese la lunghezza delle vocali cambia completamente il significato della parola! In Katakana si usa il trattino orizzontale "ー", mentre in Hiragana si aggiunge una vocale d\'estensione (in particolare U per allungare O, e I per allungare E).',
+        points: [
+          'In Katakana: コーヒー (koohii = caffè), ケーキ (keeki = torta)',
+          'In Hiragana: O si allunga con う (es. たいよう = taiyoo, きょう = kyoo)',
+          'In Hiragana: E si allunga con い (es. せんせい = sensee)',
+          'Coppie minime: おばさん (zia, 4 morae) vs おばあさん (nonna, 5 morae)'
+        ],
+        tip: '💡 Regola d\'Oro: Mantieni la vocale per il doppio del tempo (2 battiti invece di 1). Non interrompere il flusso d\'aria!'
+      },
+      en: {
+        title: 'Rules of Long Vowels (Chōon)',
+        intro: 'In Japanese, vowel length completely changes the meaning of words! Katakana uses the horizontal line "ー", while Hiragana appends extension vowels (specifically U extends O, and I extends E).',
+        points: [
+          'In Katakana: コーヒー (koohii = coffee), ケーキ (keeki = cake)',
+          'In Hiragana: O extends with う (e.g. たいよう = taiyou, きょう = kyou)',
+          'In Hiragana: E extends with い (e.g. せんせい = sensei/sensee)',
+          'Minimal pairs: おばさん (aunt) vs おばあさん (grandmother)'
+        ],
+        tip: '💡 Golden Rule: Hold the vowel sound for exactly twice as long (2 beats instead of 1). Keep air flowing smoothly!'
+      }
+    }
+  },
+  {
+    id: 3,
+    topic: 'particles-n',
+    hiraKana: [
+      { char: 'は', cleanRomaji: 'wa (particella)', baseChar: 'は', modifier: 'particella', desc: 'Letta "WA" come tema' },
+      { char: 'へ', cleanRomaji: 'e (particella)', baseChar: 'へ', modifier: 'particella', desc: 'Letta "E" come direzione' },
+      { char: 'を', cleanRomaji: 'o (particella)', baseChar: 'を', modifier: 'particella', desc: 'Letta "O" come oggetto' },
+      { char: 'ん', cleanRomaji: 'n (mora)', baseChar: 'ん', modifier: 'nasale', desc: 'Consonante autonoma (1 battito)' }
+    ],
+    kataKana: [
+      { char: 'ン', cleanRomaji: 'n (mora)', baseChar: 'ン', modifier: 'nasale', desc: 'Consonante autonoma (1 battito)' },
+      { char: 'アン', cleanRomaji: 'an', baseChar: 'ア', modifier: 'ン', desc: 'A + N' },
+      { char: 'イン', cleanRomaji: 'in', baseChar: 'イ', modifier: 'ン', desc: 'I + N' },
+      { char: 'オン', cleanRomaji: 'on', baseChar: 'オ', modifier: 'ン', desc: 'O + N' }
+    ],
+    titleIt: 'Particelle Speciali & la Nasale Finale (は・へ・を & ん/ン)',
+    titleEn: 'Special Particles & Final Nasal (は・へ・を & ん/ン)',
+    descIt: 'Le eccezioni storiche di pronuncia per le particelle e il comportamento della nasale sillabica.',
+    descEn: 'Historical pronunciation exceptions for particles and syllabic nasal behaviors.',
+    theory: {
+      it: {
+        title: 'Particelle con Pronuncia Speciale e la N finale',
+        intro: 'Tre particelle grammaticali mantengono la loro grafia storica ma cambiano pronuncia quando usate nella frase. Inoltre, "ん / ン" è l\'unica consonante autonoma che vale un intero battito!',
+        points: [
+          'は come particella di tema si legge "WA" (es. こんにちは = konnichiWA)',
+          'へ come particella di moto a luogo si legge "E" (es. とうきょう へ = tokyou E)',
+          'を come particella di complemento oggetto si legge "O" (es. ほん を よむ = hon O yomu)',
+          'ん/ン vale 1 tempo intero e assimila il suono (m/n/ng) prima di B, M, P, K'
+        ],
+        tip: '💡 Attenzione: Si scrive "は" ma si pronuncia "WA" SOLO quando è la particella grammaticale (o in saluti fissi come konnichiwa / konbanwa)!'
+      },
+      en: {
+        title: 'Particles with Special Pronunciation & Final N',
+        intro: 'Three grammatical particles retain historical spelling but change their pronunciation in sentences. Also, "ん / ン" is the only independent consonant with a full beat!',
+        points: [
+          'は as topic particle is pronounced "WA" (e.g. こんにちは = konnichiWA)',
+          'へ as directional particle is pronounced "E" (e.g. とうきょう へ = tokyo E)',
+          'を as direct object particle is pronounced "O" (e.g. ほん を = hon O)',
+          'ん/ン takes a full beat and assimilates (m/n/ng) before B, M, P, K'
+        ],
+        tip: '💡 Note: "は" is pronounced "WA" ONLY when acting as a grammatical particle or in set greetings (konnichiwa / konbanwa)!'
+      }
+    }
+  }
+];
+
+export const PHONETICS_LESSONS = PHONETICS_SYLLABLES.map((item) => ({
+  ...item
+}));
+
+export function getPhoneticsLessonKana(lesson, scriptMode) {
+  const isKatakana = scriptMode === 'katakana';
+  const list = isKatakana ? lesson.kataKana : lesson.hiraKana;
+  return list.map((item) => ({
+    ...item,
+    romaji: item.cleanRomaji
+  }));
+}
+
+const PHONETICS_EXTRA_VOCAB = [
+  { id: 'p_gakkou', kanaH: 'がっこう', kanaK: 'ガッコウ', romaji: 'gakkou', english: 'school', italian: 'scuola', imageKeyword: 'house', topic: 'sokuon' },
+  { id: 'p_zasshi', kanaH: 'ざっし', kanaK: 'ザッシ', romaji: 'zasshi', english: 'magazine', italian: 'rivista', imageKeyword: 'book', topic: 'sokuon' },
+  { id: 'p_kitte', kanaH: 'きって', kanaK: 'キッテ', romaji: 'kitte', english: 'stamp', italian: 'francobollo', imageKeyword: 'letter', topic: 'sokuon' },
+  { id: 'p_ippai', kanaH: 'いっぱい', kanaK: 'イッパイ', romaji: 'ippai', english: 'full', italian: 'pieno', imageKeyword: 'water', topic: 'sokuon' },
+  { id: 'p_konnichiwa', kanaH: 'こんにちは', kanaK: 'コンニチハ', romaji: 'konnichiwa', english: 'hello', italian: 'ciao / buongiorno', imageKeyword: 'friend', topic: 'particles-n' },
+  { id: 'p_arigatou', kanaH: 'ありがとう', kanaK: 'アリガトウ', romaji: 'arigatou', english: 'thank you', italian: 'grazie', imageKeyword: 'heart', topic: 'long-vowels' }
+];
+
+export function getPhoneticsLessonVocabulary(lesson, scriptMode) {
+  const candidates = VOCABULARY.filter((word) => word.script === scriptMode);
+  let vocabMatching = [];
+
+  if (lesson.topic === 'sokuon') {
+    const sokuonChar = scriptMode === 'katakana' ? 'ッ' : 'っ';
+    vocabMatching = candidates.filter(w => w.kana.includes(sokuonChar));
+  } else if (lesson.topic === 'long-vowels') {
+    if (scriptMode === 'katakana') {
+      vocabMatching = candidates.filter(w => w.kana.includes('ー'));
+    } else {
+      vocabMatching = candidates.filter(w => 
+        w.kana.includes('う') || w.kana.includes('い') || w.romaji.includes('ou') || w.romaji.includes('ei')
+      );
+    }
+  } else if (lesson.topic === 'particles-n') {
+    const nChar = scriptMode === 'katakana' ? 'ン' : 'ん';
+    vocabMatching = candidates.filter(w => w.kana.includes(nChar));
+  }
+
+  const extraMatching = PHONETICS_EXTRA_VOCAB
+    .filter(item => item.topic === lesson.topic)
+    .map(item => ({
+      id: item.id,
+      kana: scriptMode === 'katakana' ? item.kanaK : item.kanaH,
+      romaji: item.romaji,
+      english: item.english,
+      italian: item.italian,
+      imageKeyword: item.imageKeyword,
+      script: scriptMode
+    }));
+
+  const combined = [...vocabMatching];
+  extraMatching.forEach(extra => {
+    if (!combined.some(c => c.romaji === extra.romaji || c.kana === extra.kana)) {
+      combined.push(extra);
+    }
+  });
+
+  return combined.slice(0, 10);
+}
+
+

@@ -382,6 +382,40 @@ export const translations = {
       correctSequence: 'Sequenza Corretta',
       playAgain: 'Gioca Ancora',
       changeSettings: 'Cambia Modalità'
+    },
+
+    // Structured Lessons
+    lessons: {
+      title: 'Lezioni Strutturate',
+      subtitle: 'Percorsi di studio guidati passo dopo passo: Kana Base, Suoni Modificati, Suoni Contratti e Regole di Fonetica.',
+      hubBadge: 'Percorsi Didattici',
+      allCourses: 'Tutti i Corsi',
+      backToHub: 'Tutti i Corsi',
+      startCourse: 'Inizia Corso',
+      continueCourse: 'Continua Giorno',
+      comingSoon: 'In Arrivo',
+      day: 'Giorno',
+      reviewLesson: 'Ripassa Lezione',
+      
+      track5KanaTitle: '5 Kana al Giorno',
+      track5KanaSubtitle: 'Sillabario Base Gojūon (五十音)',
+      track5KanaDesc: 'Impara i 46 caratteri fondamentali passo dopo passo: teoria, flashcards, scrittura e quiz finale.',
+      track5KanaBadge: '10 Giorni • 46 Kana Base',
+
+      trackDakutenTitle: 'Dakuten & Handakuten',
+      trackDakutenSubtitle: 'Suoni sonori e semi-sonori (゛ e ゜)',
+      trackDakutenDesc: 'Padroneggia i 25 caratteri modificati (G, Z, D, B, P) suddivisi in 5 giornate tematiche, con confronto visivo tra suono sordo e sonoro.',
+      trackDakutenBadge: '5 Giorni • 25 Suoni Sonori',
+
+      trackYoonTitle: 'Combinazioni Yōon',
+      trackYoonSubtitle: 'Suoni contratti con piccolo ya, yu, yo (ゃ, ゅ, ょ)',
+      trackYoonDesc: 'Padroneggia tutte le 33 combinazioni contratte (K, S, T, N, H, M, R, G, J, B, P) in 6 lezioni con regole di proporzione grafica e pronuncia a tempo unico.',
+      trackYoonBadge: '6 Giorni • 33 Suoni Contratti',
+
+      trackPhoneticsTitle: 'Regole di Fonetica Speciale',
+      trackPhoneticsSubtitle: 'Sokuon (っ/ッ), Allungamenti Vocalici (ー) & Particelle Speciali',
+      trackPhoneticsDesc: 'Padroneggia le 3 regole fondamentali per pronunciare e comprendere il giapponese autentico: consonanti doppie, vocali allungate e particelle storiche.',
+      trackPhoneticsBadge: '3 Giorni • Fonetica & Ritmo',
     }
   },
 
@@ -766,6 +800,40 @@ export const translations = {
       correctSequence: 'Correct Sequence',
       playAgain: 'Play Again',
       changeSettings: 'Change Settings'
+    },
+
+    // Structured Lessons
+    lessons: {
+      title: 'Structured Lessons',
+      subtitle: 'Step-by-step guided learning tracks: Basic Kana, Voiced Sounds, Contracted Sounds, and Phonetics Rules.',
+      hubBadge: 'Curriculum Tracks',
+      allCourses: 'All Courses',
+      backToHub: 'All Courses',
+      startCourse: 'Start Course',
+      continueCourse: 'Continue Day',
+      comingSoon: 'Coming Soon',
+      day: 'Day',
+      reviewLesson: 'Review Lesson',
+      
+      track5KanaTitle: '5 Kana per Day',
+      track5KanaSubtitle: 'Basic Gojūon Syllabary (五十音)',
+      track5KanaDesc: 'Master the 46 foundation characters step by step: theory, flashcards, writing practice, and final verification quiz.',
+      track5KanaBadge: '10 Days • 46 Foundation Kana',
+
+      trackDakutenTitle: 'Dakuten & Handakuten',
+      trackDakutenSubtitle: 'Voiced & Semi-voiced Sounds (゛ & ゜)',
+      trackDakutenDesc: 'Master 25 modified characters (G, Z, D, B, P) across 5 thematic days with side-by-side phonetic contrast.',
+      trackDakutenBadge: '5 Days • 25 Voiced Kana',
+
+      trackYoonTitle: 'Yōon Combinations',
+      trackYoonSubtitle: 'Contracted sounds with small ya, yu, yo (ゃ, ゅ, ょ)',
+      trackYoonDesc: 'Master all 33 contracted combinations (K, S, T, N, H, M, R, G, J, B, P) in 6 lessons with graphic proportion rules.',
+      trackYoonBadge: '6 Days • 33 Contracted Sounds',
+
+      trackPhoneticsTitle: 'Special Phonetics Rules',
+      trackPhoneticsSubtitle: 'Sokuon (っ/ッ), Long Vowels (ー) & Special Particles',
+      trackPhoneticsDesc: 'Master the 3 essential rules for authentic Japanese rhythm and pronunciation: double consonants, elongated vowels, and historical particles.',
+      trackPhoneticsBadge: '3 Days • Phonetics & Rhythm',
     }
   }
 };
