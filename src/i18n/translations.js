@@ -105,8 +105,8 @@ export const translations = {
       tabHandakuten: 'Handakuten (゜)',
       tabYoon: 'Yōon (拗音)',
       tabSmall: 'Piccoli (っ/ー)',
-      tabSokuon: 'Raddoppiamento consonante (っ)',
-      tabChoonpu: 'Allungamento vocalico (ー)',
+      tabSokuon: 'Sokuon (促音)',
+      tabChoonpu: 'Chōonpu (長音符)',
       charDetails: 'Dettagli Carattere',
       exampleWord: 'Parola d\'esempio',
       close: 'Chiudi'
@@ -409,8 +409,8 @@ export const translations = {
       tabHandakuten: 'Handakuten (゜)',
       tabYoon: 'Yōon / Comb.',
       tabSmall: 'Small (っ/ー)',
-      tabSokuon: 'Consonant Doubling (っ)',
-      tabChoonpu: 'Long Vowel Mark (ー)',
+      tabSokuon: 'Sokuon (促音)',
+      tabChoonpu: 'Chōonpu (長音符)',
       charDetails: 'Character Details',
       exampleWord: 'Example Word',
       close: 'Close'
