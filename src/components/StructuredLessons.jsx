@@ -417,54 +417,106 @@ export default function StructuredLessons({ scriptMode, updateStats }) {
 
       {/* Step 0: Teoria & Confronto Visivo / Suono Base vs Sonoro */}
       {step === 0 && (
-        <div className="space-y-4 animate-fade-in">
+        <div className="space-y-5 animate-fade-in">
+          {/* Theory & Explanation Card */}
+          {isDakutenMode && activeLesson.theory && (() => {
+            const theoryData = activeLesson.theory[lang] || activeLesson.theory.it;
+            return (
+              <div className="zen-card p-5 sm:p-6 rounded-3xl border-2 border-amber-500/30 dark:border-amber-500/40 bg-gradient-to-br from-amber-500/5 via-zen-surface-lowest to-amber-500/10 dark:from-amber-500/10 dark:via-zen-dark-surface dark:to-amber-500/15 shadow-zen-md space-y-4">
+                <div className="flex items-center gap-3 text-amber-600 dark:text-amber-400">
+                  <div className="p-2.5 rounded-2xl bg-amber-500/15 border border-amber-500/30 shadow-sm">
+                    <Zap className="w-5 h-5 fill-current" />
+                  </div>
+                  <div>
+                    <span className="text-3xs font-bold uppercase tracking-wider text-amber-600/80 dark:text-amber-400/80">
+                      {lang === 'it' ? 'Guida Teorica & Fonetica' : 'Theory & Phonetics Guide'}
+                    </span>
+                    <h3 className="font-headline text-lg sm:text-xl font-bold text-zen-text dark:text-zen-dark-text">
+                      {theoryData.title}
+                    </h3>
+                  </div>
+                </div>
+
+                <p className="text-xs sm:text-sm text-zen-text/90 dark:text-zen-dark-text/90 leading-relaxed font-medium">
+                  {theoryData.intro}
+                </p>
+
+                {theoryData.points && theoryData.points.length > 0 && (
+                  <div className="grid sm:grid-cols-2 gap-2 pt-1">
+                    {theoryData.points.map((pt, idx) => (
+                      <div 
+                        key={idx}
+                        className="px-3.5 py-2 rounded-xl bg-zen-surface-lowest/80 dark:bg-zen-dark-surface-high/60 border border-amber-500/20 text-xs text-zen-text dark:text-zen-dark-text font-semibold flex items-center gap-2.5 shadow-2xs"
+                      >
+                        <span className="w-2 h-2 rounded-full bg-amber-500 shrink-0" />
+                        <span>{pt}</span>
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                {theoryData.tip && (
+                  <div className="p-3.5 rounded-2xl bg-amber-500/10 dark:bg-amber-500/20 border border-amber-500/30 text-2xs sm:text-xs text-amber-900 dark:text-amber-200 leading-relaxed font-medium">
+                    {theoryData.tip}
+                  </div>
+                )}
+              </div>
+            );
+          })()}
+
+          {/* Kana Comparison Cards */}
           {isDakutenMode ? (
-            <div className="grid gap-3 sm:grid-cols-5">
-              {activeKana.map((item) => (
-                <div
-                  key={item.romaji}
-                  className="zen-card flex flex-col items-center justify-between border border-zen-border/40 p-4 dark:border-zen-dark-border bg-zen-surface-lowest dark:bg-zen-dark-surface shadow-zen-sm rounded-3xl"
-                >
-                  {/* Top Base Comparison Pill */}
-                  <div className="w-full flex items-center justify-between bg-zen-surface-container/40 dark:bg-zen-dark-surface-high/40 px-2.5 py-1 rounded-xl text-3xs font-bold text-zen-text-muted mb-2">
-                    <span>Base</span>
+            <div className="space-y-3">
+              <h4 className="text-xs font-bold text-zen-text-muted dark:text-zen-dark-text-muted uppercase tracking-wider px-1">
+                {lang === 'it' ? 'Confronto Suono Base ➔ Suono Sonoro' : 'Base Sound ➔ Voiced Sound Comparison'}
+              </h4>
+              <div className="grid gap-3 sm:grid-cols-5">
+                {activeKana.map((item) => (
+                  <div
+                    key={item.romaji}
+                    className="zen-card flex flex-col items-center justify-between border border-zen-border/40 p-4 dark:border-zen-dark-border bg-zen-surface-lowest dark:bg-zen-dark-surface shadow-zen-sm rounded-3xl"
+                  >
+                    {/* Top Base Comparison Pill */}
+                    <div className="w-full flex items-center justify-between bg-zen-surface-container/40 dark:bg-zen-dark-surface-high/40 px-2.5 py-1 rounded-xl text-3xs font-bold text-zen-text-muted mb-2">
+                      <span>Base</span>
+                      <button
+                        type="button"
+                        onClick={() => playKanaSound(item.baseChar)}
+                        className="hover:text-zen-primary flex items-center gap-1 cursor-pointer"
+                        title="Ascolta suono base"
+                      >
+                        <span className="font-kana">{item.baseChar}</span> ({item.baseRomaji})
+                        <Volume2 className="w-2.5 h-2.5 opacity-70" />
+                      </button>
+                    </div>
+
+                    {/* Transformed Dakuten Kana */}
                     <button
                       type="button"
-                      onClick={() => playKanaSound(item.baseChar)}
-                      className="hover:text-zen-primary flex items-center gap-1"
-                      title="Ascolta suono base"
+                      onClick={() => playKanaSound(item.char)}
+                      className="flex flex-col items-center group my-1 cursor-pointer"
+                      title="Ascolta suono modificato"
                     >
-                      <span className="font-kana">{item.baseChar}</span> ({item.baseRomaji})
-                      <Volume2 className="w-2.5 h-2.5 opacity-70" />
+                      <span className="font-kana text-6xl font-extrabold text-amber-600 dark:text-amber-400 group-hover:scale-105 transition-transform">
+                        {item.char}
+                      </span>
+                      <span className="mt-2 font-bold font-headline text-base text-zen-text dark:text-zen-dark-text uppercase tracking-wider">
+                        {item.cleanRomaji || item.romaji}
+                      </span>
+                    </button>
+
+                    {/* Audio Button */}
+                    <button
+                      type="button"
+                      onClick={() => playKanaSound(item.char)}
+                      className="w-full mt-2 py-1.5 rounded-xl bg-amber-500/10 dark:bg-amber-500/20 text-amber-600 dark:text-amber-400 text-3xs font-bold flex items-center justify-center gap-1 hover:bg-amber-500/20 cursor-pointer transition-colors"
+                    >
+                      <Volume2 className="w-3.5 h-3.5" />
+                      <span>{lang === 'it' ? 'Ascolta' : 'Play'}</span>
                     </button>
                   </div>
-
-                  {/* Transformed Dakuten Kana */}
-                  <button
-                    type="button"
-                    onClick={() => playKanaSound(item.char)}
-                    className="flex flex-col items-center group my-1 cursor-pointer"
-                    title="Ascolta suono modificato"
-                  >
-                    <span className="font-kana text-6xl font-extrabold text-amber-600 dark:text-amber-400 group-hover:scale-105 transition-transform">
-                      {item.char}
-                    </span>
-                    <span className="mt-2 font-bold font-headline text-base text-zen-text dark:text-zen-dark-text uppercase tracking-wider">
-                      {item.cleanRomaji || item.romaji}
-                    </span>
-                  </button>
-
-                  {/* Audio Button */}
-                  <button
-                    type="button"
-                    onClick={() => playKanaSound(item.char)}
-                    className="w-full mt-2 py-1.5 rounded-xl bg-amber-500/10 dark:bg-amber-500/20 text-amber-600 dark:text-amber-400 text-3xs font-bold flex items-center justify-center gap-1 hover:bg-amber-500/20 cursor-pointer transition-colors"
-                  >
-                    <Volume2 className="w-3.5 h-3.5" />
-                    <span>{lang === 'it' ? 'Ascolta' : 'Play'}</span>
-                  </button>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           ) : (
             <div className="grid gap-4 sm:grid-cols-5 animate-fade-in">
