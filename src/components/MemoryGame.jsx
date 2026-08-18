@@ -218,8 +218,10 @@ export default function MemoryGame() {
 
     const clickedCard = cards[index];
 
-    // Play pronunciation if card has kana
-    if (clickedCard.kana) {
+    // Play pronunciation only for illustration or audio mystery cards
+    // Text cards (kana, kana-char, romaji) do NOT play audio so the player has to read the text
+    const shouldPlayAudio = clickedCard.type === 'illustration' || clickedCard.type === 'audio';
+    if (shouldPlayAudio && clickedCard.kana) {
       playKanaSound(clickedCard.kana);
     }
 
