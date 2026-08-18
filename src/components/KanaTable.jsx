@@ -15,6 +15,7 @@ import {
 import { getKanaExample, getKanaExampleWord } from '../data/kanaData';
 import { playKanaSound } from '../utils/audio';
 import { useLanguage } from '../context/LanguageContext';
+import ContextualTabGuide from './ContextualTabGuide';
 
 export default function KanaTable({ scriptMode }) {
   const { lang, t } = useLanguage();
@@ -107,7 +108,7 @@ export default function KanaTable({ scriptMode }) {
               key={cat.id}
               onClick={() => { setActiveTab(cat.id); setSelectedKana(null); }}
               aria-label={cat.label}
-              className={`px-3 sm:px-4 py-2 rounded-xl text-xs font-bold transition-all min-h-[38px] flex items-center ${
+              className={`px-3 sm:px-4 py-2 rounded-xl text-xs font-bold transition-all min-h-[38px] flex items-center cursor-pointer ${
                 activeTab === cat.id
                   ? 'bg-zen-surface-lowest dark:bg-zen-dark-primary text-zen-primary dark:text-zen-dark-on-primary shadow-zen-sm'
                   : 'text-zen-text-muted dark:text-zen-dark-text-muted hover:text-zen-text dark:hover:text-zen-dark-text'
@@ -117,6 +118,16 @@ export default function KanaTable({ scriptMode }) {
             </button>
           ))}
         </div>
+      </div>
+
+      {/* Contextual Table Mini-Guide */}
+      <div className="max-w-2xl lg:max-w-3xl mx-auto w-full">
+        <ContextualTabGuide 
+          category={activeTab} 
+          scriptMode={scriptMode}
+          defaultExpanded={false}
+          variant="accordion"
+        />
       </div>
 
       {/* Coordinate Matrix Container with max-width to limit card growth */}

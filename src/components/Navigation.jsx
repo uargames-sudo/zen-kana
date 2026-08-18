@@ -409,96 +409,113 @@ export default function Navigation({
 
       {/* ===================== KANA SYLLABARY GUIDE MODAL ===================== */}
 
+      {/* ===================== KANA SYLLABARY GUIDE MODAL ===================== */}
+
       {showGuideModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-fadeIn">
-          <div className="relative w-full max-w-lg bg-white dark:bg-zen-dark-surface rounded-3xl p-6 shadow-2xl border border-zen-surface-high dark:border-zen-dark-border max-h-[90vh] overflow-y-auto space-y-5">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-md animate-fadeIn">
+          <div className="relative w-full max-w-xl bg-zen-surface-lowest dark:bg-zen-dark-surface rounded-3xl p-6 sm:p-7 shadow-2xl border border-zen-border/60 dark:border-zen-dark-border max-h-[90vh] overflow-y-auto space-y-5">
             <button
               onClick={() => setShowGuideModal(false)}
               aria-label={t('nav.closeGuide')}
-              className="absolute top-4 right-4 p-2 rounded-xl text-zen-text-muted hover:bg-zen-surface-container dark:hover:bg-zen-dark-surface-high transition-colors"
+              className="absolute top-4 right-4 p-2 rounded-xl text-zen-text-muted hover:text-zen-text hover:bg-zen-surface-container dark:hover:bg-zen-dark-surface-high transition-colors cursor-pointer"
             >
               <X className="w-5 h-5" />
             </button>
 
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-2xl bg-zen-primary/10 dark:bg-zen-dark-primary/20 text-zen-primary dark:text-zen-dark-primary flex items-center justify-center">
-                <HelpCircle className="w-5 h-5" />
+            <div className="flex items-center gap-3 pr-8">
+              <div className="w-11 h-11 rounded-2xl bg-zen-primary/10 dark:bg-zen-dark-primary/20 text-zen-primary dark:text-zen-dark-primary flex items-center justify-center border border-zen-primary/20 shrink-0 shadow-sm">
+                <HelpCircle className="w-6 h-6" />
               </div>
               <div>
-                <h3 className="font-headline text-lg font-bold text-zen-text dark:text-zen-dark-text leading-tight">
+                <h3 className="font-headline text-xl font-bold text-zen-text dark:text-zen-dark-text leading-tight">
                   {t('nav.guideTitle')}
                 </h3>
-                <p className="text-xs text-zen-text-muted dark:text-zen-dark-text-muted">
+                <p className="text-xs text-zen-text-muted dark:text-zen-dark-text-muted mt-0.5 font-medium">
                   {t('nav.guideSubtitle')}
                 </p>
               </div>
             </div>
 
-            <div className="space-y-3.5">
-              {/* Hiragana Card */}
-              <div className="p-4 rounded-2xl bg-zen-surface dark:bg-zen-dark-surface-high/60 border border-zen-border/40 dark:border-zen-dark-border">
-                <div className="flex items-center gap-2 mb-1">
-                  <span className="w-7 h-7 rounded-lg bg-zen-primary text-white flex items-center justify-center font-kana font-bold text-sm">
+            <div className="space-y-3.5 pt-1">
+              {/* 1. Hiragana Card */}
+              <div className="p-4 rounded-2xl bg-zen-surface-container/40 dark:bg-zen-dark-surface-high/60 border border-zen-border/50 dark:border-zen-dark-border shadow-2xs space-y-1.5">
+                <div className="flex items-center gap-2.5">
+                  <span className="w-8 h-8 rounded-xl bg-zen-primary text-white flex items-center justify-center font-kana font-bold text-base shadow-sm shrink-0">
                     あ
                   </span>
-                  <h4 className="font-bold text-sm text-zen-text dark:text-zen-dark-text">
+                  <h4 className="font-bold text-sm sm:text-base font-headline text-zen-text dark:text-zen-dark-text">
                     {t('nav.guideHiraganaTitle')}
                   </h4>
                 </div>
-                <p className="text-xs text-zen-text-muted dark:text-zen-dark-text-muted leading-relaxed">
+                <p className="text-xs text-zen-text/90 dark:text-zen-dark-text/90 leading-relaxed font-medium pl-10.5">
                   {t('nav.guideHiraganaDesc')}
                 </p>
               </div>
 
-              {/* Katakana Card */}
-              <div className="p-4 rounded-2xl bg-zen-surface dark:bg-zen-dark-surface-high/60 border border-zen-border/40 dark:border-zen-dark-border">
-                <div className="flex items-center gap-2 mb-1">
-                  <span className="w-7 h-7 rounded-lg bg-zen-secondary text-white flex items-center justify-center font-kana font-bold text-sm">
+              {/* 2. Katakana Card */}
+              <div className="p-4 rounded-2xl bg-zen-surface-container/40 dark:bg-zen-dark-surface-high/60 border border-zen-border/50 dark:border-zen-dark-border shadow-2xs space-y-1.5">
+                <div className="flex items-center gap-2.5">
+                  <span className="w-8 h-8 rounded-xl bg-zen-secondary text-white flex items-center justify-center font-kana font-bold text-base shadow-sm shrink-0">
                     ア
                   </span>
-                  <h4 className="font-bold text-sm text-zen-text dark:text-zen-dark-text">
+                  <h4 className="font-bold text-sm sm:text-base font-headline text-zen-text dark:text-zen-dark-text">
                     {t('nav.guideKatakanaTitle')}
                   </h4>
                 </div>
-                <p className="text-xs text-zen-text-muted dark:text-zen-dark-text-muted leading-relaxed">
+                <p className="text-xs text-zen-text/90 dark:text-zen-dark-text/90 leading-relaxed font-medium pl-10.5">
                   {t('nav.guideKatakanaDesc')}
                 </p>
               </div>
 
-              {/* Dakuten Card */}
-              <div className="p-4 rounded-2xl bg-zen-surface dark:bg-zen-dark-surface-high/60 border border-zen-border/40 dark:border-zen-dark-border">
-                <div className="flex items-center gap-2 mb-1">
-                  <span className="w-7 h-7 rounded-lg bg-zen-accent text-white flex items-center justify-center font-kana font-bold text-sm">
+              {/* 3. Dakuten & Handakuten Card */}
+              <div className="p-4 rounded-2xl bg-zen-surface-container/40 dark:bg-zen-dark-surface-high/60 border border-zen-border/50 dark:border-zen-dark-border shadow-2xs space-y-1.5">
+                <div className="flex items-center gap-2.5">
+                  <span className="w-8 h-8 rounded-xl bg-zen-accent text-white flex items-center justify-center font-kana font-bold text-base shadow-sm shrink-0">
                     が
                   </span>
-                  <h4 className="font-bold text-sm text-zen-text dark:text-zen-dark-text">
+                  <h4 className="font-bold text-sm sm:text-base font-headline text-zen-text dark:text-zen-dark-text">
                     {t('nav.guideDakutenTitle')}
                   </h4>
                 </div>
-                <p className="text-xs text-zen-text-muted dark:text-zen-dark-text-muted leading-relaxed">
+                <p className="text-xs text-zen-text/90 dark:text-zen-dark-text/90 leading-relaxed font-medium pl-10.5">
                   {t('nav.guideDakutenDesc')}
                 </p>
               </div>
 
-              {/* Yoon Card */}
-              <div className="p-4 rounded-2xl bg-zen-surface dark:bg-zen-dark-surface-high/60 border border-zen-border/40 dark:border-zen-dark-border">
-                <div className="flex items-center gap-2 mb-1">
-                  <span className="w-7 h-7 rounded-lg bg-emerald-600 text-white flex items-center justify-center font-kana font-bold text-sm">
+              {/* 4. Yoon Combinations Card */}
+              <div className="p-4 rounded-2xl bg-zen-surface-container/40 dark:bg-zen-dark-surface-high/60 border border-zen-border/50 dark:border-zen-dark-border shadow-2xs space-y-1.5">
+                <div className="flex items-center gap-2.5">
+                  <span className="w-8 h-8 rounded-xl bg-emerald-600 text-white flex items-center justify-center font-kana font-bold text-xs shadow-sm shrink-0">
                     きゃ
                   </span>
-                  <h4 className="font-bold text-sm text-zen-text dark:text-zen-dark-text">
+                  <h4 className="font-bold text-sm sm:text-base font-headline text-zen-text dark:text-zen-dark-text">
                     {t('nav.guideYoonTitle')}
                   </h4>
                 </div>
-                <p className="text-xs text-zen-text-muted dark:text-zen-dark-text-muted leading-relaxed">
+                <p className="text-xs text-zen-text/90 dark:text-zen-dark-text/90 leading-relaxed font-medium pl-10.5">
                   {t('nav.guideYoonDesc')}
+                </p>
+              </div>
+
+              {/* 5. Special Phonetics & Rhythm Card */}
+              <div className="p-4 rounded-2xl bg-zen-surface-container/40 dark:bg-zen-dark-surface-high/60 border border-zen-border/50 dark:border-zen-dark-border shadow-2xs space-y-1.5">
+                <div className="flex items-center gap-2.5">
+                  <span className="w-8 h-8 rounded-xl bg-amber-600 text-white flex items-center justify-center font-kana font-bold text-base shadow-sm shrink-0">
+                    っ
+                  </span>
+                  <h4 className="font-bold text-sm sm:text-base font-headline text-zen-text dark:text-zen-dark-text">
+                    {t('nav.guidePhoneticsTitle')}
+                  </h4>
+                </div>
+                <p className="text-xs text-zen-text/90 dark:text-zen-dark-text/90 leading-relaxed font-medium pl-10.5">
+                  {t('nav.guidePhoneticsDesc')}
                 </p>
               </div>
             </div>
 
             <button
               onClick={() => setShowGuideModal(false)}
-              className="w-full py-3 bg-zen-primary dark:bg-zen-dark-primary text-white dark:text-zen-dark-on-primary rounded-xl font-bold text-xs uppercase tracking-wider shadow-sm hover:opacity-90 transition-opacity min-h-[44px]"
+              className="w-full py-3.5 bg-zen-primary dark:bg-zen-dark-primary text-white dark:text-zen-dark-on-primary rounded-2xl font-bold text-xs uppercase tracking-wider shadow-zen-md hover:scale-[1.02] active:scale-[0.98] transition-all min-h-[48px] cursor-pointer"
             >
               {t('nav.closeGuide')}
             </button>

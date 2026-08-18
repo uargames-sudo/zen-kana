@@ -11,8 +11,9 @@ import {
     SMALL_HIRAGANA_GRID,
     SMALL_KATAKANA_GRID
 } from '../../data/kanaTables';
-import { Eye, EyeOff, BookOpen } from 'lucide-react';
+import { Eye, EyeOff, BookOpen, Info, HelpCircle } from 'lucide-react';
 import { useLanguage } from '../../context/LanguageContext';
+import ContextualTabGuide from '../ContextualTabGuide';
 
 export default function VirtualKeyboard({ 
     onKeyPress, 
@@ -26,6 +27,7 @@ export default function VirtualKeyboard({
     const [script, setScript] = useState('hiragana'); // 'hiragana' or 'katakana'
     const [category, setCategory] = useState('basic'); // 'basic', 'dakuten', 'handakuten', 'yoon', 'small'
     const [romajiToggled, setRomajiToggled] = useState(false);
+    const [showGuide, setShowGuide] = useState(false);
 
     const isHiragana = script === 'hiragana';
 
@@ -115,13 +117,27 @@ export default function VirtualKeyboard({
                         {t('keyboard.katakana')}
                     </button>
                 </div>
-                
+
                 <div className="flex flex-wrap items-center gap-2">
+                    <button
+                        type="button"
+                        onClick={() => setShowGuide(!showGuide)}
+                        className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-all border cursor-pointer ${
+                            showGuide
+                                ? 'bg-zen-primary text-white dark:bg-zen-dark-primary dark:text-zen-dark-on-primary border-zen-primary dark:border-zen-dark-primary shadow-sm'
+                                : 'bg-zen-surface-container dark:bg-zen-dark-surface-high text-zen-text-muted dark:text-zen-dark-text-muted border-zen-border/40 dark:border-zen-dark-border hover:text-zen-text'
+                        }`}
+                        title="Mostra / Nascondi miniguida"
+                    >
+                        <Info className="w-3.5 h-3.5" />
+                        <span>{showGuide ? t('activeStudy.hideRefKeyboard') || 'Chiudi Guida' : 'Guida'}</span>
+                    </button>
+
                     {allowToggleRomaji && (
                         <button
                             type="button"
                             onClick={() => setRomajiToggled(!romajiToggled)}
-                            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-all border ${
+                            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-all border cursor-pointer ${
                                 romajiToggled
                                     ? 'bg-amber-500/15 text-amber-700 dark:text-amber-300 border-amber-500/40 shadow-sm'
                                     : 'bg-zen-surface-container dark:bg-zen-dark-surface-high text-zen-text-muted dark:text-zen-dark-text-muted border-zen-border/40 dark:border-zen-dark-border hover:text-zen-text'
@@ -138,7 +154,7 @@ export default function VirtualKeyboard({
                             type="button"
                             onClick={onBackspace}
                             disabled={disabled}
-                            className="px-3.5 py-1.5 bg-rose-500/10 text-rose-600 dark:text-rose-300 rounded-xl hover:bg-rose-500/20 transition-colors font-bold text-xs uppercase tracking-widest border border-rose-500/30 disabled:opacity-50"
+                            className="px-3.5 py-1.5 bg-rose-500/10 text-rose-600 dark:text-rose-300 rounded-xl hover:bg-rose-500/20 transition-colors font-bold text-xs uppercase tracking-widest border border-rose-500/30 disabled:opacity-50 cursor-pointer"
                         >
                             {t('keyboard.del')}
                         </button>
@@ -153,7 +169,7 @@ export default function VirtualKeyboard({
                         key={cat.id}
                         type="button"
                         onClick={() => setCategory(cat.id)}
-                        className={`flex-1 min-w-[70px] py-1.5 px-2 rounded-xl text-xs font-bold transition-all text-center ${
+                        className={`flex-1 min-w-[70px] py-1.5 px-2 rounded-xl text-xs font-bold transition-all text-center cursor-pointer ${
                             category === cat.id
                                 ? 'bg-zen-surface-lowest dark:bg-zen-dark-primary text-zen-primary dark:text-zen-dark-on-primary shadow-zen-sm'
                                 : 'text-zen-text-muted dark:text-zen-dark-text-muted hover:text-zen-text dark:hover:text-zen-dark-text'
@@ -163,6 +179,17 @@ export default function VirtualKeyboard({
                     </button>
                 ))}
             </div>
+
+            {/* Contextual Keyboard Mini-Guide */}
+            {showGuide && (
+                <div className="mb-3.5 animate-fadeIn">
+                    <ContextualTabGuide
+                        category={category}
+                        scriptMode={script}
+                        variant="banner"
+                    />
+                </div>
+            )}
 
             {/* Coordinate Grid Container */}
             <div className="space-y-1.5 sm:space-y-2">
