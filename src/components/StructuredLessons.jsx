@@ -27,6 +27,7 @@ import {
 import { getVocabularyIcon } from '../data/vocabulary';
 import { playKanaSound } from '../utils/audio';
 import KanaDrawingPad from './KanaDrawingPad';
+import VocabIllustration from './common/VocabIllustration';
 import { useLanguage } from '../context/LanguageContext';
 
 function HighlightedKana({ text, lesson, scriptMode }) {
@@ -607,32 +608,40 @@ export default function StructuredLessons({ scriptMode, updateStats }) {
       {/* Step 3: Vocabolario */}
       {step === 3 && (
         <div className="zen-card space-y-4 border border-zen-border/40 p-6 dark:border-zen-dark-border bg-zen-surface-lowest dark:bg-zen-dark-surface rounded-3xl shadow-zen-md animate-fade-in">
-          <p className="text-xs font-bold text-zen-text-muted uppercase tracking-wider">
-            {t('lessons.vocabularyFound')} ({activeVocabulary.length})
-          </p>
+          <div className="flex items-center justify-between">
+            <p className="text-xs font-bold text-zen-text-muted uppercase tracking-wider">
+              {t('lessons.vocabularyFound')} ({activeVocabulary.length})
+            </p>
+            <span className="text-3xs text-zen-text-muted font-medium hidden sm:inline">
+              {lang === 'it' ? 'Tocca per ascoltare la pronuncia' : 'Tap to hear pronunciation'}
+            </span>
+          </div>
 
           <div className="grid gap-3 sm:grid-cols-2">
-            {activeVocabulary.map((word) => {
-              const Icon = getVocabularyIcon(word.imageKeyword);
-              return (
-                <button
-                  key={word.id}
-                  onClick={() => playKanaSound(word.kana)}
-                  className="flex items-center justify-between rounded-2xl border border-zen-border/40 p-4 text-left dark:border-zen-dark-border bg-zen-surface-container/20 dark:bg-zen-dark-surface-high/30 hover:border-zen-primary dark:hover:border-zen-dark-primary transition-all group cursor-pointer"
-                >
-                  <div className="space-y-1">
-                    <HighlightedKana text={word.kana} lesson={activeLesson} scriptMode={scriptMode} />
-                    <div className="text-sm font-bold font-headline text-zen-text dark:text-zen-dark-text">{word.romaji}</div>
-                    <div className="text-xs text-zen-text-muted dark:text-zen-dark-text-muted">
-                      {lang === 'it' ? word.italian : word.english}
-                    </div>
+            {activeVocabulary.map((word) => (
+              <button
+                key={word.id}
+                onClick={() => playKanaSound(word.kana)}
+                className="flex items-center justify-between rounded-2xl border border-zen-border/40 p-3.5 sm:p-4 text-left dark:border-zen-dark-border bg-zen-surface-container/20 dark:bg-zen-dark-surface-high/30 hover:border-zen-primary dark:hover:border-zen-dark-primary hover:shadow-zen-sm transition-all group cursor-pointer"
+              >
+                <div className="space-y-1 min-w-0 flex-1 pr-3">
+                  <HighlightedKana text={word.kana} lesson={activeLesson} scriptMode={scriptMode} />
+                  <div className="text-sm font-bold font-headline text-zen-text dark:text-zen-dark-text">{word.romaji}</div>
+                  <div className="text-xs text-zen-text-muted dark:text-zen-dark-text-muted capitalize">
+                    {lang === 'it' ? word.italian : word.english}
                   </div>
-                  <div className="p-3 rounded-2xl bg-zen-surface-lowest dark:bg-zen-dark-surface shadow-zen-sm text-zen-primary dark:text-zen-dark-primary group-hover:scale-110 transition-transform">
-                    <Icon className="h-6 w-6" />
-                  </div>
-                </button>
-              );
-            })}
+                </div>
+                <div className="shrink-0">
+                  <VocabIllustration
+                    id={word.id}
+                    keyword={word.imageKeyword}
+                    alt={word.english}
+                    className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-zen-surface-lowest dark:bg-zen-dark-surface p-1 shadow-sm group-hover:scale-105 transition-transform"
+                    iconClassName="w-8 h-8 sm:w-9 sm:h-9"
+                  />
+                </div>
+              </button>
+            ))}
           </div>
         </div>
       )}
