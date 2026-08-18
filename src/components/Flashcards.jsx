@@ -375,9 +375,11 @@ export default function Flashcards({ scriptMode = 'hiragana', updateStats }) {
                     <div className="text-3xl font-headline font-bold capitalize text-zen-text dark:text-zen-dark-text">
                       {currentItem.romaji}
                     </div>
-                    <p className="mx-auto max-w-xs rounded-xl border border-zen-border/40 bg-white/80 dark:bg-zen-dark-bg/80 px-4 py-2 text-sm text-zen-text-muted dark:border-zen-dark-border dark:text-zen-dark-text-muted font-medium">
-                      {getKanaExample(currentItem, lang)}
-                    </p>
+                    {getKanaExample(currentItem, lang) && (
+                      <div className="mx-auto max-w-xs px-4 py-2 rounded-xl border border-zen-border/60 dark:border-zen-dark-border bg-zen-surface-container/60 dark:bg-zen-dark-surface-high text-zen-text dark:text-zen-dark-text text-sm font-medium shadow-2xs">
+                        {getKanaExample(currentItem, lang)}
+                      </div>
+                    )}
                   </>
                 )}
               </div>
@@ -435,7 +437,7 @@ export default function Flashcards({ scriptMode = 'hiragana', updateStats }) {
       )}
 
       {/* Mastered / Need Review Stats Bar */}
-      <div className="flex items-center justify-around rounded-2xl border border-zen-surface-high bg-white p-4 text-xs font-semibold text-zen-text-muted dark:border-zen-dark-border dark:bg-zen-dark-surface dark:text-zen-dark-text-muted shadow-2xs">
+      <div className="flex items-center justify-around rounded-2xl border border-zen-border/40 bg-zen-surface-lowest dark:bg-zen-dark-surface dark:border-zen-dark-border p-4 text-xs font-semibold text-zen-text-muted dark:text-zen-dark-text-muted shadow-2xs">
         <span className="flex items-center gap-1.5 text-zen-primary dark:text-zen-dark-primary font-bold">
           <CheckCircle className="h-4 w-4" />{' '}
           {t('flashcards.mastered') || (lang === 'it' ? 'Memorizzati' : 'Mastered')}: {masteredCount}
