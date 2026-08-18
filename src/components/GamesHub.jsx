@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
-import { Gamepad2, Brain, Puzzle } from 'lucide-react';
+import { Gamepad2, Brain, Puzzle, Layers } from 'lucide-react';
 import MemoryGame from './MemoryGame';
 import KanaPuzzle from './KanaPuzzle';
+import KanaMahjong from './KanaMahjong';
 import { useLanguage } from '../context/LanguageContext';
 
 export default function GamesHub({ scriptMode = 'hiragana' }) {
   const { t } = useLanguage();
-  const [activeGame, setActiveGame] = useState('puzzle'); // 'puzzle' | 'memory'
+  const [activeGame, setActiveGame] = useState('mahjong'); // 'mahjong' | 'puzzle' | 'memory'
 
   return (
     <div className="space-y-6">
@@ -23,11 +24,27 @@ export default function GamesHub({ scriptMode = 'hiragana' }) {
         </div>
 
         {/* Sub-game navigation tabs */}
-        <div className="flex items-center gap-1.5 bg-zen-surface-container dark:bg-zen-dark-surface p-1 rounded-2xl border border-zen-border/40 dark:border-zen-dark-border self-start sm:self-auto shrink-0 shadow-zen-sm">
+        <div className="flex flex-wrap items-center gap-1.5 bg-zen-surface-container dark:bg-zen-dark-surface p-1 rounded-2xl border border-zen-border/40 dark:border-zen-dark-border self-start sm:self-auto shrink-0 shadow-zen-sm">
+          <button
+            type="button"
+            onClick={() => setActiveGame('mahjong')}
+            className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-2 min-h-[38px] cursor-pointer ${
+              activeGame === 'mahjong'
+                ? 'bg-zen-surface-lowest dark:bg-zen-dark-primary text-zen-primary dark:text-zen-dark-on-primary shadow-zen-sm'
+                : 'text-zen-text-muted dark:text-zen-dark-text-muted hover:text-zen-text dark:hover:text-zen-dark-text'
+            }`}
+          >
+            <Layers className="w-4 h-4" />
+            <span>{t('games.tabMahjong') || 'Kana Mahjong'}</span>
+            <span className="text-3xs font-mono font-extrabold uppercase px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-700 dark:text-amber-300">
+              NEW
+            </span>
+          </button>
+
           <button
             type="button"
             onClick={() => setActiveGame('puzzle')}
-            className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-2 min-h-[38px] ${
+            className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-2 min-h-[38px] cursor-pointer ${
               activeGame === 'puzzle'
                 ? 'bg-zen-surface-lowest dark:bg-zen-dark-primary text-zen-primary dark:text-zen-dark-on-primary shadow-zen-sm'
                 : 'text-zen-text-muted dark:text-zen-dark-text-muted hover:text-zen-text dark:hover:text-zen-dark-text'
@@ -40,7 +57,7 @@ export default function GamesHub({ scriptMode = 'hiragana' }) {
           <button
             type="button"
             onClick={() => setActiveGame('memory')}
-            className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-2 min-h-[38px] ${
+            className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-2 min-h-[38px] cursor-pointer ${
               activeGame === 'memory'
                 ? 'bg-zen-surface-lowest dark:bg-zen-dark-primary text-zen-primary dark:text-zen-dark-on-primary shadow-zen-sm'
                 : 'text-zen-text-muted dark:text-zen-dark-text-muted hover:text-zen-text dark:hover:text-zen-dark-text'
@@ -54,9 +71,13 @@ export default function GamesHub({ scriptMode = 'hiragana' }) {
 
       {/* Render Active Game */}
       <div>
-        {activeGame === 'puzzle' ? (
+        {activeGame === 'mahjong' && (
+          <KanaMahjong defaultScriptMode={scriptMode} />
+        )}
+        {activeGame === 'puzzle' && (
           <KanaPuzzle defaultScriptMode={scriptMode} />
-        ) : (
+        )}
+        {activeGame === 'memory' && (
           <MemoryGame />
         )}
       </div>
