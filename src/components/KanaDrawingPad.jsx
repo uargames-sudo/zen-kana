@@ -25,6 +25,10 @@ export default function KanaDrawingPad({ kana, romaji, onScore }) {
   const [score, setScore] = useState(null);
   const template = SHAPES[TEMPLATE_BY_ROMAJI[romaji] || 'two'];
 
+  const getStrokeColor = () => {
+    return document.documentElement.classList.contains('dark') ? '#f0b000' : '#981701';
+  };
+
   const prepareCanvas = () => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -37,7 +41,7 @@ export default function KanaDrawingPad({ kana, romaji, onScore }) {
     context.lineCap = 'round';
     context.lineJoin = 'round';
     context.lineWidth = 22;
-    context.strokeStyle = document.documentElement.classList.contains('dark') ? '#36d399' : '#38656f';
+    context.strokeStyle = getStrokeColor();
     contextRef.current = context;
   };
 
@@ -61,8 +65,11 @@ export default function KanaDrawingPad({ kana, romaji, onScore }) {
     canvasRef.current.setPointerCapture?.(event.pointerId);
     const point = pointFromEvent(event);
     activeStroke.current = [point];
-    contextRef.current.beginPath();
-    contextRef.current.moveTo(point.rawX, point.rawY);
+    if (contextRef.current) {
+      contextRef.current.strokeStyle = getStrokeColor();
+      contextRef.current.beginPath();
+      contextRef.current.moveTo(point.rawX, point.rawY);
+    }
   };
   const move = (event) => {
     if (!activeStroke.current) return;
@@ -96,9 +103,20 @@ export default function KanaDrawingPad({ kana, romaji, onScore }) {
 
   return <div className="space-y-3">
     <div className="relative h-72 overflow-hidden rounded-3xl border-2 border-dashed border-zen-primary-light/60 bg-zen-surface-container/30 touch-none dark:border-zen-dark-border dark:bg-zen-dark-surface-high">
-      <div className="pointer-events-none absolute inset-0 grid place-items-center"><span className="font-kana text-[190px] font-bold text-zen-primary/10 dark:text-zen-dark-primary/15">{kana}</span></div>
+      <div className="pointer-events-none absolute inset-0 grid place-items-center">
+        <span className={`font-kana font-bold text-zen-primary/10 dark:text-zen-dark-primary/15 select-none ${kana?.length > 1 ? 'text-[120px] sm:text-[145px] tracking-tight' : 'text-[180px] sm:text-[190px]'}`}>
+          {kana}
+        </span>
+      </div>
       <canvas ref={canvasRef} onPointerDown={start} onPointerMove={move} onPointerUp={finish} onPointerCancel={finish} className="relative z-10 h-full w-full touch-none" />
     </div>
-    <div className="flex items-center justify-between text-sm"><span className="font-semibold text-zen-text-muted dark:text-zen-dark-text-muted">{score === null ? `Draw ${template.length} stroke${template.length > 1 ? 's' : ''}` : <span className="flex items-center gap-1 text-zen-primary dark:text-zen-dark-primary"><CheckCircle className="h-4 w-4" /> Score: {score}%</span>}</span><button onClick={clear} className="flex items-center gap-1 rounded-xl border border-zen-border/60 px-3 py-2 text-xs font-bold text-zen-text dark:border-zen-dark-border dark:text-zen-dark-text"><Eraser className="h-4 w-4" /> Clear</button></div>
+    <div className="flex items-center justify-between text-sm">
+      <span className="font-semibold text-zen-text-muted dark:text-zen-dark-text-muted">
+        {score === null ? `Draw ${template.length} stroke${template.length > 1 ? 's' : ''}` : <span className="flex items-center gap-1 text-zen-primary dark:text-zen-dark-primary"><CheckCircle className="h-4 w-4" /> Score: {score}%</span>}
+      </span>
+      <button onClick={clear} className="flex items-center gap-1 rounded-xl border border-zen-border/60 px-3 py-2 text-xs font-bold text-zen-text dark:border-zen-dark-border dark:text-zen-dark-text cursor-pointer hover:border-zen-primary transition-colors">
+        <Eraser className="h-4 w-4" /> Clear
+      </button>
+    </div>
   </div>;
 }
