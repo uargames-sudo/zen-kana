@@ -440,15 +440,15 @@ export default function KanaPuzzle({ defaultScriptMode = 'hiragana' }) {
               </label>
               <div className="grid grid-cols-3 gap-2">
                 {[
-                  { id: 'easy', label: t('puzzle.diffEasy'), desc: t('puzzle.diffEasyDesc') },
-                  { id: 'medium', label: t('puzzle.diffMed'), desc: t('puzzle.diffMedDesc') },
-                  { id: 'hard', label: t('puzzle.diffHard'), desc: t('puzzle.diffHardDesc') }
+                  { id: 'easy', label: t('puzzle.diffEasy'), desc: t('puzzle.diffEasyDesc'), hint: t('puzzle.diffEasyHint') },
+                  { id: 'medium', label: t('puzzle.diffMed'), desc: t('puzzle.diffMedDesc'), hint: t('puzzle.diffMedHint') },
+                  { id: 'hard', label: t('puzzle.diffHard'), desc: t('puzzle.diffHardDesc'), hint: t('puzzle.diffHardHint') }
                 ].map((diff) => (
                   <button
                     key={diff.id}
                     type="button"
                     onClick={() => setDifficulty(diff.id)}
-                    className={`p-3 rounded-2xl border text-center transition-all flex flex-col items-center justify-between gap-1 ${
+                    className={`p-3 rounded-2xl border text-center transition-all flex flex-col items-center justify-between gap-1.5 ${
                       difficulty === diff.id
                         ? 'bg-zen-primary/10 dark:bg-zen-dark-primary/20 border-zen-primary dark:border-zen-dark-primary text-zen-primary dark:text-zen-dark-primary font-bold shadow-zen-sm'
                         : 'bg-zen-surface-container/30 dark:bg-zen-dark-surface-high/30 border-zen-border/40 dark:border-zen-dark-border text-zen-text-muted hover:border-zen-primary/40'
@@ -457,6 +457,9 @@ export default function KanaPuzzle({ defaultScriptMode = 'hiragana' }) {
                     <span className="text-xs font-bold">{diff.label}</span>
                     <span className="text-3xs px-2 py-0.5 rounded-full bg-zen-surface-lowest dark:bg-zen-dark-surface border border-zen-border/40 font-mono">
                       {diff.desc}
+                    </span>
+                    <span className="text-3xs text-zen-text-muted dark:text-zen-dark-text-muted leading-tight text-center">
+                      {diff.hint}
                     </span>
                   </button>
                 ))}
@@ -510,6 +513,9 @@ export default function KanaPuzzle({ defaultScriptMode = 'hiragana' }) {
   // ======================= PLAYING SCREEN =======================
   if (gameState === 'playing' && currentWord) {
     const isKanaToRomaji = gameMode === 'kana-to-romaji';
+    const showTranslation = difficulty === 'easy' || isSuccess || isFailed;
+    const showIllustration = difficulty !== 'hard' || isSuccess || isFailed;
+    const translationText = lang === 'it' ? currentWord.italian : currentWord.english;
 
     return (
       <div className="max-w-xl mx-auto space-y-5 pb-24 xl:pb-8 animate-fade-in">
@@ -595,31 +601,53 @@ export default function KanaPuzzle({ defaultScriptMode = 'hiragana' }) {
                 <div className="font-kana text-3xl sm:text-4xl font-extrabold text-zen-primary dark:text-zen-dark-primary leading-tight">
                   {currentWord.kana}
                 </div>
-                <div className="text-xs text-zen-text-muted dark:text-zen-dark-text-muted font-medium mt-0.5">
-                  {lang === 'it' ? currentWord.italian : currentWord.english}
-                </div>
+                {showTranslation ? (
+                  <div className="text-xs text-zen-text-muted dark:text-zen-dark-text-muted font-medium mt-0.5 animate-fadeIn">
+                    {translationText}
+                  </div>
+                ) : (
+                  <div className="text-3xs font-bold uppercase tracking-widest text-zen-text-muted/50 dark:text-zen-dark-text-muted/50 mt-1">
+                    • • •
+                  </div>
+                )}
               </div>
             ) : (
               <div>
                 <div className="text-2xl sm:text-3xl font-headline font-bold text-zen-text dark:text-zen-dark-text leading-tight capitalize">
                   {currentWord.romaji}
                 </div>
-                <div className="text-xs text-zen-primary dark:text-zen-dark-primary font-semibold mt-0.5">
-                  {lang === 'it' ? currentWord.italian : currentWord.english}
-                </div>
+                {showTranslation ? (
+                  <div className="text-xs text-zen-primary dark:text-zen-dark-primary font-semibold mt-0.5 animate-fadeIn">
+                    {translationText}
+                  </div>
+                ) : (
+                  <div className="text-3xs font-bold uppercase tracking-widest text-zen-text-muted/50 dark:text-zen-dark-text-muted/50 mt-1">
+                    • • •
+                  </div>
+                )}
               </div>
             )}
           </div>
 
-          {/* Right Illustration */}
+          {/* Right Illustration Box */}
           <div className="shrink-0">
-            <VocabIllustration
-              id={currentWord.id}
-              keyword={currentWord.imageKeyword}
-              alt={currentWord.english}
-              className="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl bg-zen-surface-container/30 dark:bg-zen-dark-surface-high/30 p-1 shadow-sm"
-              iconClassName="w-10 h-10 sm:w-12 sm:h-12"
-            />
+            {showIllustration ? (
+              <VocabIllustration
+                id={currentWord.id}
+                keyword={currentWord.imageKeyword}
+                alt={currentWord.english}
+                className="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl bg-zen-surface-container/30 dark:bg-zen-dark-surface-high/30 p-1 shadow-sm transition-all duration-300 animate-fadeIn"
+                iconClassName="w-10 h-10 sm:w-12 sm:h-12"
+              />
+            ) : (
+              <div 
+                className="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl bg-zen-surface-container/30 dark:bg-zen-dark-surface-high/30 border-2 border-dashed border-zen-border/50 dark:border-zen-dark-border/50 flex flex-col items-center justify-center text-zen-text-muted/50 p-2 text-center"
+                title="Illustrazione nascosta in modalità Difficile"
+              >
+                <HelpCircle className="w-6 h-6 sm:w-7 sm:h-7 opacity-40 mb-1" />
+                <span className="text-3xs font-bold uppercase tracking-wider opacity-60">Hard</span>
+              </div>
+            )}
           </div>
         </div>
 
