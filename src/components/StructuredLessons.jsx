@@ -124,6 +124,11 @@ export default function StructuredLessons({ scriptMode, updateStats }) {
   const kanaPhonetics = useMemo(() => getPhoneticsLessonKana(lessonPhonetics, scriptMode), [lessonPhonetics, scriptMode]);
   const vocabularyPhonetics = useMemo(() => getPhoneticsLessonVocabulary(lessonPhonetics, scriptMode), [lessonPhonetics, scriptMode]);
   
+  // Active dataset mode flags
+  const isDakutenMode = viewMode === 'course-dakuten';
+  const isYoonMode = viewMode === 'course-yoon';
+  const isPhoneticsMode = viewMode === 'course-phonetics';
+
   const activeLesson = isPhoneticsMode 
     ? lessonPhonetics 
     : isYoonMode 
@@ -134,11 +139,6 @@ export default function StructuredLessons({ scriptMode, updateStats }) {
   
   const activeLessonContent = activeLesson?.[scriptMode] || activeLesson;
 
-  // Active dataset depending on mode
-  const isDakutenMode = viewMode === 'course-dakuten';
-  const isYoonMode = viewMode === 'course-yoon';
-  const isPhoneticsMode = viewMode === 'course-phonetics';
-  
   const activeKana = isPhoneticsMode 
     ? kanaPhonetics 
     : isYoonMode 

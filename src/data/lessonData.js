@@ -1,5 +1,5 @@
-import { HIRAGANA_BASIC, KANA_DAKUTEN, KANA_COMBINATION } from './kanaData';
-import { VOCABULARY } from './vocabulary';
+import { HIRAGANA_BASIC, KANA_DAKUTEN, KANA_COMBINATION } from './kanaData.js';
+import { VOCABULARY } from './vocabulary.js';
 
 // ==========================================
 // 1. BASIC GOJŪON COURSE (10 Days, 46 Kana)
