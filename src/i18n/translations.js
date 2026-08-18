@@ -189,6 +189,33 @@ export const translations = {
       consultationNotice: 'Tastiera di consultazione (Digita la risposta con la tastiera del dispositivo)'
     },
 
+    // Flashcards
+    flashcards: {
+      title: 'Flashcard',
+      flipHint: 'Tocca per girare',
+      forgot: 'Non lo sapevo',
+      knewIt: 'Lo sapevo!',
+      resetDeck: 'Ricomincia da Capo',
+      allKana: 'Tutti i Kana (104)',
+      basic: 'Base (46)',
+      dakuten: 'Dakuten (25)',
+      yoon: 'Yōon (33)',
+      vocabulary: 'Vocabolario (100)',
+      shuffle: 'Ordine Casuale',
+      ordered: 'Ordine Standard',
+      reshuffle: 'Rimescola',
+      mistakesReview: 'Revisione Errori',
+      cardsNeedReview: 'carte da rivedere',
+      showAll: 'Mostra Tutte',
+      reviewErrorsOnly: 'Ripeti Solo Errori',
+      revealedAnswer: 'Risultato',
+      rateRecall: 'Valuta la tua memorizzazione:',
+      previous: 'Precedente',
+      next: 'Successivo',
+      mastered: 'Memorizzati',
+      needReview: 'Da rivedere'
+    },
+
     // Vocabulary
     vocabulary: {
       title: 'Vocabolario',
@@ -198,7 +225,10 @@ export const translations = {
       filterAll: 'Tutti',
       filterHiragana: 'Hiragana',
       filterKatakana: 'Katakana',
-      showingWords: 'parole trovate'
+      showingWords: 'parole trovate',
+      shuffle: 'Ordine Casuale',
+      ordered: 'Ordine Standard',
+      reshuffle: 'Rimescola'
     },
 
     // Structured Lessons Hub & Courses
@@ -609,6 +639,33 @@ export const translations = {
       consultationNotice: 'Consultation Keyboard (Type answer with your keyboard)'
     },
 
+    // Flashcards
+    flashcards: {
+      title: 'Flashcards',
+      flipHint: 'Tap to flip',
+      forgot: 'Did not know',
+      knewIt: 'Knew it!',
+      resetDeck: 'Reset Deck',
+      allKana: 'All Kana (104)',
+      basic: 'Basic (46)',
+      dakuten: 'Dakuten (25)',
+      yoon: 'Yōon (33)',
+      vocabulary: 'Vocabulary (100)',
+      shuffle: 'Shuffle Order',
+      ordered: 'Standard Order',
+      reshuffle: 'Reshuffle',
+      mistakesReview: 'Mistakes Review',
+      cardsNeedReview: 'cards need review',
+      showAll: 'Show All',
+      reviewErrorsOnly: 'Review Errors Only',
+      revealedAnswer: 'Answer',
+      rateRecall: 'Rate your memory recall below:',
+      previous: 'Previous',
+      next: 'Next',
+      mastered: 'Mastered',
+      needReview: 'Need Review'
+    },
+
     // Vocabulary
     vocabulary: {
       title: 'Vocabulary',
@@ -618,7 +675,10 @@ export const translations = {
       filterAll: 'All',
       filterHiragana: 'Hiragana',
       filterKatakana: 'Katakana',
-      showingWords: 'words found'
+      showingWords: 'words found',
+      shuffle: 'Shuffle Order',
+      ordered: 'Standard Order',
+      reshuffle: 'Reshuffle'
     },
 
     // Structured Lessons Hub & Courses
