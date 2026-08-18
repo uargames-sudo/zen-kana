@@ -625,9 +625,11 @@ export default function MemoryGame() {
                           )}
                         </div>
 
-                        {/* Bottom Sound hint */}
-                        <div className="w-full flex justify-end">
-                          <Volume2 className="w-3 h-3 text-zen-text-muted/40" />
+                        {/* Bottom Sound hint only for cards that have audio */}
+                        <div className="w-full flex justify-end min-h-[12px]">
+                          {(card.type === 'illustration' || card.type === 'audio') && (
+                            <Volume2 className="w-3 h-3 text-zen-text-muted/50 dark:text-zen-dark-text-muted/50" />
+                          )}
                         </div>
                       </div>
                     </div>
