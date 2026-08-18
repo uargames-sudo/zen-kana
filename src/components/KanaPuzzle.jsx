@@ -1,0 +1,733 @@
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
+import { 
+  Puzzle, 
+  Sparkles, 
+  RotateCcw, 
+  CheckCircle2, 
+  XCircle, 
+  Volume2, 
+  Trophy, 
+  Shuffle, 
+  Trash2, 
+  Lightbulb, 
+  ArrowRight,
+  Flame,
+  HelpCircle,
+  Play
+} from 'lucide-react';
+import confetti from 'canvas-confetti';
+import { VOCABULARY } from '../data/vocabulary';
+import { tokenizeKana, generateDistractors } from '../utils/kanaTokenizer';
+import VocabIllustration from './common/VocabIllustration';
+import { playKanaSound } from '../utils/audio';
+import { useLanguage } from '../context/LanguageContext';
+
+export default function KanaPuzzle({ defaultScriptMode = 'hiragana' }) {
+  const { lang, t } = useLanguage();
+
+  // Settings
+  const [gameMode, setGameMode] = useState('kana-to-romaji'); // 'kana-to-romaji' | 'romaji-to-kana'
+  const [difficulty, setDifficulty] = useState('easy'); // 'easy' (+0), 'medium' (+2), 'hard' (+5)
+  const [scriptFilter, setScriptFilter] = useState(defaultScriptMode || 'all'); // 'all' | 'hiragana' | 'katakana'
+
+  // Game lifecycle
+  const [gameState, setGameState] = useState('setup'); // 'setup' | 'playing' | 'completed'
+  const [wordList, setWordList] = useState([]);
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  // Active Word Puzzle State
+  const [currentTokens, setCurrentTokens] = useState([]); // [{ kana, romaji, id, uid }]
+  const [availableTiles, setAvailableTiles] = useState([]); // pool of tiles available to click
+  const [placedSlots, setPlacedSlots] = useState([]); // array matching token length [tile | null]
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [isError, setIsError] = useState(false);
+  const [score, setScore] = useState(0);
+  const [streak, setStreak] = useState(0);
+  const [maxStreak, setMaxStreak] = useState(0);
+  const [hintsUsed, setHintsUsed] = useState(0);
+  const [timerSeconds, setTimerSeconds] = useState(0);
+  const [isTimerRunning, setIsTimerRunning] = useState(false);
+
+  const WORDS_PER_SESSION = 10;
+
+  // Timer Effect
+  useEffect(() => {
+    let interval;
+    if (isTimerRunning && gameState === 'playing') {
+      interval = setInterval(() => {
+        setTimerSeconds(prev => prev + 1);
+      }, 1000);
+    }
+    return () => clearInterval(interval);
+  }, [isTimerRunning, gameState]);
+
+  // Difficulty Distractor mapping
+  const distractorCount = useMemo(() => {
+    switch (difficulty) {
+      case 'hard': return 5;
+      case 'medium': return 2;
+      default: return 0;
+    }
+  }, [difficulty]);
+
+  // Prepare a single puzzle word
+  const setupPuzzleWord = useCallback((wordObj) => {
+    if (!wordObj) return;
+
+    const tokens = tokenizeKana(wordObj.kana).map((tok, idx) => ({
+      ...tok,
+      slotId: idx,
+      uid: `target-${idx}-${tok.kana}-${tok.romaji}`
+    }));
+
+    setCurrentTokens(tokens);
+
+    // Generate distractors if needed
+    const distractors = generateDistractors(tokens, wordObj.script || 'hiragana', distractorCount);
+
+    // Combine and shuffle available tiles
+    const allTiles = [...tokens, ...distractors].sort(() => Math.random() - 0.5);
+    setAvailableTiles(allTiles);
+
+    // Empty slots array
+    setPlacedSlots(new Array(tokens.length).fill(null));
+    setIsSuccess(false);
+    setIsError(false);
+  }, [distractorCount]);
+
+  // Start new game session
+  const startSession = () => {
+    let pool = VOCABULARY;
+    if (scriptFilter === 'hiragana') {
+      pool = VOCABULARY.filter(w => w.script === 'hiragana');
+    } else if (scriptFilter === 'katakana') {
+      pool = VOCABULARY.filter(w => w.script === 'katakana');
+    }
+
+    const shuffled = [...pool].sort(() => Math.random() - 0.5);
+    const selected = shuffled.slice(0, Math.min(WORDS_PER_SESSION, shuffled.length));
+
+    setWordList(selected);
+    setCurrentIndex(0);
+    setScore(0);
+    setStreak(0);
+    setMaxStreak(0);
+    setHintsUsed(0);
+    setTimerSeconds(0);
+    setIsTimerRunning(true);
+    setGameState('playing');
+
+    if (selected.length > 0) {
+      setupPuzzleWord(selected[0]);
+    }
+  };
+
+  const currentWord = wordList[currentIndex];
+
+  // Tile Click -> Place in first empty slot
+  const handleTileClick = (tile) => {
+    if (isSuccess) return;
+    setIsError(false);
+
+    // Find first empty slot
+    const emptySlotIdx = placedSlots.findIndex(s => s === null);
+    if (emptySlotIdx === -1) return; // All slots full
+
+    // Place tile into slot
+    const newSlots = [...placedSlots];
+    newSlots[emptySlotIdx] = tile;
+    setPlacedSlots(newSlots);
+
+    // Remove tile from available pool
+    setAvailableTiles(prev => prev.filter(t => t.uid !== tile.uid));
+
+    // Check if slots are fully filled
+    checkSolution(newSlots);
+  };
+
+  // Slot Click -> Remove tile from slot back to pool
+  const handleSlotClick = (slotIdx) => {
+    if (isSuccess) return;
+    const tile = placedSlots[slotIdx];
+    if (!tile) return;
+
+    setIsError(false);
+
+    // Remove from slot
+    const newSlots = [...placedSlots];
+    newSlots[slotIdx] = null;
+    setPlacedSlots(newSlots);
+
+    // Return to available pool
+    setAvailableTiles(prev => [...prev, tile]);
+  };
+
+  // Clear all slots
+  const handleClearSlots = () => {
+    if (isSuccess) return;
+    const tilesToReturn = placedSlots.filter(Boolean);
+    setAvailableTiles(prev => [...prev, ...tilesToReturn]);
+    setPlacedSlots(new Array(currentTokens.length).fill(null));
+    setIsError(false);
+  };
+
+  // Shuffle available pool tiles visually
+  const handleShufflePool = () => {
+    setAvailableTiles(prev => [...prev].sort(() => Math.random() - 0.5));
+  };
+
+  // Hint button -> place next correct tile
+  const handleUseHint = () => {
+    if (isSuccess) return;
+
+    // Find first incorrectly placed or empty slot
+    let targetSlotIdx = -1;
+    for (let i = 0; i < currentTokens.length; i++) {
+      const placed = placedSlots[i];
+      const target = currentTokens[i];
+      const isMatch = gameMode === 'kana-to-romaji' 
+        ? placed?.romaji === target.romaji
+        : placed?.kana === target.kana;
+
+      if (!placed || !isMatch) {
+        targetSlotIdx = i;
+        break;
+      }
+    }
+
+    if (targetSlotIdx === -1) return;
+
+    const expectedToken = currentTokens[targetSlotIdx];
+
+    // If there's currently an incorrect tile in this slot, remove it first
+    if (placedSlots[targetSlotIdx]) {
+      const wrongTile = placedSlots[targetSlotIdx];
+      setAvailableTiles(prev => [...prev, wrongTile]);
+    }
+
+    // Find the correct tile from available pool or from other wrong slots
+    let foundTile = availableTiles.find(t => 
+      gameMode === 'kana-to-romaji' 
+        ? t.romaji === expectedToken.romaji && !t.isDistractor
+        : t.kana === expectedToken.kana && !t.isDistractor
+    );
+
+    let newAvailable = [...availableTiles];
+    let newSlots = [...placedSlots];
+
+    if (foundTile) {
+      newAvailable = newAvailable.filter(t => t.uid !== foundTile.uid);
+    } else {
+      // Tile might be wrongly placed in another slot
+      for (let s = 0; s < newSlots.length; s++) {
+        if (s !== targetSlotIdx && newSlots[s]) {
+          const t = newSlots[s];
+          const isTarget = gameMode === 'kana-to-romaji' 
+            ? t.romaji === expectedToken.romaji && !t.isDistractor
+            : t.kana === expectedToken.kana && !t.isDistractor;
+
+          if (isTarget) {
+            foundTile = t;
+            newSlots[s] = null;
+            break;
+          }
+        }
+      }
+    }
+
+    if (foundTile) {
+      newSlots[targetSlotIdx] = foundTile;
+      setPlacedSlots(newSlots);
+      setAvailableTiles(newAvailable);
+      setHintsUsed(prev => prev + 1);
+      checkSolution(newSlots);
+    }
+  };
+
+  // Check Solution
+  const checkSolution = (slots) => {
+    const isFull = slots.every(s => s !== null);
+    if (!isFull) return;
+
+    let isCorrect = true;
+    for (let i = 0; i < currentTokens.length; i++) {
+      const placed = slots[i];
+      const target = currentTokens[i];
+
+      if (gameMode === 'kana-to-romaji') {
+        if (placed.romaji !== target.romaji) {
+          isCorrect = false;
+          break;
+        }
+      } else {
+        if (placed.kana !== target.kana) {
+          isCorrect = false;
+          break;
+        }
+      }
+    }
+
+    if (isCorrect) {
+      // VICTORY ON THIS WORD
+      setIsSuccess(true);
+      setIsError(false);
+      setScore(prev => prev + 100 + streak * 10);
+      setStreak(prev => {
+        const next = prev + 1;
+        if (next > maxStreak) setMaxStreak(next);
+        return next;
+      });
+
+      // Play audio of the word
+      if (currentWord?.kana) {
+        playKanaSound(currentWord.kana);
+      }
+
+      // Transition to next word after delay
+      setTimeout(() => {
+        if (currentIndex + 1 < wordList.length) {
+          const nextIdx = currentIndex + 1;
+          setCurrentIndex(nextIdx);
+          setupPuzzleWord(wordList[nextIdx]);
+        } else {
+          // Completed all words in session!
+          handleSessionVictory();
+        }
+      }, 1100);
+    } else {
+      // INCORRECT
+      setIsError(true);
+      setStreak(0);
+    }
+  };
+
+  // Final Session Victory
+  const handleSessionVictory = () => {
+    setIsTimerRunning(false);
+    setGameState('completed');
+
+    try {
+      confetti({
+        particleCount: 80,
+        spread: 70,
+        origin: { y: 0.6 }
+      });
+    } catch {
+      // Safe fallback if confetti isn't supported
+    }
+  };
+
+  const progressPercent = wordList.length > 0 
+    ? Math.round(((currentIndex + (isSuccess ? 1 : 0)) / wordList.length) * 100) 
+    : 0;
+
+  const formatTime = (totalSeconds) => {
+    const mins = Math.floor(totalSeconds / 60);
+    const secs = totalSeconds % 60;
+    return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+  };
+
+  // ======================= SETUP SCREEN =======================
+  if (gameState === 'setup') {
+    return (
+      <div className="max-w-xl mx-auto space-y-6 pb-20 xl:pb-8 animate-fade-in">
+        <div className="zen-card p-6 sm:p-8 bg-zen-surface-lowest dark:bg-zen-dark-surface border border-zen-border/40 dark:border-zen-dark-border text-center space-y-4">
+          <div className="w-16 h-16 rounded-2xl bg-zen-primary/10 dark:bg-zen-dark-primary/20 text-zen-primary dark:text-zen-dark-primary mx-auto flex items-center justify-center shadow-zen-sm">
+            <Puzzle className="w-8 h-8" />
+          </div>
+
+          <div>
+            <h2 className="font-headline text-2xl sm:text-3xl font-bold text-zen-text dark:text-zen-dark-text">
+              {t('puzzle.title')}
+            </h2>
+            <p className="text-sm text-zen-text-muted dark:text-zen-dark-text-muted mt-1 max-w-md mx-auto">
+              {t('puzzle.subtitle')}
+            </p>
+          </div>
+
+          {/* Configuration Options */}
+          <div className="space-y-4 pt-4 text-left">
+            {/* 1. Game Mode Switcher */}
+            <div>
+              <label className="block text-xs font-bold text-zen-text-muted dark:text-zen-dark-text-muted uppercase tracking-wider mb-2">
+                {t('puzzle.modeLabel')}
+              </label>
+              <div className="grid grid-cols-2 gap-2 bg-zen-surface-container/60 dark:bg-zen-dark-surface-high p-1 rounded-2xl border border-zen-border/40 dark:border-zen-dark-border">
+                <button
+                  type="button"
+                  onClick={() => setGameMode('kana-to-romaji')}
+                  className={`py-2.5 px-3 rounded-xl text-xs font-bold transition-all flex flex-col items-center gap-0.5 ${
+                    gameMode === 'kana-to-romaji'
+                      ? 'bg-zen-surface-lowest dark:bg-zen-dark-primary text-zen-primary dark:text-zen-dark-on-primary shadow-zen-sm'
+                      : 'text-zen-text-muted hover:text-zen-text dark:text-zen-dark-text-muted dark:hover:text-zen-dark-text'
+                  }`}
+                >
+                  <span>Kana ➔ Romaji</span>
+                  <span className="text-3xs opacity-80">{t('puzzle.modeKanaToRomajiDesc')}</span>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => setGameMode('romaji-to-kana')}
+                  className={`py-2.5 px-3 rounded-xl text-xs font-bold transition-all flex flex-col items-center gap-0.5 ${
+                    gameMode === 'romaji-to-kana'
+                      ? 'bg-zen-surface-lowest dark:bg-zen-dark-primary text-zen-primary dark:text-zen-dark-on-primary shadow-zen-sm'
+                      : 'text-zen-text-muted hover:text-zen-text dark:text-zen-dark-text-muted dark:hover:text-zen-dark-text'
+                  }`}
+                >
+                  <span>Romaji ➔ Kana</span>
+                  <span className="text-3xs opacity-80">{t('puzzle.modeRomajiToKanaDesc')}</span>
+                </button>
+              </div>
+            </div>
+
+            {/* 2. Difficulty Tier */}
+            <div>
+              <label className="block text-xs font-bold text-zen-text-muted dark:text-zen-dark-text-muted uppercase tracking-wider mb-2">
+                {t('puzzle.difficultyLabel')}
+              </label>
+              <div className="grid grid-cols-3 gap-2">
+                {[
+                  { id: 'easy', label: t('puzzle.diffEasy'), desc: t('puzzle.diffEasyDesc'), badge: '+0' },
+                  { id: 'medium', label: t('puzzle.diffMed'), desc: t('puzzle.diffMedDesc'), badge: '+2' },
+                  { id: 'hard', label: t('puzzle.diffHard'), desc: t('puzzle.diffHardDesc'), badge: '+5' }
+                ].map((diff) => (
+                  <button
+                    key={diff.id}
+                    type="button"
+                    onClick={() => setDifficulty(diff.id)}
+                    className={`p-3 rounded-2xl border text-center transition-all flex flex-col items-center justify-between gap-1 ${
+                      difficulty === diff.id
+                        ? 'bg-zen-primary/10 dark:bg-zen-dark-primary/20 border-zen-primary dark:border-zen-dark-primary text-zen-primary dark:text-zen-dark-primary font-bold shadow-zen-sm'
+                        : 'bg-zen-surface-container/30 dark:bg-zen-dark-surface-high/30 border-zen-border/40 dark:border-zen-dark-border text-zen-text-muted hover:border-zen-primary/40'
+                    }`}
+                  >
+                    <span className="text-xs font-bold">{diff.label}</span>
+                    <span className="text-3xs px-2 py-0.5 rounded-full bg-zen-surface-lowest dark:bg-zen-dark-surface border border-zen-border/40 font-mono">
+                      {diff.desc}
+                    </span>
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* 3. Script Filter */}
+            <div>
+              <label className="block text-xs font-bold text-zen-text-muted dark:text-zen-dark-text-muted uppercase tracking-wider mb-2">
+                {t('puzzle.scriptFilterLabel')}
+              </label>
+              <div className="flex items-center gap-2">
+                {[
+                  { id: 'all', label: t('puzzle.filterAll') },
+                  { id: 'hiragana', label: 'Hiragana (ひらがな)' },
+                  { id: 'katakana', label: 'Katakana (カタカナ)' }
+                ].map((item) => (
+                  <button
+                    key={item.id}
+                    type="button"
+                    onClick={() => setScriptFilter(item.id)}
+                    className={`flex-1 py-2 rounded-xl text-xs font-semibold transition-all border ${
+                      scriptFilter === item.id
+                        ? 'bg-zen-surface-lowest dark:bg-zen-dark-primary text-zen-primary dark:text-zen-dark-on-primary border-zen-primary/40 dark:border-zen-dark-primary font-bold shadow-zen-sm'
+                        : 'bg-zen-surface-container/30 dark:bg-zen-dark-surface border-zen-border/40 dark:border-zen-dark-border text-zen-text-muted hover:text-zen-text'
+                    }`}
+                  >
+                    {item.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Launch Button */}
+          <div className="pt-4">
+            <button
+              type="button"
+              onClick={startSession}
+              className="w-full py-3.5 px-6 rounded-2xl bg-zen-primary dark:bg-zen-dark-primary hover:bg-zen-primary-dark dark:hover:bg-zen-dark-primary-hover text-white dark:text-zen-dark-on-primary font-headline font-bold text-base shadow-zen-md hover:scale-[1.01] active:scale-[0.99] transition-all flex items-center justify-center gap-2"
+            >
+              <Play className="w-5 h-5 fill-current" />
+              <span>{t('puzzle.startBtn')}</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // ======================= PLAYING SCREEN =======================
+  if (gameState === 'playing' && currentWord) {
+    const isKanaToRomaji = gameMode === 'kana-to-romaji';
+
+    return (
+      <div className="max-w-xl mx-auto space-y-5 pb-24 xl:pb-8 animate-fade-in">
+        {/* Top Header: Navigation & Stats */}
+        <div className="space-y-2">
+          <div className="flex items-center justify-between text-xs font-bold text-zen-text-muted dark:text-zen-dark-text-muted">
+            <div className="flex items-center gap-3">
+              <button
+                type="button"
+                onClick={() => setGameState('setup')}
+                className="px-3 py-1 rounded-xl bg-zen-surface-lowest dark:bg-zen-dark-surface border border-zen-border/60 dark:border-zen-dark-border text-zen-text-muted hover:text-zen-text transition-colors shadow-zen-sm font-bold text-2xs uppercase tracking-wider"
+              >
+                {t('puzzle.exit')}
+              </button>
+              <span>{t('puzzle.wordCounter')} {currentIndex + 1} / {wordList.length}</span>
+            </div>
+
+            <div className="flex items-center gap-3">
+              {streak > 1 && (
+                <div className="flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-amber-500/15 border border-amber-500/30 text-amber-600 dark:text-amber-400 font-bold text-2xs animate-pulse">
+                  <Flame className="w-3 h-3 fill-current" />
+                  <span>x{streak}</span>
+                </div>
+              )}
+              <span className="font-mono text-zen-text dark:text-zen-dark-text">
+                {formatTime(timerSeconds)}
+              </span>
+            </div>
+          </div>
+
+          {/* Progress Bar */}
+          <div className="w-full bg-zen-surface-container dark:bg-zen-dark-surface-high h-2 rounded-full overflow-hidden">
+            <div 
+              className="bg-zen-primary dark:bg-zen-dark-primary h-full transition-all duration-300 rounded-full"
+              style={{ width: `${progressPercent}%` }}
+            />
+          </div>
+        </div>
+
+        {/* Word Target Card with Illustration */}
+        <div className={`zen-card p-4 sm:p-5 rounded-3xl border-2 transition-all duration-300 flex items-center justify-between gap-4 ${
+          isSuccess 
+            ? 'bg-emerald-500/10 dark:bg-emerald-500/15 border-emerald-500/60 shadow-zen-lg scale-102' 
+            : isError 
+            ? 'bg-rose-500/10 dark:bg-rose-500/15 border-rose-500/60 animate-shake' 
+            : 'bg-zen-surface-lowest dark:bg-zen-dark-surface border-zen-border/40 dark:border-zen-dark-border shadow-zen-md'
+        }`}>
+          <div className="min-w-0 flex-1 space-y-1">
+            <div className="flex items-center gap-2">
+              <span className="text-2xs font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-zen-surface-container dark:bg-zen-dark-surface-high text-zen-text-muted">
+                {currentWord.script}
+              </span>
+              <button
+                type="button"
+                onClick={() => playKanaSound(currentWord.kana)}
+                className="p-1.5 rounded-lg bg-zen-primary/10 dark:bg-zen-dark-primary/20 text-zen-primary dark:text-zen-dark-primary hover:scale-110 transition-transform"
+                title="Ascolta pronuncia giapponese"
+              >
+                <Volume2 className="w-3.5 h-3.5" />
+              </button>
+            </div>
+
+            {/* Prompt Target Display */}
+            {isKanaToRomaji ? (
+              <div>
+                <div className="font-kana text-3xl sm:text-4xl font-extrabold text-zen-primary dark:text-zen-dark-primary leading-tight">
+                  {currentWord.kana}
+                </div>
+                <div className="text-xs text-zen-text-muted dark:text-zen-dark-text-muted font-medium mt-0.5">
+                  {lang === 'it' ? currentWord.italian : currentWord.english}
+                </div>
+              </div>
+            ) : (
+              <div>
+                <div className="text-2xl sm:text-3xl font-headline font-bold text-zen-text dark:text-zen-dark-text leading-tight capitalize">
+                  {currentWord.romaji}
+                </div>
+                <div className="text-xs text-zen-primary dark:text-zen-dark-primary font-semibold mt-0.5">
+                  {lang === 'it' ? currentWord.italian : currentWord.english}
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* Right Illustration */}
+          <div className="shrink-0">
+            <VocabIllustration
+              id={currentWord.id}
+              keyword={currentWord.imageKeyword}
+              alt={currentWord.english}
+              className="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl bg-zen-surface-container/30 dark:bg-zen-dark-surface-high/30 p-1 shadow-sm"
+              iconClassName="w-10 h-10 sm:w-12 sm:h-12"
+            />
+          </div>
+        </div>
+
+        {/* ================= Target Placed Slots ================= */}
+        <div className="space-y-2">
+          <div className="flex items-center justify-between text-2xs font-bold text-zen-text-muted uppercase tracking-wider px-1">
+            <span>{t('puzzle.slotsLabel')} ({placedSlots.filter(Boolean).length}/{currentTokens.length})</span>
+            {isError && (
+              <span className="text-rose-500 dark:text-rose-400 font-bold animate-pulse">
+                {t('puzzle.incorrectTryAgain')}
+              </span>
+            )}
+            {isSuccess && (
+              <span className="text-emerald-500 dark:text-emerald-400 font-bold flex items-center gap-1">
+                <CheckCircle2 className="w-3.5 h-3.5" /> {t('puzzle.correct')}!
+              </span>
+            )}
+          </div>
+
+          {/* Slot boxes */}
+          <div className="flex items-center justify-center gap-2 sm:gap-3 flex-wrap">
+            {placedSlots.map((tile, slotIdx) => {
+              const hasTile = tile !== null;
+              const displayText = hasTile 
+                ? (isKanaToRomaji ? tile.romaji : tile.kana) 
+                : '';
+
+              return (
+                <button
+                  key={`slot-${slotIdx}`}
+                  type="button"
+                  onClick={() => handleSlotClick(slotIdx)}
+                  className={`w-14 h-14 sm:w-16 sm:h-16 rounded-2xl border-2 transition-all duration-200 flex flex-col items-center justify-center relative cursor-pointer ${
+                    hasTile
+                      ? isSuccess
+                        ? 'bg-emerald-500 text-white border-emerald-600 shadow-zen-md scale-105'
+                        : isError
+                        ? 'bg-rose-500/15 border-rose-500 text-rose-600 dark:text-rose-400'
+                        : 'bg-zen-primary dark:bg-zen-dark-primary text-white dark:text-zen-dark-on-primary border-zen-primary shadow-zen-sm scale-102'
+                      : 'bg-white/60 dark:bg-zen-dark-surface/60 border-dashed border-zen-border dark:border-zen-dark-border text-zen-text-muted/40 hover:border-zen-primary/50'
+                  }`}
+                  title={hasTile ? 'Tocca per rimuovere' : `Slot vuoto ${slotIdx + 1}`}
+                >
+                  <span className="text-3xs absolute top-1 left-1.5 opacity-50 font-mono font-bold">
+                    {slotIdx + 1}
+                  </span>
+
+                  {hasTile ? (
+                    <span className={`font-bold leading-none ${isKanaToRomaji ? 'font-headline text-base sm:text-lg uppercase' : 'font-kana text-2xl sm:text-3xl'}`}>
+                      {displayText}
+                    </span>
+                  ) : (
+                    <span className="text-xs text-zen-border dark:text-zen-dark-border font-mono">•</span>
+                  )}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* ================= Available Syllable Tiles Pool ================= */}
+        <div className="zen-card p-4 sm:p-5 rounded-3xl border border-zen-border/40 dark:border-zen-dark-border bg-zen-surface-container/30 dark:bg-zen-dark-surface-high/30 space-y-3">
+          <div className="flex items-center justify-between text-2xs font-bold text-zen-text-muted uppercase tracking-wider">
+            <span>{t('puzzle.availableTilesLabel')}</span>
+            <div className="flex items-center gap-1.5">
+              <button
+                type="button"
+                onClick={handleShufflePool}
+                className="p-1.5 rounded-lg bg-zen-surface-lowest dark:bg-zen-dark-surface text-zen-text-muted hover:text-zen-text transition-colors shadow-zen-sm"
+                title={t('puzzle.shuffle')}
+              >
+                <Shuffle className="w-3.5 h-3.5" />
+              </button>
+              <button
+                type="button"
+                onClick={handleClearSlots}
+                className="p-1.5 rounded-lg bg-zen-surface-lowest dark:bg-zen-dark-surface text-zen-text-muted hover:text-rose-500 transition-colors shadow-zen-sm"
+                title={t('puzzle.clearAll')}
+              >
+                <Trash2 className="w-3.5 h-3.5" />
+              </button>
+              <button
+                type="button"
+                onClick={handleUseHint}
+                className="p-1.5 rounded-lg bg-zen-surface-lowest dark:bg-zen-dark-surface text-amber-500 hover:text-amber-600 transition-colors shadow-zen-sm flex items-center gap-1 text-3xs font-bold"
+                title={t('puzzle.hint')}
+              >
+                <Lightbulb className="w-3.5 h-3.5" />
+                <span>{t('puzzle.hint')}</span>
+              </button>
+            </div>
+          </div>
+
+          {/* Tiles Grid */}
+          <div className="flex items-center justify-center gap-2 sm:gap-2.5 flex-wrap min-h-[64px]">
+            {availableTiles.map((tile) => {
+              const displayText = isKanaToRomaji ? tile.romaji : tile.kana;
+
+              return (
+                <button
+                  key={tile.uid}
+                  type="button"
+                  onClick={() => handleTileClick(tile)}
+                  className="w-13 h-13 sm:w-14 sm:h-14 rounded-2xl bg-zen-surface-lowest dark:bg-zen-dark-surface border-2 border-zen-border/70 dark:border-zen-dark-border text-zen-text dark:text-zen-dark-text font-bold shadow-zen-sm hover:border-zen-primary dark:hover:border-zen-dark-primary hover:scale-108 active:scale-95 transition-all flex items-center justify-center cursor-pointer"
+                >
+                  <span className={isKanaToRomaji ? 'font-headline text-sm sm:text-base uppercase tracking-wider' : 'font-kana text-xl sm:text-2xl font-bold text-zen-primary dark:text-zen-dark-primary'}>
+                    {displayText}
+                  </span>
+                </button>
+              );
+            })}
+
+            {availableTiles.length === 0 && (
+              <span className="text-xs text-zen-text-muted italic py-3">
+                {t('puzzle.allTilesPlaced')}
+              </span>
+            )}
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // ======================= COMPLETED SCREEN =======================
+  if (gameState === 'completed') {
+    return (
+      <div className="max-w-md mx-auto zen-card p-6 sm:p-8 border-2 border-emerald-500/40 bg-zen-surface-lowest dark:bg-zen-dark-surface text-center space-y-6 animate-fade-in shadow-zen-xl pb-20 xl:pb-8">
+        <div className="w-20 h-20 rounded-3xl bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 mx-auto flex items-center justify-center border-2 border-emerald-500/30 shadow-zen-md">
+          <Trophy className="w-10 h-10" />
+        </div>
+
+        <div>
+          <h2 className="font-headline text-3xl font-bold text-zen-text dark:text-zen-dark-text">
+            {t('puzzle.victoryTitle')}
+          </h2>
+          <p className="text-sm text-zen-text-muted dark:text-zen-dark-text-muted mt-1">
+            {t('puzzle.victorySubtitle')}
+          </p>
+        </div>
+
+        {/* Stats Grid */}
+        <div className="grid grid-cols-3 gap-3">
+          <div className="p-3 rounded-2xl bg-zen-surface-container/50 dark:bg-zen-dark-surface-high border border-zen-border/40">
+            <span className="text-2xs font-bold text-zen-text-muted uppercase">{t('puzzle.statScore')}</span>
+            <div className="text-xl font-bold font-mono text-zen-primary dark:text-zen-dark-primary mt-0.5">{score}</div>
+          </div>
+          <div className="p-3 rounded-2xl bg-zen-surface-container/50 dark:bg-zen-dark-surface-high border border-zen-border/40">
+            <span className="text-2xs font-bold text-zen-text-muted uppercase">{t('puzzle.statTime')}</span>
+            <div className="text-xl font-bold font-mono text-zen-text dark:text-zen-dark-text mt-0.5">{formatTime(timerSeconds)}</div>
+          </div>
+          <div className="p-3 rounded-2xl bg-zen-surface-container/50 dark:bg-zen-dark-surface-high border border-zen-border/40">
+            <span className="text-2xs font-bold text-zen-text-muted uppercase">{t('puzzle.statStreak')}</span>
+            <div className="text-xl font-bold font-mono text-amber-500 mt-0.5">x{maxStreak}</div>
+          </div>
+        </div>
+
+        <div className="space-y-3 pt-2">
+          <button
+            type="button"
+            onClick={startSession}
+            className="w-full py-3.5 rounded-2xl bg-zen-primary dark:bg-zen-dark-primary hover:bg-zen-primary-dark dark:hover:bg-zen-dark-primary-hover text-white dark:text-zen-dark-on-primary font-bold text-sm shadow-zen-md transition-all flex items-center justify-center gap-2"
+          >
+            <RotateCcw className="w-4 h-4" />
+            <span>{t('puzzle.playAgain')}</span>
+          </button>
+
+          <button
+            type="button"
+            onClick={() => setGameState('setup')}
+            className="w-full py-3 rounded-2xl bg-zen-surface-container dark:bg-zen-dark-surface hover:bg-zen-surface-container-high text-zen-text-muted hover:text-zen-text text-xs font-bold transition-all"
+          >
+            {t('puzzle.changeSettings')}
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  return null;
+}

@@ -12,7 +12,7 @@ const VerificationQuiz = lazy(() => import('./components/VerificationQuiz'));
 const Vocabulary = lazy(() => import('./components/Vocabulary'));
 const StructuredLessons = lazy(() => import('./components/StructuredLessons'));
 const ActiveStudy = lazy(() => import('./components/ActiveStudy/ActiveStudy'));
-const MemoryGame = lazy(() => import('./components/MemoryGame'));
+const GamesHub = lazy(() => import('./components/GamesHub'));
 
 function ModuleLoadingFallback() {
   return (
@@ -119,8 +119,9 @@ export default function App() {
         return <ListeningQuiz scriptMode={scriptMode} updateStats={updateStats} />;
       case 'quiz':
         return <VerificationQuiz scriptMode={scriptMode} updateStats={updateStats} />;
+      case 'games':
       case 'memory':
-        return <MemoryGame />;
+        return <GamesHub scriptMode={scriptMode} />;
       default:
         return <Dashboard setActiveTab={setActiveTab} scriptMode={scriptMode} stats={stats} resetStats={resetStats} />;
     }

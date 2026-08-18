@@ -32,6 +32,9 @@ export const translations = {
       quiz: 'Quiz',
       quizShort: 'Quiz',
       quizDesc: 'Verifica delle Conoscenze',
+      games: 'Giochi',
+      gamesShort: 'Giochi',
+      gamesDesc: 'Dojo Giochi & Sfide Interattive',
       memory: 'Memory Zen',
       memoryShort: 'Memory',
       memoryDesc: 'Gioco delle Coppie & Vocaboli',
@@ -302,6 +305,50 @@ export const translations = {
       victorySubtitle: 'Hai completato con successo la sessione di Memory Zen!',
       playAgain: 'Gioca Ancora',
       changeSettings: 'Altre Modalità'
+    },
+
+    // Games Dojo
+    games: {
+      title: 'Dojo Giochi',
+      subtitle: 'Allena la mente e impara il giapponese con giochi e sfide interattive.',
+      tabPuzzle: 'Kana Puzzle',
+      tabMemory: 'Memory Zen'
+    },
+
+    // Kana Puzzle / Scramble
+    puzzle: {
+      title: 'Kana Word Puzzle',
+      subtitle: 'Ricomponi le parole giapponesi posizionando le tessere nell\'ordine corretto.',
+      modeLabel: '1. Modalità di Gioco',
+      modeKanaToRomajiDesc: 'Vedi Kana ➔ Ricomponi Romaji',
+      modeRomajiToKanaDesc: 'Vedi Romaji ➔ Ricomponi Kana',
+      difficultyLabel: '2. Livello di Difficoltà',
+      diffEasy: 'Facile',
+      diffEasyDesc: '0 extra',
+      diffMed: 'Medio',
+      diffMedDesc: '+2 extra',
+      diffHard: 'Difficile',
+      diffHardDesc: '+5 extra',
+      scriptFilterLabel: '3. Sistema di Scrittura',
+      filterAll: 'Tutti (Hira + Kata)',
+      startBtn: 'Inizia Partita',
+      exit: 'Esci',
+      wordCounter: 'Parola',
+      slotsLabel: 'Caselle Parola',
+      availableTilesLabel: 'Tessere Disponibili',
+      allTilesPlaced: 'Tutte le tessere sono state posizionate.',
+      shuffle: 'Mescola tessere',
+      clearAll: 'Pulisci caselle',
+      hint: 'Aiuto',
+      correct: 'Esatto',
+      incorrectTryAgain: 'Non corretto, riprova!',
+      victoryTitle: 'Ottimo Lavoro!',
+      victorySubtitle: 'Hai completato con successo tutte le parole del puzzle!',
+      statScore: 'Punteggio',
+      statTime: 'Tempo',
+      statStreak: 'Max Streak',
+      playAgain: 'Gioca Ancora',
+      changeSettings: 'Cambia Modalità'
     }
   },
 
@@ -336,6 +383,9 @@ export const translations = {
       quiz: 'Quiz',
       quizShort: 'Quiz',
       quizDesc: 'Knowledge Assessment',
+      games: 'Games',
+      gamesShort: 'Games',
+      gamesDesc: 'Games Dojo & Interactive Challenges',
       memory: 'Zen Memory',
       memoryShort: 'Memory',
       memoryDesc: 'Pairs & Vocabulary Matching',
@@ -604,6 +654,50 @@ export const translations = {
       listenHint: 'Listen',
       victoryTitle: 'Congratulations!',
       victorySubtitle: 'You have successfully completed the Zen Memory session!',
+      playAgain: 'Play Again',
+      changeSettings: 'Change Settings'
+    },
+
+    // Games Dojo
+    games: {
+      title: 'Games Dojo',
+      subtitle: 'Train your brain and learn Japanese through interactive puzzles and games.',
+      tabPuzzle: 'Kana Puzzle',
+      tabMemory: 'Zen Memory'
+    },
+
+    // Kana Puzzle / Scramble
+    puzzle: {
+      title: 'Kana Word Puzzle',
+      subtitle: 'Reconstruct Japanese words by placing syllable tiles in the correct sequence.',
+      modeLabel: '1. Game Mode',
+      modeKanaToRomajiDesc: 'See Kana ➔ Assemble Romaji',
+      modeRomajiToKanaDesc: 'See Romaji ➔ Assemble Kana',
+      difficultyLabel: '2. Difficulty Level',
+      diffEasy: 'Easy',
+      diffEasyDesc: '0 extra',
+      diffMed: 'Medium',
+      diffMedDesc: '+2 extra',
+      diffHard: 'Hard',
+      diffHardDesc: '+5 extra',
+      scriptFilterLabel: '3. Writing System',
+      filterAll: 'All (Hira + Kata)',
+      startBtn: 'Start Puzzle',
+      exit: 'Exit',
+      wordCounter: 'Word',
+      slotsLabel: 'Word Slots',
+      availableTilesLabel: 'Available Tiles',
+      allTilesPlaced: 'All available tiles have been placed.',
+      shuffle: 'Shuffle tiles',
+      clearAll: 'Clear slots',
+      hint: 'Hint',
+      correct: 'Correct',
+      incorrectTryAgain: 'Incorrect, try again!',
+      victoryTitle: 'Great Job!',
+      victorySubtitle: 'You have successfully solved all the word puzzles in this session!',
+      statScore: 'Score',
+      statTime: 'Time',
+      statStreak: 'Max Streak',
       playAgain: 'Play Again',
       changeSettings: 'Change Settings'
     }

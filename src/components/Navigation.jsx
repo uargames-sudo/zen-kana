@@ -20,6 +20,7 @@ import {
   Globe,
   HelpCircle,
   Brain,
+  Gamepad2,
 } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 
@@ -96,7 +97,7 @@ export default function Navigation({
     { id: 'writing', label: t('nav.writing'), shortLabel: t('nav.writingShort'), icon: PenTool, desc: t('nav.writingDesc') },
     { id: 'listening', label: t('nav.listening'), shortLabel: t('nav.listeningShort'), icon: Volume2, desc: t('nav.listeningDesc') },
     { id: 'quiz', label: t('nav.quiz'), shortLabel: t('nav.quizShort'), icon: Award, desc: t('nav.quizDesc') },
-    { id: 'memory', label: t('nav.memory'), shortLabel: t('nav.memoryShort'), icon: Brain, desc: t('nav.memoryDesc') },
+    { id: 'games', label: t('nav.games'), shortLabel: t('nav.gamesShort'), icon: Gamepad2, desc: t('nav.gamesDesc') },
   ];
 
   // 5 Primary items for the mobile bottom nav + Menu toggle
