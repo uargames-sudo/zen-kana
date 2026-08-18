@@ -139,38 +139,36 @@ export default function VerificationQuiz({ scriptMode, updateStats }) {
                 return (
                   <div
                     key={`wrong-q-${idx}`}
-                    className="p-4 rounded-2xl bg-zen-surface-container/40 dark:bg-zen-dark-surface-high border border-zen-border/40 dark:border-zen-dark-border flex flex-col sm:flex-row sm:items-center justify-between gap-4"
+                    className="p-3.5 sm:p-4 rounded-2xl bg-zen-surface-container/40 dark:bg-zen-dark-surface-high border border-zen-border/40 dark:border-zen-dark-border flex flex-col md:flex-row md:items-center justify-between gap-3 sm:gap-4"
                   >
-                    <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-3 min-w-0">
                       <button
                         type="button"
                         onClick={() => playKanaSound(targetText)}
-                        className="p-3 rounded-xl bg-zen-primary/10 dark:bg-zen-dark-primary/20 text-zen-primary dark:text-zen-dark-primary hover:bg-zen-primary/20 transition-colors shadow-sm shrink-0"
+                        className="p-2.5 sm:p-3 rounded-xl bg-zen-primary/10 dark:bg-zen-dark-primary/20 text-zen-primary dark:text-zen-dark-primary hover:bg-zen-primary/20 transition-colors shadow-sm shrink-0"
                         title="Audio"
                       >
-                        <Volume2 className="w-5 h-5" />
+                        <Volume2 className="w-4 h-4 sm:w-5 sm:h-5" />
                       </button>
-                      <div>
-                        <div className="flex items-center gap-2">
-                          <span className="font-kana font-bold text-2xl text-zen-text dark:text-white">
-                            {targetText}
+                      <div className="flex items-baseline gap-2 flex-wrap min-w-0">
+                        <span className="font-kana font-bold text-xl sm:text-2xl text-zen-text dark:text-white whitespace-nowrap">
+                          {targetText}
+                        </span>
+                        {!isKana && (
+                          <span className="text-xs font-mono text-zen-text-muted dark:text-zen-dark-text-muted whitespace-nowrap">
+                            ({q.target.romaji})
                           </span>
-                          {!isKana && (
-                            <span className="text-xs font-mono text-zen-text-muted dark:text-zen-dark-text-muted">
-                              ({q.target.romaji})
-                            </span>
-                          )}
-                        </div>
+                        )}
                       </div>
                     </div>
 
-                    <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4 text-xs font-semibold">
-                      <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-rose-500/10 text-rose-600 dark:text-rose-400 border border-rose-500/30">
+                    <div className="flex flex-wrap items-center gap-2 text-xs font-semibold shrink-0">
+                      <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-rose-500/10 text-rose-600 dark:text-rose-400 border border-rose-500/30 whitespace-nowrap">
                         <X className="w-3.5 h-3.5 shrink-0" />
                         <span>{lang === 'it' ? 'Tua risposta' : 'Your answer'}: <strong>{userLabel}</strong></span>
                       </div>
 
-                      <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30">
+                      <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30 whitespace-nowrap">
                         <Check className="w-3.5 h-3.5 shrink-0" />
                         <span>{lang === 'it' ? 'Corretta' : 'Correct'}: <strong>{correctLabel}</strong></span>
                       </div>
