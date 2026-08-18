@@ -410,12 +410,16 @@ export function getKanaExample(item, lang = 'it') {
     const entry = KANA_EXAMPLES_MAP[item.hiragana];
     return lang === 'it' ? entry.it : entry.en;
   }
-  if (item.katakana && KANA_EXAMPLES_MAP[item.katakana]) {
-    const entry = KANA_EXAMPLES_MAP[item.katakana];
-    return lang === 'it' ? entry.it : entry.en;
-  }
   if (lang === 'it') {
     return item.exampleIt || item.example || '';
   }
   return item.exampleEn || item.example || '';
 }
+
+export function getKanaExampleWord(item) {
+  const exampleStr = getKanaExample(item, 'it');
+  if (!exampleStr) return '';
+  const match = exampleStr.match(/^([^\s(]+)/);
+  return match ? match[1].trim() : '';
+}
+
