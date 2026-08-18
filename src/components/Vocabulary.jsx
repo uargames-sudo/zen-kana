@@ -151,8 +151,8 @@ export default function Vocabulary() {
                   <div className="text-sm font-bold font-headline text-zen-text dark:text-zen-dark-text tracking-wide">
                     {word.romaji}
                   </div>
-                  <div className="text-xs text-zen-text-muted dark:text-zen-dark-text-muted font-medium truncate">
-                    {lang === 'it' ? `${word.italian} • ${word.english}` : `${word.english} • ${word.italian}`}
+                  <div className="text-xs text-zen-text-muted dark:text-zen-dark-text-muted font-medium truncate capitalize">
+                    {lang === 'it' ? (word.italian || word.english) : (word.english || word.italian)}
                   </div>
                 </div>
 
