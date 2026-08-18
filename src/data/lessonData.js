@@ -634,10 +634,10 @@ const PHONETICS_SYLLABLES = [
           title: 'How Small っ (Sokuon) Works in Hiragana',
           intro: 'Small っ (written at 1/4 size) is NEVER pronounced as "tsu". It creates a tiny glottal stop (a beat of silence) that doubles the subsequent consonant (K, S, T, P)!',
           points: [
-            'ki + small tsu + pu = kippu ("ticket")',
-            'ga + small tsu + kou = gakkou ("school")',
-            'za + small tsu + shi = zasshi ("magazine")',
-            'ki + small tsu + te = kitte ("stamp")'
+            'き (ki) + っ (pause) + ぷ (pu) = きっぷ (kippu, "ticket")',
+            'が (ga) + っ (pause) + こう (kou) = がっこう (gakkou, "school")',
+            'ざ (za) + っ (pause) + し (shi) = ざっし (zasshi, "magazine")',
+            'き (ki) + っ (pause) + て (te) = きって (kitte, "stamp")'
           ],
           tip: '💡 Rhythm Tip: Hold your breath for half a second before releasing the next consonant. Count 1 distinct beat on the pause!'
         }
@@ -664,10 +664,10 @@ const PHONETICS_SYLLABLES = [
           title: 'How Small ッ Works in Katakana',
           intro: 'In loanwords from Western languages, small ッ reproduces double consonants and abrupt consonant endings from English and European words.',
           points: [
-            'be + small tsu + do = beddo ("bed")',
-            'sa + small tsu + kaa = sakkaa ("soccer")',
-            'ko + small tsu + pu = koppu ("glass / cup")',
-            'ba + small tsu + gu = baggu ("bag")'
+            'ベ (be) + ッ (pause) + ド (do) = ベッド (beddo, "bed")',
+            'サ (sa) + ッ (pause) + カー (kaa) = サッカー (sakkaa, "soccer")',
+            'コ (ko) + ッ (pause) + プ (pu) = コップ (koppu, "glass / cup")',
+            'バ (ba) + ッ (pause) + グ (gu) = バッグ (baggu, "bag")'
           ],
           tip: '💡 Graphic Rule: Small ッ is placed in the bottom-left corner of the character cell, occupying about 1/4 of the space.'
         }
@@ -743,10 +743,10 @@ const PHONETICS_SYLLABLES = [
           title: 'The Chōonpu (ー) Mark in Katakana',
           intro: 'In Katakana, long vowels do NOT use extra letters. Instead, a universal mark is used: the horizontal line "ー" (Chōonpu), extending the vowel by 1 full beat!',
           points: [
-            'ko + ー + hi + ー = コーヒー (koohii, "coffee")',
-            'ke + ー + ki = ケーキ (keeki, "cake")',
-            'ta + ku + shi + ー = タクシー (takushii, "taxi")',
-            'no + ー + to = ノート (nooto, "notebook")'
+            'コ (ko) + ー + ヒ (hi) + ー = コーヒー (koohii, "coffee")',
+            'ケ (ke) + ー + キ (ki) = ケーキ (keeki, "cake")',
+            'タ (ta) + ク (ku) + シ (shi) + ー = タクシー (takushii, "taxi")',
+            'ノ (no) + ー + ト (to) = ノート (nooto, "notebook")'
           ],
           tip: '💡 Stroke Orientation: In horizontal writing it is drawn left-to-right (ー). In vertical writing, it rotates into a vertical line (丨)!'
         }
@@ -819,10 +819,10 @@ const PHONETICS_SYLLABLES = [
           title: 'How the Character ン Functions in Katakana',
           intro: 'Katakana uses "ン" to transcribe all foreign words ending in N or nasal sounds, giving the syllable a complete rhythmic beat (1 mora).',
           points: [
-            'pa + n = パン (pan, from Portuguese "pão" / bread)',
-            'pe + n = ペン (pen, "pen")',
-            'pa + so + ko + n = パソコン (pasokon, "PC / computer")',
-            'su + pu + ー + n = スプーン (supuun, "spoon")'
+            'パ (pa) + ン (n) = パン (pan, from Portuguese "pão" / bread)',
+            'ペ (pe) + ン (n) = ペン (pen, "pen")',
+            'パ (pa) + ソ (so) + コ (ko) + ン (n) = パソコン (pasokon, "PC / computer")',
+            'ス (su) + プ (pu) + ー (long) + ン (n) = スプーン (supuun, "spoon")'
           ],
           tip: '💡 Vital Graphic Distinction: Never confuse ン (N, upward stroke with 1 slant dot) with ソ (SO, downward stroke) or シ (SHI, 2 dots)!'
         }
