@@ -600,45 +600,77 @@ const PHONETICS_SYLLABLES = [
     id: 1,
     topic: 'sokuon',
     hiraKana: [
-      { char: 'っ', cleanRomaji: 'sokuon (っ)', baseChar: 'つ', modifier: 'piccolo', desc: 'Raddoppia consonante' },
-      { char: 'っき', cleanRomaji: 'kki', baseChar: 'き', modifier: 'っ', desc: 'Doppia K' },
-      { char: 'っし', cleanRomaji: 'sshi', baseChar: 'し', modifier: 'っ', desc: 'Doppia S' },
-      { char: 'って', cleanRomaji: 'tte', baseChar: 'て', modifier: 'っ', desc: 'Doppia T' },
-      { char: 'っぷ', cleanRomaji: 'ppu', baseChar: 'ぷ', modifier: 'っ', desc: 'Doppia P' }
+      { char: 'っ', cleanRomaji: 'sokuon (っ)', baseChar: 'つ', modifier: 'piccolo', descIt: 'Raddoppia consonante', descEn: 'Doubles consonant' },
+      { char: 'っき', cleanRomaji: 'kki', baseChar: 'き', modifier: 'っ', descIt: 'Doppia K', descEn: 'Double K' },
+      { char: 'っし', cleanRomaji: 'sshi', baseChar: 'し', modifier: 'っ', descIt: 'Doppia S', descEn: 'Double S' },
+      { char: 'って', cleanRomaji: 'tte', baseChar: 'て', modifier: 'っ', descIt: 'Doppia T', descEn: 'Double T' },
+      { char: 'っぷ', cleanRomaji: 'ppu', baseChar: 'ぷ', modifier: 'っ', descIt: 'Doppia P', descEn: 'Double P' }
     ],
     kataKana: [
-      { char: 'ッ', cleanRomaji: 'sokuon (ッ)', baseChar: 'ツ', modifier: 'small', desc: 'Doubles consonant' },
-      { char: 'ッカ', cleanRomaji: 'kka', baseChar: 'カ', modifier: 'ッ', desc: 'Double K' },
-      { char: 'ッシ', cleanRomaji: 'sshi', baseChar: 'シ', modifier: 'ッ', desc: 'Double S' },
-      { char: 'ット', cleanRomaji: 'tto', baseChar: 'ト', modifier: 'ッ', desc: 'Double T' },
-      { char: 'ップ', cleanRomaji: 'ppu', baseChar: 'プ', modifier: 'ッ', desc: 'Double P' }
+      { char: 'ッ', cleanRomaji: 'sokuon (ッ)', baseChar: 'ツ', modifier: 'small', descIt: 'Raddoppia consonante', descEn: 'Doubles consonant' },
+      { char: 'ッカ', cleanRomaji: 'kka', baseChar: 'カ', modifier: 'ッ', descIt: 'Doppia K', descEn: 'Double K' },
+      { char: 'ッシ', cleanRomaji: 'sshi', baseChar: 'シ', modifier: 'ッ', descIt: 'Doppia S', descEn: 'Double S' },
+      { char: 'ット', cleanRomaji: 'tto', baseChar: 'ト', modifier: 'ッ', descIt: 'Doppia T', descEn: 'Double T' },
+      { char: 'ップ', cleanRomaji: 'ppu', baseChar: 'プ', modifier: 'ッ', descIt: 'Doppia P', descEn: 'Double P' }
     ],
-    titleIt: 'Sokuon (促音): Piccolo っ/ッ e Consonanti Doppie',
-    titleEn: 'Sokuon: Small っ/ッ & Double Consonants',
-    descIt: 'Il salto di 1 battito (glottal stop) che raddoppia la consonante successiva (K, S, T, P).',
-    descEn: 'The 1-beat glottal pause that doubles the following consonant (K, S, T, P).',
-    theory: {
-      it: {
-        title: 'Come funziona il Piccolo っ / ッ (Sokuon)',
-        intro: 'Il piccolo っ (scritto a circa 1/4 della dimensione normale) NON si pronuncia "tsu". Rappresenta una brevissima pausa di silenzio (glottal stop) che raddoppia la consonante successiva!',
-        points: [
-          'き (ki) + っ (pausa) + ぷ (pu) = きっぷ (kippu, "biglietto")',
-          'べ (be) + ッ (pausa) + ド (do) = ベッド (beddo, "letto")',
-          'さ (sa) + ッ (pausa) + カー (kaa) = サッカー (sakkaa, "calcio")',
-          'Si usa prima di consonanti sorde o sonore (K, S, T, P, G, D, B)'
-        ],
-        tip: '💡 Trucco di Ritmo: Trattieni il respiro per un istante prima di pronunciare la consonante successiva. Conta mentalmente 1 battito sulla pausa!'
-      },
-      en: {
-        title: 'How Small っ / ッ (Sokuon) Works',
-        intro: 'Small っ (written at 1/4 size) is NEVER pronounced as "tsu". It creates a tiny glottal stop (a beat of silence) that doubles the subsequent consonant!',
-        points: [
-          'ki + small tsu + pu = kippu ("ticket")',
-          'be + small tsu + do = beddo ("bed")',
-          'sa + small tsu + kaa = sakkaa ("soccer")',
-          'Used strictly before consonants (K, S, T, P, G, D, B)'
-        ],
-        tip: '💡 Rhythm Tip: Hold your breath for half a second before releasing the next consonant. Count 1 distinct beat on the pause!'
+    hiragana: {
+      titleIt: 'Sokuon (促音): Piccolo っ e Consonanti Doppie',
+      titleEn: 'Sokuon: Small っ & Double Consonants',
+      descIt: 'Il salto di 1 battito (glottal stop) che raddoppia la consonante successiva nelle parole native.',
+      descEn: 'The 1-beat glottal pause that doubles the following consonant in native words.',
+      theory: {
+        it: {
+          title: 'Come funziona il Piccolo っ (Sokuon)',
+          intro: 'Il piccolo っ (scritto a circa 1/4 della dimensione normale) NON si pronuncia "tsu". Rappresenta una brevissima pausa di silenzio (glottal stop) che raddoppia il suono della consonante successiva (K, S, T, P)!',
+          points: [
+            'き (ki) + っ (pausa) + ぷ (pu) = きっぷ (kippu, "biglietto")',
+            'が (ga) + っ (pausa) + こう (kou) = がっこう (gakkou, "scuola")',
+            'ざ (za) + っ (pausa) + し (shi) = ざっし (zasshi, "rivista")',
+            'き (ki) + っ (pausa) + て (te) = きって (kitte, "francobollo")'
+          ],
+          tip: '💡 Trucco di Ritmo: Trattieni il respiro per un istante prima di pronunciare la consonante successiva. Conta mentalmente 1 battito sulla pausa!'
+        },
+        en: {
+          title: 'How Small っ (Sokuon) Works in Hiragana',
+          intro: 'Small っ (written at 1/4 size) is NEVER pronounced as "tsu". It creates a tiny glottal stop (a beat of silence) that doubles the subsequent consonant (K, S, T, P)!',
+          points: [
+            'ki + small tsu + pu = kippu ("ticket")',
+            'ga + small tsu + kou = gakkou ("school")',
+            'za + small tsu + shi = zasshi ("magazine")',
+            'ki + small tsu + te = kitte ("stamp")'
+          ],
+          tip: '💡 Rhythm Tip: Hold your breath for half a second before releasing the next consonant. Count 1 distinct beat on the pause!'
+        }
+      }
+    },
+    katakana: {
+      titleIt: 'Sokuon (促音): Piccolo ッ nei Prestiti Stranieri',
+      titleEn: 'Sokuon: Small ッ in Foreign Loanwords',
+      descIt: 'Il raddoppio consonantico e la pausa ritmica nelle parole occidentali (Gairaigo).',
+      descEn: 'Consonant doubling and rhythmic pause in loanwords (Gairaigo).',
+      theory: {
+        it: {
+          title: 'Come funziona il Piccolo ッ in Katakana',
+          intro: 'Nei prestiti da lingue straniere, il piccolo ッ serve a riprodurre le consonanti doppie e i suoni consonantici netti e troncati delle parole occidentali.',
+          points: [
+            'ベ (be) + ッ (pausa) + ド (do) = ベッド (beddo, "bed / letto")',
+            'サ (sa) + ッ (pausa) + カー (kaa) = サッカー (sakkaa, "soccer / calcio")',
+            'コ (ko) + ッ (pausa) + プ (pu) = コップ (koppu, "copo / bicchiere")',
+            'バ (ba) + ッ (pausa) + グ (gu) = バッグ (baggu, "bag / borsa")'
+          ],
+          tip: '💡 Regola Grafica: Il piccolo ッ si posiziona in basso a sinistra nel quadrato ideale del carattere, occupando circa 1/4 dello spazio.'
+        },
+        en: {
+          title: 'How Small ッ Works in Katakana',
+          intro: 'In loanwords from Western languages, small ッ reproduces double consonants and abrupt consonant endings from English and European words.',
+          points: [
+            'be + small tsu + do = beddo ("bed")',
+            'sa + small tsu + kaa = sakkaa ("soccer")',
+            'ko + small tsu + pu = koppu ("glass / cup")',
+            'ba + small tsu + gu = baggu ("bag")'
+          ],
+          tip: '💡 Graphic Rule: Small ッ is placed in the bottom-left corner of the character cell, occupying about 1/4 of the space.'
+        }
       }
     }
   },
@@ -646,46 +678,78 @@ const PHONETICS_SYLLABLES = [
     id: 2,
     topic: 'long-vowels',
     hiraKana: [
-      { char: 'ああ', cleanRomaji: 'aa (ā)', baseChar: 'あ', modifier: 'あ', desc: 'Allungamento A' },
-      { char: 'いい', cleanRomaji: 'ii (ī)', baseChar: 'い', modifier: 'い', desc: 'Allungamento I' },
-      { char: 'うう', cleanRomaji: 'uu (ū)', baseChar: 'う', modifier: 'う', desc: 'Allungamento U' },
-      { char: 'えい', cleanRomaji: 'ee / ei', baseChar: 'え', modifier: 'い', desc: 'Allungamento E con い' },
-      { char: 'おう', cleanRomaji: 'oo / ou', baseChar: 'お', modifier: 'う', desc: 'Allungamento O con う' }
+      { char: 'ああ', cleanRomaji: 'aa (ā)', baseChar: 'あ', modifier: 'あ', descIt: 'Allungamento A', descEn: 'Long A' },
+      { char: 'いい', cleanRomaji: 'ii (ī)', baseChar: 'い', modifier: 'い', descIt: 'Allungamento I', descEn: 'Long I' },
+      { char: 'うう', cleanRomaji: 'uu (ū)', baseChar: 'う', modifier: 'う', descIt: 'Allungamento U', descEn: 'Long U' },
+      { char: 'えい', cleanRomaji: 'ee / ei', baseChar: 'え', modifier: 'い', descIt: 'Allungamento E con い', descEn: 'Long E with い' },
+      { char: 'おう', cleanRomaji: 'oo / ou', baseChar: 'お', modifier: 'う', descIt: 'Allungamento O con う', descEn: 'Long O with う' }
     ],
     kataKana: [
-      { char: 'ー', cleanRomaji: 'chōonpu (ー)', baseChar: 'ー', modifier: 'lungo', desc: 'Allunga di 1 mora' },
-      { char: 'アー', cleanRomaji: 'aa', baseChar: 'ア', modifier: 'ー', desc: 'A allungata' },
-      { char: 'イー', cleanRomaji: 'ii', baseChar: 'イ', modifier: 'ー', desc: 'I allungata' },
-      { char: 'ウー', cleanRomaji: 'uu', baseChar: 'ウ', modifier: 'ー', desc: 'U allungata' },
-      { char: 'エー', cleanRomaji: 'ee', baseChar: 'エ', modifier: 'ー', desc: 'E allungata' },
-      { char: 'オー', cleanRomaji: 'oo', baseChar: 'オ', modifier: 'ー', desc: 'O allungata' }
+      { char: 'ー', cleanRomaji: 'chōonpu (ー)', baseChar: 'ー', modifier: 'lungo', descIt: 'Allunga di 1 mora', descEn: 'Lengthens by 1 mora' },
+      { char: 'アー', cleanRomaji: 'aa', baseChar: 'ア', modifier: 'ー', descIt: 'A allungata (2 morae)', descEn: 'Long A (2 morae)' },
+      { char: 'イー', cleanRomaji: 'ii', baseChar: 'イ', modifier: 'ー', descIt: 'I allungata (2 morae)', descEn: 'Long I (2 morae)' },
+      { char: 'ウー', cleanRomaji: 'uu', baseChar: 'ウ', modifier: 'ー', descIt: 'U allungata (2 morae)', descEn: 'Long U (2 morae)' },
+      { char: 'エー', cleanRomaji: 'ee', baseChar: 'エ', modifier: 'ー', descIt: 'E allungata (2 morae)', descEn: 'Long E (2 morae)' },
+      { char: 'オー', cleanRomaji: 'oo', baseChar: 'オ', modifier: 'ー', descIt: 'O allungata (2 morae)', descEn: 'Long O (2 morae)' }
     ],
-    titleIt: 'Vocali Lunghe (Chōonpu ー & Allungamenti Hiragana)',
-    titleEn: 'Long Vowels (Chōonpu ー & Hiragana Elongations)',
-    descIt: 'Allungamento vocalico a 2 battiti: il trattino ー in Katakana e le regole おう/えい in Hiragana.',
-    descEn: 'Two-beat vowel lengthening: the ー mark in Katakana and おう/えい rules in Hiragana.',
-    theory: {
-      it: {
-        title: 'Regole delle Vocali Lunghe (Chōon)',
-        intro: 'In giapponese la lunghezza delle vocali cambia completamente il significato della parola! In Katakana si usa il trattino orizzontale "ー", mentre in Hiragana si aggiunge una vocale d\'estensione (in particolare U per allungare O, e I per allungare E).',
-        points: [
-          'In Katakana: コーヒー (koohii = caffè), ケーキ (keeki = torta)',
-          'In Hiragana: O si allunga con う (es. たいよう = taiyoo, きょう = kyoo)',
-          'In Hiragana: E si allunga con い (es. せんせい = sensee)',
-          'Coppie minime: おばさん (zia, 4 morae) vs おばあさん (nonna, 5 morae)'
-        ],
-        tip: '💡 Regola d\'Oro: Mantieni la vocale per il doppio del tempo (2 battiti invece di 1). Non interrompere il flusso d\'aria!'
-      },
-      en: {
-        title: 'Rules of Long Vowels (Chōon)',
-        intro: 'In Japanese, vowel length completely changes the meaning of words! Katakana uses the horizontal line "ー", while Hiragana appends extension vowels (specifically U extends O, and I extends E).',
-        points: [
-          'In Katakana: コーヒー (koohii = coffee), ケーキ (keeki = cake)',
-          'In Hiragana: O extends with う (e.g. たいよう = taiyou, きょう = kyou)',
-          'In Hiragana: E extends with い (e.g. せんせい = sensei/sensee)',
-          'Minimal pairs: おばさん (aunt) vs おばあさん (grandmother)'
-        ],
-        tip: '💡 Golden Rule: Hold the vowel sound for exactly twice as long (2 beats instead of 1). Keep air flowing smoothly!'
+    hiragana: {
+      titleIt: 'Allungamenti Vocalici in Hiragana (AA, II, UU, EI, OU)',
+      titleEn: 'Hiragana Vowel Elongation (AA, II, UU, EI, OU)',
+      descIt: 'Estensione a 2 battiti: le regole fondamentali per allungare le vocali (O con う, E con い).',
+      descEn: 'Two-beat vowel lengthening: the core rules for extending vowels (O with う, E with い).',
+      theory: {
+        it: {
+          title: 'Regole di Allungamento Vocale in Hiragana',
+          intro: 'In Hiragana la lunghezza delle vocali è fonologica e cambia radicalmente il significato della parola! Per allungare una vocale si aggiunge una seconda vocale specifica:',
+          points: [
+            'O si allunga con う: たいよう (taiyou = sole), きょう (kyou = oggi), おとうさん (otousan = padre)',
+            'E si allunga con い: せんせい (sensei = maestro), がくせい (gakusei = studente)',
+            'A, I, U si allungano con あ, い, う: おかあさん (okaasan = madre), おにいさん (oniisan = fratello)',
+            'Coppie minime cruciali: おばさん (zia, 4 morae) vs おばあさん (nonna, 5 morae); ゆき (neve) vs ゆうき (coraggio)'
+          ],
+          tip: '💡 Regola d\'Oro: Mantieni il suono vocalico per il doppio del tempo (2 battiti invece di 1) senza spezzare l\'emissione di voce!'
+        },
+        en: {
+          title: 'Vowel Elongation Rules in Hiragana',
+          intro: 'In Hiragana, vowel duration is phonemic and completely changes word meaning! Specific vowels are appended to create long sounds:',
+          points: [
+            'O extends with う: たいよう (taiyou = sun), きょう (kyou = today), おとうさん (otousan = father)',
+            'E extends with い: せんせい (sensei = teacher), がくせい (gakusei = student)',
+            'A, I, U extend with あ, い, う: おかあさん (okaasan = mother), おにいさん (oniisan = brother)',
+            'Minimal pairs: おばさん (aunt) vs おばあさん (grandmother); ゆき (snow) vs ゆうき (courage)'
+          ],
+          tip: '💡 Golden Rule: Hold the vowel sound for exactly twice as long (2 beats instead of 1) in a continuous smooth breath!'
+        }
+      }
+    },
+    katakana: {
+      titleIt: 'Chōonpu (長音符): Il Trattino di Allungamento ー',
+      titleEn: 'Chōonpu: The Katakana Lengthening Mark ー',
+      descIt: 'Il tratto orizzontale ー che estende di 1 tempo qualsiasi vocale precedente.',
+      descEn: 'The horizontal mark ー that extends any preceding vowel sound by 1 beat.',
+      theory: {
+        it: {
+          title: 'Il Segno Chōonpu (ー) in Katakana',
+          intro: 'Nel Katakana le vocali lunghe NON usano lettere aggiuntive ma un segno speciale universale: il trattino orizzontale "ー" (Chōonpu), che raddoppia la durata di qualsiasi vocale!',
+          points: [
+            'コ (ko) + ー + ヒ (hi) + ー = コーヒー (koohii, "coffee / caffè")',
+            'ケ (ke) + ー + キ (ki) = ケーキ (keeki, "cake / torta")',
+            'タ (ta) + ク (ku) + シ (shi) + ー = タクシー (takushii, "taxi")',
+            'ノ (no) + ー + ト (to) = ノート (nooto, "notebook / quaderno")'
+          ],
+          tip: '💡 Direzione del tratto: Nella scrittura orizzontale si traccia da sinistra a destra (ー). Nella scrittura verticale tradizionale diventa una linea verticale (丨)!'
+        },
+        en: {
+          title: 'The Chōonpu (ー) Mark in Katakana',
+          intro: 'In Katakana, long vowels do NOT use extra letters. Instead, a universal mark is used: the horizontal line "ー" (Chōonpu), extending the vowel by 1 full beat!',
+          points: [
+            'ko + ー + hi + ー = コーヒー (koohii, "coffee")',
+            'ke + ー + ki = ケーキ (keeki, "cake")',
+            'ta + ku + shi + ー = タクシー (takushii, "taxi")',
+            'no + ー + to = ノート (nooto, "notebook")'
+          ],
+          tip: '💡 Stroke Orientation: In horizontal writing it is drawn left-to-right (ー). In vertical writing, it rotates into a vertical line (丨)!'
+        }
       }
     }
   },
@@ -693,43 +757,75 @@ const PHONETICS_SYLLABLES = [
     id: 3,
     topic: 'particles-n',
     hiraKana: [
-      { char: 'は', cleanRomaji: 'wa (particella)', baseChar: 'は', modifier: 'particella', desc: 'Letta "WA" come tema' },
-      { char: 'へ', cleanRomaji: 'e (particella)', baseChar: 'へ', modifier: 'particella', desc: 'Letta "E" come direzione' },
-      { char: 'を', cleanRomaji: 'o (particella)', baseChar: 'を', modifier: 'particella', desc: 'Letta "O" come oggetto' },
-      { char: 'ん', cleanRomaji: 'n (mora)', baseChar: 'ん', modifier: 'nasale', desc: 'Consonante autonoma (1 battito)' }
+      { char: 'は', cleanRomaji: 'wa (particella)', baseChar: 'は', modifier: 'particella', descIt: 'Letta "WA" come tema', descEn: 'Read "WA" as topic' },
+      { char: 'へ', cleanRomaji: 'e (particella)', baseChar: 'へ', modifier: 'particella', descIt: 'Letta "E" come direzione', descEn: 'Read "E" as direction' },
+      { char: 'を', cleanRomaji: 'o (particella)', baseChar: 'を', modifier: 'particella', descIt: 'Letta "O" come oggetto', descEn: 'Read "O" as object' },
+      { char: 'ん', cleanRomaji: 'n (mora)', baseChar: 'ん', modifier: 'nasale', descIt: 'Nasale autonoma (1 mora)', descEn: 'Syllabic nasal (1 mora)' }
     ],
     kataKana: [
-      { char: 'ン', cleanRomaji: 'n (mora)', baseChar: 'ン', modifier: 'nasale', desc: 'Consonante autonoma (1 battito)' },
-      { char: 'アン', cleanRomaji: 'an', baseChar: 'ア', modifier: 'ン', desc: 'A + N' },
-      { char: 'イン', cleanRomaji: 'in', baseChar: 'イ', modifier: 'ン', desc: 'I + N' },
-      { char: 'オン', cleanRomaji: 'on', baseChar: 'オ', modifier: 'ン', desc: 'O + N' }
+      { char: 'ン', cleanRomaji: 'n (mora)', baseChar: 'ン', modifier: 'nasale', descIt: 'Nasale autonoma (1 mora)', descEn: 'Syllabic nasal (1 mora)' },
+      { char: 'アン', cleanRomaji: 'an', baseChar: 'ア', modifier: 'ン', descIt: 'Sillaba A + N', descEn: 'Syllable A + N' },
+      { char: 'イン', cleanRomaji: 'in', baseChar: 'イ', modifier: 'ン', descIt: 'Sillaba I + N', descEn: 'Syllable I + N' },
+      { char: 'オン', cleanRomaji: 'on', baseChar: 'オ', modifier: 'ン', descIt: 'Sillaba O + N', descEn: 'Syllable O + N' }
     ],
-    titleIt: 'Particelle Speciali & la Nasale Finale (は・へ・を & ん/ン)',
-    titleEn: 'Special Particles & Final Nasal (は・へ・を & ん/ン)',
-    descIt: 'Le eccezioni storiche di pronuncia per le particelle e il comportamento della nasale sillabica.',
-    descEn: 'Historical pronunciation exceptions for particles and syllabic nasal behaviors.',
-    theory: {
-      it: {
-        title: 'Particelle con Pronuncia Speciale e la N finale',
-        intro: 'Tre particelle grammaticali mantengono la loro grafia storica ma cambiano pronuncia quando usate nella frase. Inoltre, "ん / ン" è l\'unica consonante autonoma che vale un intero battito!',
-        points: [
-          'は come particella di tema si legge "WA" (es. こんにちは = konnichiWA)',
-          'へ come particella di moto a luogo si legge "E" (es. とうきょう へ = tokyou E)',
-          'を come particella di complemento oggetto si legge "O" (es. ほん を よむ = hon O yomu)',
-          'ん/ン vale 1 tempo intero e assimila il suono (m/n/ng) prima di B, M, P, K'
-        ],
-        tip: '💡 Attenzione: Si scrive "は" ma si pronuncia "WA" SOLO quando è la particella grammaticale (o in saluti fissi come konnichiwa / konbanwa)!'
-      },
-      en: {
-        title: 'Particles with Special Pronunciation & Final N',
-        intro: 'Three grammatical particles retain historical spelling but change their pronunciation in sentences. Also, "ん / ン" is the only independent consonant with a full beat!',
-        points: [
-          'は as topic particle is pronounced "WA" (e.g. こんにちは = konnichiWA)',
-          'へ as directional particle is pronounced "E" (e.g. とうきょう へ = tokyo E)',
-          'を as direct object particle is pronounced "O" (e.g. ほん を = hon O)',
-          'ん/ン takes a full beat and assimilates (m/n/ng) before B, M, P, K'
-        ],
-        tip: '💡 Note: "は" is pronounced "WA" ONLY when acting as a grammatical particle or in set greetings (konnichiwa / konbanwa)!'
+    hiragana: {
+      titleIt: 'Particelle Speciali (は・へ・を) & la Nasale ん',
+      titleEn: 'Special Particles (は・へ・を) & Final Nasal ん',
+      descIt: 'Le eccezioni storiche di pronuncia per le particelle e il comportamento della nasale sillabica.',
+      descEn: 'Historical pronunciation exceptions for particles and syllabic nasal behaviors.',
+      theory: {
+        it: {
+          title: 'Particelle con Lettura Speciale e la sillaba ん',
+          intro: 'In Hiragana tre particelle grammaticali mantengono la loro grafia tradizionale ma cambiano pronuncia quando collegano le parole nella frase. Inoltre, "ん" è l\'unica consonante autonoma con un tempo intero (1 mora)!',
+          points: [
+            'は come particella di tema si legge "WA": こんにちは (konnichiWA), わたし は (watashi WA)',
+            'へ come particella di moto a luogo si legge "E": とうきょう へ (Tokyo E = verso Tokyo)',
+            'を come particella di complemento oggetto si legge "O": ほん を よむ (hon O yomu = leggere un libro)',
+            'ん vale 1 tempo intero e assimila il suono (m/n/ng) prima di B, M, P, K'
+          ],
+          tip: '💡 Attenzione: Si scrive "は" ma si legge "WA" SOLO quando ha funzione grammaticale di particella o nei saluti storici come konnichiwa / konbanwa!'
+        },
+        en: {
+          title: 'Special Particle Readings & Syllabic ん in Hiragana',
+          intro: 'Three grammatical particles retain historical spelling but change their pronunciation in sentences. Also, "ん" is the only independent consonant with a full beat!',
+          points: [
+            'は as topic particle is pronounced "WA": こんにちは (konnichiWA), わたし は (watashi WA)',
+            'へ as directional particle is pronounced "E": とうきょう へ (Tokyo E = to Tokyo)',
+            'を as direct object particle is pronounced "O": ほん を (hon O = book [obj])',
+            'ん takes a full beat and assimilates (m/n/ng) before B, M, P, K'
+          ],
+          tip: '💡 Note: "は" is pronounced "WA" ONLY when acting as a grammatical particle or in set greetings (konnichiwa / konbanwa)!'
+        }
+      }
+    },
+    katakana: {
+      titleIt: 'La Nasale Sillabica Finale ン & Parole Straniere',
+      titleEn: 'Final Syllabic Nasal ン in Loanwords',
+      descIt: 'L\'adattamento delle desinenze nasali e consonantiche nei prestiti internazionali.',
+      descEn: 'Nasal endings and consonant adaptation in international loanwords.',
+      theory: {
+        it: {
+          title: 'Come funziona il carattere ン in Katakana',
+          intro: 'Il Katakana usa "ン" per adattare tutte le parole straniere che terminano con la lettera N o con suoni nasali, conferendo alla sillaba un tempo ritmico completo (1 mora).',
+          points: [
+            'パ (pa) + ン (n) = パン (pan, dal portoghese "pão" / pane)',
+            'ペ (pe) + ン (n) = ペン (pen, "pen / penna")',
+            'パ (pa) + ソ (so) + コ (ko) + ン (n) = パソコン (pasokon, "personal computer")',
+            'ス (su) + プ (pu) + ー (lungo) + ン (n) = スプーン (supuun, "spoon / cucchiaio")'
+          ],
+          tip: '💡 Distinzione Grafica Fondamentale: Non confondere ン (N, tratto dal basso verso l\'alto con 1 puntino obliquo) con ソ (SO, tratto dall\'alto verso il basso) o シ (SHI, 2 puntini)!'
+        },
+        en: {
+          title: 'How the Character ン Functions in Katakana',
+          intro: 'Katakana uses "ン" to transcribe all foreign words ending in N or nasal sounds, giving the syllable a complete rhythmic beat (1 mora).',
+          points: [
+            'pa + n = パン (pan, from Portuguese "pão" / bread)',
+            'pe + n = ペン (pen, "pen")',
+            'pa + so + ko + n = パソコン (pasokon, "PC / computer")',
+            'su + pu + ー + n = スプーン (supuun, "spoon")'
+          ],
+          tip: '💡 Vital Graphic Distinction: Never confuse ン (N, upward stroke with 1 slant dot) with ソ (SO, downward stroke) or シ (SHI, 2 dots)!'
+        }
       }
     }
   }

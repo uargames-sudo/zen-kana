@@ -123,11 +123,6 @@ export default function StructuredLessons({ scriptMode, updateStats }) {
   const lessonPhonetics = PHONETICS_LESSONS[lessonIdPhonetics - 1];
   const kanaPhonetics = useMemo(() => getPhoneticsLessonKana(lessonPhonetics, scriptMode), [lessonPhonetics, scriptMode]);
   const vocabularyPhonetics = useMemo(() => getPhoneticsLessonVocabulary(lessonPhonetics, scriptMode), [lessonPhonetics, scriptMode]);
-
-  // Active dataset depending on mode
-  const isDakutenMode = viewMode === 'course-dakuten';
-  const isYoonMode = viewMode === 'course-yoon';
-  const isPhoneticsMode = viewMode === 'course-phonetics';
   
   const activeLesson = isPhoneticsMode 
     ? lessonPhonetics 
@@ -136,7 +131,14 @@ export default function StructuredLessons({ scriptMode, updateStats }) {
     : isDakutenMode 
     ? lessonDakuten 
     : lesson5Kana;
+  
+  const activeLessonContent = activeLesson?.[scriptMode] || activeLesson;
 
+  // Active dataset depending on mode
+  const isDakutenMode = viewMode === 'course-dakuten';
+  const isYoonMode = viewMode === 'course-yoon';
+  const isPhoneticsMode = viewMode === 'course-phonetics';
+  
   const activeKana = isPhoneticsMode 
     ? kanaPhonetics 
     : isYoonMode 
@@ -200,7 +202,6 @@ export default function StructuredLessons({ scriptMode, updateStats }) {
     setCardIndex(0);
     setVocabIndex(0);
     setFlipped(false);
-    setQuizIndex(0);
     setQuizIndex(0);
     setQuizScore(0);
   };
@@ -551,11 +552,11 @@ export default function StructuredLessons({ scriptMode, updateStats }) {
               </span>
             </div>
             <h2 className="mt-1 font-headline text-2xl font-bold text-zen-text dark:text-zen-dark-text">
-              {t('lessons.day')} {activeLesson.id} · {(isPhoneticsMode || isYoonMode || isDakutenMode) ? (lang === 'it' ? activeLesson.titleIt : activeLesson.titleEn) : t('lessons.track5KanaSubtitle')}
+              {t('lessons.day')} {activeLesson.id} · {(isPhoneticsMode || isYoonMode || isDakutenMode) ? (lang === 'it' ? (activeLessonContent.titleIt || activeLesson.titleIt) : (activeLessonContent.titleEn || activeLesson.titleEn)) : t('lessons.track5KanaSubtitle')}
             </h2>
             {(isPhoneticsMode || isYoonMode || isDakutenMode) && (
               <p className="text-xs text-zen-text-muted dark:text-zen-dark-text-muted mt-0.5">
-                {lang === 'it' ? activeLesson.descIt : activeLesson.descEn}
+                {lang === 'it' ? (activeLessonContent.descIt || activeLesson.descIt) : (activeLessonContent.descEn || activeLesson.descEn)}
               </p>
             )}
           </div>
@@ -566,11 +567,14 @@ export default function StructuredLessons({ scriptMode, updateStats }) {
             onChange={(event) => changeLesson(Number(event.target.value))}
             className="rounded-xl border border-zen-border bg-white px-3 py-2 text-sm font-bold dark:border-zen-dark-border dark:bg-zen-dark-surface dark:text-zen-dark-text shadow-zen-sm cursor-pointer"
           >
-            {(isPhoneticsMode ? PHONETICS_LESSONS : isYoonMode ? YOON_LESSONS : (isDakutenMode ? DAKUTEN_LESSONS : LESSONS)).map((item) => (
-              <option key={item.id} value={item.id}>
-                {t('lessons.day')} {item.id} {isPhoneticsMode ? `(${lang === 'it' ? item.titleIt.split(':')[0] : item.titleEn.split(':')[0]})` : isYoonMode ? `(${item.romaji.slice(0, 3).join(', ')}...)` : isDakutenMode ? `(${item.romaji.slice(0, 3).join(', ')}...)` : '(5 Kana)'}
-              </option>
-            ))}
+            {(isPhoneticsMode ? PHONETICS_LESSONS : isYoonMode ? YOON_LESSONS : (isDakutenMode ? DAKUTEN_LESSONS : LESSONS)).map((item) => {
+              const itemContent = item[scriptMode] || item;
+              return (
+                <option key={item.id} value={item.id}>
+                  {t('lessons.day')} {item.id} {isPhoneticsMode ? `(${lang === 'it' ? itemContent.titleIt.split(':')[0] : itemContent.titleEn.split(':')[0]})` : isYoonMode ? `(${item.romaji.slice(0, 3).join(', ')}...)` : isDakutenMode ? `(${item.romaji.slice(0, 3).join(', ')}...)` : '(5 Kana)'}
+                </option>
+              );
+            })}
           </select>
         </div>
 
@@ -596,8 +600,9 @@ export default function StructuredLessons({ scriptMode, updateStats }) {
       {step === 0 && (
         <div className="space-y-5 animate-fade-in">
           {/* Theory & Explanation Card */}
-          {(isDakutenMode || isYoonMode || isPhoneticsMode) && activeLesson.theory && (() => {
-            const theoryData = activeLesson.theory[lang] || activeLesson.theory.it;
+          {(isDakutenMode || isYoonMode || isPhoneticsMode) && (activeLessonContent.theory || activeLesson.theory) && (() => {
+            const currentTheory = activeLessonContent.theory || activeLesson.theory;
+            const theoryData = currentTheory[lang] || currentTheory.it;
             return (
               <div className="zen-card p-5 sm:p-6 rounded-3xl border border-zen-border/60 dark:border-zen-dark-border bg-zen-surface-lowest dark:bg-zen-dark-surface shadow-zen-md space-y-4">
                 <div className="flex items-center gap-3 text-zen-primary dark:text-zen-dark-primary">
@@ -654,7 +659,7 @@ export default function StructuredLessons({ scriptMode, updateStats }) {
                     className="zen-card flex flex-col items-center justify-between border border-zen-border/40 p-4 dark:border-zen-dark-border bg-zen-surface-lowest dark:bg-zen-dark-surface shadow-zen-sm rounded-3xl"
                   >
                     <div className="w-full flex items-center justify-center gap-1.5 bg-zen-surface-container/40 dark:bg-zen-dark-surface-high/40 px-2 py-1 rounded-xl text-3xs font-bold text-zen-text-muted mb-2 text-center truncate">
-                      <span>{item.desc || item.modifier}</span>
+                      <span>{lang === 'it' ? (item.descIt || item.desc || item.modifier) : (item.descEn || item.desc || item.modifier)}</span>
                     </div>
 
                     <button
