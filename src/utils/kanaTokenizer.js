@@ -1,6 +1,7 @@
 /**
  * Japanese Kana & Romaji Syllable Tokenizer & Puzzle Helper
  * Decomposes Japanese vocabulary into atomic kana syllables and matching romaji units.
+ * Supports standard Kana, Yoon combinations, Sokuon (っ/ッ consonant gemination), and Choonpu (ー vowel lengthening).
  */
 import { 
   HIRAGANA_BASIC, 
@@ -53,14 +54,49 @@ const SINGLE_KANA_MAP = {};
   }
 });
 
-// Special symbols
-SINGLE_KANA_MAP['っ'] = 'tsu';
-SINGLE_KANA_MAP['ッ'] = 'tsu';
-SINGLE_KANA_MAP['ー'] = '—';
+/**
+ * Determine the duplicated consonant sound for Sokuon (っ / ッ)
+ * e.g., before 'ド' (do) -> 'd', before 'ぷ' (pu) -> 'p', before 'ト' (to) -> 't'
+ */
+function getNextConsonant(kanaStr, nextIdx) {
+  if (nextIdx >= kanaStr.length) return 't';
+  
+  if (nextIdx + 1 < kanaStr.length) {
+    const pair = kanaStr.slice(nextIdx, nextIdx + 2);
+    if (YOON_MAP[pair]) {
+      const rom = YOON_MAP[pair];
+      if (rom.startsWith('ch')) return 't';
+      if (rom.startsWith('sh')) return 's';
+      return rom[0];
+    }
+  }
+
+  const nextChar = kanaStr[nextIdx];
+  const nextRom = SINGLE_KANA_MAP[nextChar] || '';
+  if (!nextRom) return 't';
+  if (nextRom.startsWith('ch')) return 't';
+  if (nextRom.startsWith('sh')) return 's';
+  if (nextRom.startsWith('ts')) return 't';
+  return nextRom[0] || 't';
+}
+
+/**
+ * Determine the lengthened vowel sound for Choonpu (ー)
+ * e.g., after 'コ' (ko) -> 'o', after 'ヒ' (hi) -> 'i', after 'タ' (ta) -> 'a'
+ */
+function getPrevVowel(tokens) {
+  if (tokens.length === 0) return 'a';
+  const prevRom = tokens[tokens.length - 1].romaji;
+  const vowels = ['a', 'i', 'u', 'e', 'o'];
+  for (let i = prevRom.length - 1; i >= 0; i--) {
+    if (vowels.includes(prevRom[i])) return prevRom[i];
+  }
+  return 'a';
+}
 
 /**
  * Tokenize a Japanese Kana word into syllable tokens
- * @param {string} kanaStr Japanese kana string (e.g. "さかな", "でんしゃ", "コーヒー")
+ * @param {string} kanaStr Japanese kana string (e.g. "さかな", "でんしゃ", "ベッド", "コーヒー")
  * @returns {Array<{ kana: string, romaji: string }>} Array of syllable tokens
  */
 export function tokenizeKana(kanaStr = '') {
@@ -69,7 +105,7 @@ export function tokenizeKana(kanaStr = '') {
   let i = 0;
 
   while (i < kanaStr.length) {
-    // 1. Check 2-character Yoon combination (e.g. しゃ, キャ)
+    // 1. Check 2-character Yoon combination (e.g. しゃ, キャ, ぎょ)
     if (i + 1 < kanaStr.length) {
       const pair = kanaStr.slice(i, i + 2);
       if (YOON_MAP[pair]) {
@@ -82,17 +118,32 @@ export function tokenizeKana(kanaStr = '') {
       }
     }
 
-    // 2. Check single character
     const char = kanaStr[i];
-    let romaji = SINGLE_KANA_MAP[char] || char;
 
-    // Special gemination mark (sokuon) context
+    // 2. Sokuon (っ / ッ) -> consonant gemination
     if (char === 'っ' || char === 'ッ') {
-      romaji = 'tsu';
-    } else if (char === 'ー') {
-      romaji = '—';
+      const cons = getNextConsonant(kanaStr, i + 1);
+      tokens.push({
+        kana: char,
+        romaji: cons
+      });
+      i += 1;
+      continue;
     }
 
+    // 3. Choonpu (ー) -> vowel elongation
+    if (char === 'ー') {
+      const vowel = getPrevVowel(tokens);
+      tokens.push({
+        kana: char,
+        romaji: vowel
+      });
+      i += 1;
+      continue;
+    }
+
+    // 4. Regular single kana
+    const romaji = SINGLE_KANA_MAP[char] || char;
     tokens.push({
       kana: char,
       romaji: romaji.toLowerCase()
@@ -129,7 +180,7 @@ const KATAKANA_DISTRACTOR_POOL = [
   { kana: 'マ', romaji: 'ma' }, { kana: 'ミ', romaji: 'mi' }, { kana: 'ム', romaji: 'mu' }, { kana: 'メ', romaji: 'me' }, { kana: 'モ', romaji: 'mo' },
   { kana: 'ヤ', romaji: 'ya' }, { kana: 'ユ', romaji: 'yu' }, { kana: 'ヨ', romaji: 'yo' },
   { kana: 'ラ', romaji: 'ra' }, { kana: 'リ', romaji: 'ri' }, { kana: 'ル', romaji: 'ru' }, { kana: 'レ', romaji: 're' }, { kana: 'ロ', romaji: 'ro' },
-  { kana: 'ワ', romaji: 'wa' }, { kana: 'ン', romaji: 'n' }, { kana: 'ー', romaji: '—' }
+  { kana: 'ワ', romaji: 'wa' }, { kana: 'ン', romaji: 'n' }
 ];
 
 /**
