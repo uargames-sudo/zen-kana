@@ -11,7 +11,7 @@ export const HIRAGANA_GRID = [
     [{ k: 'や', r: 'ya' }, null, { k: 'ゆ', r: 'yu' }, null, { k: 'よ', r: 'yo' }],
     [{ k: 'ら', r: 'ra' }, { k: 'り', r: 'ri' }, { k: 'る', r: 'ru' }, { k: 'れ', r: 're' }, { k: 'ろ', r: 'ro' }],
     [{ k: 'わ', r: 'wa' }, null, null, null, { k: 'を', r: 'wo' }],
-    [{ k: 'ん', r: 'n' }, { k: 'っ', r: 'tsu' }, { k: 'ゃ', r: 'ya' }, { k: 'ゅ', r: 'yu' }, { k: 'ょ', r: 'yo' }]
+    [{ k: 'ん', r: 'n' }, null, null, null, null]
 ];
 
 export const KATAKANA_GRID = [
@@ -25,7 +25,7 @@ export const KATAKANA_GRID = [
     [{ k: 'ヤ', r: 'ya' }, null, { k: 'ユ', r: 'yu' }, null, { k: 'ヨ', r: 'yo' }],
     [{ k: 'ラ', r: 'ra' }, { k: 'リ', r: 'ri' }, { k: 'ル', r: 'ru' }, { k: 'レ', r: 're' }, { k: 'ロ', r: 'ro' }],
     [{ k: 'ワ', r: 'wa' }, null, null, null, { k: 'ヲ', r: 'wo' }],
-    [{ k: 'ン', r: 'n' }, { k: 'ー', r: '-' }, { k: 'ッ', r: 'tsu' }, { k: 'ャ', r: 'ya' }, { k: 'ュ', r: 'yu' }]
+    [{ k: 'ン', r: 'n' }, null, null, null, null]
 ];
 
 export const DAKUTEN_HIRAGANA_GRID = [
