@@ -79,13 +79,10 @@ export const YOON_KATAKANA_GRID = [
 ];
 
 export const SMALL_HIRAGANA_GRID = [
-    [{ k: 'っ', r: 'tsu' }, { k: 'ゃ', r: 'ya' }, { k: 'ゅ', r: 'yu' }, { k: 'ょ', r: 'yo' }, { k: 'ー', r: '-' }],
-    [{ k: 'ぁ', r: 'a' }, { k: 'ぃ', r: 'i' }, { k: 'ぅ', r: 'u' }, { k: 'ぇ', r: 'e' }, { k: 'ぉ', r: 'o' }],
-    [{ k: 'ゎ', r: 'wa' }, null, null, null, null]
+    [{ k: 'っ', r: 'tsu' }]
 ];
 
 export const SMALL_KATAKANA_GRID = [
-    [{ k: 'ッ', r: 'tsu' }, { k: 'ャ', r: 'ya' }, { k: 'ュ', r: 'yu' }, { k: 'ョ', r: 'yo' }, { k: 'ー', r: '-' }],
-    [{ k: 'ァ', r: 'a' }, { k: 'ィ', r: 'i' }, { k: 'ゥ', r: 'u' }, { k: 'ェ', r: 'e' }, { k: 'ォ', r: 'o' }],
-    [{ k: 'ヮ', r: 'wa' }, { k: 'ヴ', r: 'vu' }, null, null, null]
+    [{ k: 'ー', r: '—' }]
 ];
+

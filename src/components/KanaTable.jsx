@@ -48,9 +48,9 @@ export default function KanaTable({ scriptMode }) {
         };
       case 'small':
         return {
-          columns: ['1', '2', '3', '4', '5'],
-          rowLabels: ['•', '•', '•'],
-          colCount: 5,
+          columns: isHiragana ? ['促音 (Sokuon)'] : ['長音符 (Chōonpu)'],
+          rowLabels: [isHiragana ? 'っ' : 'ー'],
+          colCount: 1,
           grid: isHiragana ? SMALL_HIRAGANA_GRID : SMALL_KATAKANA_GRID
         };
       default:
@@ -73,6 +73,8 @@ export default function KanaTable({ scriptMode }) {
 
   const gridColsClass = colCount === 3 
     ? 'grid-cols-[36px_repeat(3,1fr)] sm:grid-cols-[48px_repeat(3,1fr)]' 
+    : colCount === 1
+    ? 'grid-cols-[36px_minmax(120px,200px)] sm:grid-cols-[48px_minmax(140px,220px)]'
     : 'grid-cols-[36px_repeat(5,1fr)] sm:grid-cols-[48px_repeat(5,1fr)]';
 
   const categories = [
@@ -80,7 +82,7 @@ export default function KanaTable({ scriptMode }) {
     { id: 'dakuten', label: t('table.tabDakuten') },
     { id: 'handakuten', label: t('table.tabHandakuten') },
     { id: 'yoon', label: t('table.tabYoon') },
-    { id: 'small', label: t('table.tabSmall') }
+    { id: 'small', label: isHiragana ? t('table.tabSokuon') : t('table.tabChoonpu') }
   ];
 
   return (

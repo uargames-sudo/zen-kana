@@ -55,9 +55,9 @@ export default function VirtualKeyboard({
             break;
         case 'small':
             activeGrid = isHiragana ? SMALL_HIRAGANA_GRID : SMALL_KATAKANA_GRID;
-            colHeaders = ['1', '2', '3', '4', '5'];
-            rowLabels = ['•', '•', '•'];
-            gridColsClass = 'grid-cols-[28px_repeat(5,1fr)] sm:grid-cols-[36px_repeat(5,1fr)]';
+            colHeaders = isHiragana ? ['Sokuon (っ)'] : ['Chōonpu (ー)'];
+            rowLabels = [isHiragana ? 'っ' : 'ー'];
+            gridColsClass = 'grid-cols-[28px_minmax(90px,160px)] sm:grid-cols-[36px_minmax(120px,180px)]';
             break;
         default:
             activeGrid = isHiragana ? HIRAGANA_GRID : KATAKANA_GRID;
@@ -70,11 +70,11 @@ export default function VirtualKeyboard({
     const isRomajiVisible = showRomaji || (allowToggleRomaji && romajiToggled);
 
     const categories = [
-        { id: 'basic', label: t('keyboard.basic') },
-        { id: 'dakuten', label: t('keyboard.dakuten') },
-        { id: 'handakuten', label: t('keyboard.handakuten') },
-        { id: 'yoon', label: t('keyboard.yoon') },
-        { id: 'small', label: t('keyboard.small') }
+        { id: 'basic', label: t('table.tabBasic') },
+        { id: 'dakuten', label: t('table.tabDakuten') },
+        { id: 'handakuten', label: t('table.tabHandakuten') },
+        { id: 'yoon', label: t('table.tabYoon') },
+        { id: 'small', label: isHiragana ? t('table.tabSokuon') : t('table.tabChoonpu') }
     ];
 
     return (
