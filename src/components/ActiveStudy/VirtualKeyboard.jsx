@@ -45,27 +45,27 @@ export default function VirtualKeyboard({
             activeGrid = isHiragana ? HANDAKUTEN_HIRAGANA_GRID : HANDAKUTEN_KATAKANA_GRID;
             colHeaders = ['A', 'I', 'U', 'E', 'O'];
             rowLabels = ['P'];
-            gridColsClass = 'grid-cols-[28px_repeat(5,1fr)] sm:grid-cols-[36px_repeat(5,1fr)]';
+            gridColsClass = 'grid-cols-[28px_repeat(5,minmax(0,1fr))] sm:grid-cols-[36px_repeat(5,minmax(0,1fr))]';
             break;
         case 'yoon':
             activeGrid = isHiragana ? YOON_HIRAGANA_GRID : YOON_KATAKANA_GRID;
             colHeaders = ['A', 'U', 'O'];
             rowLabels = ['KY', 'SH', 'CH', 'NY', 'HY', 'MY', 'RY', 'GY', 'J', 'BY', 'PY'];
-            gridColsClass = 'grid-cols-[28px_repeat(3,1fr)] sm:grid-cols-[36px_repeat(3,1fr)]';
+            gridColsClass = 'grid-cols-[28px_repeat(3,minmax(0,1fr))] sm:grid-cols-[36px_repeat(3,minmax(0,1fr))]';
             break;
         case 'small':
             activeGrid = isHiragana ? SMALL_HIRAGANA_GRID : SMALL_KATAKANA_GRID;
             colHeaders = isHiragana ? ['Sokuon (っ)'] : ['Chōonpu (ー)', 'Sokuon (ッ)'];
             rowLabels = [isHiragana ? 'っ' : '•'];
             gridColsClass = isHiragana 
-                ? 'grid-cols-[28px_minmax(90px,160px)] sm:grid-cols-[36px_minmax(120px,180px)]'
-                : 'grid-cols-[28px_repeat(2,minmax(80px,140px))] sm:grid-cols-[36px_repeat(2,minmax(100px,160px))]';
+                ? 'grid-cols-[28px_minmax(0,1fr)] sm:grid-cols-[36px_minmax(120px,180px)]'
+                : 'grid-cols-[28px_repeat(2,minmax(0,1fr))] sm:grid-cols-[36px_repeat(2,minmax(100px,160px))]';
             break;
         default:
             activeGrid = isHiragana ? HIRAGANA_GRID : KATAKANA_GRID;
             colHeaders = ['A', 'I', 'U', 'E', 'O'];
             rowLabels = ['—', 'K', 'S', 'T', 'N', 'H', 'M', 'Y', 'R', 'W', 'N'];
-            gridColsClass = 'grid-cols-[28px_repeat(5,1fr)] sm:grid-cols-[36px_repeat(5,1fr)]';
+            gridColsClass = 'grid-cols-[28px_repeat(5,minmax(0,1fr))] sm:grid-cols-[36px_repeat(5,minmax(0,1fr))]';
             break;
     }
 

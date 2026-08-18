@@ -72,12 +72,12 @@ export default function KanaTable({ scriptMode }) {
   };
 
   const gridColsClass = colCount === 3 
-    ? 'grid-cols-[36px_repeat(3,1fr)] sm:grid-cols-[48px_repeat(3,1fr)]' 
+    ? 'grid-cols-[28px_repeat(3,minmax(0,1fr))] xs:grid-cols-[36px_repeat(3,minmax(0,1fr))] sm:grid-cols-[48px_repeat(3,minmax(0,1fr))]' 
     : colCount === 2
-    ? 'grid-cols-[36px_repeat(2,minmax(110px,180px))] sm:grid-cols-[48px_repeat(2,minmax(130px,200px))]'
+    ? 'grid-cols-[28px_repeat(2,minmax(0,1fr))] xs:grid-cols-[36px_repeat(2,minmax(0,1fr))] sm:grid-cols-[48px_repeat(2,minmax(120px,200px))]'
     : colCount === 1
-    ? 'grid-cols-[36px_minmax(120px,200px)] sm:grid-cols-[48px_minmax(140px,220px)]'
-    : 'grid-cols-[36px_repeat(5,1fr)] sm:grid-cols-[48px_repeat(5,1fr)]';
+    ? 'grid-cols-[28px_minmax(0,1fr)] xs:grid-cols-[36px_minmax(0,1fr)] sm:grid-cols-[48px_minmax(140px,220px)]'
+    : 'grid-cols-[28px_repeat(5,minmax(0,1fr))] xs:grid-cols-[36px_repeat(5,minmax(0,1fr))] sm:grid-cols-[48px_repeat(5,minmax(0,1fr))]';
 
   const categories = [
     { id: 'basic', label: t('table.tabBasic') },
@@ -120,16 +120,16 @@ export default function KanaTable({ scriptMode }) {
       </div>
 
       {/* Coordinate Matrix Container with max-width to limit card growth */}
-      <div className="space-y-2.5 sm:space-y-3 max-w-2xl lg:max-w-3xl mx-auto">
+      <div className="space-y-2 sm:space-y-3 max-w-2xl lg:max-w-3xl mx-auto w-full">
         {/* Top Header Row: Vowels / Columns */}
-        <div className={`grid ${gridColsClass} gap-2 sm:gap-3.5 items-center`}>
+        <div className={`grid ${gridColsClass} gap-1.5 xs:gap-2 sm:gap-3.5 items-center`}>
           <div className="flex items-center justify-center text-2xs font-bold font-mono text-zen-text-muted/60 dark:text-zen-dark-text-muted/60 uppercase">
             {/* Corner anchor */}
           </div>
           {columns.map((colName, cIdx) => (
             <div 
               key={`${colName}-${cIdx}`} 
-              className="py-2 text-center font-extrabold text-sm sm:text-base font-mono text-zen-text dark:text-zen-dark-primary bg-white dark:bg-zen-dark-surface rounded-xl border-2 border-zen-text/70 dark:border-zen-dark-primary/60 shadow-zen-sm uppercase tracking-wider"
+              className="py-1.5 xs:py-2 text-center font-extrabold text-xs xs:text-sm sm:text-base font-mono text-zen-text dark:text-zen-dark-primary bg-white dark:bg-zen-dark-surface rounded-xl border-2 border-zen-text/70 dark:border-zen-dark-primary/60 shadow-zen-sm uppercase tracking-wider"
             >
               {colName}
             </div>
@@ -137,12 +137,12 @@ export default function KanaTable({ scriptMode }) {
         </div>
 
         {/* Matrix Rows with Left Consonant Header */}
-        <div className="space-y-2 sm:space-y-3">
+        <div className="space-y-1.5 xs:space-y-2 sm:space-y-3">
           {grid.map((rowItems, rIdx) => (
-            <div key={`row-${rIdx}`} className={`grid ${gridColsClass} gap-2 sm:gap-3.5 items-stretch`}>
+            <div key={`row-${rIdx}`} className={`grid ${gridColsClass} gap-1.5 xs:gap-2 sm:gap-3.5 items-stretch`}>
               {/* Left Consonant Header Badge */}
               <div 
-                className="flex items-center justify-center rounded-2xl bg-white dark:bg-zen-dark-surface border-2 border-zen-text/70 dark:border-zen-dark-primary/60 text-zen-text dark:text-zen-dark-primary font-mono font-extrabold text-sm sm:text-base select-none"
+                className="flex items-center justify-center rounded-xl sm:rounded-2xl bg-white dark:bg-zen-dark-surface border-2 border-zen-text/70 dark:border-zen-dark-primary/60 text-zen-text dark:text-zen-dark-primary font-mono font-extrabold text-xs xs:text-sm sm:text-base select-none"
                 title={`Riga ${rowLabels[rIdx] || ''}`}
               >
                 {rowLabels[rIdx] || '—'}
@@ -154,7 +154,7 @@ export default function KanaTable({ scriptMode }) {
                   return (
                     <div
                       key={`empty-${rIdx}-${cIdx}`}
-                      className="aspect-square max-w-[120px] max-h-[120px] w-full mx-auto rounded-2xl bg-transparent border border-dashed border-zen-border/30 dark:border-zen-dark-border/40"
+                      className="aspect-square max-w-[120px] max-h-[120px] w-full mx-auto rounded-xl sm:rounded-2xl bg-transparent border border-dashed border-zen-border/30 dark:border-zen-dark-border/40"
                     />
                   );
                 }
@@ -169,21 +169,21 @@ export default function KanaTable({ scriptMode }) {
                     tabIndex={0}
                     onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && handleCardClick(cell)}
                     aria-label={`Kana ${cell.k}, romaji ${cell.r}`}
-                    className={`aspect-square max-w-[120px] max-h-[120px] w-full mx-auto rounded-2xl p-1.5 sm:p-3 flex flex-col items-center justify-between cursor-pointer transition-all duration-200 ${
+                    className={`aspect-square max-w-[120px] max-h-[120px] w-full mx-auto rounded-xl sm:rounded-2xl p-1 xs:p-1.5 sm:p-3 flex flex-col items-center justify-between cursor-pointer transition-all duration-200 ${
                       isSelected
                         ? 'bg-zen-primary dark:bg-zen-dark-primary text-white dark:text-zen-dark-on-primary ring-4 ring-zen-primary/20 dark:ring-zen-dark-primary/40 shadow-zen-lg scale-105'
                         : 'zen-card bg-zen-surface-lowest dark:bg-zen-dark-surface border border-zen-border/40 dark:border-zen-dark-border hover:border-zen-primary dark:hover:border-zen-dark-primary hover:scale-102'
                     }`}
                   >
                     <div className="w-full flex justify-end">
-                      <Volume2 className={`w-3 h-3 sm:w-3.5 sm:h-3.5 ${isSelected ? 'text-white dark:text-zen-dark-on-primary' : 'text-zen-primary/60 dark:text-zen-dark-text-muted'}`} />
+                      <Volume2 className={`w-2.5 h-2.5 xs:w-3 xs:h-3 sm:w-3.5 sm:h-3.5 ${isSelected ? 'text-white dark:text-zen-dark-on-primary' : 'text-zen-primary/60 dark:text-zen-dark-text-muted'}`} />
                     </div>
 
-                    <span className={`font-kana font-bold ${activeTab === 'yoon' ? 'text-xl sm:text-2xl md:text-3xl' : 'text-2xl sm:text-3xl md:text-4xl'} leading-none ${isSelected ? 'text-white dark:text-zen-dark-on-primary' : 'text-zen-primary dark:text-zen-dark-text'}`}>
+                    <span className={`font-kana font-bold ${activeTab === 'yoon' ? 'text-lg xs:text-xl sm:text-2xl md:text-3xl' : 'text-xl xs:text-2xl sm:text-3xl md:text-4xl'} leading-none ${isSelected ? 'text-white dark:text-zen-dark-on-primary' : 'text-zen-primary dark:text-zen-dark-text'}`}>
                       {cell.k}
                     </span>
 
-                    <span className={`text-2xs sm:text-xs font-semibold font-mono tracking-wider uppercase ${isSelected ? 'text-white/90 dark:text-zen-dark-on-primary/90' : 'text-zen-text-muted dark:text-zen-dark-text-muted'}`}>
+                    <span className={`text-[10px] xs:text-2xs sm:text-xs font-semibold font-mono tracking-wider uppercase ${isSelected ? 'text-white/90 dark:text-zen-dark-on-primary/90' : 'text-zen-text-muted dark:text-zen-dark-text-muted'}`}>
                       {cell.r}
                     </span>
                   </div>
