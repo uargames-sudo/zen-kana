@@ -1,5 +1,50 @@
 # Release Notes: Zen Kana
 
+## Version 1.4.0 — Kana Mahjong Zen, 4 Structured Courses, Contextual Mini-Guides & Shuffle Modes
+
+**Release Date:** August 2026  
+**Status:** Stable Release  
+
+---
+
+### 🌟 Highlights & Major New Features
+
+#### 1. 🀄 Kana Mahjong Zen Solitaire ("Dojo Giochi")
+A brand new multi-layered 3D tile matching game designed specifically for Japanese language learners:
+- **Kana ↔ Romaji Pairing**: Match each Kana tile (Hiragana or Katakana) with its corresponding Romaji sound tile.
+- **Classic Mahjong Solitaire Physics**: Layer-based 3D collision check (`z-index` height) and lateral freedom checks. Blocked tiles are subtly dimmed.
+- **3 Dynamic Board Layouts**:
+  - 🐢 *Tartaruga Zen (Easy)*: 24 tiles across 2 layers.
+  - 🔺 *Piramide Classica (Medium)*: 48 tiles across 3 layers.
+  - 🐉 *Dragone Imperiale (Hard)*: 72 tiles across 4 intricate layers.
+- **Kana Subsets & Assists**: Select between *Basic Gojūon*, *Dakuten*, *Yōon*, or *All Kana*, with in-game **Hint** (💡) and **Board Shuffle** (🔀), combo streak multipliers, and celebration confetti.
+
+---
+
+#### 2. 📖 4 Complete Structured Learning Tracks
+Expanded the guided curriculum into 4 dedicated, progressive course tracks:
+1. **5 Kana al Giorno** (10 Days • 46 Basic Characters)
+2. **Dakuten & Handakuten** (5 Days • 25 Voiced & Semi-Voiced Sounds)
+3. **Combinazioni Yōon** (6 Days • 33 Contracted Sounds)
+4. **Fonetica Speciale & Ritmo** (3 Days • Sokuon, Chōonpu, Historical Particles & Nasal)
+- Complete script isolation: Dedicated theory, illustrations, handwriting pad, and quizzes for both Hiragana and Katakana modes.
+
+---
+
+#### 3. 💡 Contextual Mini-Guides & Syllabary Reference Overhaul
+- **Interactive Matrix Mini-Guides**: Added an expandable quick-guide accordion in `KanaTable.jsx` explaining the active category (Base, Dakuten, Handakuten, Yōon, or Phonetics).
+- **Virtual Keyboard Guide**: Instant access to contextual explanations right from the study toolbar in `VirtualKeyboard.jsx`.
+- **High-Contrast Global Guide**: Redesigned the Japanese Syllabary Guide modal with all 5 writing system pillars and perfected Dark/Light mode contrast.
+
+---
+
+#### 4. 🎴 Flashcards & Vocabulary Shuffle Modes
+- **Customizable Flashcard Sets**: Filter review decks by *All (104)*, *Basic (46)*, *Dakuten (25)*, *Yōon (33)*, or *Vocabulary (100)*.
+- **Shuffle / Random Order**: One-tap toggle and instant reshuffle for both Flashcards and the Vocabulary Studio.
+- **Dark Mode Card Harmony**: Fixed example badge contrast on the back of flashcards for seamless dark mode immersion.
+
+---
+
 ## Version 1.3.1 — UI/UX Refinements, Responsive Matrix Scaling & Audio Logic Optimization
 
 **Release Date:** August 2026  

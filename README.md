@@ -13,34 +13,42 @@ A calm, focused, and intuitive Japanese character learning studio designed as a 
 
 ## ✨ Features
 
-- **🎨 Zen Design System**: Kyoto Lacquer Red & Warm Rice Paper light theme, paired with a Deep Warm Charcoal & Sun Gold nocturnal sanctuary theme.
-- **🎴 Zen Memory Game**: Interactive Matching Game with 3 study modes (*Vocabulary & Illustrations*, *Syllabary Kana ↔ Romaji*, and *Audio Listening*), 3 difficulty tiers (6, 8, 12 pairs), 3D flip card animations, combo streak multipliers, and celebration confetti.
-- **🖼️ 2D Japanese Vector Vocabulary Illustrations**: Dedicated authentic Japanese-style vector illustrations for vocabulary words with progressive multi-format fallback (`.jpg` / `.webp` / `.png` → vector icon) across Vocabulary and Flashcards.
+- **🎨 Zen Design System**: Kyoto Lacquer Red & Warm Rice Paper light theme, paired with a Deep Warm Charcoal & Sun Gold nocturnal sanctuary theme with high-contrast readability.
+- **🀄 Kana Mahjong Zen Solitaire**: Multi-layer 3D Mahjong Solitaire tile-matching game (match Kana with its corresponding Romaji) with 3 layouts (*Zen Turtle*, *Classic Pyramid*, *Imperial Dragon*), free-tile collision detection, hints, shuffle, and combo multipliers.
+- **🧩 Kana Word Puzzle**: Reconstruct Japanese vocabulary words by placing syllable tiles in correct order with distraction tiles, translation hints, and difficulty levels.
+- **🎴 Zen Memory Game**: Interactive Matching Game with 3 study modes (*Vocabulary & Illustrations*, *Syllabary Kana ↔ Romaji*, and *Audio Listening*), 3 difficulty tiers, 3D flip card animations, combo streak multipliers, and celebration confetti.
+- **📖 4 Comprehensive Guided Courses**:
+  1. *5 Kana al Giorno* (10 Days • 46 Basic Gojūon)
+  2. *Dakuten & Handakuten* (5 Days • 25 Voiced/Semi-voiced sounds)
+  3. *Combinazioni Yōon* (6 Days • 33 Contracted sounds)
+  4. *Fonetica Speciale & Ritmo* (3 Days • Sokuon, Chōonpu, Particles & Nasal)
+- **💡 Contextual Mini-Guides**: Live educational explanations embedded right inside Kana Reference Tables and the Virtual Keyboard matching the active script and category.
+- **🃏 Enhanced Flashcards & Shuffle Mode**: Spaced repetition cards with category filters (*All*, *Basic*, *Dakuten*, *Yōon*, *Vocabulary*), Shuffle / Random order toggle, and instant error revision mode.
+- **📚 Shufflable Vocabulary Studio**: 100 essential Japanese words with authentic 2D vector illustrations, Romaji, Italian and English translations, pronunciation audio, and random shuffle mode.
 - **🔊 High-Fidelity Speech & Audio Engine**: Instant pre-warming on user gesture (zero first-click latency), maximum volume output (`1.0`), learner-calibrated cadence (0.75 for Kana, 0.80 for vocabulary), and Chromium GC protection.
-- **🌍 Bilingual Interface (i18n)**: Full support for **Italian** and **English** with seamless in-app language switcher (`IT` / `EN`) across all learning modules and menus.
+- **🌍 Bilingual Interface (i18n)**: Full runtime switching between **Italian** and **English** with seamless in-app language switcher (`IT` / `EN`) across all learning modules and menus.
 - **📑 Unified 5-Category Kana Matrix**: Reference tables and virtual keyboard organized into **Base (46)**, **Dakuten (゛)**, **Handakuten (゜)**, **Yōon (拗音)**, and **Small/Sokuon (っ/ー)** with 100% bilingual example coverage.
-- **🧠 Multi-Sensory Learning**: Combines visual flashcards, native Japanese audio pronunciation, memory matching, and interactive handwriting canvas for maximum retention.
 - **⚡ Advanced Active Study**: Train muscle memory and script-to-romaji transliteration with immediate visual feedback, 3 difficulty tiers (Easy, Medium, Hard), and automatic audio playback.
-- **⌨️ Enhanced Virtual Kana Keyboard**: 5-category layout, toggleable Romaji sub-labels, and responsive mobile key sizing.
+- **✍️ Interactive Writing Canvas**: Practice handwriting Kana with stroke order guides, clear canvas, and real-time visual feedback.
 - **📱 Progressive Web App (PWA)**: Fully installable on mobile devices (Android/iOS) and desktop browsers with header install button and offline Service Worker caching.
 - **🖥️ Cross-Platform Desktop Support**: Packaged with **Tauri v2** for lightweight, ultra-fast native Windows, macOS, and Linux desktop builds.
-- **📅 10-Day Guided Curriculum**: Step-by-step daily lessons covering 5 Kana characters per day with integrated writing practice, vocabulary, and reviews.
-- **🌐 Local Network Testing**: Built-in support to run and test on your local Wi-Fi network from any smartphone or tablet.
 
 ---
 
-## 📚 Learning Modules
+## 📚 Learning & Gaming Modules
 
 | Module | Description |
 | :--- | :--- |
 | **📊 Dashboard** | Overview of your study stats, daily streak, progress metrics, and quick navigation to all study tools. |
-| **🎴 Zen Memory** | Interactive matching game with 3 modes (Vocab & Illustrations, Kana ↔ Romaji, Audio Listening), 3 difficulty levels, combo streaks, and celebratory confetti. |
-| **📑 Kana Tables** | Interactive coordinate matrix across 5 categories (Base, Dakuten, Handakuten, Yōon, Small) with instant pronunciation and bilingual examples. |
-| **🃏 Flashcards** | Practice Hiragana, Katakana, and illustrated Vocabulary with 3D flip card animations, authentic illustrations, bilingual words (IT/EN), and *Mastered / Needs Practice* sorting. |
-| **⚡ Active Study** | Transliteration training supporting Read Kana, Write Kana, and Mixed modes with 3 difficulty levels, virtual keyboard consultation, and accepted Romaji variants. |
+| **🀄 Kana Mahjong** | 3D multi-layered Mahjong Solitaire matching Kana with Romaji, featuring hints, shuffle, combos, and board layouts. |
+| **🧩 Kana Puzzle** | Interactive word construction puzzle: assemble Kana syllables into words against distractor tiles. |
+| **🎴 Zen Memory** | Memory matching game with 3 modes (Vocab & Illustrations, Kana ↔ Romaji, Audio Listening), combo streaks, and confetti. |
+| **📖 Structured Lessons** | 4 complete step-by-step curriculum tracks with daily theory, flashcards, handwriting canvas, and verification quizzes. |
+| **📑 Kana Tables** | Interactive coordinate matrix across 5 categories with contextual mini-guides, instant pronunciation, and examples. |
+| **🃏 Flashcards** | 3D flip flashcards supporting Kana subsets & Vocabulary with Shuffle mode, mistake review, and mastery counters. |
+| **⚡ Active Study** | Transliteration training supporting Read Kana, Write Kana, and Mixed modes with 3 difficulty levels and virtual keyboard. |
 | **✍️ Writing Canvas** | Practice handwriting Kana with stroke order guides, clear canvas, and real-time visual feedback. |
-| **📖 Structured Lessons** | 10-day step-by-step curriculum covering 5 Kana characters daily, including character writing and vocabulary practice. |
-| **💬 Vocabulary Studio** | Explore 100+ Japanese vocabulary words categorized with Romaji, Italian and English translations, 2D vector illustrations, Kana breakdowns, and audio playback. |
+| **💬 Vocabulary Studio** | Explore 100+ Japanese vocabulary words categorized with Romaji, translations, 2D vector illustrations, and audio. |
 | **🎧 Listening Quiz** | Train your auditory recognition: listen to native Japanese audio and select the matching Kana character. |
 | **🎯 Verification Quiz** | Test your character recognition (Kana to Romaji and Romaji to Kana) with score tracking and celebration animations. |
 

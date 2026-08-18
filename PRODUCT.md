@@ -28,16 +28,19 @@ Unlike bloated language learning platforms that require accounts, online connect
 
 ## Capabilities and Constraints
 
-- **Multi-Modal Learning Modules:**
+- **Multi-Modal Learning & Gaming Modules:**
   1. *Dashboard:* Overview of streak, mastered Kana, and quick practice launch.
-  2. *Kana Matrix (Table):* Interactive reference tables for Hiragana and Katakana with audio pronunciation and stroke order modals.
-  3. *Active Study:* Active recall prompt system with virtual and physical keyboard input modes, difficulty filters, and instant feedback.
-  4. *Flashcards:* Spaced repetition recall cards with keyboard shortcuts (`Space`, `1`, `2`, `Arrows`) and mastery tracking.
-  5. *Writing Canvas:* Interactive HTML5 drawing pad with stroke order reference guide, guidelines, and clearing tools.
-  6. *Listening Quiz:* Auditory recognition quiz with customizable question counts and vocabulary integration.
-  7. *Structured Lessons:* Step-by-step sequential learning curriculum with progress checkpoints.
-  8. *Verification Quiz:* Multiple-choice recognition tests.
-  9. *Vocabulary:* Top 100 essential Japanese words categorized by script and themes with pronunciation.
+  2. *Kana Mahjong Zen:* 3D multi-layered tile matching solitaire game pairing Kana with Romaji across 3 difficulty layouts.
+  3. *Kana Word Puzzle:* Interactive syllable tile reconstruction puzzle with distractors and hint mechanics.
+  4. *Zen Memory:* Visual, auditory, and illustrated vocabulary memory matching game with combo streaks.
+  5. *Kana Matrix (Table):* Interactive reference tables with contextual mini-guides, audio pronunciation, and stroke order modals.
+  6. *Structured Lessons (4 Courses):* Comprehensive curriculum covering 5 Kana/day, Dakuten/Handakuten, Yōon combinations, and Special Phonetics.
+  7. *Active Study:* Active recall prompt system with virtual and physical keyboard input modes, difficulty filters, and instant feedback.
+  8. *Flashcards:* Spaced repetition recall cards with category filters, shuffle mode, keyboard shortcuts (`Space`, `1`, `2`, `Arrows`), and mastery tracking.
+  9. *Writing Canvas:* Interactive HTML5 drawing pad with stroke order reference guide, guidelines, and clearing tools.
+  10. *Listening Quiz:* Auditory recognition quiz with customizable question counts and vocabulary integration.
+  11. *Verification Quiz:* Multiple-choice recognition tests with celebration animations.
+  12. *Vocabulary Studio:* Top 100 essential Japanese words with authentic 2D vector illustrations, translations, pronunciation, and random shuffle.
 - **Internationalization (i18n):** Complete runtime switching between Italian (`it`) and English (`en`).
 - **Audio Engine:** Web Audio API synthesis and native Japanese voice playback.
 - **Theme Architecture:** Dual-mode theme system (Light & Dark) with local persistence.
