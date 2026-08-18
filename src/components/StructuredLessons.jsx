@@ -446,7 +446,7 @@ export default function StructuredLessons({ scriptMode, updateStats }) {
                         key={idx}
                         className="px-3.5 py-2 rounded-xl bg-zen-surface-container/40 dark:bg-zen-dark-surface-high/60 border border-zen-border/40 text-xs text-zen-text dark:text-zen-dark-text font-semibold flex items-center gap-2.5 shadow-2xs"
                       >
-                        <span className="w-2 h-2 rounded-full bg-zen-primary shrink-0" />
+                        <span className="w-2 h-2 rounded-full bg-zen-primary dark:bg-zen-dark-primary shrink-0" />
                         <span>{pt}</span>
                       </div>
                     ))}
