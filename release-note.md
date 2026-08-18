@@ -9,24 +9,24 @@
 
 ### 🌟 Highlights & Major New Features
 
-#### 1. 🀄 Kana Mahjong Zen Solitaire ("Dojo Giochi")
+#### 1. 🀄 Kana Mahjong Zen Solitaire ("Games Dojo")
 A brand new multi-layered 3D tile matching game designed specifically for Japanese language learners:
 - **Kana ↔ Romaji Pairing**: Match each Kana tile (Hiragana or Katakana) with its corresponding Romaji sound tile.
 - **Classic Mahjong Solitaire Physics**: Layer-based 3D collision check (`z-index` height) and lateral freedom checks. Blocked tiles are subtly dimmed.
 - **3 Dynamic Board Layouts**:
-  - 🐢 *Tartaruga Zen (Easy)*: 24 tiles across 2 layers.
-  - 🔺 *Piramide Classica (Medium)*: 48 tiles across 3 layers.
-  - 🐉 *Dragone Imperiale (Hard)*: 72 tiles across 4 intricate layers.
+  - 🐢 *Zen Turtle (Easy)*: 24 tiles across 2 layers.
+  - 🔺 *Classic Pyramid (Medium)*: 48 tiles across 3 layers.
+  - 🐉 *Imperial Dragon (Hard)*: 72 tiles across 4 intricate layers.
 - **Kana Subsets & Assists**: Select between *Basic Gojūon*, *Dakuten*, *Yōon*, or *All Kana*, with in-game **Hint** (💡) and **Board Shuffle** (🔀), combo streak multipliers, and celebration confetti.
 
 ---
 
 #### 2. 📖 4 Complete Structured Learning Tracks
 Expanded the guided curriculum into 4 dedicated, progressive course tracks:
-1. **5 Kana al Giorno** (10 Days • 46 Basic Characters)
+1. **5 Kana a Day** (10 Days • 46 Basic Characters)
 2. **Dakuten & Handakuten** (5 Days • 25 Voiced & Semi-Voiced Sounds)
-3. **Combinazioni Yōon** (6 Days • 33 Contracted Sounds)
-4. **Fonetica Speciale & Ritmo** (3 Days • Sokuon, Chōonpu, Historical Particles & Nasal)
+3. **Yōon Combinations** (6 Days • 33 Contracted Sounds)
+4. **Special Phonetics & Rhythm** (3 Days • Sokuon, Chōonpu, Historical Particles & Nasal)
 - Complete script isolation: Dedicated theory, illustrations, handwriting pad, and quizzes for both Hiragana and Katakana modes.
 
 ---
@@ -59,7 +59,7 @@ Expanded the guided curriculum into 4 dedicated, progressive course tracks:
 - **Special Tab Specialization**:
   - Hiragana: Dedicated **`Sokuon (促音)`** tab containing `っ` (*tsu* gemination mark).
   - Katakana: Dedicated **`Chōonpu / Sokuon (ー/ッ)`** tab containing both `ー` (*chōonpu* vowel elongation) and `ッ` (*sokuon* gemination).
-  - Updated Katakana `ッ` example word to authentic Japanese vocabulary `ベッド` (*beddo* - letto).
+  - Updated Katakana `ッ` example word to authentic Japanese vocabulary `ベッド` (*beddo* - bed).
 - **Mobile Grid Overflow & Alignment Fix**: Converted CSS grid columns to `minmax(0, 1fr)` and fine-tuned responsive gaps, eliminating horizontal column clipping and aligning headers with all 5 vowel columns (*A, I, U, E, O*).
 - **Desktop Card Constraints**: Applied proportional max-width bounds (`max-w-[120px]` and `max-w-3xl` container) to prevent cards from over-expanding on wide screens.
 
@@ -107,9 +107,9 @@ Expanded the guided curriculum into 4 dedicated, progressive course tracks:
 #### 1. 🎴 Zen Memory Game Module ("Memory Dojo")
 A brand new interactive game mode to boost Kana and vocabulary recall through active visual and auditory pairing:
 - **3 Game Modes**:
-  - 🖼️ *Vocabolario & Illustrazioni*: Match Kana words with authentic 2D Japanese vector illustrations and bilingual translations.
-  - 🔤 *Sillabario (Kana ↔ Romaji)*: Match Kana characters with their Romaji sound.
-  - 🎧 *Ascolto (Audio ↔ Carta)*: Listen to native Japanese speech to find the corresponding card.
+  - 🖼️ *Vocabulary & Illustrations*: Match Kana words with authentic 2D Japanese vector illustrations and bilingual translations.
+  - 🔤 *Syllabary (Kana ↔ Romaji)*: Match Kana characters with their Romaji sound.
+  - 🎧 *Audio Listening (Audio ↔ Card)*: Listen to native Japanese speech to find the corresponding card.
 - **3 Difficulty Tiers**: Easy (6 pairs / 12 cards), Medium (8 pairs / 16 cards), and Hard (12 pairs / 24 cards).
 - **Tactile Polish**: 3D flip card animations with Kyoto Lacquer Red / Golden Amber traditional patterned backs, live moves counter, timer, combo streak multipliers (`x2`, `x3`...), and celebratory confetti upon victory.
 
@@ -158,7 +158,7 @@ The interactive Kana Tables view has been completely restructured to match the 5
 2. **Dakuten (゛)**: Voiced consonant sounds (*G, Z, D, B* - 20 characters).
 3. **Handakuten (゜)**: Semi-voiced plosive sounds (*P* - 5 characters).
 4. **Yōon (拗音 / Combinations)**: 3-column contracted syllable matrix (*A, U, O* × 11 consonant combinations = 33 characters).
-5. **Piccoli / Small Kana (っ/ー)**: Sokuon gemination mark (っ), long vowel mark (ー), small ya/yu/yo, and reduced vowels (ぁ, ぃ, ぅ, ぇ, ぉ, ゎ, ゔ).
+5. **Small Kana / Phonetics (っ/ー)**: Sokuon gemination mark (っ), long vowel mark (ー), small ya/yu/yo, and reduced vowels (ぁ, ぃ, ぅ, ぇ, ぉ, ゎ, ゔ).
 
 ---
 

@@ -15,13 +15,13 @@ A calm, focused, and intuitive Japanese character learning studio designed as a 
 
 - **🎨 Zen Design System**: Kyoto Lacquer Red & Warm Rice Paper light theme, paired with a Deep Warm Charcoal & Sun Gold nocturnal sanctuary theme with high-contrast readability.
 - **🀄 Kana Mahjong Zen Solitaire**: Multi-layer 3D Mahjong Solitaire tile-matching game (match Kana with its corresponding Romaji) with 3 layouts (*Zen Turtle*, *Classic Pyramid*, *Imperial Dragon*), free-tile collision detection, hints, shuffle, and combo multipliers.
-- **🧩 Kana Word Puzzle**: Reconstruct Japanese vocabulary words by placing syllable tiles in correct order with distraction tiles, translation hints, and difficulty levels.
+- **🧩 Kana Word Puzzle**: Reconstruct Japanese vocabulary words by placing syllable tiles in correct order with distractor tiles, translation hints, and difficulty levels.
 - **🎴 Zen Memory Game**: Interactive Matching Game with 3 study modes (*Vocabulary & Illustrations*, *Syllabary Kana ↔ Romaji*, and *Audio Listening*), 3 difficulty tiers, 3D flip card animations, combo streak multipliers, and celebration confetti.
 - **📖 4 Comprehensive Guided Courses**:
-  1. *5 Kana al Giorno* (10 Days • 46 Basic Gojūon)
+  1. *5 Kana a Day* (10 Days • 46 Basic Gojūon)
   2. *Dakuten & Handakuten* (5 Days • 25 Voiced/Semi-voiced sounds)
-  3. *Combinazioni Yōon* (6 Days • 33 Contracted sounds)
-  4. *Fonetica Speciale & Ritmo* (3 Days • Sokuon, Chōonpu, Particles & Nasal)
+  3. *Yōon Combinations* (6 Days • 33 Contracted sounds)
+  4. *Special Phonetics & Rhythm* (3 Days • Sokuon, Chōonpu, Particles & Nasal)
 - **💡 Contextual Mini-Guides**: Live educational explanations embedded right inside Kana Reference Tables and the Virtual Keyboard matching the active script and category.
 - **🃏 Enhanced Flashcards & Shuffle Mode**: Spaced repetition cards with category filters (*All*, *Basic*, *Dakuten*, *Yōon*, *Vocabulary*), Shuffle / Random order toggle, and instant error revision mode.
 - **📚 Shufflable Vocabulary Studio**: 100 essential Japanese words with authentic 2D vector illustrations, Romaji, Italian and English translations, pronunciation audio, and random shuffle mode.
