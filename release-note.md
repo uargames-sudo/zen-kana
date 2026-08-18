@@ -1,5 +1,55 @@
 # Release Notes: Zen Kana
 
+## Version 1.3.1 — UI/UX Refinements, Responsive Matrix Scaling & Audio Logic Optimization
+
+**Release Date:** August 2026  
+**Status:** Stable Release  
+
+---
+
+### 🌟 Highlights & Fixes
+
+#### 1. 📑 Kana Reference Tables & Special Category Clean-up
+- **Gojūon Base Clean-up**: Removed redundant symbols from the `N` row in both Hiragana and Katakana tables.
+- **Special Tab Specialization**:
+  - Hiragana: Dedicated **`Sokuon (促音)`** tab containing `っ` (*tsu* gemination mark).
+  - Katakana: Dedicated **`Chōonpu / Sokuon (ー/ッ)`** tab containing both `ー` (*chōonpu* vowel elongation) and `ッ` (*sokuon* gemination).
+  - Updated Katakana `ッ` example word to authentic Japanese vocabulary `ベッド` (*beddo* - letto).
+- **Mobile Grid Overflow & Alignment Fix**: Converted CSS grid columns to `minmax(0, 1fr)` and fine-tuned responsive gaps, eliminating horizontal column clipping and aligning headers with all 5 vowel columns (*A, I, U, E, O*).
+- **Desktop Card Constraints**: Applied proportional max-width bounds (`max-w-[120px]` and `max-w-3xl` container) to prevent cards from over-expanding on wide screens.
+
+---
+
+#### 2. 🔊 Floating Detail Bar & Dual Audio Playback
+- **Dual Pronunciation**:
+  - Clicking the Kana badge plays the **single syllable sound** (e.g. `ゆ` → *YU*).
+  - Clicking the Audio button or example word plays the **full authentic Japanese example word** (e.g. `ゆき` → *yuki*).
+- **Responsive Stacking & Word Wrap**: Implemented multi-line text wrapping preventing text from overlapping control buttons.
+- **Bottom Navigation Clearance**: Sticky bar positioning calibrated (`bottom-24` on mobile/tablet viewports, `xl:bottom-6` on desktop) ensuring it never sits behind the navigation bar.
+
+---
+
+#### 3. 🖥️ Desktop Header Compact Dock Mode
+- Implemented an elegant navigation dock: **icon-only** for inactive tabs to save horizontal space, expanding smoothly on hover (`hover:max-w-[160px]`), and **icon + label** for the active tab.
+
+---
+
+#### 4. 📊 Dashboard Responsive Grid Scalability
+- Refined breakpoint transitions for Quick Activity modules (4 columns on wide desktop → 3 columns on laptop → 2 columns on tablet → 1 column on mobile).
+
+---
+
+#### 5. 📝 Quiz Mistakes Review Formatting
+- Fixed Japanese character vertical splitting (`whitespace-nowrap`) in Mistakes Review across both Listening Quiz and Verification Quiz.
+
+---
+
+#### 6. 🎴 Memory Zen Audio & Icon Refinements
+- Audio is now triggered exclusively when revealing **Illustration** cards or **Audio Mystery** cards.
+- Text/writing cards (Kana, Romaji) no longer auto-play audio or display speaker icons, preserving the reading and recall challenge.
+
+---
+
 ## Version 1.3.0 — Zen Memory Game, Vocabulary Illustrations & High-Fidelity Audio Engine
 
 **Release Date:** August 2026  
