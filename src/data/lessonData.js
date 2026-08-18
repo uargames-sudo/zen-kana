@@ -1,4 +1,4 @@
-import { HIRAGANA_BASIC, KANA_DAKUTEN } from './kanaData';
+import { HIRAGANA_BASIC, KANA_DAKUTEN, KANA_COMBINATION } from './kanaData';
 import { VOCABULARY } from './vocabulary';
 
 // ==========================================
