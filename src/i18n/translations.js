@@ -199,10 +199,20 @@ export const translations = {
       showingWords: 'parole trovate'
     },
 
-    // Structured Lessons
+    // Structured Lessons Hub & Courses
     lessons: {
-      title: 'Lezioni Strutturate',
-      subtitle: 'Segui il piano di studio giornaliero per padroneggiare tutti i caratteri progressivamente.',
+      title: 'Lezioni',
+      subtitle: 'Percorso di studio guidato',
+      hubTitle: 'Lezioni & Corsi',
+      hubSubtitle: 'Percorsi di studio strutturati per padroneggiare il giapponese passo dopo passo.',
+      track5KanaTitle: '5 Kana al Giorno',
+      track5KanaSubtitle: 'Kana base un passo alla volta',
+      track5KanaDesc: 'Impara i 46 caratteri base Gojūon suddivisi in 10 lezioni quotidiane mirate con teoria, schede interattive, scrittura e quiz di verifica.',
+      track5KanaBadge: '10 Giorni • 46 Kana Base',
+      startCourse: 'Inizia Corso',
+      continueCourse: 'Continua Giorno',
+      backToHub: 'Tutti i Corsi',
+      comingSoon: 'In Arrivo',
       day: 'Giorno',
       characters: 'Caratteri',
       cumulative: 'Cumulativi',
@@ -560,10 +570,20 @@ export const translations = {
       showingWords: 'words found'
     },
 
-    // Structured Lessons
+    // Structured Lessons Hub & Courses
     lessons: {
-      title: 'Structured Lessons',
-      subtitle: 'Follow the daily syllabus to master all characters step by step.',
+      title: 'Lessons',
+      subtitle: 'Guided Study Path',
+      hubTitle: 'Lessons & Courses',
+      hubSubtitle: 'Structured study paths to master Japanese step by step.',
+      track5KanaTitle: '5 Kana a Day',
+      track5KanaSubtitle: 'Basic Kana one step at a time',
+      track5KanaDesc: 'Master the 46 fundamental Gojūon characters across 10 focused daily lessons with theory, interactive cards, stroke practice, and quizzes.',
+      track5KanaBadge: '10 Days • 46 Basic Kana',
+      startCourse: 'Start Course',
+      continueCourse: 'Continue Day',
+      backToHub: 'All Courses',
+      comingSoon: 'Coming Soon',
       day: 'Day',
       characters: 'Characters',
       cumulative: 'Cumulative',
