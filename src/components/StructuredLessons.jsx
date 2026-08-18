@@ -22,7 +22,10 @@ import {
   kanaHighlightType,
   DAKUTEN_LESSONS,
   getDakutenLessonKana,
-  getDakutenLessonVocabulary
+  getDakutenLessonVocabulary,
+  YOON_LESSONS,
+  getYoonLessonKana,
+  getYoonLessonVocabulary
 } from '../data/lessonData';
 import { getVocabularyIcon } from '../data/vocabulary';
 import { playKanaSound } from '../utils/audio';
@@ -74,13 +77,15 @@ function HighlightedKana({ text = '', targetChars = new Set() }) {
 export default function StructuredLessons({ scriptMode, updateStats }) {
   const { lang, t } = useLanguage();
 
-  // Navigation mode: 'hub' | 'course-5kana' | 'course-dakuten'
+  // Navigation mode: 'hub' | 'course-5kana' | 'course-dakuten' | 'course-yoon'
   const [viewMode, setViewMode] = useState('hub');
 
   // 5-Kana Course State
   const [lessonId5Kana, setLessonId5Kana] = useState(1);
   // Dakuten Course State
   const [lessonIdDakuten, setLessonIdDakuten] = useState(1);
+  // Yōon Course State
+  const [lessonIdYoon, setLessonIdYoon] = useState(1);
 
   // Common active step for whichever course is open
   const [step, setStep] = useState(0);
@@ -104,11 +109,17 @@ export default function StructuredLessons({ scriptMode, updateStats }) {
   const kanaDakuten = useMemo(() => getDakutenLessonKana(lessonDakuten, scriptMode), [lessonDakuten, scriptMode]);
   const vocabularyDakuten = useMemo(() => getDakutenLessonVocabulary(lessonDakuten, scriptMode), [lessonDakuten, scriptMode]);
 
+  // ================= YŌON COURSE DERIVATIONS =================
+  const lessonYoon = YOON_LESSONS[lessonIdYoon - 1];
+  const kanaYoon = useMemo(() => getYoonLessonKana(lessonYoon, scriptMode), [lessonYoon, scriptMode]);
+  const vocabularyYoon = useMemo(() => getYoonLessonVocabulary(lessonYoon, scriptMode), [lessonYoon, scriptMode]);
+
   // Active dataset depending on mode
   const isDakutenMode = viewMode === 'course-dakuten';
-  const activeLesson = isDakutenMode ? lessonDakuten : lesson5Kana;
-  const activeKana = isDakutenMode ? kanaDakuten : kana5Kana;
-  const activeVocabulary = isDakutenMode ? vocabularyDakuten : vocabulary5Kana;
+  const isYoonMode = viewMode === 'course-yoon';
+  const activeLesson = isYoonMode ? lessonYoon : (isDakutenMode ? lessonDakuten : lesson5Kana);
+  const activeKana = isYoonMode ? kanaYoon : (isDakutenMode ? kanaDakuten : kana5Kana);
+  const activeVocabulary = isYoonMode ? vocabularyYoon : (isDakutenMode ? vocabularyDakuten : vocabulary5Kana);
   const targetKanaChars = useMemo(() => new Set(activeKana.map((k) => k.char).filter(Boolean)), [activeKana]);
 
   const currentKana = activeKana[cardIndex % Math.max(activeKana.length, 1)] || {};
@@ -131,13 +142,22 @@ export default function StructuredLessons({ scriptMode, updateStats }) {
         return pool.sort(() => Math.random() - 0.5);
       }
 
+      if (isYoonMode) {
+        // In Yoon mode: include similar sounding distractors
+        const others = activeKana.filter(item => item.romaji !== target.romaji);
+        const pool = [target, ...others].slice(0, 4);
+        return pool.sort(() => Math.random() - 0.5);
+      }
+
       return [target, ...activeKana.filter((item) => item.romaji !== target.romaji).slice(0, 3)].sort(() => Math.random() - 0.5);
     }
     return quizWord ? [quizWord, ...activeVocabulary.filter((item) => item.id !== quizWord.id).slice(0, 3)].sort(() => Math.random() - 0.5) : [];
-  }, [isKanaQuiz, activeKana, quizIndex, quizWord, activeVocabulary, isDakutenMode]);
+  }, [isKanaQuiz, activeKana, quizIndex, quizWord, activeVocabulary, isDakutenMode, isYoonMode]);
 
   const changeLesson = (id) => {
-    if (isDakutenMode) {
+    if (isYoonMode) {
+      setLessonIdYoon(id);
+    } else if (isDakutenMode) {
       setLessonIdDakuten(id);
     } else {
       setLessonId5Kana(id);
@@ -161,7 +181,7 @@ export default function StructuredLessons({ scriptMode, updateStats }) {
   };
 
   const answerQuiz = (choice) => {
-    const correct = isKanaQuiz ? choice.romaji === activeKana[quizIndex].romaji : choice.id === quizWord.id;
+    const correct = isKanaQuiz ? choice.romaji === activeKana[quizIndex]?.romaji : choice.id === quizWord?.id;
     updateStats?.(correct);
     if (correct) setQuizScore((value) => value + 1);
     setQuizIndex((value) => value + 1);
@@ -318,6 +338,71 @@ export default function StructuredLessons({ scriptMode, updateStats }) {
                 </div>
               </div>
             </div>
+
+            {/* Track 3: Combinazioni Yōon */}
+            <div className="zen-card p-6 sm:p-7 border-2 border-zen-primary/40 dark:border-zen-dark-primary/50 bg-zen-surface-lowest dark:bg-zen-dark-surface shadow-zen-md hover:shadow-zen-lg transition-all rounded-3xl group">
+              <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+                <div className="space-y-3 flex-1">
+                  <div className="flex flex-wrap items-center gap-2">
+                    <span className="px-3 py-1 rounded-full bg-zen-primary/10 dark:bg-zen-dark-primary/20 text-zen-primary dark:text-zen-dark-primary text-xs font-bold font-mono">
+                      {t('lessons.trackYoonBadge') || '6 Giorni • 33 Suoni Contratti'}
+                    </span>
+                    <span className="px-2.5 py-0.5 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-600 dark:text-emerald-400 text-2xs font-bold">
+                      {lang === 'it' ? 'Attivo' : 'Active'}
+                    </span>
+                    <span className="px-2.5 py-0.5 rounded-full bg-zen-surface-container dark:bg-zen-dark-surface-high text-zen-text-muted text-2xs font-bold font-kana">
+                      きゃ・しゃ・ちゃ・にゃ・ぎゃ
+                    </span>
+                  </div>
+
+                  <div>
+                    <h4 className="font-headline text-2xl font-bold text-zen-text dark:text-zen-dark-text group-hover:text-zen-primary dark:group-hover:text-zen-dark-primary transition-colors">
+                      {t('lessons.trackYoonTitle') || 'Combinazioni Yōon'}
+                    </h4>
+                    <p className="text-sm font-semibold text-zen-primary dark:text-zen-dark-primary mt-0.5">
+                      {t('lessons.trackYoonSubtitle') || 'Suoni contratti con piccolo ya, yu, yo (ゃ, ゅ, ょ)'}
+                    </p>
+                    <p className="text-xs text-zen-text-muted dark:text-zen-dark-text-muted mt-2 leading-relaxed">
+                      {t('lessons.trackYoonDesc') || 'Padroneggia tutte le 33 combinazioni contratte (K, S, T, N, H, M, R, G, J, B, P) in 6 lezioni con regole di proporzione grafica e pronuncia a tempo unico.'}
+                    </p>
+                  </div>
+
+                  {/* Features Mini-badges */}
+                  <div className="flex flex-wrap gap-2 pt-1 text-2xs font-bold text-zen-text-muted dark:text-zen-dark-text-muted">
+                    <span className="flex items-center gap-1 bg-zen-surface-container/60 dark:bg-zen-dark-surface-high/60 px-2.5 py-1 rounded-lg">
+                      <Zap className="w-3 h-3 text-zen-primary" /> Regola di Fusione
+                    </span>
+                    <span className="flex items-center gap-1 bg-zen-surface-container/60 dark:bg-zen-dark-surface-high/60 px-2.5 py-1 rounded-lg">
+                      <Layers className="w-3 h-3 text-zen-secondary" /> Flashcards
+                    </span>
+                    <span className="flex items-center gap-1 bg-zen-surface-container/60 dark:bg-zen-dark-surface-high/60 px-2.5 py-1 rounded-lg">
+                      <PenTool className="w-3 h-3 text-zen-accent" /> Piccolo ゃ/ゅ/ょ
+                    </span>
+                    <span className="flex items-center gap-1 bg-zen-surface-container/60 dark:bg-zen-dark-surface-high/60 px-2.5 py-1 rounded-lg">
+                      <Award className="w-3 h-3 text-emerald-500" /> Quiz Discriminativo
+                    </span>
+                  </div>
+                </div>
+
+                <div className="shrink-0 flex md:flex-col items-center justify-between gap-3 border-t md:border-t-0 md:border-l border-zen-border/40 dark:border-zen-dark-border pt-4 md:pt-0 md:pl-6">
+                  <div className="text-left md:text-center">
+                    <span className="text-3xs font-bold uppercase tracking-wider text-zen-text-muted">Progresso</span>
+                    <div className="text-base font-bold font-mono text-zen-text dark:text-zen-dark-text">
+                      Giorno {lessonIdYoon}/6
+                    </div>
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={() => openCourse('course-yoon')}
+                    className="py-3 px-5 rounded-2xl bg-zen-primary dark:bg-zen-dark-primary hover:bg-zen-primary-dark dark:hover:bg-zen-dark-primary-hover text-white dark:text-zen-dark-on-primary font-bold text-xs shadow-zen-md hover:scale-105 active:scale-95 transition-all flex items-center gap-2 cursor-pointer shrink-0"
+                  >
+                    <span>{lessonIdYoon > 1 ? `${t('lessons.continueCourse')} ${lessonIdYoon}` : t('lessons.startCourse')}</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -330,15 +415,10 @@ export default function StructuredLessons({ scriptMode, updateStats }) {
           <div className="grid sm:grid-cols-2 gap-3">
             {[
               {
-                title: 'Combinazioni Yōon',
-                subtitle: 'Dittonghi e suoni contratti (きゃ, しゃ...)',
-                kana: 'きゃ・しゃ',
-              },
-              {
-                title: 'Regole di Fonetica Zen',
-                subtitle: 'Sokuon (っ) e Chōonpu (ー)',
+                title: t('lessons.trackPhoneticsTitle') || 'Regole di Fonetica Zen',
+                subtitle: t('lessons.trackPhoneticsSubtitle') || 'Sokuon (っ) e Chōonpu (ー)',
                 kana: 'っ・ー',
-              },
+              }
             ].map((course, idx) => (
               <div
                 key={idx}
@@ -387,13 +467,17 @@ export default function StructuredLessons({ scriptMode, updateStats }) {
                 <span>{t('lessons.backToHub') || 'Tutti i Corsi'}</span>
               </button>
               <span className="text-xs font-bold uppercase tracking-wider">
-                {isDakutenMode ? t('lessons.trackDakutenTitle') : t('lessons.track5KanaTitle')}
+                {isYoonMode 
+                  ? t('lessons.trackYoonTitle') 
+                  : isDakutenMode 
+                  ? t('lessons.trackDakutenTitle') 
+                  : t('lessons.track5KanaTitle')}
               </span>
             </div>
             <h2 className="mt-1 font-headline text-2xl font-bold text-zen-text dark:text-zen-dark-text">
-              {t('lessons.day')} {activeLesson.id} · {isDakutenMode ? (lang === 'it' ? activeLesson.titleIt : activeLesson.titleEn) : t('lessons.track5KanaSubtitle')}
+              {t('lessons.day')} {activeLesson.id} · {(isYoonMode || isDakutenMode) ? (lang === 'it' ? activeLesson.titleIt : activeLesson.titleEn) : t('lessons.track5KanaSubtitle')}
             </h2>
-            {isDakutenMode && (
+            {(isYoonMode || isDakutenMode) && (
               <p className="text-xs text-zen-text-muted dark:text-zen-dark-text-muted mt-0.5">
                 {lang === 'it' ? activeLesson.descIt : activeLesson.descEn}
               </p>
@@ -402,13 +486,13 @@ export default function StructuredLessons({ scriptMode, updateStats }) {
 
           {/* Day Selector */}
           <select
-            value={isDakutenMode ? lessonIdDakuten : lessonId5Kana}
+            value={isYoonMode ? lessonIdYoon : (isDakutenMode ? lessonIdDakuten : lessonId5Kana)}
             onChange={(event) => changeLesson(Number(event.target.value))}
             className="rounded-xl border border-zen-border bg-white px-3 py-2 text-sm font-bold dark:border-zen-dark-border dark:bg-zen-dark-surface dark:text-zen-dark-text shadow-zen-sm cursor-pointer"
           >
-            {(isDakutenMode ? DAKUTEN_LESSONS : LESSONS).map((item) => (
+            {(isYoonMode ? YOON_LESSONS : (isDakutenMode ? DAKUTEN_LESSONS : LESSONS)).map((item) => (
               <option key={item.id} value={item.id}>
-                {t('lessons.day')} {item.id} {isDakutenMode ? `(${item.romaji.slice(0, 3).join(', ')}...)` : '(5 Kana)'}
+                {t('lessons.day')} {item.id} {isYoonMode ? `(${item.romaji.slice(0, 3).join(', ')}...)` : isDakutenMode ? `(${item.romaji.slice(0, 3).join(', ')}...)` : '(5 Kana)'}
               </option>
             ))}
           </select>
@@ -432,11 +516,11 @@ export default function StructuredLessons({ scriptMode, updateStats }) {
         </div>
       </div>
 
-      {/* Step 0: Teoria & Confronto Visivo / Suono Base vs Sonoro */}
+      {/* Step 0: Teoria & Confronto Visivo */}
       {step === 0 && (
         <div className="space-y-5 animate-fade-in">
           {/* Theory & Explanation Card */}
-          {isDakutenMode && activeLesson.theory && (() => {
+          {(isDakutenMode || isYoonMode) && activeLesson.theory && (() => {
             const theoryData = activeLesson.theory[lang] || activeLesson.theory.it;
             return (
               <div className="zen-card p-5 sm:p-6 rounded-3xl border border-zen-border/60 dark:border-zen-dark-border bg-zen-surface-lowest dark:bg-zen-dark-surface shadow-zen-md space-y-4">
@@ -481,8 +565,54 @@ export default function StructuredLessons({ scriptMode, updateStats }) {
             );
           })()}
 
-          {/* Kana Comparison Cards */}
-          {isDakutenMode ? (
+          {/* Kana Comparison Cards: Yoon Mode */}
+          {isYoonMode ? (
+            <div className="space-y-3">
+              <h4 className="text-xs font-bold text-zen-text-muted dark:text-zen-dark-text-muted uppercase tracking-wider px-1">
+                {lang === 'it' ? 'Fusione Sillabica: Suono -I + Piccolo ya/yu/yo (ゃ, ゅ, ょ)' : 'Syllable Fusion: -I Sound + Small ya/yu/yo (ゃ, ゅ, ょ)'}
+              </h4>
+              <div className="grid gap-3 sm:grid-cols-3 md:grid-cols-6">
+                {activeKana.map((item) => (
+                  <div
+                    key={item.romaji}
+                    className="zen-card flex flex-col items-center justify-between border border-zen-border/40 p-4 dark:border-zen-dark-border bg-zen-surface-lowest dark:bg-zen-dark-surface shadow-zen-sm rounded-3xl"
+                  >
+                    {/* Top Base Comparison Pill */}
+                    <div className="w-full flex items-center justify-center gap-1.5 bg-zen-surface-container/40 dark:bg-zen-dark-surface-high/40 px-2 py-1 rounded-xl text-3xs font-bold text-zen-text-muted mb-2 font-kana">
+                      <span>{item.baseChar}</span>
+                      <span className="text-zen-primary dark:text-zen-dark-primary">+</span>
+                      <span className="text-zen-primary dark:text-zen-dark-primary">{item.yoonModifier}</span>
+                    </div>
+
+                    {/* Transformed Yoon Kana */}
+                    <button
+                      type="button"
+                      onClick={() => playKanaSound(item.char)}
+                      className="flex flex-col items-center group my-1 cursor-pointer"
+                      title="Ascolta suono Yōon"
+                    >
+                      <span className="font-kana text-5xl font-extrabold text-zen-primary dark:text-zen-dark-primary group-hover:scale-105 transition-transform">
+                        {item.char}
+                      </span>
+                      <span className="mt-2 font-bold font-headline text-base text-zen-text dark:text-zen-dark-text uppercase tracking-wider">
+                        {item.cleanRomaji || item.romaji}
+                      </span>
+                    </button>
+
+                    {/* Audio Button */}
+                    <button
+                      type="button"
+                      onClick={() => playKanaSound(item.char)}
+                      className="w-full mt-2 py-1.5 rounded-xl bg-zen-primary/10 dark:bg-zen-dark-primary/20 text-zen-primary dark:text-zen-dark-primary text-3xs font-bold flex items-center justify-center gap-1 hover:bg-zen-primary/20 cursor-pointer transition-colors"
+                    >
+                      <Volume2 className="w-3.5 h-3.5" />
+                      <span>{lang === 'it' ? 'Ascolta' : 'Play'}</span>
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ) : isDakutenMode ? (
             <div className="space-y-3">
               <h4 className="text-xs font-bold text-zen-text-muted dark:text-zen-dark-text-muted uppercase tracking-wider px-1">
                 {lang === 'it' ? 'Confronto Suono Base ➔ Suono Sonoro' : 'Base Sound ➔ Voiced Sound Comparison'}
@@ -716,7 +846,7 @@ export default function StructuredLessons({ scriptMode, updateStats }) {
                 >
                   {t('lessons.reviewLesson')}
                 </button>
-                {activeLesson.id < (isDakutenMode ? DAKUTEN_LESSONS.length : LESSONS.length) && (
+                {activeLesson.id < (isYoonMode ? YOON_LESSONS.length : isDakutenMode ? DAKUTEN_LESSONS.length : LESSONS.length) && (
                   <button
                     type="button"
                     onClick={() => changeLesson(activeLesson.id + 1)}

@@ -123,7 +123,25 @@ export const KANA_COMBINATION = [
 
   { hiragana: 'りゃ', katakana: 'リャ', romaji: 'rya', example: 'りゃくそく (ryakusoku - abbreviation)', exampleIt: 'りゃくそく (ryakusoku - abbreviazione)', exampleEn: 'りゃくそく (ryakusoku - abbreviation)' },
   { hiragana: 'りゅ', katakana: 'リュ', romaji: 'ryu', example: 'りゅう (ryuu - dragon)', exampleIt: 'りゅう (ryuu - drago)', exampleEn: 'りゅう (ryuu - dragon)' },
-  { hiragana: 'りょ', katakana: 'リョ', romaji: 'ryo', example: 'りょこう (ryokou - travel)', exampleIt: 'りょこう (ryokou - viaggio)', exampleEn: 'りょこう (ryokou - travel)' }
+  { hiragana: 'りょ', katakana: 'リョ', romaji: 'ryo', example: 'りょこう (ryokou - travel)', exampleIt: 'りょこう (ryokou - viaggio)', exampleEn: 'りょこう (ryokou - travel)' },
+
+  // Dakuten Yōon
+  { hiragana: 'ぎゃ', katakana: 'ギャ', romaji: 'gya', example: 'ぎゃく (gyaku - opposite)', exampleIt: 'ぎゃく (gyaku - opposto)', exampleEn: 'ぎゃく (gyaku - opposite)' },
+  { hiragana: 'ぎゅ', katakana: 'ギュ', romaji: 'gyu', example: 'ぎゅうにく (gyuuniku - beef)', exampleIt: 'ぎゅうにく (gyuuniku - manzo)', exampleEn: 'ぎゅうにく (gyuuniku - beef)' },
+  { hiragana: 'ぎょ', katakana: 'ギョ', romaji: 'gyo', example: 'ぎょうざ (gyouza - dumplings)', exampleIt: 'ぎょうざ (gyouza - ravioli)', exampleEn: 'ぎょうざ (gyouza - dumplings)' },
+
+  { hiragana: 'じゃ', katakana: 'ジャ', romaji: 'ja', example: 'じゃがいも (jagaimo - potato)', exampleIt: 'じゃがいも (jagaimo - patata)', exampleEn: 'じゃがいも (jagaimo - potato)' },
+  { hiragana: 'じゅ', katakana: 'ジュ', romaji: 'ju', example: 'ジュース (juusu - juice)', exampleIt: 'ジュース (juusu - succo)', exampleEn: 'ジュース (juusu - juice)' },
+  { hiragana: 'じょ', katakana: 'ジョ', romaji: 'jo', example: 'じょせい (josei - woman)', exampleIt: 'じょせい (josei - donna)', exampleEn: 'じょせい (josei - woman)' },
+
+  { hiragana: 'びゃ', katakana: 'ビャ', romaji: 'bya', example: 'びゃくや (byakuya - white night)', exampleIt: 'びゃくや (byakuya - notte bianca)', exampleEn: 'びゃくや (byakuya - white night)' },
+  { hiragana: 'びゅ', katakana: 'ビュ', romaji: 'byu', example: 'びゅー (byuu - view)', exampleIt: 'びゅー (byuu - vista/panorama)', exampleEn: 'びゅー (byuu - view)' },
+  { hiragana: 'びょ', katakana: 'ビョ', romaji: 'byo', example: 'びょういん (byouin - hospital)', exampleIt: 'びょういん (byouin - ospedale)', exampleEn: 'びょういん (byouin - hospital)' },
+
+  // Handakuten Yōon
+  { hiragana: 'ぴゃ', katakana: 'ピャ', romaji: 'pya', example: 'ろっぴゃく (roppyaku - six hundred)', exampleIt: 'ろっぴゃく (roppyaku - seicento)', exampleEn: 'ろっぴゃく (roppyaku - six hundred)' },
+  { hiragana: 'ぴゅ', katakana: 'ピュ', romaji: 'pyu', example: 'ぴゅあ (pyua - pure)', exampleIt: 'ぴゅあ (pyua - puro)', exampleEn: 'ぴゅあ (pyua - pure)' },
+  { hiragana: 'ぴょ', katakana: 'ピョ', romaji: 'pyo', example: 'ぴょんぴょん (pyonpyon - hopping)', exampleIt: 'ぴょんぴょん (pyonpyon - saltellante)', exampleEn: 'ぴょんぴょん (pyonpyon - hopping)' }
 ];
 
 export const KANA_EXAMPLES_MAP = {
