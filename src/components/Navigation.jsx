@@ -143,9 +143,9 @@ export default function Navigation({
               </div>
             </div>
 
-            {/* Desktop Navigation Links */}
+            {/* Desktop Navigation Links (Icon-only for inactive, full for active, hover reveal) */}
             <nav className="min-w-0 flex-1 flex items-center justify-center px-1">
-              <div className="flex items-center gap-1 flex-nowrap">
+              <div className="flex items-center gap-1 bg-zen-surface-container/60 dark:bg-zen-dark-surface p-1 rounded-2xl border border-zen-border/30 dark:border-zen-dark-border flex-nowrap">
                 {navItems.map((item) => {
                   const Icon = item.icon;
                   const isActive = activeTab === item.id;
@@ -154,20 +154,31 @@ export default function Navigation({
                     <button
                       key={item.id}
                       onClick={() => setActiveTab(item.id)}
-                      className={`flex items-center gap-1.5 whitespace-nowrap rounded-xl px-2.5 py-1.5 text-xs font-medium transition-all shrink-0 ${
+                      title={item.label}
+                      aria-label={item.label}
+                      className={`group relative flex items-center gap-1.5 rounded-xl px-2.5 py-1.5 text-xs font-medium transition-all duration-200 shrink-0 ${
                         isActive
-                          ? 'bg-zen-primary/10 dark:bg-zen-dark-surface-high text-zen-primary dark:text-zen-dark-primary font-bold border border-zen-primary/20 dark:border-zen-dark-border shadow-sm'
-                          : 'text-zen-text-muted dark:text-zen-dark-text-muted hover:bg-zen-surface-high dark:hover:bg-zen-dark-surface hover:text-zen-text dark:hover:text-zen-dark-text'
+                          ? 'bg-zen-primary/10 dark:bg-zen-dark-primary/15 text-zen-primary dark:text-zen-dark-primary font-bold border border-zen-primary/25 dark:border-zen-dark-primary/30 shadow-sm'
+                          : 'text-zen-text-muted dark:text-zen-dark-text-muted hover:bg-zen-surface-high dark:hover:bg-zen-dark-bg hover:text-zen-primary dark:hover:text-zen-dark-primary'
                       }`}
                     >
                       <Icon
-                        className={`w-3.5 h-3.5 shrink-0 ${
+                        className={`w-4 h-4 shrink-0 transition-transform duration-200 group-hover:scale-110 ${
                           isActive
                             ? 'text-zen-primary dark:text-zen-dark-primary'
                             : ''
                         }`}
                       />
-                      <span>{item.label}</span>
+                      {/* Name visible if active, or smoothly revealed on mouse over */}
+                      <span
+                        className={`whitespace-nowrap transition-all duration-300 overflow-hidden select-none ${
+                          isActive
+                            ? 'max-w-[160px] opacity-100'
+                            : 'max-w-0 opacity-0 group-hover:max-w-[160px] group-hover:opacity-100 group-hover:ml-0.5'
+                        }`}
+                      >
+                        {item.label}
+                      </span>
                     </button>
                   );
                 })}
