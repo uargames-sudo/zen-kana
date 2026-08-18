@@ -106,7 +106,7 @@ export const translations = {
       tabYoon: 'Yōon (拗音)',
       tabSmall: 'Piccoli (っ/ー)',
       tabSokuon: 'Sokuon (促音)',
-      tabChoonpu: 'Chōonpu (長音符)',
+      tabChoonpu: 'Chōonpu / Sokuon (ー/ッ)',
       charDetails: 'Dettagli Carattere',
       exampleWord: 'Parola d\'esempio',
       close: 'Chiudi'
@@ -410,7 +410,7 @@ export const translations = {
       tabYoon: 'Yōon / Comb.',
       tabSmall: 'Small (っ/ー)',
       tabSokuon: 'Sokuon (促音)',
-      tabChoonpu: 'Chōonpu (長音符)',
+      tabChoonpu: 'Chōonpu / Sokuon (ー/ッ)',
       charDetails: 'Character Details',
       exampleWord: 'Example Word',
       close: 'Close'

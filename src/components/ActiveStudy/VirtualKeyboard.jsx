@@ -55,9 +55,11 @@ export default function VirtualKeyboard({
             break;
         case 'small':
             activeGrid = isHiragana ? SMALL_HIRAGANA_GRID : SMALL_KATAKANA_GRID;
-            colHeaders = isHiragana ? ['Sokuon (っ)'] : ['Chōonpu (ー)'];
-            rowLabels = [isHiragana ? 'っ' : 'ー'];
-            gridColsClass = 'grid-cols-[28px_minmax(90px,160px)] sm:grid-cols-[36px_minmax(120px,180px)]';
+            colHeaders = isHiragana ? ['Sokuon (っ)'] : ['Chōonpu (ー)', 'Sokuon (ッ)'];
+            rowLabels = [isHiragana ? 'っ' : '•'];
+            gridColsClass = isHiragana 
+                ? 'grid-cols-[28px_minmax(90px,160px)] sm:grid-cols-[36px_minmax(120px,180px)]'
+                : 'grid-cols-[28px_repeat(2,minmax(80px,140px))] sm:grid-cols-[36px_repeat(2,minmax(100px,160px))]';
             break;
         default:
             activeGrid = isHiragana ? HIRAGANA_GRID : KATAKANA_GRID;

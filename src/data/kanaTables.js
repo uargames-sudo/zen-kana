@@ -83,6 +83,6 @@ export const SMALL_HIRAGANA_GRID = [
 ];
 
 export const SMALL_KATAKANA_GRID = [
-    [{ k: 'ー', r: '—' }]
+    [{ k: 'ー', r: '—' }, { k: 'ッ', r: 'tsu' }]
 ];
 

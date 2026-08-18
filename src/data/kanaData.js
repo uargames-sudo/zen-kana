@@ -367,7 +367,7 @@ export const KANA_EXAMPLES_MAP = {
 
   // Small & Special
   'っ': { it: 'きっぷ (kippu - biglietto) [Consonante doppia]', en: 'きっぷ (kippu - ticket) [Double consonant]' },
-  'ッ': { it: 'きっぷ (kippu - biglietto) [Consonante doppia]', en: 'きっぷ (kippu - ticket) [Double consonant]' },
+  'ッ': { it: 'ベッド (beddo - letto) [Consonante doppia]', en: 'ベッド (beddo - bed) [Double consonant]' },
   'ゃ': { it: 'おちゃ (ocha - tè) [Piccolo ya]', en: 'おちゃ (ocha - tea) [Small ya]' },
   'ャ': { it: 'おちゃ (ocha - tè) [Piccolo ya]', en: 'おちゃ (ocha - tea) [Small ya]' },
   'ゅ': { it: 'ぎゅうにゅう (gyuunyuu - latte) [Piccolo yu]', en: 'ぎゅうにゅう (gyuunyuu - milk) [Small yu]' },

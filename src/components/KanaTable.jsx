@@ -48,9 +48,9 @@ export default function KanaTable({ scriptMode }) {
         };
       case 'small':
         return {
-          columns: isHiragana ? ['促音 (Sokuon)'] : ['長音符 (Chōonpu)'],
-          rowLabels: [isHiragana ? 'っ' : 'ー'],
-          colCount: 1,
+          columns: isHiragana ? ['促音 (Sokuon)'] : ['長音符 (Chōonpu)', '促音 (Sokuon)'],
+          rowLabels: [isHiragana ? 'っ' : '•'],
+          colCount: isHiragana ? 1 : 2,
           grid: isHiragana ? SMALL_HIRAGANA_GRID : SMALL_KATAKANA_GRID
         };
       default:
@@ -73,6 +73,8 @@ export default function KanaTable({ scriptMode }) {
 
   const gridColsClass = colCount === 3 
     ? 'grid-cols-[36px_repeat(3,1fr)] sm:grid-cols-[48px_repeat(3,1fr)]' 
+    : colCount === 2
+    ? 'grid-cols-[36px_repeat(2,minmax(110px,180px))] sm:grid-cols-[48px_repeat(2,minmax(130px,200px))]'
     : colCount === 1
     ? 'grid-cols-[36px_minmax(120px,200px)] sm:grid-cols-[48px_minmax(140px,220px)]'
     : 'grid-cols-[36px_repeat(5,1fr)] sm:grid-cols-[48px_repeat(5,1fr)]';
