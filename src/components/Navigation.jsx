@@ -192,26 +192,28 @@ export default function Navigation({
               <div className="flex items-center bg-zen-surface-container dark:bg-zen-dark-surface p-0.5 rounded-full border border-zen-border/40 dark:border-zen-dark-border shrink-0">
                 <button
                   onClick={() => setScriptMode('hiragana')}
-                  className={`px-2.5 py-1 rounded-full text-xs font-semibold transition-all ${
+                  className={`px-2.5 py-1 rounded-full text-xs font-semibold transition-all flex items-center justify-center min-w-[32px] ${
                     scriptMode === 'hiragana'
                       ? 'bg-zen-primary dark:bg-zen-dark-primary text-white dark:text-zen-dark-on-primary shadow-zen-sm'
                       : 'text-zen-text-muted dark:text-zen-dark-text-muted hover:text-zen-text dark:hover:text-zen-dark-text'
                   }`}
                   title={t('nav.scriptHiragana')}
                 >
-                  <span>{t('nav.scriptHiragana')}</span>
+                  <span className="hidden 2xl:inline">{t('nav.scriptHiragana')}</span>
+                  <span className="2xl:hidden">{t('nav.scriptHiraganaShort')}</span>
                 </button>
 
                 <button
                   onClick={() => setScriptMode('katakana')}
-                  className={`px-2.5 py-1 rounded-full text-xs font-semibold transition-all ${
+                  className={`px-2.5 py-1 rounded-full text-xs font-semibold transition-all flex items-center justify-center min-w-[32px] ${
                     scriptMode === 'katakana'
                       ? 'bg-zen-primary dark:bg-zen-dark-primary text-white dark:text-zen-dark-on-primary shadow-zen-sm'
                       : 'text-zen-text-muted dark:text-zen-dark-text-muted hover:text-zen-text dark:hover:text-zen-dark-text'
                   }`}
                   title={t('nav.scriptKatakana')}
                 >
-                  <span>{t('nav.scriptKatakana')}</span>
+                  <span className="hidden 2xl:inline">{t('nav.scriptKatakana')}</span>
+                  <span className="2xl:hidden">{t('nav.scriptKatakanaShort')}</span>
                 </button>
               </div>
 
