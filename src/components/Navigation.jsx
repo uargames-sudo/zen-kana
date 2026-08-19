@@ -127,7 +127,7 @@ export default function Navigation({
             {/* Logo */}
             <div
               onClick={() => setActiveTab('dashboard')}
-              className="group flex flex-1 shrink-0 cursor-pointer items-center gap-2"
+              className="group flex flex-1 min-w-0 cursor-pointer items-center gap-2"
             >
               <div className="w-8 h-8 rounded-xl bg-zen-primary dark:bg-zen-dark-primary text-white dark:text-zen-dark-on-primary flex items-center justify-center font-kana font-bold text-base shadow-zen-sm group-hover:scale-105 transition-transform shrink-0">
                 あ
@@ -187,7 +187,7 @@ export default function Navigation({
             </nav>
 
             {/* Top Bar Actions (Script switch, Language, Install PWA & Theme) */}
-            <div className="flex flex-1 shrink-0 justify-end items-center gap-2">
+            <div className="flex flex-1 min-w-0 justify-end items-center gap-2">
               {/* Script Switcher */}
               <div className="flex items-center bg-zen-surface-container dark:bg-zen-dark-surface p-0.5 rounded-full border border-zen-border/40 dark:border-zen-dark-border shrink-0">
                 <button
