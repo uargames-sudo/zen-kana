@@ -562,7 +562,7 @@ export default function MemoryGame() {
 
                       {/* ============ BACK: CARD FACE (REVEALED) ============ */}
                       <div
-                        className={`absolute inset-0 w-full h-full rounded-2xl [backface-visibility:hidden] [transform:rotateY(180deg)] p-2 sm:p-3 flex flex-col items-center justify-between border-2 transition-all ${
+                        className={`absolute inset-0 w-full h-full rounded-2xl [backface-visibility:hidden] [transform:rotateY(180deg)] p-1.5 sm:p-2.5 flex flex-col items-center justify-between border-2 transition-all overflow-hidden ${
                           isMatched
                             ? 'bg-emerald-500/10 dark:bg-emerald-500/15 border-emerald-500/60 dark:border-emerald-400 shadow-zen-sm'
                             : 'bg-zen-surface-lowest dark:bg-zen-dark-surface border-zen-primary/50 dark:border-zen-dark-primary shadow-zen-md'
@@ -585,15 +585,15 @@ export default function MemoryGame() {
                         {/* Card Content based on type */}
                         <div className="my-auto flex flex-col items-center justify-center text-center">
                           {card.type === 'illustration' ? (
-                            <div className="flex flex-col items-center gap-1">
+                            <div className="flex flex-col items-center gap-1 w-full">
                               <VocabIllustration 
                                 id={card.id} 
                                 keyword={card.keyword} 
                                 alt={card.english} 
-                                className="w-12 h-12 sm:w-16 sm:h-16" 
-                                iconClassName="w-6 h-6 sm:w-8 sm:h-8"
+                                className="w-8 h-8 sm:w-12 sm:h-12" 
+                                iconClassName="w-5 h-5 sm:w-6 sm:h-6"
                               />
-                              <span className="text-2xs sm:text-xs font-bold text-zen-text dark:text-zen-dark-text leading-tight mt-0.5">
+                              <span className="text-3xs sm:text-2xs font-bold text-zen-text dark:text-zen-dark-text leading-tight mt-0.5 text-center break-words line-clamp-2 w-full px-0.5">
                                 {lang === 'it' ? card.italian : card.english}
                               </span>
                             </div>
@@ -614,13 +614,15 @@ export default function MemoryGame() {
                             </div>
                           ) : (
                             // Kana text card
-                            <div className="flex flex-col items-center">
-                              <span className="font-kana text-2xl sm:text-4xl font-bold text-zen-primary dark:text-zen-dark-primary leading-tight">
+                            <div className="flex flex-col items-center w-full px-0.5">
+                              <span className={`font-kana font-bold text-zen-primary dark:text-zen-dark-primary leading-tight text-center break-words ${card.kana.length > 4 ? 'text-sm sm:text-base' : card.kana.length > 2 ? 'text-lg sm:text-xl' : 'text-2xl sm:text-4xl'}`}>
                                 {card.kana}
                               </span>
-                              <span className="text-2xs sm:text-xs font-mono font-semibold text-zen-text-muted dark:text-zen-dark-text-muted uppercase mt-0.5">
-                                {card.romaji}
-                              </span>
+                              {difficulty === 'easy' && (
+                                <span className="text-3xs sm:text-2xs font-mono font-semibold text-zen-text-muted dark:text-zen-dark-text-muted uppercase mt-0.5 truncate w-full text-center">
+                                  {card.romaji}
+                                </span>
+                              )}
                             </div>
                           )}
                         </div>
