@@ -117,15 +117,17 @@ export default function StoryReader() {
     return (
         <div className="w-full max-w-2xl mx-auto p-4 flex flex-col pt-2 pb-20">
             {/* Header */}
-            <div className="flex items-start gap-4 mb-8">
-                <button
-                    onClick={() => setSelectedStory(null)}
-                    className="shrink-0 p-3 rounded-2xl bg-zen-surface-container dark:bg-zen-dark-surface border border-zen-border/40 dark:border-zen-dark-border hover:bg-zen-surface-high dark:hover:bg-zen-dark-surface-high active:scale-95 transition-all text-zen-text dark:text-zen-dark-text"
-                    aria-label="Back to stories"
-                >
-                    <ArrowLeft className="w-5 h-5" />
-                </button>
-                <div className="flex-1 pt-1">
+            <div className="relative flex flex-col items-center text-center mb-8">
+                <div className="absolute left-0 top-0 sm:top-1">
+                    <button
+                        onClick={() => setSelectedStory(null)}
+                        className="shrink-0 p-2.5 sm:p-3 rounded-2xl bg-zen-surface-container dark:bg-zen-dark-surface border border-zen-border/40 dark:border-zen-dark-border hover:bg-zen-surface-high dark:hover:bg-zen-dark-surface-high active:scale-95 transition-all text-zen-text dark:text-zen-dark-text"
+                        aria-label="Back to stories"
+                    >
+                        <ArrowLeft className="w-5 h-5" />
+                    </button>
+                </div>
+                <div className="flex flex-col items-center px-14 pt-1">
                     <span className="px-2 py-0.5 rounded-lg bg-zen-primary/10 dark:bg-zen-dark-primary/20 text-zen-primary dark:text-zen-dark-primary text-[10px] font-bold font-mono uppercase tracking-widest mb-2 inline-block">
                         {selectedStory.level} Story
                     </span>
@@ -135,7 +137,7 @@ export default function StoryReader() {
                     <p className="text-sm font-headline font-semibold text-zen-text-muted dark:text-zen-dark-text-muted">
                         {lang === 'it' ? selectedStory.titleIt : selectedStory.titleEn}
                     </p>
-                    <p className="text-xs text-zen-text-muted/70 mt-3 border-l-2 border-zen-primary/30 pl-3 py-0.5">
+                    <p className="text-xs text-zen-text-muted/70 mt-3 italic max-w-sm">
                         {selectedStory.description}
                     </p>
                 </div>
