@@ -28,7 +28,11 @@ A calm, focused, and intuitive Japanese character learning studio designed as a 
 - **🔊 High-Fidelity Speech & Audio Engine**: Instant pre-warming on user gesture (zero first-click latency), maximum volume output (`1.0`), learner-calibrated cadence (0.75 for Kana, 0.80 for vocabulary), and Chromium GC protection.
 - **🌍 Bilingual Interface (i18n)**: Full runtime switching between **Italian** and **English** with seamless in-app language switcher (`IT` / `EN`) across all learning modules and menus.
 - **📑 Unified 5-Category Kana Matrix**: Reference tables and virtual keyboard organized into **Base (46)**, **Dakuten (゛)**, **Handakuten (゜)**, **Yōon (拗音)**, and **Small/Sokuon (っ/ー)** with 100% bilingual example coverage.
-- **⚡ Advanced Active Study**: Train muscle memory and script-to-romaji transliteration with immediate visual feedback, 3 difficulty tiers (Easy, Medium, Hard), and automatic audio playback.
+- **⚡ Advanced Active Study Hub**: A comprehensive 3-pillar learning hub:
+  - *Kana Study*: Train muscle memory and transliteration with 3 difficulty tiers and a virtual keyboard.
+  - *Phrases Studio*: Interactive flashcards for survival Japanese (Greetings, Transport, Restaurant) with flip-to-reveal translation and TTS audio.
+  - *Story Reader*: N5-level short stories presented line-by-line with progressive reveals (Romaji → Translation) and per-line playback.
+- **🇯🇵 Native Furigana Engine**: Full support for HTML5 `<ruby>` tags to display perfectly aligned Furigana over Kanji characters.
 - **✍️ Interactive Writing Canvas**: Practice handwriting Kana with stroke order guides, clear canvas, and real-time visual feedback.
 - **📱 Progressive Web App (PWA)**: Fully installable on mobile devices (Android/iOS) and desktop browsers with header install button and offline Service Worker caching.
 - **🖥️ Cross-Platform Desktop Support**: Packaged with **Tauri v2** for lightweight, ultra-fast native Windows, macOS, and Linux desktop builds.
@@ -46,7 +50,7 @@ A calm, focused, and intuitive Japanese character learning studio designed as a 
 | **📖 Structured Lessons** | 4 complete step-by-step curriculum tracks with daily theory, flashcards, handwriting canvas, and verification quizzes. |
 | **📑 Kana Tables** | Interactive coordinate matrix across 5 categories with contextual mini-guides, instant pronunciation, and examples. |
 | **🃏 Flashcards** | 3D flip flashcards supporting Kana subsets & Vocabulary with Shuffle mode, mistake review, and mastery counters. |
-| **⚡ Active Study** | Transliteration training supporting Read Kana, Write Kana, and Mixed modes with 3 difficulty levels and virtual keyboard. |
+| **⚡ Active Study** | A 3-pillar study hub featuring timed Kana transliteration, survival Phrases Studio, and a guided N5 Story Reader. |
 | **✍️ Writing Canvas** | Practice handwriting Kana with stroke order guides, clear canvas, and real-time visual feedback. |
 | **💬 Vocabulary Studio** | Explore 100+ Japanese vocabulary words categorized with Romaji, translations, 2D vector illustrations, and audio. |
 | **🎧 Listening Quiz** | Train your auditory recognition: listen to native Japanese audio and select the matching Kana character. |
