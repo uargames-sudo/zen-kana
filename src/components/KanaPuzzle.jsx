@@ -856,8 +856,8 @@ export default function KanaPuzzle({ defaultScriptMode = 'hiragana' }) {
         {/* ================= Mistakes Review Section ================= */}
         {mistakes.length > 0 ? (
           <div className="zen-card p-5 sm:p-6 border border-zen-border/40 dark:border-zen-dark-border bg-zen-surface-lowest dark:bg-zen-dark-surface space-y-4">
-            <div className="flex items-center gap-2 border-b border-zen-border/30 dark:border-zen-dark-border/40 pb-3">
-              <AlertCircle className="w-5 h-5 text-rose-500" />
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-2 border-b border-zen-border/30 dark:border-zen-dark-border/40 pb-4 text-center">
+              <AlertCircle className="w-5 h-5 text-rose-500 hidden sm:block" />
               <h3 className="font-headline text-lg font-bold text-zen-text dark:text-zen-dark-text">
                 {t('puzzle.reviewTitle')} ({mistakes.length})
               </h3>

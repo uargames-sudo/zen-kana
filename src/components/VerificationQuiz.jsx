@@ -114,8 +114,8 @@ export default function VerificationQuiz({ scriptMode, updateStats }) {
 
         {/* Mistakes Review Section */}
         <div className="zen-card p-6 sm:p-8 bg-white dark:bg-zen-dark-surface border-2 border-zen-surface-high dark:border-zen-dark-border rounded-3xl shadow-zen-lg dark:shadow-zen-dark-lg space-y-4">
-          <div className="flex items-center justify-between border-b border-zen-border/40 dark:border-zen-dark-border pb-3">
-            <h3 className="text-base font-bold text-zen-text dark:text-zen-dark-text flex items-center gap-2">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 border-b border-zen-border/40 dark:border-zen-dark-border pb-4">
+            <h3 className="text-base font-bold text-zen-text dark:text-zen-dark-text flex flex-col sm:flex-row items-center justify-center gap-2 text-center">
               <span>{lang === 'it' ? 'Riepilogo Risposte Errate' : 'Mistakes Review'}</span>
               <span className={`px-2.5 py-0.5 rounded-full text-xs font-extrabold ${wrongQuestions.length === 0 ? 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400' : 'bg-rose-500/10 text-rose-600 dark:text-rose-400'}`}>
                 {wrongQuestions.length} {lang === 'it' ? 'errori' : 'mistakes'}
