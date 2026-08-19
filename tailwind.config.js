@@ -46,7 +46,7 @@ export default {
       fontFamily: {
         kana: ['Literata', 'serif'],
         headline: ['Literata', 'serif'],
-        sans: ['Inter', 'sans-serif']
+        sans: ['Outfit', 'sans-serif']
       },
       fontSize: {
         '3xs': ['0.5625rem', { lineHeight: '0.75rem' }], // 9px micro
