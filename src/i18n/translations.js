@@ -232,7 +232,7 @@ export const translations = {
     },
 
     // Structured Lessons Hub & Courses
-    lessons: {
+    _lessons_old: {
       title: 'Lezioni',
       subtitle: 'Percorso di studio guidato',
       hubTitle: 'Lezioni & Corsi',
@@ -461,6 +461,15 @@ export const translations = {
     // Structured Lessons
     lessons: {
       title: 'Lezioni Strutturate',
+      hubTitle: 'Lezioni & Corsi',
+      hubSubtitle: 'Percorsi di studio strutturati per padroneggiare il giapponese passo dopo passo.',
+      baseComparison: 'Confronto con il suono base',
+      soundTransformation: 'Trasformazione Fonetica',
+      characters: 'Caratteri',
+      cumulative: 'Cumulativi',
+      startLesson: 'Inizia Lezione',
+      completed: 'Completata',
+      vocabularyFound: 'Vocaboli disponibili per questa lezione',
       subtitle: 'Percorsi di studio guidati passo dopo passo: Kana Base, Suoni Modificati, Suoni Contratti e Regole di Fonetica.',
       hubBadge: 'Percorsi Didattici',
       allCourses: 'Tutti i Corsi',
@@ -724,7 +733,7 @@ export const translations = {
     },
 
     // Structured Lessons Hub & Courses
-    lessons: {
+    _lessons_old: {
       title: 'Lessons',
       subtitle: 'Guided Study Path',
       hubTitle: 'Lessons & Courses',
@@ -953,6 +962,15 @@ export const translations = {
     // Structured Lessons
     lessons: {
       title: 'Structured Lessons',
+      hubTitle: 'Lessons & Courses',
+      hubSubtitle: 'Structured study paths to master Japanese step by step.',
+      baseComparison: 'Comparison with base sound',
+      soundTransformation: 'Phonetic Transformation',
+      characters: 'Characters',
+      cumulative: 'Cumulative',
+      startLesson: 'Start Lesson',
+      completed: 'Completed',
+      vocabularyFound: 'Available vocabulary for this lesson',
       subtitle: 'Step-by-step guided learning tracks: Basic Kana, Voiced Sounds, Contracted Sounds, and Phonetics Rules.',
       hubBadge: 'Curriculum Tracks',
       allCourses: 'All Courses',
