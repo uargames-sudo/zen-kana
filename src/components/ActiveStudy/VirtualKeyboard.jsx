@@ -201,7 +201,7 @@ export default function VirtualKeyboard({
                             key={`${vowel}-${vIdx}`}
                             className="py-1 text-center font-extrabold text-xs sm:text-sm font-mono text-zen-text dark:text-zen-dark-primary bg-white dark:bg-zen-dark-surface rounded-lg border-2 border-zen-text/70 dark:border-zen-dark-primary/60 shadow-xs uppercase tracking-wider"
                         >
-                            {vowel}
+                            {isRomajiVisible ? vowel : '\u00A0'}
                         </div>
                     ))}
                 </div>
@@ -210,11 +210,10 @@ export default function VirtualKeyboard({
                 <div className="grid gap-1.5 sm:gap-2">
                     {activeGrid.map((row, rIdx) => (
                         <div key={rIdx} className={`grid ${gridColsClass} gap-1.5 sm:gap-2 items-stretch`}>
-                            {/* Left Consonant Header */}
                             <div 
                                 className="flex items-center justify-center rounded-xl bg-white dark:bg-zen-dark-surface border-2 border-zen-text/70 dark:border-zen-dark-primary/60 text-zen-text dark:text-zen-dark-primary font-mono font-extrabold text-xs sm:text-sm select-none"
                             >
-                                {rowLabels[rIdx] || '—'}
+                                {isRomajiVisible ? (rowLabels[rIdx] || '—') : '\u00A0'}
                             </div>
 
                             {row.map((item, cIdx) => (
