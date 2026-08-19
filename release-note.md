@@ -1,5 +1,26 @@
 # Release Notes: Zen Kana
 
+## Version 1.4.1 — UI Refinements, Layout Polish & Translation Fixes
+
+**Release Date:** August 2026  
+**Status:** Minor Update / Patch  
+
+---
+
+### 🎨 UI & Layout Improvements
+- **Navigation & Headers**: Perfectly centered the main app logo across all desktop and mobile views. Realigned the `KanaTable` headers for perfect symmetry with the kana grid.
+- **Mistakes Review Section**: Centered the "Riepilogo Risposte Errate" title and badge across all quiz modes (Listening, Verification, Kana Puzzle).
+- **Active Study Solution Card**: Optimized layout by moving the audio playback button to the top-right corner, allowing the revealed Kana text to be perfectly centered.
+- **Memory Game Enhancements**: 
+  - Added dynamic text scaling and word-wrapping (`line-clamp`) to prevent long words from overflowing the memory cards on smaller screens.
+  - Romaji hints under the Kana cards are now intelligently hidden on Medium and Hard difficulties for a better challenge.
+- **Virtual Keyboard**: Romaji grid headers are now hidden completely when the global Romaji toggle is switched off, respecting the user's intent.
+- **Dark Mode Legibility**: Fixed text color for "Previous" and "Next" flashcard buttons in Structured Lessons when using Dark Mode.
+
+### 🌐 Translation Fixes
+- **i18n Fixes**: Merged overlapping translation objects that were causing missing string keys (like `hubTitle`) in the Structured Lessons hub.
+
+---
 ## Version 1.4.0 — Kana Mahjong Zen, 4 Structured Courses, Contextual Mini-Guides & Shuffle Modes
 
 **Release Date:** August 2026  
