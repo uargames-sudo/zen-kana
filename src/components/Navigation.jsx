@@ -471,7 +471,22 @@ export default function Navigation({
                 </p>
               </div>
 
-              {/* 3. Dakuten & Handakuten Card */}
+              {/* 3. Kanji Card */}
+              <div className="p-4 rounded-2xl bg-zen-surface-container/40 dark:bg-zen-dark-surface-high/60 border border-zen-border/50 dark:border-zen-dark-border shadow-2xs space-y-1.5">
+                <div className="flex items-center gap-2.5">
+                  <span className="w-8 h-8 rounded-xl bg-purple-600 text-white flex items-center justify-center font-kana font-bold text-base shadow-sm shrink-0">
+                    漢
+                  </span>
+                  <h4 className="font-bold text-sm sm:text-base font-headline text-zen-text dark:text-zen-dark-text">
+                    {t('nav.guideKanjiTitle') || 'Kanji (漢字)'}
+                  </h4>
+                </div>
+                <p className="text-xs text-zen-text/90 dark:text-zen-dark-text/90 leading-relaxed font-medium pl-10.5">
+                  {t('nav.guideKanjiDesc') || 'Ideogrammi che rappresentano un intero concetto o significato.'}
+                </p>
+              </div>
+
+              {/* 4. Dakuten & Handakuten Card */}
               <div className="p-4 rounded-2xl bg-zen-surface-container/40 dark:bg-zen-dark-surface-high/60 border border-zen-border/50 dark:border-zen-dark-border shadow-2xs space-y-1.5">
                 <div className="flex items-center gap-2.5">
                   <span className="w-8 h-8 rounded-xl bg-zen-accent text-white flex items-center justify-center font-kana font-bold text-base shadow-sm shrink-0">

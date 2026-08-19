@@ -63,9 +63,11 @@ export const translations = {
       guideTitle: 'Guida ai Sillabari Giapponesi',
       guideSubtitle: 'Capire quando e come usare Hiragana, Katakana, Diacritici e Fonetica',
       guideHiraganaTitle: 'Hiragana (ひらがな)',
-      guideHiraganaDesc: 'Il sillabario fondamentale dalle forme curve e morbide. Si usa per parole native giapponesi, desinenze verbali e aggettivali (okurigana) e particelle grammaticali (は, が, を, に).',
+      guideHiraganaDesc: 'Il sillabario base. Usato per le parole native giapponesi, la grammatica (particelle) e i suffissi dei verbi. È il primo passo fondamentale.',
       guideKatakanaTitle: 'Katakana (カタカナ)',
-      guideKatakanaDesc: 'Il sillabario geometrico e angolare. Si usa per prestiti linguistici stranieri (Gairaigo, es. コーヒー = caffè), nomi di persona o luoghi esteri, onomatopee nei manga e termini scientifici.',
+      guideKatakanaDesc: 'Il sillabario per i prestiti stranieri. Usato per parole non giapponesi (es. computer, nomi propri stranieri), onomatopee e per dare enfasi (come il nostro corsivo).',
+      guideKanjiTitle: 'Kanji (漢字)',
+      guideKanjiDesc: 'Ideogrammi di origine cinese che rappresentano un intero concetto o significato. Il giapponese moderno utilizza una combinazione di Kanji (per la radice delle parole) e Hiragana (per la grammatica).',
       guideDakutenTitle: 'Dakuten (゛) & Handakuten (゜)',
       guideDakutenDesc: 'I trattini ten-ten ゛ attivano la voce trasformando consonanti sorde in sonore (K➔G, S➔Z/JI, T➔D/JI/ZU, H➔B). Il cerchietto maru ゜ trasforma la riga H in P (suono semi-sonoro).',
       guideYoonTitle: 'Combinazioni Yōon (拗音 ゃ・ゅ・ょ)',
@@ -189,33 +191,6 @@ export const translations = {
       consultationNotice: 'Tastiera di consultazione (Digita la risposta con la tastiera del dispositivo)'
     },
 
-    // Flashcards
-    flashcards: {
-      title: 'Flashcard',
-      flipHint: 'Tocca per girare',
-      forgot: 'Non lo sapevo',
-      knewIt: 'Lo sapevo!',
-      resetDeck: 'Ricomincia da Capo',
-      allKana: 'Tutti i Kana (104)',
-      basic: 'Base (46)',
-      dakuten: 'Dakuten (25)',
-      yoon: 'Yōon (33)',
-      vocabulary: 'Vocabolario (100)',
-      shuffle: 'Ordine Casuale',
-      ordered: 'Ordine Standard',
-      reshuffle: 'Rimescola',
-      mistakesReview: 'Revisione Errori',
-      cardsNeedReview: 'carte da rivedere',
-      showAll: 'Mostra Tutte',
-      reviewErrorsOnly: 'Ripeti Solo Errori',
-      revealedAnswer: 'Risultato',
-      rateRecall: 'Valuta la tua memorizzazione:',
-      previous: 'Precedente',
-      next: 'Successivo',
-      mastered: 'Memorizzati',
-      needReview: 'Da rivedere'
-    },
-
     // Vocabulary
     vocabulary: {
       title: 'Vocabolario',
@@ -229,42 +204,6 @@ export const translations = {
       shuffle: 'Ordine Casuale',
       ordered: 'Ordine Standard',
       reshuffle: 'Rimescola'
-    },
-
-    // Structured Lessons Hub & Courses
-    _lessons_old: {
-      title: 'Lezioni',
-      subtitle: 'Percorso di studio guidato',
-      hubTitle: 'Lezioni & Corsi',
-      hubSubtitle: 'Percorsi di studio strutturati per padroneggiare il giapponese passo dopo passo.',
-      track5KanaTitle: '5 Kana al Giorno',
-      track5KanaSubtitle: 'Kana base un passo alla volta',
-      track5KanaDesc: 'Impara i 46 caratteri base Gojūon suddivisi in 10 lezioni quotidiane mirate con teoria, schede interattive, scrittura e quiz di verifica.',
-      track5KanaBadge: '10 Giorni • 46 Kana Base',
-      trackDakutenTitle: 'Dakuten & Handakuten',
-      trackDakutenSubtitle: 'Suoni sonori e semi-sonori (゛ e ゜)',
-      trackDakutenDesc: 'Padroneggia i 25 caratteri modificati (G, Z, D, B, P) suddivisi in 5 giornate tematiche, con confronto visivo tra suono sordo e sonoro.',
-      trackDakutenBadge: '5 Giorni • 25 Suoni Sonori',
-      trackYoonTitle: 'Combinazioni Yōon',
-      trackYoonSubtitle: 'Suoni contratti con piccolo ya, yu, yo (ゃ, ゅ, ょ)',
-      trackYoonDesc: 'Padroneggia tutte le 33 combinazioni contratte (K, S, T, N, H, M, R, G, J, B, P) in 6 lezioni con regole di proporzione grafica e pronuncia a tempo unico.',
-      trackYoonBadge: '6 Giorni • 33 Suoni Contratti',
-      trackPhoneticsTitle: 'Fonetica: Sokuon & Chōonpu',
-      trackPhoneticsSubtitle: 'Raddoppi (っ) e vocali lunghe (ー)',
-      trackPhoneticsBadge: 'Regole Speciali',
-      baseComparison: 'Confronto con il suono base',
-      soundTransformation: 'Trasformazione Fonetica',
-      startCourse: 'Inizia Corso',
-      continueCourse: 'Continua Giorno',
-      backToHub: 'Tutti i Corsi',
-      comingSoon: 'In Arrivo',
-      day: 'Giorno',
-      characters: 'Caratteri',
-      cumulative: 'Cumulativi',
-      startLesson: 'Inizia Lezione',
-      reviewLesson: 'Ripassa',
-      completed: 'Completata',
-      vocabularyFound: 'Vocaboli disponibili per questa lezione'
     },
 
     // Writing Canvas
@@ -304,7 +243,7 @@ export const translations = {
       resultsTitle: 'Sessione di Ascolto Completata!',
       accuracy: 'Precisione',
       correctCount: 'Risposte Corrette',
-      failedCount: 'Risposte Errate',
+      failedCount: 'Errate',
       reviewTitle: 'Riepilogo Risposte Errate',
       noMistakes: 'Fantastico! Nessun errore commesso in questa sessione!',
       yourAnswer: 'La tua risposta',
@@ -371,7 +310,7 @@ export const translations = {
       tabMahjong: 'Kana Mahjong'
     },
 
-    // Kana Mahjong Solitaire
+    // Mahjong
     mahjong: {
       title: 'Kana Mahjong Zen',
       subtitle: 'Abbina ogni tessera Kana con il suo Romaji corrispondente per liberare il tavolo!',
@@ -412,7 +351,7 @@ export const translations = {
       backToSetup: 'Cambia Tavolo'
     },
 
-    // Kana Puzzle / Scramble
+    // Puzzle
     puzzle: {
       title: 'Kana Word Puzzle',
       subtitle: 'Ricomponi le parole giapponesi posizionando le tessere nell\'ordine corretto.',
@@ -479,22 +418,18 @@ export const translations = {
       comingSoon: 'In Arrivo',
       day: 'Giorno',
       reviewLesson: 'Ripassa Lezione',
-      
       track5KanaTitle: '5 Kana al Giorno',
       track5KanaSubtitle: 'Sillabario Base Gojūon (五十音)',
       track5KanaDesc: 'Impara i 46 caratteri fondamentali passo dopo passo: teoria, flashcards, scrittura e quiz finale.',
       track5KanaBadge: '10 Giorni • 46 Kana Base',
-
       trackDakutenTitle: 'Dakuten & Handakuten',
       trackDakutenSubtitle: 'Suoni sonori e semi-sonori (゛ e ゜)',
       trackDakutenDesc: 'Padroneggia i 25 caratteri modificati (G, Z, D, B, P) suddivisi in 5 giornate tematiche, con confronto visivo tra suono sordo e sonoro.',
       trackDakutenBadge: '5 Giorni • 25 Suoni Sonori',
-
       trackYoonTitle: 'Combinazioni Yōon',
       trackYoonSubtitle: 'Suoni contratti con piccolo ya, yu, yo (ゃ, ゅ, ょ)',
       trackYoonDesc: 'Padroneggia tutte le 33 combinazioni contratte (K, S, T, N, H, M, R, G, J, B, P) in 6 lezioni con regole di proporzione grafica e pronuncia a tempo unico.',
       trackYoonBadge: '6 Giorni • 33 Suoni Contratti',
-
       trackPhoneticsTitle: 'Regole di Fonetica Speciale',
       trackPhoneticsSubtitle: 'Sokuon (っ/ッ), Allungamenti Vocalici (ー) & Particelle Speciali',
       trackPhoneticsDesc: 'Padroneggia le 3 regole fondamentali per pronunciare e comprendere il giapponese autentico: consonanti doppie, vocali allungate e particelle storiche.',
@@ -564,9 +499,11 @@ export const translations = {
       guideTitle: 'Japanese Syllabary Guide',
       guideSubtitle: 'Understanding when and how to use Hiragana, Katakana, Diacritics & Phonetics',
       guideHiraganaTitle: 'Hiragana (ひらがな)',
-      guideHiraganaDesc: 'The foundational syllabary with curved, flowing strokes. Used for native Japanese words, grammatical particles (は, が, を, に), and verb/adjective inflections (okurigana).',
+      guideHiraganaDesc: 'The base syllabary. Used for native Japanese words, grammar (particles), and verb suffixes. It is the fundamental first step.',
       guideKatakanaTitle: 'Katakana (カタカナ)',
-      guideKatakanaDesc: 'The angular, geometric syllabary. Used primarily for foreign loanwords (Gairaigo, e.g. コーヒー for coffee), foreign names, onomatopoeia, and technical/scientific terms.',
+      guideKatakanaDesc: 'The syllabary for foreign loanwords. Used for non-Japanese words (e.g., computer, foreign names), onomatopoeia, and emphasis (like italics).',
+      guideKanjiTitle: 'Kanji (漢字)',
+      guideKanjiDesc: 'Logograms of Chinese origin that represent concepts or meanings. Modern Japanese uses a combination of Kanji (for word roots) and Hiragana (for grammar).',
       guideDakutenTitle: 'Dakuten (゛) & Handakuten (゜)',
       guideDakutenDesc: 'Ten-ten strokes ゛ voice voiceless consonants (K➔G, S➔Z/JI, T➔D/JI/ZU, H➔B). The maru circle ゜ transforms Row H into Row P (semi-voiced plosive).',
       guideYoonTitle: 'Yōon Combinations (拗音 ゃ・ゅ・ょ)',

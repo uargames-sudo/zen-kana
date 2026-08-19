@@ -55,6 +55,8 @@ Unlike bloated language learning platforms that require accounts, online connect
 
 - Complete 46-character Hiragana & Katakana datasets with romaji and audio mappings in `src/data/kanaTables.js`.
 - Curated 100-word essential Japanese vocabulary list with bilingual Italian/English translations.
+- Core learning tracks including "5 Kana a Day", "Dakuten", "Yōon", and "Special Phonetics".
+- Phrasebook (`phrasesData.js`) and Short Stories (`storiesData.js`) leveraging HTML5 Ruby tags for accurate Kanji furigana support.
 - Full offline Service Worker PWA configuration with install prompts and manifest.
 
 ## Product Principles
