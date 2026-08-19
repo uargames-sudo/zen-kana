@@ -91,7 +91,7 @@ export default function KanaTable({ scriptMode }) {
   return (
     <div className="space-y-6 pb-40 xl:pb-28">
       {/* Header & Tabs */}
-      <div className="flex flex-col xl:flex-row xl:items-center justify-between gap-4 max-w-2xl lg:max-w-3xl mx-auto w-full">
+      <div className="flex flex-col items-center justify-center gap-4 max-w-2xl lg:max-w-3xl mx-auto w-full text-center">
         <div>
           <h2 className="text-2xl sm:text-3xl font-headline font-bold text-zen-text dark:text-zen-dark-text">
             {isHiragana ? 'Hiragana (ひらがな)' : 'Katakana (カタカナ)'} {t('table.title')}
@@ -102,7 +102,7 @@ export default function KanaTable({ scriptMode }) {
         </div>
 
         {/* 5 Sub-tabs matching VirtualKeyboard */}
-        <div className="flex flex-wrap items-center gap-1.5 bg-zen-surface-container dark:bg-zen-dark-surface p-1 rounded-2xl border border-zen-border/40 dark:border-zen-dark-border self-start xl:self-auto">
+        <div className="flex flex-wrap items-center justify-center gap-1.5 bg-zen-surface-container dark:bg-zen-dark-surface p-1 rounded-2xl border border-zen-border/40 dark:border-zen-dark-border">
           {categories.map((cat) => (
             <button
               key={cat.id}
