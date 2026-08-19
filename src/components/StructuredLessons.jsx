@@ -831,7 +831,7 @@ export default function StructuredLessons({ scriptMode, updateStats }) {
                 setCardIndex((value) => Math.max(0, value - 1));
                 setFlipped(false);
               }}
-              className="py-2 px-4 rounded-xl bg-zen-surface-container dark:bg-zen-dark-surface-high text-xs font-bold text-zen-text hover:scale-105 transition-all cursor-pointer"
+              className="py-2 px-4 rounded-xl bg-zen-surface-container dark:bg-zen-dark-surface-high text-xs font-bold text-zen-text dark:text-zen-dark-text hover:scale-105 transition-all cursor-pointer"
             >
               {lang === 'it' ? '← Precedente' : '← Previous'}
             </button>
@@ -841,7 +841,7 @@ export default function StructuredLessons({ scriptMode, updateStats }) {
                 setCardIndex((value) => Math.min(activeKana.length - 1, value + 1));
                 setFlipped(false);
               }}
-              className="py-2 px-4 rounded-xl bg-zen-surface-container dark:bg-zen-dark-surface-high text-xs font-bold text-zen-text hover:scale-105 transition-all cursor-pointer"
+              className="py-2 px-4 rounded-xl bg-zen-surface-container dark:bg-zen-dark-surface-high text-xs font-bold text-zen-text dark:text-zen-dark-text hover:scale-105 transition-all cursor-pointer"
             >
               {lang === 'it' ? 'Successivo →' : 'Next →'}
             </button>
