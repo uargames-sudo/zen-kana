@@ -48,6 +48,8 @@
   --zen-dark-primary: #f0b000;
   --zen-dark-on-primary: #141517;
   --zen-dark-secondary: #fbbf24;
+  --zen-dark-shadow: rgba(0, 0, 0, 0.5);
+  --zen-dark-shadow-hover: rgba(0, 0, 0, 0.7);
 }
 
 .safe-area {
@@ -88,7 +90,7 @@
 .dark .zen-card {
   background: var(--zen-dark-surface, #1a1b1e);
   color: var(--zen-dark-text, #f4f3f0);
-  box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.5);
+  box-shadow: 0px 4px 24px var(--zen-dark-shadow, rgba(0, 0, 0, 0.5));
   border-color: var(--zen-dark-border, #31333a);
 }
 
@@ -97,7 +99,7 @@
 }
 
 .dark .zen-card:hover {
-  box-shadow: 0px 12px 36px rgba(0, 0, 0, 0.7);
+  box-shadow: 0px 12px 36px var(--zen-dark-shadow-hover, rgba(0, 0, 0, 0.7));
   border-color: var(--zen-dark-primary, #f0b000);
 }
 

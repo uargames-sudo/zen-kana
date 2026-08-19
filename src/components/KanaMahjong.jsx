@@ -592,7 +592,7 @@ export default function KanaMahjong({ defaultScriptMode = 'hiragana' }) {
 
               {/* Streak Combo Badge */}
               {streak > 1 && (
-                <div className="flex items-center gap-1 px-3 py-1.5 rounded-xl bg-amber-500/15 text-amber-700 dark:text-amber-300 border border-amber-500/30 text-xs font-bold animate-bounce">
+                <div className="flex items-center gap-1 px-3 py-1.5 rounded-xl bg-amber-500/15 text-amber-700 dark:text-amber-300 border border-amber-500/30 text-xs font-bold animate-pulse">
                   <Flame className="w-3.5 h-3.5 fill-current" />
                   <span>{streak}x {t('mahjong.combo') || 'Combo'}</span>
                 </div>
@@ -689,7 +689,7 @@ export default function KanaMahjong({ defaultScriptMode = 'hiragana' }) {
                     }}
                     className={`
                       w-13 h-17 sm:w-16 sm:h-22 select-none transition-transform duration-200
-                      ${isShaking ? 'animate-bounce text-rose-500' : ''}
+                      ${isShaking ? 'animate-pulse text-rose-500' : ''}
                       ${isFree ? 'cursor-pointer' : 'cursor-not-allowed'}
                     `}
                   >

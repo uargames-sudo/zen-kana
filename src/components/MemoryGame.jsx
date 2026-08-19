@@ -503,7 +503,7 @@ export default function MemoryGame() {
 
               {/* Streak */}
               {streak > 1 && (
-                <div className="flex items-center gap-1 px-2.5 py-1 rounded-xl bg-amber-500/15 border border-amber-500/30 text-amber-600 dark:text-amber-400 text-xs font-bold animate-bounce">
+                <div className="flex items-center gap-1 px-2.5 py-1 rounded-xl bg-amber-500/15 border border-amber-500/30 text-amber-600 dark:text-amber-400 text-xs font-bold animate-pulse">
                   <Flame className="w-3.5 h-3.5 fill-current" />
                   <span>x{streak}</span>
                 </div>
