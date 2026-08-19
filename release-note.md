@@ -1,6 +1,28 @@
 # Release Notes: Zen Kana
 
-## Version 1.4.1 — UI Refinements, Layout Polish & Translation Fixes
+## Version 1.5.0 — Real Japanese, Furigana & Immersive Reading
+
+**Release Date:** August 2026  
+**Status:** Major Feature Update  
+
+---
+
+### ✨ New Features: The "Active Study" Hub
+Active Study has been completely redesigned from a simple quiz into a comprehensive 3-pillar learning hub:
+- **Kana / Vocabulary**: The classic timed transliteration challenge.
+- **Phrases Studio (Survival Japanese)**: A brand new interactive flashcard system featuring 15+ essential daily phrases categorized by themes (Greetings, Transport, Restaurant, etc.). Complete with native TTS audio and interactive flips for Romaji and translations.
+- **Story Reader**: A guided reading experience tailored for N5 beginners. Includes 5 original short stories presented line-by-line. Features progressive reveals (1st tap: Romaji, 2nd tap: Translation) and per-line audio playback.
+
+### 🇯🇵 Furigana Engine & Kanji Introduction
+- Developed a custom `<FuriganaText />` React component utilizing native HTML5 `<ruby>` tags for flawless Kanji pronunciation guides.
+- Implemented a clean `{漢字}[かんじ]` syntax within the codebase to easily author dual-layered Japanese text.
+- Added a dedicated "Kanji (漢字)" section to the in-app Syllabary Guide to explain their origin and relationship with Hiragana.
+
+### 🎨 UI & Layout Polish
+- Story Reader headers are now perfectly centered for a cleaner, symmetrical reading environment.
+- Integrated the beautiful *Outfit* font across the app for a more distinctive and modern aesthetic.
+
+---
 
 **Release Date:** August 2026  
 **Status:** Minor Update / Patch  
