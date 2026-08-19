@@ -14,6 +14,8 @@
 - **Memory Game Enhancements**: 
   - Added dynamic text scaling and word-wrapping (`line-clamp`) to prevent long words from overflowing the memory cards on smaller screens.
   - Romaji hints under the Kana cards are now intelligently hidden on Medium and Hard difficulties for a better challenge.
+- **Typography & Aesthetics**: Upgraded the main UI font to **Outfit** for a more distinctive, modern, and friendly aesthetic. Replaced dated bounce animations with softer, elegant pulse effects.
+- **Dark Mode Polish**: Deepened the Dark Mode background to a pure charcoal (`#0a0a0c`), tuned the Amber accent for better nocturnal eye comfort, and updated the PWA `theme-color` to adapt dynamically.
 - **Virtual Keyboard**: Romaji grid headers are now hidden completely when the global Romaji toggle is switched off, respecting the user's intent.
 - **Dark Mode Legibility**: Fixed text color for "Previous" and "Next" flashcard buttons in Structured Lessons when using Dark Mode.
 
