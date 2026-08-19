@@ -49,13 +49,23 @@ export default function SolutionCard({ item, onNext, status }) {
                 </div>
             )}
 
-            <div className="bg-zen-surface-container/40 dark:bg-zen-dark-surface-high p-6 text-center border-b border-zen-border/40 dark:border-zen-dark-border">
+            <div className="relative bg-zen-surface-container/40 dark:bg-zen-dark-surface-high p-6 text-center border-b border-zen-border/40 dark:border-zen-dark-border">
                 <h3 className="text-xs font-bold text-zen-text-muted dark:text-zen-dark-text-muted uppercase tracking-widest mb-4">
                     {t('activeStudy.solutionTitle')}
                 </h3>
                 
-                {/* Furigana + Kanji/Kana & Audio button */}
-                <div className="flex items-center justify-center gap-3 mb-2">
+                <button
+                    type="button"
+                    onClick={handlePlayAudio}
+                    className="absolute top-4 right-4 sm:top-5 sm:right-5 p-2.5 bg-zen-primary/10 dark:bg-zen-dark-primary/20 text-zen-primary dark:text-zen-dark-primary hover:bg-zen-primary/20 rounded-full border border-zen-primary/20 dark:border-zen-dark-border transition-all active:scale-95 shadow-sm"
+                    title="Pronounce word"
+                    aria-label="Pronounce word"
+                >
+                    <Volume2 className="w-5 h-5" />
+                </button>
+
+                {/* Furigana + Kanji/Kana */}
+                <div className="flex items-center justify-center mb-2">
                     {item.furigana && Array.isArray(item.furigana) ? (
                         <div className="flex justify-center items-end space-x-1">
                             {item.furigana.map((f, i) => (
@@ -70,16 +80,6 @@ export default function SolutionCard({ item, onNext, status }) {
                             {item.japanese || item.kana}
                         </div>
                     )}
-                    
-                    <button
-                        type="button"
-                        onClick={handlePlayAudio}
-                        className="p-2.5 bg-zen-primary/10 dark:bg-zen-dark-primary/20 text-zen-primary dark:text-zen-dark-primary hover:bg-zen-primary/20 rounded-full border border-zen-primary/20 dark:border-zen-dark-border transition-all active:scale-95 shadow-sm"
-                        title="Pronounce word"
-                        aria-label="Pronounce word"
-                    >
-                        <Volume2 className="w-5 h-5" />
-                    </button>
                 </div>
                 
                 <div className="text-2xl font-headline font-bold text-zen-text dark:text-zen-dark-primary mt-2">
