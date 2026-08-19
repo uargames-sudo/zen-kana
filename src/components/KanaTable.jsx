@@ -91,7 +91,7 @@ export default function KanaTable({ scriptMode }) {
   return (
     <div className="space-y-6 pb-40 xl:pb-28">
       {/* Header & Tabs */}
-      <div className="flex flex-col xl:flex-row xl:items-center justify-between gap-4">
+      <div className="flex flex-col xl:flex-row xl:items-center justify-between gap-4 max-w-2xl lg:max-w-3xl mx-auto w-full">
         <div>
           <h2 className="text-2xl sm:text-3xl font-headline font-bold text-zen-text dark:text-zen-dark-text">
             {isHiragana ? 'Hiragana (ひらがな)' : 'Katakana (カタカナ)'} {t('table.title')}

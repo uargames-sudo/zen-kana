@@ -127,7 +127,7 @@ export default function Navigation({
             {/* Logo */}
             <div
               onClick={() => setActiveTab('dashboard')}
-              className="group flex shrink-0 cursor-pointer items-center gap-2"
+              className="group flex flex-1 shrink-0 cursor-pointer items-center gap-2"
             >
               <div className="w-8 h-8 rounded-xl bg-zen-primary dark:bg-zen-dark-primary text-white dark:text-zen-dark-on-primary flex items-center justify-center font-kana font-bold text-base shadow-zen-sm group-hover:scale-105 transition-transform shrink-0">
                 あ
@@ -145,7 +145,7 @@ export default function Navigation({
             </div>
 
             {/* Desktop Navigation Links (Icon-only for inactive, full for active, hover reveal) */}
-            <nav className="min-w-0 flex-1 flex items-center justify-center px-1">
+            <nav className="min-w-0 shrink-0 flex items-center justify-center px-1">
               <div className="flex items-center gap-1 bg-zen-surface-container/60 dark:bg-zen-dark-surface p-1 rounded-2xl border border-zen-border/30 dark:border-zen-dark-border flex-nowrap">
                 {navItems.map((item) => {
                   const Icon = item.icon;
@@ -187,7 +187,7 @@ export default function Navigation({
             </nav>
 
             {/* Top Bar Actions (Script switch, Language, Install PWA & Theme) */}
-            <div className="flex shrink-0 items-center gap-2">
+            <div className="flex flex-1 shrink-0 justify-end items-center gap-2">
               {/* Script Switcher */}
               <div className="flex items-center bg-zen-surface-container dark:bg-zen-dark-surface p-0.5 rounded-full border border-zen-border/40 dark:border-zen-dark-border shrink-0">
                 <button
@@ -278,19 +278,21 @@ export default function Navigation({
             }}
           >
             {/* Hamburger button */}
-            <button
+            <div className="flex flex-1 items-center justify-start">
+              <button
               onClick={() => setIsMobileMenuOpen(true)}
               className="flex h-9 w-9 items-center justify-center rounded-xl bg-zen-surface-container dark:bg-zen-dark-surface border border-zen-border/40 dark:border-zen-dark-border text-zen-text dark:text-zen-dark-text active:scale-95 transition-transform"
               aria-label="Apri menu navigazione"
               aria-expanded={isMobileMenuOpen}
             >
               <Menu className="h-5 w-5 text-zen-primary dark:text-zen-dark-primary" />
-            </button>
+              </button>
+            </div>
 
             {/* Brand Logo & Name */}
             <button
               onClick={() => setActiveTab('dashboard')}
-              className="flex items-center gap-2 px-1 text-center"
+              className="flex shrink-0 items-center justify-center gap-2 px-1 text-center"
             >
               <div className="w-7 h-7 rounded-lg bg-zen-primary dark:bg-zen-dark-primary text-white dark:text-zen-dark-on-primary flex items-center justify-center font-kana font-bold text-sm shadow-zen-sm">
                 あ
@@ -301,7 +303,7 @@ export default function Navigation({
             </button>
 
             {/* Actions: Guide, Script mode badge, Language, Install icon & Theme toggle */}
-            <div className="flex items-center gap-1.5">
+            <div className="flex flex-1 items-center justify-end gap-1.5">
               <button
                 onClick={() => setShowGuideModal(true)}
                 className="flex h-8 w-8 items-center justify-center rounded-xl bg-zen-surface-container dark:bg-zen-dark-surface border border-zen-border/40 dark:border-zen-dark-border text-zen-primary dark:text-zen-dark-primary active:scale-95 transition-transform"
