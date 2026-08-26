@@ -15,7 +15,7 @@ A calm, focused, and intuitive Japanese character learning studio designed as a 
 
 - **🎨 Zen Design System**: Kyoto Lacquer Red & Warm Rice Paper light theme, paired with a Deep Warm Charcoal & Sun Gold nocturnal sanctuary theme with high-contrast readability.
 - **🀄 Kana Mahjong Zen Solitaire**: Multi-layer 3D Mahjong Solitaire tile-matching game (match Kana with its corresponding Romaji) with 3 layouts (*Zen Turtle*, *Classic Pyramid*, *Imperial Dragon*), free-tile collision detection, hints, shuffle, and combo multipliers.
-- **🧩 Kana Word Puzzle**: Reconstruct Japanese vocabulary words by placing syllable tiles in correct order with distractor tiles, translation hints, and difficulty levels.
+- **🧩 Kana Word Puzzle**: Reconstruct Japanese vocabulary words by placing syllable tiles in correct order with distractor tiles, translation hints, difficulty tiers, customizable session lengths (5, 10, 15, 25, or All words), and senior-accessible high-contrast typography.
 - **🎴 Zen Memory Game**: Interactive Matching Game with 3 study modes (*Vocabulary & Illustrations*, *Syllabary Kana ↔ Romaji*, and *Audio Listening*), 3 difficulty tiers, 3D flip card animations, combo streak multipliers, and celebration confetti.
 - **📖 4 Comprehensive Guided Courses**:
   1. *5 Kana a Day* (10 Days • 46 Basic Gojūon)

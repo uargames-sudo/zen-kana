@@ -860,7 +860,7 @@ export default function StructuredLessons({ scriptMode, updateStats }) {
                 className={`rounded-2xl px-4 py-2.5 font-kana text-2xl transition-all cursor-pointer ${
                   currentKana.romaji === item.romaji
                     ? 'bg-zen-primary text-white dark:bg-zen-dark-primary dark:text-zen-dark-on-primary shadow-zen-sm scale-105'
-                    : 'bg-zen-surface-container text-zen-text dark:bg-zen-dark-surface-high hover:scale-102'
+                    : 'bg-zen-surface-container text-zen-text dark:bg-zen-dark-surface-high dark:text-zen-dark-text hover:scale-102'
                 }`}
               >
                 {item.char}

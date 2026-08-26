@@ -57,7 +57,15 @@ export default function KanaDrawingPad({ kana, romaji, onScore }) {
 
   const pointFromEvent = (event) => {
     const rect = canvasRef.current.getBoundingClientRect();
-    return { x: (event.clientX - rect.left) / rect.width, y: (event.clientY - rect.top) / rect.height, rawX: event.clientX - rect.left, rawY: event.clientY - rect.top };
+    let clientX, clientY;
+    if (event.touches && event.touches.length > 0) {
+      clientX = event.touches[0].clientX;
+      clientY = event.touches[0].clientY;
+    } else {
+      clientX = event.clientX;
+      clientY = event.clientY;
+    }
+    return { x: (clientX - rect.left) / rect.width, y: (clientY - rect.top) / rect.height, rawX: clientX - rect.left, rawY: clientY - rect.top };
   };
 
   const start = (event) => {
@@ -108,7 +116,7 @@ export default function KanaDrawingPad({ kana, romaji, onScore }) {
           {kana}
         </span>
       </div>
-      <canvas ref={canvasRef} onPointerDown={start} onPointerMove={move} onPointerUp={finish} onPointerCancel={finish} className="relative z-10 h-full w-full touch-none" />
+      <canvas ref={canvasRef} onMouseDown={start} onMouseMove={move} onMouseUp={finish} onMouseLeave={finish} onTouchStart={start} onTouchMove={move} onTouchEnd={finish} className="relative z-10 h-full w-full touch-none" />
     </div>
     <div className="flex items-center justify-between text-sm">
       <span className="font-semibold text-zen-text-muted dark:text-zen-dark-text-muted">

@@ -1,5 +1,32 @@
 # Release Notes: Zen Kana
 
+## Version 1.5.1 — Mobile Accessibility, Kana Puzzle Session Customization & Katakana Artworks Expansion
+
+**Release Date:** August 2026  
+**Status:** Minor Update / Accessibility & Content Patch  
+
+---
+
+### 👓 Mobile Accessibility & Senior-Friendly Typography
+- **Kana Puzzle UI Redesign for Readability**: Significantly increased font sizes and touch targets across all mobile breakpoints to ensure effortless reading even without reading glasses.
+  - Target Kana syllables enlarged to `text-4xl sm:text-5xl font-extrabold`.
+  - Tile and slot minimum dimensions increased to `64x64px` (`w-16 h-16 sm:w-18 sm:h-18`) with generous touch padding.
+  - Italian and English translation subtitles enlarged from `12px` to `16-18px` (`text-base sm:text-lg`).
+  - Tile glyphs and placed slot labels upgraded to high-contrast `30-36px` (`text-3xl sm:text-4xl`).
+  - Action buttons (Shuffle, Clear, Hint, Exit) upgraded to touch-friendly sizes with clear labels.
+
+### 🎮 Configurable Session Length in Kana Puzzle
+- Added a new **"Numero di Parole / Number of Words"** selector in the Puzzle configuration screen:
+  - Preset options for **5** (quick run), **10** (default), **15**, **25** (deep practice), or **Tutte / All** available vocabulary items.
+  - Dynamically updates progress bar calculations, word counter, and scoring.
+
+### 🎨 Vocabulary Artworks Expansion
+- Added **13 new authentic 2D vector illustrations** for Katakana vocabulary (`k12.jpg` – `k24.jpg`):
+  - `ココア` (cocoa), `ミルク` (milk), `ジュース` (juice), `ビール` (beer), `ワイン` (wine), `レモン` (lemon), `トマト` (tomato), `サラダ` (salad), `スープ` (soup), `ラーメン` (ramen), `パスタ` (pasta), `ピザ` (pizza), `ケーキ` (cake).
+  - Clean square format with unified Kyoto Lacquer Red and warm cream minimalist aesthetic.
+
+---
+
 ## Version 1.5.0 — Real Japanese, Furigana & Immersive Reading
 
 **Release Date:** August 2026  
