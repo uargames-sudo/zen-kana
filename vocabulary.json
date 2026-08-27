@@ -750,6 +750,388 @@
         "level": 1
     },
     {
+        "id": "h51",
+        "kana": "そら",
+        "type": "word",
+        "romaji": "sora",
+        "english": "sky",
+        "italian": "cielo",
+        "imageKeyword": "cloud-sun",
+        "script": "hiragana",
+        "japanese": "そら",
+        "acceptedRomaji": [
+            "sora"
+        ],
+        "level": 1
+    },
+    {
+        "id": "h52",
+        "kana": "にく",
+        "type": "word",
+        "romaji": "niku",
+        "english": "meat",
+        "italian": "carne",
+        "imageKeyword": "beef",
+        "script": "hiragana",
+        "japanese": "にく",
+        "acceptedRomaji": [
+            "niku"
+        ],
+        "level": 1
+    },
+    {
+        "id": "h53",
+        "kana": "へや",
+        "type": "word",
+        "romaji": "heya",
+        "english": "room",
+        "italian": "stanza",
+        "imageKeyword": "door-open",
+        "script": "hiragana",
+        "japanese": "へや",
+        "acceptedRomaji": [
+            "heya"
+        ],
+        "level": 1
+    },
+    {
+        "id": "h54",
+        "kana": "さくら",
+        "type": "word",
+        "romaji": "sakura",
+        "english": "cherry blossom",
+        "italian": "ciliegio",
+        "imageKeyword": "flower",
+        "script": "hiragana",
+        "japanese": "さくら",
+        "acceptedRomaji": [
+            "sakura"
+        ],
+        "level": 1
+    },
+    {
+        "id": "h55",
+        "kana": "れもん",
+        "type": "word",
+        "romaji": "remon",
+        "english": "lemon",
+        "italian": "limone",
+        "imageKeyword": "citrus",
+        "script": "hiragana",
+        "japanese": "れもん",
+        "acceptedRomaji": [
+            "remon"
+        ],
+        "level": 1
+    },
+    {
+        "id": "h56",
+        "kana": "ぎんこう",
+        "type": "word",
+        "romaji": "ginkou",
+        "english": "bank",
+        "italian": "banca",
+        "imageKeyword": "landmark",
+        "script": "hiragana",
+        "japanese": "ぎんこう",
+        "acceptedRomaji": [
+            "ginkou",
+            "ginko"
+        ],
+        "level": 1
+    },
+    {
+        "id": "h57",
+        "kana": "ざっし",
+        "type": "word",
+        "romaji": "zasshi",
+        "english": "magazine",
+        "italian": "rivista",
+        "imageKeyword": "book-open",
+        "script": "hiragana",
+        "japanese": "ざっし",
+        "acceptedRomaji": [
+            "zasshi"
+        ],
+        "level": 1
+    },
+    {
+        "id": "h58",
+        "kana": "ぞう",
+        "type": "word",
+        "romaji": "zou",
+        "english": "elephant",
+        "italian": "elefante",
+        "imageKeyword": "paw-print",
+        "script": "hiragana",
+        "japanese": "ぞう",
+        "acceptedRomaji": [
+            "zou",
+            "zo"
+        ],
+        "level": 1
+    },
+    {
+        "id": "h59",
+        "kana": "どこ",
+        "type": "word",
+        "romaji": "doko",
+        "english": "where",
+        "italian": "dove",
+        "imageKeyword": "map-pin",
+        "script": "hiragana",
+        "japanese": "どこ",
+        "acceptedRomaji": [
+            "doko"
+        ],
+        "level": 1
+    },
+    {
+        "id": "h60",
+        "kana": "ぶた",
+        "type": "word",
+        "romaji": "buta",
+        "english": "pig",
+        "italian": "maiale",
+        "imageKeyword": "piggy-bank",
+        "script": "hiragana",
+        "japanese": "ぶた",
+        "acceptedRomaji": [
+            "buta"
+        ],
+        "level": 1
+    },
+    {
+        "id": "h61",
+        "kana": "べんきょう",
+        "type": "word",
+        "romaji": "benkyou",
+        "english": "study",
+        "italian": "studio",
+        "imageKeyword": "graduation-cap",
+        "script": "hiragana",
+        "japanese": "べんきょう",
+        "acceptedRomaji": [
+            "benkyou",
+            "benkyo"
+        ],
+        "level": 1
+    },
+    {
+        "id": "h62",
+        "kana": "ぼうし",
+        "type": "word",
+        "romaji": "boushi",
+        "english": "hat",
+        "italian": "cappello",
+        "imageKeyword": "crown",
+        "script": "hiragana",
+        "japanese": "ぼうし",
+        "acceptedRomaji": [
+            "boushi",
+            "boshi"
+        ],
+        "level": 1
+    },
+    {
+        "id": "h63",
+        "kana": "ぱん",
+        "type": "word",
+        "romaji": "pan",
+        "english": "bread",
+        "italian": "pane",
+        "imageKeyword": "croissant",
+        "script": "hiragana",
+        "japanese": "ぱん",
+        "acceptedRomaji": [
+            "pan"
+        ],
+        "level": 1
+    },
+    {
+        "id": "h64",
+        "kana": "ぴかぴか",
+        "type": "word",
+        "romaji": "pikapika",
+        "english": "shiny",
+        "italian": "brillante",
+        "imageKeyword": "sparkles",
+        "script": "hiragana",
+        "japanese": "ぴかぴか",
+        "acceptedRomaji": [
+            "pikapika"
+        ],
+        "level": 1
+    },
+    {
+        "id": "h65",
+        "kana": "ぺん",
+        "type": "word",
+        "romaji": "pen",
+        "english": "pen",
+        "italian": "penna",
+        "imageKeyword": "pen-tool",
+        "script": "hiragana",
+        "japanese": "ぺん",
+        "acceptedRomaji": [
+            "pen"
+        ],
+        "level": 1
+    },
+    {
+        "id": "h66",
+        "kana": "ぽけっと",
+        "type": "word",
+        "romaji": "poketto",
+        "english": "pocket",
+        "italian": "tasca",
+        "imageKeyword": "shirt",
+        "script": "hiragana",
+        "japanese": "ぽけっと",
+        "acceptedRomaji": [
+            "poketto"
+        ],
+        "level": 1
+    },
+    {
+        "id": "h67",
+        "kana": "きゃく",
+        "type": "word",
+        "romaji": "kyaku",
+        "english": "guest",
+        "italian": "ospite",
+        "imageKeyword": "users",
+        "script": "hiragana",
+        "japanese": "きゃく",
+        "acceptedRomaji": [
+            "kyaku"
+        ],
+        "level": 1
+    },
+    {
+        "id": "h68",
+        "kana": "きゅうり",
+        "type": "word",
+        "romaji": "kyuuri",
+        "english": "cucumber",
+        "italian": "cetriolo",
+        "imageKeyword": "salad",
+        "script": "hiragana",
+        "japanese": "きゅうり",
+        "acceptedRomaji": [
+            "kyuuri",
+            "kyuri"
+        ],
+        "level": 1
+    },
+    {
+        "id": "h69",
+        "kana": "おちゃ",
+        "type": "word",
+        "romaji": "ocha",
+        "english": "green tea",
+        "italian": "tè verde",
+        "imageKeyword": "coffee",
+        "script": "hiragana",
+        "japanese": "おちゃ",
+        "acceptedRomaji": [
+            "ocha"
+        ],
+        "level": 1
+    },
+    {
+        "id": "h70",
+        "kana": "しゅみ",
+        "type": "word",
+        "romaji": "shumi",
+        "english": "hobby",
+        "italian": "hobby",
+        "imageKeyword": "gamepad-2",
+        "script": "hiragana",
+        "japanese": "しゅみ",
+        "acceptedRomaji": [
+            "shumi"
+        ],
+        "level": 1
+    },
+    {
+        "id": "h71",
+        "kana": "ちょきん",
+        "type": "word",
+        "romaji": "chokin",
+        "english": "savings",
+        "italian": "risparmi",
+        "imageKeyword": "coins",
+        "script": "hiragana",
+        "japanese": "ちょきん",
+        "acceptedRomaji": [
+            "chokin"
+        ],
+        "level": 1
+    },
+    {
+        "id": "h72",
+        "kana": "りょこう",
+        "type": "word",
+        "romaji": "ryokou",
+        "english": "travel",
+        "italian": "viaggio",
+        "imageKeyword": "plane",
+        "script": "hiragana",
+        "japanese": "りょこう",
+        "acceptedRomaji": [
+            "ryokou",
+            "ryoko"
+        ],
+        "level": 1
+    },
+    {
+        "id": "h73",
+        "kana": "じゃがいも",
+        "type": "word",
+        "romaji": "jagaimo",
+        "english": "potato",
+        "italian": "patata",
+        "imageKeyword": "utensils",
+        "script": "hiragana",
+        "japanese": "じゃがいも",
+        "acceptedRomaji": [
+            "jagaimo"
+        ],
+        "level": 1
+    },
+    {
+        "id": "h74",
+        "kana": "ひゃく",
+        "type": "word",
+        "romaji": "hyaku",
+        "english": "hundred",
+        "italian": "cento",
+        "imageKeyword": "hash",
+        "script": "hiragana",
+        "japanese": "ひゃく",
+        "acceptedRomaji": [
+            "hyaku"
+        ],
+        "level": 1
+    },
+    {
+        "id": "h75",
+        "kana": "びょういん",
+        "type": "word",
+        "romaji": "byouin",
+        "english": "hospital",
+        "italian": "ospedale",
+        "imageKeyword": "heart-pulse",
+        "script": "hiragana",
+        "japanese": "びょういん",
+        "acceptedRomaji": [
+            "byouin",
+            "byoin"
+        ],
+        "level": 1
+    },
+    {
         "id": "k1",
         "kana": "カメラ",
         "type": "word",
@@ -1496,6 +1878,392 @@
         "japanese": "サービス",
         "acceptedRomaji": [
             "saabisu"
+        ],
+        "level": 1
+    },
+    {
+        "id": "k51",
+        "kana": "ウール",
+        "type": "word",
+        "romaji": "uuru",
+        "english": "wool",
+        "italian": "lana",
+        "imageKeyword": "shirt",
+        "script": "katakana",
+        "japanese": "ウール",
+        "acceptedRomaji": [
+            "uuru",
+            "uru"
+        ],
+        "level": 1
+    },
+    {
+        "id": "k52",
+        "kana": "エアコン",
+        "type": "word",
+        "romaji": "eakon",
+        "english": "air conditioner",
+        "italian": "climatizzatore",
+        "imageKeyword": "wind",
+        "script": "katakana",
+        "japanese": "エアコン",
+        "acceptedRomaji": [
+            "eakon"
+        ],
+        "level": 1
+    },
+    {
+        "id": "k53",
+        "kana": "セーター",
+        "type": "word",
+        "romaji": "seetaa",
+        "english": "sweater",
+        "italian": "maglione",
+        "imageKeyword": "shirt",
+        "script": "katakana",
+        "japanese": "セーター",
+        "acceptedRomaji": [
+            "seetaa",
+            "seta"
+        ],
+        "level": 1
+    },
+    {
+        "id": "k54",
+        "kana": "チケット",
+        "type": "word",
+        "romaji": "chiketto",
+        "english": "ticket",
+        "italian": "biglietto",
+        "imageKeyword": "ticket",
+        "script": "katakana",
+        "japanese": "チケット",
+        "acceptedRomaji": [
+            "chiketto"
+        ],
+        "level": 1
+    },
+    {
+        "id": "k55",
+        "kana": "ヌードル",
+        "type": "word",
+        "romaji": "nuudoru",
+        "english": "noodles",
+        "italian": "noodles",
+        "imageKeyword": "soup",
+        "script": "katakana",
+        "japanese": "ヌードル",
+        "acceptedRomaji": [
+            "nuudoru",
+            "nudoru"
+        ],
+        "level": 1
+    },
+    {
+        "id": "k56",
+        "kana": "ネクタイ",
+        "type": "word",
+        "romaji": "nekutai",
+        "english": "necktie",
+        "italian": "cravatta",
+        "imageKeyword": "shirt",
+        "script": "katakana",
+        "japanese": "ネクタイ",
+        "acceptedRomaji": [
+            "nekutai"
+        ],
+        "level": 1
+    },
+    {
+        "id": "k57",
+        "kana": "ハム",
+        "type": "word",
+        "romaji": "hamu",
+        "english": "ham",
+        "italian": "prosciutto",
+        "imageKeyword": "beef",
+        "script": "katakana",
+        "japanese": "ハム",
+        "acceptedRomaji": [
+            "hamu"
+        ],
+        "level": 1
+    },
+    {
+        "id": "k58",
+        "kana": "ヘルメット",
+        "type": "word",
+        "romaji": "herumetto",
+        "english": "helmet",
+        "italian": "casco",
+        "imageKeyword": "shield",
+        "script": "katakana",
+        "japanese": "ヘルメット",
+        "acceptedRomaji": [
+            "herumetto"
+        ],
+        "level": 1
+    },
+    {
+        "id": "k59",
+        "kana": "ムービー",
+        "type": "word",
+        "romaji": "muubii",
+        "english": "movie",
+        "italian": "film",
+        "imageKeyword": "film",
+        "script": "katakana",
+        "japanese": "ムービー",
+        "acceptedRomaji": [
+            "muubii",
+            "mubi"
+        ],
+        "level": 1
+    },
+    {
+        "id": "k60",
+        "kana": "モニター",
+        "type": "word",
+        "romaji": "monitaa",
+        "english": "monitor",
+        "italian": "monitor",
+        "imageKeyword": "tv",
+        "script": "katakana",
+        "japanese": "モニター",
+        "acceptedRomaji": [
+            "monitaa",
+            "monita"
+        ],
+        "level": 1
+    },
+    {
+        "id": "k61",
+        "kana": "ヤシ",
+        "type": "word",
+        "romaji": "yashi",
+        "english": "palm tree",
+        "italian": "palma",
+        "imageKeyword": "palmtree",
+        "script": "katakana",
+        "japanese": "ヤシ",
+        "acceptedRomaji": [
+            "yashi"
+        ],
+        "level": 1
+    },
+    {
+        "id": "k62",
+        "kana": "ユーザー",
+        "type": "word",
+        "romaji": "yuuzaa",
+        "english": "user",
+        "italian": "utente",
+        "imageKeyword": "user",
+        "script": "katakana",
+        "japanese": "ユーザー",
+        "acceptedRomaji": [
+            "yuuzaa",
+            "yuza"
+        ],
+        "level": 1
+    },
+    {
+        "id": "k63",
+        "kana": "ヨーグルト",
+        "type": "word",
+        "romaji": "yooguruto",
+        "english": "yogurt",
+        "italian": "yogurt",
+        "imageKeyword": "milk",
+        "script": "katakana",
+        "japanese": "ヨーグルト",
+        "acceptedRomaji": [
+            "yooguruto",
+            "yoguruto"
+        ],
+        "level": 1
+    },
+    {
+        "id": "k64",
+        "kana": "リモコン",
+        "type": "word",
+        "romaji": "rimokon",
+        "english": "remote control",
+        "italian": "telecomando",
+        "imageKeyword": "sliders",
+        "script": "katakana",
+        "japanese": "リモコン",
+        "acceptedRomaji": [
+            "rimokon"
+        ],
+        "level": 1
+    },
+    {
+        "id": "k65",
+        "kana": "ロボット",
+        "type": "word",
+        "romaji": "robotto",
+        "english": "robot",
+        "italian": "robot",
+        "imageKeyword": "bot",
+        "script": "katakana",
+        "japanese": "ロボット",
+        "acceptedRomaji": [
+            "robotto"
+        ],
+        "level": 1
+    },
+    {
+        "id": "k66",
+        "kana": "ゲーム",
+        "type": "word",
+        "romaji": "geemu",
+        "english": "game",
+        "italian": "videogioco",
+        "imageKeyword": "gamepad-2",
+        "script": "katakana",
+        "japanese": "ゲーム",
+        "acceptedRomaji": [
+            "geemu",
+            "gemu"
+        ],
+        "level": 1
+    },
+    {
+        "id": "k67",
+        "kana": "ゴルフ",
+        "type": "word",
+        "romaji": "gorufu",
+        "english": "golf",
+        "italian": "golf",
+        "imageKeyword": "target",
+        "script": "katakana",
+        "japanese": "ゴルフ",
+        "acceptedRomaji": [
+            "gorufu"
+        ],
+        "level": 1
+    },
+    {
+        "id": "k68",
+        "kana": "ズボン",
+        "type": "word",
+        "romaji": "zubon",
+        "english": "pants",
+        "italian": "pantaloni",
+        "imageKeyword": "shirt",
+        "script": "katakana",
+        "japanese": "ズボン",
+        "acceptedRomaji": [
+            "zubon"
+        ],
+        "level": 1
+    },
+    {
+        "id": "k69",
+        "kana": "デザート",
+        "type": "word",
+        "romaji": "dezaato",
+        "english": "dessert",
+        "italian": "dessert",
+        "imageKeyword": "cake",
+        "script": "katakana",
+        "japanese": "デザート",
+        "acceptedRomaji": [
+            "dezaato",
+            "dezato"
+        ],
+        "level": 1
+    },
+    {
+        "id": "k70",
+        "kana": "ボール",
+        "type": "word",
+        "romaji": "booru",
+        "english": "ball",
+        "italian": "palla",
+        "imageKeyword": "circle",
+        "script": "katakana",
+        "japanese": "ボール",
+        "acceptedRomaji": [
+            "booru",
+            "boru"
+        ],
+        "level": 1
+    },
+    {
+        "id": "k71",
+        "kana": "ポスト",
+        "type": "word",
+        "romaji": "posuto",
+        "english": "mailbox",
+        "italian": "cassetta postale",
+        "imageKeyword": "mail",
+        "script": "katakana",
+        "japanese": "ポスト",
+        "acceptedRomaji": [
+            "posuto"
+        ],
+        "level": 1
+    },
+    {
+        "id": "k72",
+        "kana": "キャンプ",
+        "type": "word",
+        "romaji": "kyanpu",
+        "english": "camp",
+        "italian": "campeggio",
+        "imageKeyword": "tent",
+        "script": "katakana",
+        "japanese": "キャンプ",
+        "acceptedRomaji": [
+            "kyanpu"
+        ],
+        "level": 1
+    },
+    {
+        "id": "k73",
+        "kana": "チャット",
+        "type": "word",
+        "romaji": "chatto",
+        "english": "chat",
+        "italian": "chat",
+        "imageKeyword": "message-square",
+        "script": "katakana",
+        "japanese": "チャット",
+        "acceptedRomaji": [
+            "chatto"
+        ],
+        "level": 1
+    },
+    {
+        "id": "k74",
+        "kana": "ショップ",
+        "type": "word",
+        "romaji": "shoppu",
+        "english": "shop",
+        "italian": "negozio",
+        "imageKeyword": "shopping-bag",
+        "script": "katakana",
+        "japanese": "ショップ",
+        "acceptedRomaji": [
+            "shoppu"
+        ],
+        "level": 1
+    },
+    {
+        "id": "k75",
+        "kana": "パーティー",
+        "type": "word",
+        "romaji": "paatii",
+        "english": "party",
+        "italian": "festa",
+        "imageKeyword": "party-popper",
+        "script": "katakana",
+        "japanese": "パーティー",
+        "acceptedRomaji": [
+            "paatii",
+            "pati"
         ],
         "level": 1
     }

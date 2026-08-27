@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import QuestionPrompt from './QuestionPrompt';
 import AnswerInput from './AnswerInput';
 import VirtualKeyboard from './VirtualKeyboard';
@@ -6,17 +6,35 @@ import SolutionCard from './SolutionCard';
 import { checkRomajiMatch, getRomajiDiff } from '../../utils/romajiVariants';
 import { Layers, Sparkles, Keyboard, CheckCircle, XCircle } from 'lucide-react';
 import { useLanguage } from '../../context/LanguageContext';
-import defaultVocabularyData from '../../../vocabulary.json';
+import { VOCABULARY, getSyllablesDataset } from '../../data/vocabulary';
 
-export default function KanaStudy({ vocabularyData = defaultVocabularyData }) {
+export default function KanaStudy({ vocabularyData = VOCABULARY }) {
     const { lang, t } = useLanguage();
     const [phase, setPhase] = useState('setup'); // 'setup', 'playing', 'summary'
     
     // Setup state
+    const [contentType, setContentType] = useState('vocab'); // 'vocab' | 'allKana' | 'basic' | 'dakuten' | 'yoon'
     const [targetCount, setTargetCount] = useState(10); // 5, 10, 20, or 50
     const [studyMode, setStudyMode] = useState('mixed'); // 'ja-to-ro', 'ro-to-ja', 'mixed'
     const [difficulty, setDifficulty] = useState('easy'); // 'easy', 'medium', 'hard'
     
+    // Active dataset pool based on selected content type
+    const activeDataset = useMemo(() => {
+        if (contentType === 'vocab') {
+            return vocabularyData && vocabularyData.length > 0 ? vocabularyData : VOCABULARY;
+        }
+        if (contentType === 'basic') {
+            return getSyllablesDataset('all', 'basic');
+        }
+        if (contentType === 'dakuten') {
+            return getSyllablesDataset('all', 'dakuten');
+        }
+        if (contentType === 'yoon') {
+            return getSyllablesDataset('all', 'yoon');
+        }
+        return getSyllablesDataset('all', 'all');
+    }, [contentType, vocabularyData]);
+
     // Playing state
     const [mode, setMode] = useState('ja-to-ro');
     const [questionsDone, setQuestionsDone] = useState(0);
@@ -31,7 +49,8 @@ export default function KanaStudy({ vocabularyData = defaultVocabularyData }) {
     const [showConsultationKeyboard, setShowConsultationKeyboard] = useState(false);
     
     const getRandomQuestion = () => {
-        const validItems = vocabularyData.filter(item => item.japanese && item.romaji);
+        const pool = activeDataset;
+        const validItems = pool.filter(item => (item.japanese || item.kana) && item.romaji);
         if (validItems.length === 0) return null;
         const randomIndex = Math.floor(Math.random() * validItems.length);
         return validItems[randomIndex];
@@ -139,6 +158,35 @@ export default function KanaStudy({ vocabularyData = defaultVocabularyData }) {
                     </div>
                     
                     <div className="space-y-8">
+                        {/* Content Type Selector */}
+                        <div>
+                            <h3 className="text-xs font-bold text-zen-text-muted dark:text-zen-dark-text-muted mb-3 uppercase tracking-wider">
+                                {t('activeStudy.contentType')}
+                            </h3>
+                            <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
+                                {[
+                                    { id: 'vocab', label: t('activeStudy.contentVocab') },
+                                    { id: 'allKana', label: t('activeStudy.contentAllKana') },
+                                    { id: 'basic', label: t('activeStudy.contentBasic') },
+                                    { id: 'dakuten', label: t('activeStudy.contentDakuten') },
+                                    { id: 'yoon', label: t('activeStudy.contentYoon') }
+                                ].map((item) => (
+                                    <button
+                                        key={item.id}
+                                        type="button"
+                                        onClick={() => setContentType(item.id)}
+                                        className={`py-3 px-3 rounded-2xl font-bold text-xs sm:text-sm transition-all border text-center flex items-center justify-center ${
+                                            contentType === item.id
+                                                ? 'bg-zen-primary/10 border-zen-primary text-zen-primary dark:bg-zen-dark-primary/20 dark:border-zen-dark-primary dark:text-zen-dark-primary shadow-zen-sm ring-1 ring-zen-primary/30'
+                                                : 'bg-zen-surface-container/60 dark:bg-zen-dark-surface-high border-zen-border/40 dark:border-zen-dark-border text-zen-text dark:text-zen-dark-text hover:border-zen-primary/40'
+                                        }`}
+                                    >
+                                        {item.label}
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
+
                         <div>
                             <h3 className="text-xs font-bold text-zen-text-muted dark:text-zen-dark-text-muted mb-3 uppercase tracking-wider">
                                 {t('activeStudy.questionCount')}

@@ -18,7 +18,7 @@ import {
   AlertCircle
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
-import { VOCABULARY } from '../data/vocabulary';
+import { VOCABULARY, getSyllablesDataset } from '../data/vocabulary';
 import { tokenizeKana, generateDistractors } from '../utils/kanaTokenizer';
 import VocabIllustration from './common/VocabIllustration';
 import { playKanaSound } from '../utils/audio';
@@ -30,6 +30,7 @@ export default function KanaPuzzle({ defaultScriptMode = 'hiragana' }) {
   // Settings
   const [gameMode, setGameMode] = useState('kana-to-romaji'); // 'kana-to-romaji' | 'romaji-to-kana'
   const [difficulty, setDifficulty] = useState('easy'); // 'easy' (+0), 'medium' (+2), 'hard' (+5)
+  const [categoryFilter, setCategoryFilter] = useState('vocab'); // 'vocab' | 'syllables' | 'basic' | 'dakuten-yoon'
   const [scriptFilter, setScriptFilter] = useState(defaultScriptMode || 'all'); // 'all' | 'hiragana' | 'katakana'
   const [wordCount, setWordCount] = useState(10); // 5 | 10 | 15 | 25 | 'all'
 
@@ -107,11 +108,27 @@ export default function KanaPuzzle({ defaultScriptMode = 'hiragana' }) {
 
   // Start new game session
   const startSession = () => {
-    let pool = VOCABULARY;
-    if (scriptFilter === 'hiragana') {
-      pool = VOCABULARY.filter(w => w.script === 'hiragana');
-    } else if (scriptFilter === 'katakana') {
-      pool = VOCABULARY.filter(w => w.script === 'katakana');
+    let pool = [];
+    if (categoryFilter === 'vocab') {
+      pool = VOCABULARY;
+      if (scriptFilter === 'hiragana') {
+        pool = VOCABULARY.filter(w => w.script === 'hiragana');
+      } else if (scriptFilter === 'katakana') {
+        pool = VOCABULARY.filter(w => w.script === 'katakana');
+      }
+    } else if (categoryFilter === 'syllables') {
+      pool = getSyllablesDataset(scriptFilter, 'all');
+    } else if (categoryFilter === 'basic') {
+      pool = getSyllablesDataset(scriptFilter, 'basic');
+    } else if (categoryFilter === 'dakuten-yoon') {
+      pool = [
+        ...getSyllablesDataset(scriptFilter, 'dakuten'),
+        ...getSyllablesDataset(scriptFilter, 'yoon')
+      ];
+    }
+
+    if (!pool || pool.length === 0) {
+      pool = VOCABULARY;
     }
 
     const shuffled = [...pool].sort(() => Math.random() - 0.5);
@@ -467,7 +484,35 @@ export default function KanaPuzzle({ defaultScriptMode = 'hiragana' }) {
               </div>
             </div>
 
-            {/* 3. Script Filter */}
+            {/* 3. Content Category Filter */}
+            <div>
+              <label className="block text-xs sm:text-sm font-bold text-zen-text-muted dark:text-zen-dark-text-muted uppercase tracking-wider mb-2">
+                {t('puzzle.categoryLabel')}
+              </label>
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                {[
+                  { id: 'vocab', label: t('puzzle.catVocab') },
+                  { id: 'syllables', label: t('puzzle.catSyllables') },
+                  { id: 'basic', label: t('puzzle.catBasic') },
+                  { id: 'dakuten-yoon', label: t('puzzle.catDakutenYoon') }
+                ].map((cat) => (
+                  <button
+                    key={cat.id}
+                    type="button"
+                    onClick={() => setCategoryFilter(cat.id)}
+                    className={`py-2.5 px-2 rounded-xl text-xs sm:text-sm font-bold transition-all border text-center ${
+                      categoryFilter === cat.id
+                        ? 'bg-zen-surface-lowest dark:bg-zen-dark-primary text-zen-primary dark:text-zen-dark-on-primary border-zen-primary/40 dark:border-zen-dark-primary shadow-zen-sm'
+                        : 'bg-zen-surface-container/30 dark:bg-zen-dark-surface border-zen-border/40 dark:border-zen-dark-border text-zen-text-muted hover:text-zen-text hover:border-zen-primary/30'
+                    }`}
+                  >
+                    {cat.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* 4. Script Filter */}
             <div>
               <label className="block text-xs sm:text-sm font-bold text-zen-text-muted dark:text-zen-dark-text-muted uppercase tracking-wider mb-2">
                 {t('puzzle.scriptFilterLabel')}
@@ -494,7 +539,7 @@ export default function KanaPuzzle({ defaultScriptMode = 'hiragana' }) {
               </div>
             </div>
 
-            {/* 4. Word Count Selector */}
+            {/* 5. Word Count Selector */}
             <div>
               <label className="block text-xs sm:text-sm font-bold text-zen-text-muted dark:text-zen-dark-text-muted uppercase tracking-wider mb-2">
                 {t('puzzle.wordCountLabel')}

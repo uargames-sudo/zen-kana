@@ -1,5 +1,32 @@
 # Release Notes: Zen Kana
 
+## Version 1.6.0 — Complete Kana Syllabary Coverage & Multi-Category Game Dojo
+
+**Release Date:** August 2026  
+**Status:** Major Feature & Content Expansion  
+
+---
+
+### 📚 Targeted Vocabulary Expansion (150 Total Words)
+- Expanded the vocabulary dataset from 100 to **150 comprehensive Japanese words** (75 Hiragana + 75 Katakana) with full bilingual Italian & English translations, phonetic romaji, and audio support.
+- Specifically engineered to cover **100% of all Hiragana and Katakana characters and sounds**:
+  - **Hiragana Base & Dakuten**: `そら` (sky), `にく` (meat), `へや` (room), `さくら` (cherry blossom), `れもん` (lemon), `ぎんこう` (bank), `ざっし` (magazine), `ぞう` (elephant), `どこ` (where), `ぶた` (pig), `べんきょう` (study), `ぼうし` (hat).
+  - **Handakuten**: `ぱん` (bread), `ぴかぴか` (shiny), `ぺん` (pen), `ぽけっと` (pocket).
+  - **Contracted Yōon**: `きゃく` (guest), `きゅうり` (cucumber), `おちゃ` (green tea), `しゅみ` (hobby), `ちょきん` (savings), `りょこう` (travel), `じゃがいも` (potato), `ひゃく` (hundred), `びょういん` (hospital).
+  - **Katakana Base & Dakuten**: `ウール` (wool), `エアコン` (air conditioner), `セーター` (sweater), `チケット` (ticket), `ヌードル` (noodles), `ネクタイ` (tie), `ハム` (ham), `ヘルメット` (helmet), `ムービー` (movie), `モニター` (monitor), `ヤシ` (palm tree), `ユーザー` (user), `ヨーグルト` (yogurt), `リモコン` (remote control), `ロボット` (robot), `ゲーム` (game), `ゴルフ` (golf), `ズボン` (pants), `デザート` (dessert), `ボール` (ball), `ポスト` (mailbox).
+  - **Katakana Yōon**: `キャンプ` (camp), `チャット` (chat), `ショップ` (shop), `パーティー` (party).
+- Generated 50 prompt templates in `vocab-prompts.json` for future illustration assets.
+
+### 🀄 Direct Syllabary Training Mode across Games & Active Study
+- **Kana Puzzle Content Selector**:
+  - Choose between **Vocabolario (Words)**, **Tutto il Sillabario (All 104+ Kana)**, **Solo Base (46 Gojūon)**, or **Dakuten & Yōon**.
+  - Dynamically breaks down single and contracted syllables into interactive tile puzzles.
+- **Active Study Content Filter**:
+  - Added a dedicated **Content Type** selector in *Kana Study* setup to practice *Vocabulary*, *All Syllabary*, *Basic Gojūon*, *Dakuten & Handakuten*, or *Yōon Combinations*.
+- **Dynamic Syllable Generator**: Integrated `getSyllablesDataset()` enabling instant generation of quiz questions and puzzles directly from the comprehensive kana syllabary matrix.
+
+---
+
 ## Version 1.5.1 — Mobile Accessibility, Kana Puzzle Session Customization & Katakana Artworks Expansion
 
 **Release Date:** August 2026  
