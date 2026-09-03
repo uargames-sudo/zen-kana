@@ -2,13 +2,17 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '../../context/LanguageContext';
 
-export default function QuestionPrompt({ currentWord, mode, difficulty }) {
+export default function QuestionPrompt({ currentWord, mode, difficulty, scriptFilter = 'all' }) {
     const { t } = useLanguage();
     if (!currentWord) return null;
 
     // mode: 'ja-to-ro' or 'ro-to-ja'
     const isJaToRo = mode === 'ja-to-ro';
-    const showScriptHint = difficulty === 'easy';
+    // Show script hint in ro-to-ja if easy difficulty OR if practicing both scripts together
+    const showScriptHint = difficulty === 'easy' || scriptFilter === 'all' || currentWord.type === 'syllable';
+    const scriptLabel = currentWord.script === 'katakana'
+        ? (t('activeStudy.scriptKatakanaShort') || 'Katakana')
+        : (t('activeStudy.scriptHiraganaShort') || 'Hiragana');
     
     return (
         <div className="flex flex-col items-center justify-center p-8 zen-card bg-zen-surface-lowest dark:bg-zen-dark-surface rounded-3xl shadow-zen-lg dark:shadow-zen-dark-lg border-2 border-zen-border/40 dark:border-zen-dark-border min-h-[220px]">
@@ -48,7 +52,7 @@ export default function QuestionPrompt({ currentWord, mode, difficulty }) {
                         </div>
                         {showScriptHint && (
                             <div className="mt-2.5 inline-block px-3 py-1 bg-zen-primary/10 dark:bg-zen-dark-primary/20 text-zen-primary dark:text-zen-dark-primary rounded-full text-xs font-bold uppercase tracking-widest border border-zen-primary/20 dark:border-zen-dark-border">
-                                {t('activeStudy.scriptHint')} {currentWord.script || 'hiragana'}
+                                {t('activeStudy.scriptHint')} {scriptLabel}
                             </div>
                         )}
                     </>

@@ -5,7 +5,7 @@ import KanaStudy from './KanaStudy';
 import PhrasesStudio from './PhrasesStudio';
 import StoryReader from './StoryReader';
 
-export default function ActiveStudy() {
+export default function ActiveStudy({ scriptMode }) {
     const { lang } = useLanguage();
     const [activeTab, setActiveTab] = useState('kana');
 

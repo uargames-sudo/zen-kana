@@ -108,7 +108,7 @@ export default function App() {
       case 'flashcards':
         return <Flashcards scriptMode={scriptMode} updateStats={updateStats} />;
       case 'activeStudy':
-        return <ActiveStudy />;
+        return <ActiveStudy scriptMode={scriptMode} />;
       case 'vocabulary':
         return <Vocabulary />;
       case 'lessons':

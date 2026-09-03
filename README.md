@@ -29,7 +29,7 @@ A calm, focused, and intuitive Japanese character learning studio designed as a 
 - **🌍 Bilingual Interface (i18n)**: Full runtime switching between **Italian** and **English** with seamless in-app language switcher (`IT` / `EN`) across all learning modules and menus.
 - **📑 Unified 5-Category Kana Matrix**: Reference tables and virtual keyboard organized into **Base (46)**, **Dakuten (゛)**, **Handakuten (゜)**, **Yōon (拗音)**, and **Small/Sokuon (っ/ー)** with 100% bilingual example coverage.
 - **⚡ Advanced Active Study Hub**: A comprehensive 3-pillar learning hub:
-  - *Kana Study*: Train muscle memory and transliteration with 3 difficulty tiers, virtual keyboard, and content selectors (*Vocabulary*, *All Syllabary*, *Basic 46*, *Dakuten*, *Yōon*).
+  - *Kana Study*: Train muscle memory and transliteration with 3 difficulty tiers, writing system filters (*Hiragana Only*, *Katakana Only*, or *Both*), smart auto-aligning virtual keyboard, instant `Enter` key progression, and content selectors (*Vocabulary*, *All Syllabary*, *Basic 46*, *Dakuten*, *Yōon*).
   - *Phrases Studio*: Interactive flashcards for survival Japanese (Greetings, Transport, Restaurant) with flip-to-reveal translation and TTS audio.
   - *Story Reader*: N5-level short stories presented line-by-line with progressive reveals (Romaji → Translation) and per-line playback.
 - **🇯🇵 Native Furigana Engine**: Full support for HTML5 `<ruby>` tags to display perfectly aligned Furigana over Kanji characters.
@@ -50,7 +50,7 @@ A calm, focused, and intuitive Japanese character learning studio designed as a 
 | **📖 Structured Lessons** | 4 complete step-by-step curriculum tracks with daily theory, flashcards, handwriting canvas, and verification quizzes. |
 | **📑 Kana Tables** | Interactive coordinate matrix across 5 categories with contextual mini-guides, instant pronunciation, and examples. |
 | **🃏 Flashcards** | 3D flip flashcards supporting Kana subsets & Vocabulary with Shuffle mode, mistake review, and mastery counters. |
-| **⚡ Active Study** | A 3-pillar study hub featuring timed Kana transliteration, survival Phrases Studio, and a guided N5 Story Reader. |
+| **⚡ Active Study** | 3-pillar hub: Kana transliteration (with Hiragana/Katakana/Both filters, virtual keyboard, Enter navigation), survival Phrases Studio, and guided N5 Story Reader. |
 | **✍️ Writing Canvas** | Practice handwriting Kana with stroke order guides, clear canvas, and real-time visual feedback. |
 | **💬 Vocabulary Studio** | Explore 150 Japanese vocabulary words categorized with Romaji, translations, 2D vector illustrations, and audio. |
 | **🎧 Listening Quiz** | Train your auditory recognition: listen to native Japanese audio and select the matching Kana character. |

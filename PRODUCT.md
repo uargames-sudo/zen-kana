@@ -35,7 +35,7 @@ Unlike bloated language learning platforms that require accounts, online connect
   4. *Zen Memory:* Visual, auditory, and illustrated vocabulary memory matching game with combo streaks.
   5. *Kana Matrix (Table):* Interactive reference tables with contextual mini-guides, audio pronunciation, and stroke order modals.
   6. *Structured Lessons (4 Courses):* Comprehensive curriculum covering 5 Kana/day, Dakuten/Handakuten, Yōon combinations, and Special Phonetics.
-  7. *Active Study:* Active recall prompt system with virtual and physical keyboard input modes, difficulty filters, and instant feedback.
+  7. *Active Study:* Active recall prompt system with writing system filters (Hiragana/Katakana/Both), auto-aligning virtual and physical keyboard input modes, Enter key progression, difficulty tiers, and instant feedback.
   8. *Flashcards:* Spaced repetition recall cards with category filters, shuffle mode, keyboard shortcuts (`Space`, `1`, `2`, `Arrows`), and mastery tracking.
   9. *Writing Canvas:* Interactive HTML5 drawing pad with stroke order reference guide, guidelines, and clearing tools.
   10. *Listening Quiz:* Auditory recognition quiz with customizable question counts and vocabulary integration.

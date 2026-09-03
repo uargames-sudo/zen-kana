@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
     HIRAGANA_GRID, 
     KATAKANA_GRID, 
@@ -21,13 +21,20 @@ export default function VirtualKeyboard({
     disabled = false, 
     readOnly = false,
     showRomaji = false,
-    allowToggleRomaji = false
+    allowToggleRomaji = false,
+    targetScript = 'hiragana'
 }) {
     const { t } = useLanguage();
-    const [script, setScript] = useState('hiragana'); // 'hiragana' or 'katakana'
+    const [script, setScript] = useState(targetScript || 'hiragana'); // 'hiragana' or 'katakana'
     const [category, setCategory] = useState('basic'); // 'basic', 'dakuten', 'handakuten', 'yoon', 'small'
     const [romajiToggled, setRomajiToggled] = useState(false);
     const [showGuide, setShowGuide] = useState(false);
+
+    useEffect(() => {
+        if (targetScript && (targetScript === 'hiragana' || targetScript === 'katakana')) {
+            setScript(targetScript);
+        }
+    }, [targetScript]);
 
     const isHiragana = script === 'hiragana';
 

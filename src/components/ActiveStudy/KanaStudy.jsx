@@ -8,32 +8,40 @@ import { Layers, Sparkles, Keyboard, CheckCircle, XCircle } from 'lucide-react';
 import { useLanguage } from '../../context/LanguageContext';
 import { VOCABULARY, getSyllablesDataset } from '../../data/vocabulary';
 
-export default function KanaStudy({ vocabularyData = VOCABULARY }) {
+export default function KanaStudy({ vocabularyData = VOCABULARY, initialScript = 'all' }) {
     const { lang, t } = useLanguage();
     const [phase, setPhase] = useState('setup'); // 'setup', 'playing', 'summary'
     
     // Setup state
+    const [scriptFilter, setScriptFilter] = useState(initialScript || 'all'); // 'all' | 'hiragana' | 'katakana'
     const [contentType, setContentType] = useState('vocab'); // 'vocab' | 'allKana' | 'basic' | 'dakuten' | 'yoon'
     const [targetCount, setTargetCount] = useState(10); // 5, 10, 20, or 50
     const [studyMode, setStudyMode] = useState('mixed'); // 'ja-to-ro', 'ro-to-ja', 'mixed'
     const [difficulty, setDifficulty] = useState('easy'); // 'easy', 'medium', 'hard'
     
-    // Active dataset pool based on selected content type
+    // Active dataset pool based on selected content type and script filter
     const activeDataset = useMemo(() => {
         if (contentType === 'vocab') {
-            return vocabularyData && vocabularyData.length > 0 ? vocabularyData : VOCABULARY;
+            const base = vocabularyData && vocabularyData.length > 0 ? vocabularyData : VOCABULARY;
+            if (scriptFilter === 'hiragana') {
+                return base.filter(item => item.script === 'hiragana');
+            }
+            if (scriptFilter === 'katakana') {
+                return base.filter(item => item.script === 'katakana');
+            }
+            return base;
         }
         if (contentType === 'basic') {
-            return getSyllablesDataset('all', 'basic');
+            return getSyllablesDataset(scriptFilter, 'basic');
         }
         if (contentType === 'dakuten') {
-            return getSyllablesDataset('all', 'dakuten');
+            return getSyllablesDataset(scriptFilter, 'dakuten');
         }
         if (contentType === 'yoon') {
-            return getSyllablesDataset('all', 'yoon');
+            return getSyllablesDataset(scriptFilter, 'yoon');
         }
-        return getSyllablesDataset('all', 'all');
-    }, [contentType, vocabularyData]);
+        return getSyllablesDataset(scriptFilter, 'all');
+    }, [contentType, scriptFilter, vocabularyData]);
 
     // Playing state
     const [mode, setMode] = useState('ja-to-ro');
@@ -158,6 +166,34 @@ export default function KanaStudy({ vocabularyData = VOCABULARY }) {
                     </div>
                     
                     <div className="space-y-8">
+                        {/* Script Selection (Hiragana / Katakana / Both) */}
+                        <div>
+                            <h3 className="text-xs font-bold text-zen-text-muted dark:text-zen-dark-text-muted mb-3 uppercase tracking-wider">
+                                {t('activeStudy.scriptFilterTitle')}
+                            </h3>
+                            <div className="grid grid-cols-3 gap-2.5">
+                                {[
+                                    { id: 'all', kana: 'あ / ア', label: t('activeStudy.scriptAll') },
+                                    { id: 'hiragana', kana: 'あ', label: t('activeStudy.scriptHiragana') },
+                                    { id: 'katakana', kana: 'ア', label: t('activeStudy.scriptKatakana') }
+                                ].map((item) => (
+                                    <button
+                                        key={item.id}
+                                        type="button"
+                                        onClick={() => setScriptFilter(item.id)}
+                                        className={`py-3 px-3 rounded-2xl font-bold text-xs sm:text-sm transition-all border text-center flex flex-col items-center justify-center gap-1 ${
+                                            scriptFilter === item.id
+                                                ? 'bg-zen-primary/10 border-zen-primary text-zen-primary dark:bg-zen-dark-primary/20 dark:border-zen-dark-primary dark:text-zen-dark-primary shadow-zen-sm ring-1 ring-zen-primary/30'
+                                                : 'bg-zen-surface-container/60 dark:bg-zen-dark-surface-high border-zen-border/40 dark:border-zen-dark-border text-zen-text dark:text-zen-dark-text hover:border-zen-primary/40'
+                                        }`}
+                                    >
+                                        <span className="text-base sm:text-lg font-kana font-bold">{item.kana}</span>
+                                        <span className="text-xs leading-tight">{item.label}</span>
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
+
                         {/* Content Type Selector */}
                         <div>
                             <h3 className="text-xs font-bold text-zen-text-muted dark:text-zen-dark-text-muted mb-3 uppercase tracking-wider">
@@ -291,9 +327,21 @@ export default function KanaStudy({ vocabularyData = VOCABULARY }) {
                     <h2 className="text-2xl sm:text-3xl font-headline font-bold text-zen-text dark:text-zen-dark-text mb-2">
                         {t('activeStudy.sessionComplete')}
                     </h2>
-                    <p className="text-sm text-zen-text-muted dark:text-zen-dark-text-muted mb-8">
+                    <p className="text-sm text-zen-text-muted dark:text-zen-dark-text-muted mb-4">
                         {t('activeStudy.sessionSummaryText')}
                     </p>
+
+                    <div className="inline-flex items-center gap-2 mb-6 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-zen-surface-container dark:bg-zen-dark-surface-high text-zen-text-muted dark:text-zen-dark-text-muted border border-zen-border/40 dark:border-zen-dark-border">
+                        <span>
+                            {scriptFilter === 'hiragana' 
+                                ? (t('activeStudy.scriptHiraganaShort') || 'Hiragana') 
+                                : scriptFilter === 'katakana' 
+                                    ? (t('activeStudy.scriptKatakanaShort') || 'Katakana') 
+                                    : (t('activeStudy.scriptBothShort') || 'Entrambi')}
+                        </span>
+                        <span>•</span>
+                        <span>{targetCount} {t('activeStudy.questionCount') || 'domande'}</span>
+                    </div>
                     
                     <div className="grid grid-cols-2 gap-4 mb-8">
                         <div className="bg-emerald-500/10 p-4 rounded-2xl border border-emerald-500/30">
@@ -319,6 +367,7 @@ export default function KanaStudy({ vocabularyData = VOCABULARY }) {
 
     // Playing phase
     const progressPercent = Math.round(((questionsDone + 1) / targetCount) * 100);
+    const activeQuestionScript = currentQuestion?.script || (scriptFilter === 'katakana' ? 'katakana' : 'hiragana');
 
     return (
         <div className="w-full max-w-2xl mx-auto space-y-6 pb-20 xl:pb-8">
@@ -340,6 +389,13 @@ export default function KanaStudy({ vocabularyData = VOCABULARY }) {
                     </div>
 
                     <div className="flex items-center gap-2">
+                        <span className="px-2.5 py-0.5 rounded-full text-xs font-extrabold uppercase tracking-wider bg-zen-surface-container dark:bg-zen-dark-surface-high text-zen-text-muted dark:text-zen-dark-text-muted border border-zen-border/40 dark:border-zen-dark-border">
+                            {scriptFilter === 'hiragana' 
+                                ? (t('activeStudy.scriptHiraganaShort') || 'Hiragana') 
+                                : scriptFilter === 'katakana' 
+                                    ? (t('activeStudy.scriptKatakanaShort') || 'Katakana') 
+                                    : (t('activeStudy.scriptBothShort') || 'Hira / Kata')}
+                        </span>
                         <span className="px-2.5 py-0.5 rounded-full text-xs font-extrabold uppercase tracking-wider bg-zen-primary/10 dark:bg-zen-dark-primary/20 text-zen-primary dark:text-zen-dark-primary border border-zen-primary/20 dark:border-zen-dark-primary/30">
                             {difficulty === 'easy' ? t('activeStudy.difficultyEasy') : difficulty === 'medium' ? t('activeStudy.difficultyMedium') : t('activeStudy.difficultyHard')}
                         </span>
@@ -362,6 +418,7 @@ export default function KanaStudy({ vocabularyData = VOCABULARY }) {
                         currentWord={currentQuestion} 
                         mode={mode} 
                         difficulty={difficulty}
+                        scriptFilter={scriptFilter}
                     />
                     
                     <AnswerInput 
@@ -384,6 +441,7 @@ export default function KanaStudy({ vocabularyData = VOCABULARY }) {
                             readOnly={false}
                             showRomaji={difficulty === 'easy'}
                             allowToggleRomaji={difficulty === 'medium'}
+                            targetScript={activeQuestionScript}
                         />
                     )}
 
@@ -397,6 +455,7 @@ export default function KanaStudy({ vocabularyData = VOCABULARY }) {
                                     showRomaji={true}
                                     allowToggleRomaji={false}
                                     disabled={status !== 'playing'}
+                                    targetScript={activeQuestionScript}
                                 />
                             )}
 
@@ -420,6 +479,7 @@ export default function KanaStudy({ vocabularyData = VOCABULARY }) {
                                             showRomaji={false}
                                             allowToggleRomaji={true}
                                             disabled={status !== 'playing'}
+                                            targetScript={activeQuestionScript}
                                         />
                                     )}
                                 </div>

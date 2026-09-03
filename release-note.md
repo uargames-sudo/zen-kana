@@ -1,5 +1,33 @@
 # Release Notes: Zen Kana
 
+## Version 1.6.1 — Active Study Script Customization & Keyboard Workflow
+
+**Release Date:** September 2026  
+**Status:** Feature Enhancement & Ergonomics Patch  
+
+---
+
+### 🎌 Active Study Writing System Filter (Hiragana / Katakana / Both)
+- **Script Selection in Setup**: Added an intuitive Writing System selector to the *Active Study (Kana Study)* configuration screen:
+  - **Entrambi / Both (`あ / ア`)**: Full mixed-script transliteration practice across the entire Kana catalog.
+  - **Solo Hiragana / Hiragana Only (`あ`)**: Focus 100% of study sessions exclusively on Hiragana characters and vocabulary.
+  - **Solo Katakana / Katakana Only (`ア`)**: Target Katakana specifically (essential for learners needing dedicated foreign-loanword and Katakana practice).
+- **Dynamic Dataset Filtering**: Seamlessly filters both word vocabulary (`vocabulary.json`) and granular syllabary sets (Gojūon basic, Dakuten/Handakuten, and Yōon combinations) based on the chosen script.
+- **Intelligent Virtual Keyboard Alignment**:
+  - The on-screen Kana keyboard dynamically synchronizes with the active question script.
+  - Selecting "Solo Katakana" automatically initializes the virtual keyboard on Katakana input without requiring manual tab toggling.
+- **Contextual Script Badges**:
+  - Live session header display showing the active script mode (`Hiragana`, `Katakana`, or `Hira / Kata`).
+  - Session summary report detailing the writing system practiced and total question count.
+  - Informative badge on the Solution Card reinforcing character script classification.
+
+### ⌨️ Fluid Keyboard Progression & Accessibility
+- **Enter Key to Advance**: When the Solution Card appears (upon correct answer or max attempts), pressing **Enter (`Invio`)** immediately triggers the *Continua* button to advance to the next question.
+- **Debounced Key Handling**: Engineered with an 80ms safeguard delay to prevent the Enter keystroke used for submitting an answer from accidentally advancing the solution card before it can be read.
+- **Auto-Focus Accessibility**: The Continue button automatically acquires focus, enabling progression with either `Enter` or `Space`.
+
+---
+
 ## Version 1.6.0 — Complete Kana Syllabary Coverage & Multi-Category Game Dojo
 
 **Release Date:** August 2026  

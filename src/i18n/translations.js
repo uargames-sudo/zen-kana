@@ -136,6 +136,14 @@ export const translations = {
     // Active Study
     activeStudy: {
       setupTitle: 'Impostazioni Active Study',
+      scriptFilterTitle: 'Sistema di Scrittura',
+      scriptAll: 'Entrambi (あ/ア)',
+      scriptHiragana: 'Solo Hiragana (あ)',
+      scriptKatakana: 'Solo Katakana (ア)',
+      scriptHiraganaShort: 'Hiragana',
+      scriptKatakanaShort: 'Katakana',
+      scriptBothShort: 'Entrambi',
+      scriptHint: 'Scrittura:',
       questionCount: 'Numero di Domande',
       contentType: 'Tipo di Contenuto',
       contentVocab: 'Vocabolario (Parole)',
@@ -586,6 +594,14 @@ export const translations = {
     // Active Study
     activeStudy: {
       setupTitle: 'Active Study Setup',
+      scriptFilterTitle: 'Writing System',
+      scriptAll: 'Both (あ/ア)',
+      scriptHiragana: 'Hiragana Only (あ)',
+      scriptKatakana: 'Katakana Only (ア)',
+      scriptHiraganaShort: 'Hiragana',
+      scriptKatakanaShort: 'Katakana',
+      scriptBothShort: 'Both',
+      scriptHint: 'Script:',
       questionCount: 'Number of Questions',
       contentType: 'Content Type',
       contentVocab: 'Vocabulary (Words)',
