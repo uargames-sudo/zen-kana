@@ -31,25 +31,30 @@ import {
   getPhoneticsLessonVocabulary
 } from '../data/lessonData';
 import { getVocabularyIcon } from '../data/vocabulary';
+import { tokenizeKana } from '../utils/kanaTokenizer';
 import { playKanaSound } from '../utils/audio';
 import KanaDrawingPad from './KanaDrawingPad';
 import VocabIllustration from './common/VocabIllustration';
 import { useLanguage } from '../context/LanguageContext';
 
 function HighlightedKana({ text = '', targetChars = new Set() }) {
+  const tokens = tokenizeKana(text);
   const elements = [];
   let i = 0;
-  while (i < text.length) {
-    const pair = text.slice(i, i + 2);
-    if (targetChars.has(pair)) {
-      elements.push({ str: pair, isTarget: true, key: `${pair}-${i}` });
-      i += 2;
-      continue;
+
+  while (i < tokens.length) {
+    if (i + 1 < tokens.length) {
+      const pair = tokens[i].kana + tokens[i + 1].kana;
+      if (targetChars.has(pair)) {
+        elements.push({ str: pair, isTarget: true, key: `${pair}-${i}` });
+        i += 2;
+        continue;
+      }
     }
 
-    const single = text[i];
-    const isTarget = targetChars.has(single);
-    elements.push({ str: single, isTarget, key: `${single}-${i}` });
+    const tok = tokens[i];
+    const isTarget = targetChars.has(tok.kana);
+    elements.push({ str: tok.kana, isTarget, key: `${tok.kana}-${i}` });
     i += 1;
   }
 

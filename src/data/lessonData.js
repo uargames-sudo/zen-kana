@@ -1,5 +1,6 @@
 import { HIRAGANA_BASIC, KANA_DAKUTEN, KANA_COMBINATION } from './kanaData.js';
 import { VOCABULARY } from './vocabulary.js';
+import { tokenizeKana } from '../utils/kanaTokenizer.js';
 
 // ==========================================
 // 1. BASIC GOJŪON COURSE (10 Days, 46 Kana)
@@ -44,8 +45,9 @@ export function getLessonVocabulary(lesson, scriptMode) {
   const candidates = VOCABULARY.filter((word) => word.script === scriptMode);
 
   // Only words containing at least one character taught in this lesson (max 10)
+  // Use tokenizeKana so compound syllables (e.g. 'しゃ' in 'でんしゃ') do not falsely match base syllables like 'し'
   const matching = candidates.filter((word) => 
-    Array.from(word.kana).some((char) => targetChars.has(char))
+    tokenizeKana(word.kana).some((tok) => targetChars.has(tok.kana))
   );
 
   return matching.slice(0, 10);
@@ -274,8 +276,9 @@ export function getDakutenLessonVocabulary(lesson, scriptMode) {
   const candidates = VOCABULARY.filter((word) => word.script === scriptMode);
 
   // Strictly words containing AT LEAST ONE dakuten/handakuten character of the current lesson (max 10)
+  // Use tokenizeKana to avoid matching compound syllables incorrectly
   const matching = candidates.filter(word => 
-    Array.from(word.kana).some(char => targetDakutenChars.has(char))
+    tokenizeKana(word.kana).some(tok => targetDakutenChars.has(tok.kana))
   );
 
   return matching.slice(0, 10);
