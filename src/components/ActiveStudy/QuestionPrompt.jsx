@@ -1,26 +1,32 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '../../context/LanguageContext';
+import FuriganaText from '../common/FuriganaText';
 
 export default function QuestionPrompt({ currentWord, mode, difficulty, scriptFilter = 'all' }) {
-    const { t } = useLanguage();
+    const { lang, t } = useLanguage();
     if (!currentWord) return null;
 
     // mode: 'ja-to-ro' or 'ro-to-ja'
     const isJaToRo = mode === 'ja-to-ro';
     // Show script hint in ro-to-ja if easy difficulty OR if practicing both scripts together
-    const showScriptHint = difficulty === 'easy' || scriptFilter === 'all' || currentWord.type === 'syllable';
+    const showScriptHint = currentWord.script && (difficulty === 'easy' || scriptFilter === 'all' || currentWord.type === 'syllable');
     const scriptLabel = currentWord.script === 'katakana'
         ? (t('activeStudy.scriptKatakanaShort') || 'Katakana')
         : (t('activeStudy.scriptHiraganaShort') || 'Hiragana');
     
+    const rawJapanese = currentWord.japanese || currentWord.kana;
+    const translation = lang === 'it' 
+        ? (currentWord.it || currentWord.italian || currentWord.english) 
+        : (currentWord.en || currentWord.english || currentWord.italian);
+
     return (
-        <div className="flex flex-col items-center justify-center p-8 zen-card bg-zen-surface-lowest dark:bg-zen-dark-surface rounded-3xl shadow-zen-lg dark:shadow-zen-dark-lg border-2 border-zen-border/40 dark:border-zen-dark-border min-h-[220px]">
+        <div className="flex flex-col items-center justify-center p-6 sm:p-8 zen-card bg-zen-surface-lowest dark:bg-zen-dark-surface rounded-3xl shadow-zen-lg dark:shadow-zen-dark-lg border-2 border-zen-border/40 dark:border-zen-dark-border min-h-[220px]">
             <motion.div 
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 key={currentWord.id + mode}
-                className="text-center"
+                className="text-center w-full px-2"
             >
                 {isJaToRo ? (
                     <>
@@ -33,21 +39,42 @@ export default function QuestionPrompt({ currentWord, mode, difficulty, scriptFi
                                     </div>
                                 ))}
                             </div>
+                        ) : typeof rawJapanese === 'string' && rawJapanese.includes('{') ? (
+                            <div className="mb-2">
+                                <FuriganaText 
+                                    text={rawJapanese} 
+                                    className="text-4xl sm:text-5xl font-kana font-bold text-zen-primary dark:text-zen-dark-primary text-balance leading-loose" 
+                                />
+                            </div>
                         ) : (
-                            <div className="text-6xl sm:text-7xl font-kana font-bold text-zen-primary dark:text-zen-dark-primary tracking-wider">
-                                {currentWord.japanese || currentWord.kana}
+                            <div className="text-5xl sm:text-6xl font-kana font-bold text-zen-primary dark:text-zen-dark-primary tracking-wider mb-2">
+                                {rawJapanese}
                             </div>
                         )}
+                        
+                        {translation && (
+                            <div className="text-sm font-semibold text-zen-text-muted/80 dark:text-zen-dark-text-muted/80 italic mt-1">
+                                {translation}
+                            </div>
+                        )}
+
                         <div className="mt-4 text-zen-text-muted dark:text-zen-dark-text-muted text-xs font-semibold uppercase tracking-widest">
                             {t('activeStudy.translateToRomaji')}
                         </div>
                     </>
                 ) : (
                     <>
-                        <div className="text-5xl sm:text-6xl font-headline font-bold text-zen-text dark:text-zen-dark-text tracking-wider">
+                        <div className="text-4xl sm:text-5xl font-headline font-bold text-zen-text dark:text-zen-dark-text tracking-wider mb-2">
                             {currentWord.romaji}
                         </div>
-                        <div className="mt-4 text-zen-text-muted dark:text-zen-dark-text-muted text-xs font-semibold uppercase tracking-widest">
+                        
+                        {translation && (
+                            <div className="text-base font-semibold text-zen-primary dark:text-zen-dark-primary mt-1 mb-2">
+                                {translation}
+                            </div>
+                        )}
+
+                        <div className="mt-3 text-zen-text-muted dark:text-zen-dark-text-muted text-xs font-semibold uppercase tracking-widest">
                             {t('activeStudy.writeInJapanese')}
                         </div>
                         {showScriptHint && (
@@ -61,3 +88,4 @@ export default function QuestionPrompt({ currentWord, mode, difficulty, scriptFi
         </div>
     );
 }
+

@@ -3,17 +3,22 @@ import { motion } from 'framer-motion';
 import { Volume2, CheckCircle2, XCircle } from 'lucide-react';
 import { playKanaSound } from '../../utils/audio';
 import { useLanguage } from '../../context/LanguageContext';
+import FuriganaText from '../common/FuriganaText';
 
 export default function SolutionCard({ item, onNext, status }) {
     const { lang, t } = useLanguage();
     const buttonRef = useRef(null);
     if (!item) return null;
 
-    const japaneseText = item.japanese || item.kana || item.romaji;
+    const rawJapanese = item.japanese || item.kana || item.romaji;
+    // Clean audio text if furigana syntax is present
+    const audioText = typeof rawJapanese === 'string'
+        ? rawJapanese.replace(/\{([^}]+)\}\[([^\]]+)\]/g, '$1')
+        : rawJapanese;
 
     useEffect(() => {
-        if (japaneseText) {
-            playKanaSound(japaneseText);
+        if (audioText) {
+            playKanaSound(audioText);
         }
     }, [item]);
 
@@ -40,8 +45,8 @@ export default function SolutionCard({ item, onNext, status }) {
     }, [onNext]);
 
     const handlePlayAudio = () => {
-        if (japaneseText) {
-            playKanaSound(japaneseText);
+        if (audioText) {
+            playKanaSound(audioText);
         }
     };
 
@@ -80,7 +85,7 @@ export default function SolutionCard({ item, onNext, status }) {
                 <button
                     type="button"
                     onClick={handlePlayAudio}
-                    className="absolute top-4 right-4 sm:top-5 sm:right-5 p-2.5 bg-zen-primary/10 dark:bg-zen-dark-primary/20 text-zen-primary dark:text-zen-dark-primary hover:bg-zen-primary/20 rounded-full border border-zen-primary/20 dark:border-zen-dark-border transition-all active:scale-95 shadow-sm"
+                    className="absolute top-4 right-4 sm:top-5 sm:right-5 p-2.5 bg-zen-primary/10 dark:bg-zen-dark-primary/20 text-zen-primary dark:text-zen-dark-primary hover:bg-zen-primary/20 rounded-full border border-zen-primary/20 dark:border-zen-dark-border transition-all active:scale-95 shadow-sm cursor-pointer"
                     title="Pronounce word"
                     aria-label="Pronounce word"
                 >
@@ -88,7 +93,7 @@ export default function SolutionCard({ item, onNext, status }) {
                 </button>
 
                 {/* Furigana + Kanji/Kana */}
-                <div className="flex items-center justify-center mb-2">
+                <div className="flex items-center justify-center mb-2 px-2">
                     {item.furigana && Array.isArray(item.furigana) ? (
                         <div className="flex justify-center items-end space-x-1">
                             {item.furigana.map((f, i) => (
@@ -98,14 +103,19 @@ export default function SolutionCard({ item, onNext, status }) {
                                 </div>
                             ))}
                         </div>
+                    ) : typeof rawJapanese === 'string' && rawJapanese.includes('{') ? (
+                        <FuriganaText 
+                            text={rawJapanese} 
+                            className="font-kana font-bold text-3xl sm:text-4xl text-zen-primary dark:text-zen-dark-primary leading-loose" 
+                        />
                     ) : (
-                        <div className="text-5xl font-kana font-bold text-zen-primary dark:text-zen-dark-primary">
-                            {item.japanese || item.kana}
+                        <div className="text-4xl sm:text-5xl font-kana font-bold text-zen-primary dark:text-zen-dark-primary">
+                            {rawJapanese}
                         </div>
                     )}
                 </div>
                 
-                <div className="text-2xl font-headline font-bold text-zen-text dark:text-zen-dark-primary mt-2">
+                <div className="text-xl sm:text-2xl font-headline font-bold text-zen-text dark:text-zen-dark-primary mt-2">
                     {item.romaji}
                 </div>
                 {item.script && (
@@ -123,8 +133,8 @@ export default function SolutionCard({ item, onNext, status }) {
                     <span className="block text-2xs uppercase tracking-widest font-extrabold text-zen-text-muted dark:text-zen-dark-text-muted mb-2">
                         {lang === 'it' ? 'Significato' : 'Meaning'}
                     </span>
-                    <div className="text-2xl sm:text-3xl font-headline font-bold text-zen-text dark:text-zen-dark-text capitalize">
-                        {lang === 'it' ? (item.italian || item.english) : (item.english || item.italian)}
+                    <div className="text-xl sm:text-2xl font-headline font-bold text-zen-text dark:text-zen-dark-text">
+                        {lang === 'it' ? (item.it || item.italian || item.english) : (item.en || item.english || item.italian)}
                     </div>
                 </div>
 

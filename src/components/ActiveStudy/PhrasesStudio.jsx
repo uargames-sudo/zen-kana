@@ -1,167 +1,474 @@
-import React, { useState } from 'react';
-import { phrasesData, phraseCategories } from '../../data/phrasesData';
-import FuriganaText from '../common/FuriganaText';
-import { playKanaSound } from '../../utils/audio';
+import React, { useState, useMemo } from 'react';
+import QuestionPrompt from './QuestionPrompt';
+import AnswerInput from './AnswerInput';
+import VirtualKeyboard from './VirtualKeyboard';
+import SolutionCard from './SolutionCard';
+import { phrasesData, phraseCategories, getPhraseCleanKana, getPhraseCleanRomaji } from '../../data/phrasesData';
+import { checkRomajiMatch, getRomajiDiff } from '../../utils/romajiVariants';
+import { Layers, Sparkles, Keyboard } from 'lucide-react';
 import { useLanguage } from '../../context/LanguageContext';
-import { Volume2, ArrowRight, ArrowLeft, RefreshCw, Sparkles, Filter } from 'lucide-react';
 
 export default function PhrasesStudio() {
-    const { lang } = useLanguage();
+    const { lang, t } = useLanguage();
+    const [phase, setPhase] = useState('setup'); // 'setup', 'playing', 'summary'
+    
+    // Setup state
     const [selectedCategory, setSelectedCategory] = useState('All');
-    const [currentIndex, setCurrentIndex] = useState(0);
-    const [isFlipped, setIsFlipped] = useState(false);
+    const [targetCount, setTargetCount] = useState(10); // 5, 10, 15, 20
+    const [studyMode, setStudyMode] = useState('mixed'); // 'ja-to-ro', 'ro-to-ja', 'mixed'
+    const [difficulty, setDifficulty] = useState('easy'); // 'easy', 'medium', 'hard'
 
-    // Filter phrases
-    const filteredPhrases = selectedCategory === 'All' 
-        ? phrasesData 
-        : phrasesData.filter(p => p.category === selectedCategory);
+    // Active dataset pool based on selected category
+    const activeDataset = useMemo(() => {
+        if (selectedCategory === 'All') return phrasesData;
+        return phrasesData.filter(item => item.category === selectedCategory);
+    }, [selectedCategory]);
+
+    // Playing state
+    const [mode, setMode] = useState('ja-to-ro');
+    const [questionsDone, setQuestionsDone] = useState(0);
+    const [stats, setStats] = useState({ correct: 0, failed: 0 });
+    
+    const [currentQuestion, setCurrentQuestion] = useState(null);
+    const [userInput, setUserInput] = useState('');
+    const [attempts, setAttempts] = useState(0);
+    const [maxAttempts] = useState(3);
+    const [status, setStatus] = useState('playing'); // 'playing', 'success', 'failed'
+    const [diff, setDiff] = useState(null);
+    const [showConsultationKeyboard, setShowConsultationKeyboard] = useState(false);
+
+    const getRandomQuestion = () => {
+        const pool = activeDataset;
+        const validItems = pool.filter(item => item.japanese && item.romaji);
+        if (validItems.length === 0) return null;
+        const randomIndex = Math.floor(Math.random() * validItems.length);
+        return validItems[randomIndex];
+    };
+
+    const startSession = () => {
+        setQuestionsDone(0);
+        setStats({ correct: 0, failed: 0 });
+        setPhase('playing');
         
-    const currentPhrase = filteredPhrases[currentIndex];
+        setCurrentQuestion(getRandomQuestion());
+        setUserInput('');
+        setAttempts(0);
+        setStatus('playing');
+        setDiff(null);
 
-    const handleNext = () => {
-        setIsFlipped(false);
-        setTimeout(() => {
-            setCurrentIndex((prev) => (prev + 1) % filteredPhrases.length);
-        }, 150);
+        if (studyMode === 'mixed') {
+            setMode(Math.random() > 0.5 ? 'ja-to-ro' : 'ro-to-ja');
+        } else {
+            setMode(studyMode);
+        }
     };
 
-    const handlePrev = () => {
-        setIsFlipped(false);
-        setTimeout(() => {
-            setCurrentIndex((prev) => (prev - 1 + filteredPhrases.length) % filteredPhrases.length);
-        }, 150);
+    const handleSubmit = () => {
+        if (!userInput.trim() || status !== 'playing' || !currentQuestion) return;
+
+        const currentAttempts = attempts + 1;
+        setAttempts(currentAttempts);
+        
+        let isCorrect = false;
+        
+        if (mode === 'ja-to-ro') {
+            const userNorm = getPhraseCleanRomaji(userInput);
+            const targetNorm = getPhraseCleanRomaji(currentQuestion.romaji);
+            const accepted = [
+                targetNorm,
+                targetNorm.replace(/ou/g, 'oo'),
+                targetNorm.replace(/oo/g, 'ou'),
+                targetNorm.replace(/wa/g, 'ha')
+            ];
+            isCorrect = checkRomajiMatch(userNorm, accepted);
+            if (!isCorrect) {
+                setDiff(getRomajiDiff(userInput.trim(), currentQuestion.romaji));
+            }
+        } else {
+            const userClean = userInput.replace(/[\s\r\n]/g, '').trim();
+            const targetKana = getPhraseCleanKana(currentQuestion.japanese);
+            isCorrect = userClean === targetKana;
+            if (!isCorrect) {
+                setDiff(getRomajiDiff(userInput, targetKana));
+            }
+        }
+
+        if (isCorrect) {
+            setStatus('success');
+            setDiff(null);
+            setStats(s => ({ ...s, correct: s.correct + 1 }));
+        } else if (currentAttempts >= maxAttempts) {
+            setStatus('failed');
+            setStats(s => ({ ...s, failed: s.failed + 1 }));
+        }
     };
 
-    const handlePlayAudio = (e) => {
-        e.stopPropagation();
-        // Remove furigana syntax { } [ ] before sending to TTS
-        const cleanText = currentPhrase.japanese.replace(/\{([^}]+)\}\[([^\]]+)\]/g, '$1');
-        playKanaSound(cleanText, 0.85); // slightly faster than kana
+    const handleNextClick = () => {
+        const nextDoneCount = questionsDone + 1;
+        const actualTarget = Math.min(targetCount, activeDataset.length > 0 ? activeDataset.length * 2 : targetCount);
+        
+        if (nextDoneCount >= actualTarget || nextDoneCount >= targetCount) {
+            setPhase('summary');
+        } else {
+            setQuestionsDone(nextDoneCount);
+            setCurrentQuestion(getRandomQuestion());
+            setUserInput('');
+            setAttempts(0);
+            setStatus('playing');
+            setDiff(null);
+            
+            if (studyMode === 'mixed') {
+                setMode(Math.random() > 0.5 ? 'ja-to-ro' : 'ro-to-ja');
+            } else {
+                setMode(studyMode);
+            }
+        }
     };
 
-    return (
-        <div className="w-full max-w-2xl mx-auto p-4 flex flex-col pt-2 pb-20">
-            {/* Category Filter */}
-            <div className="mb-6 flex overflow-x-auto pb-2 scrollbar-hide gap-2 mask-linear-fade">
-                <button
-                    onClick={() => { setSelectedCategory('All'); setCurrentIndex(0); setIsFlipped(false); }}
-                    className={`px-4 py-1.5 rounded-full text-xs font-bold whitespace-nowrap transition-all ${
-                        selectedCategory === 'All'
-                            ? 'bg-zen-primary dark:bg-zen-dark-primary text-white dark:text-zen-dark-on-primary shadow-sm'
-                            : 'bg-zen-surface-container dark:bg-zen-dark-surface-high text-zen-text-muted dark:text-zen-dark-text-muted'
-                    }`}
-                >
-                    {lang === 'it' ? 'Tutte' : 'All'}
-                </button>
-                {phraseCategories.map(cat => (
-                    <button
-                        key={cat}
-                        onClick={() => { setSelectedCategory(cat); setCurrentIndex(0); setIsFlipped(false); }}
-                        className={`px-4 py-1.5 rounded-full text-xs font-bold whitespace-nowrap transition-all ${
-                            selectedCategory === cat
-                                ? 'bg-zen-primary dark:bg-zen-dark-primary text-white dark:text-zen-dark-on-primary shadow-sm'
-                                : 'bg-zen-surface-container dark:bg-zen-dark-surface-high text-zen-text-muted dark:text-zen-dark-text-muted'
-                        }`}
-                    >
-                        {cat}
-                    </button>
-                ))}
-            </div>
+    const handleKeyboardPress = (kana) => {
+        setUserInput(prev => prev + kana);
+        setDiff(null);
+    };
 
-            {/* Progress & Category */}
-            <div className="flex items-center justify-between text-sm mb-3 px-1">
-                <span className="font-headline font-bold text-zen-text dark:text-zen-dark-text flex items-center gap-1.5">
-                    <Sparkles className="w-4 h-4 text-zen-primary dark:text-zen-dark-primary" />
-                    {currentPhrase?.category}
-                </span>
-                <span className="font-semibold text-zen-text-muted dark:text-zen-dark-text-muted font-mono">
-                    {currentIndex + 1} / {filteredPhrases.length}
-                </span>
-            </div>
+    const handleBackspace = () => {
+        setUserInput(prev => prev.slice(0, -1));
+        setDiff(null);
+    };
 
-            {/* Phrase Card Container */}
-            {filteredPhrases.length > 0 ? (
-                <div className="perspective-1000 min-h-[300px] w-full">
-                    <div className="h-[300px] w-full rounded-3xl">
-                        <div
-                            onClick={() => setIsFlipped(!isFlipped)}
-                            className={`relative h-full w-full cursor-pointer rounded-3xl transition-transform duration-500 transform-style-3d shadow-zen-lg dark:shadow-zen-dark-lg ${
-                                isFlipped ? 'rotate-y-180' : ''
-                            }`}
-                        >
-                            {/* FRONT OF CARD (Japanese) */}
-                            <div className="absolute inset-0 flex flex-col items-center justify-center border-2 border-zen-border/40 bg-zen-surface-lowest p-8 backface-hidden zen-card dark:border-zen-dark-border dark:bg-zen-dark-surface rounded-3xl">
-                                <div className="absolute top-6 right-6">
-                                    <button
-                                        onClick={handlePlayAudio}
-                                        className="rounded-full bg-zen-primary/10 p-3 text-zen-primary dark:bg-zen-dark-primary/20 dark:text-zen-dark-primary hover:scale-110 transition-transform active:scale-95"
-                                        title="Play Japanese audio"
-                                    >
-                                        <Volume2 className="h-6 w-6" />
-                                    </button>
-                                </div>
-                                
-                                <div className="text-center w-full px-4 mt-8">
-                                    <FuriganaText 
-                                        text={currentPhrase.japanese} 
-                                        className="font-kana font-bold tracking-wide text-4xl sm:text-5xl text-zen-text dark:text-zen-dark-text text-balance leading-loose" 
-                                    />
-                                </div>
-                                
-                                <div className="absolute bottom-6 flex w-full justify-center text-xs font-semibold text-zen-text-muted/60 dark:text-zen-dark-text-muted/60">
-                                    <span className="flex items-center gap-1">
-                                        <RefreshCw className="w-3.5 h-3.5" />
-                                        {lang === 'it' ? 'Tocca per la traduzione' : 'Tap for translation'}
-                                    </span>
-                                </div>
-                            </div>
+    if (phrasesData.length === 0) {
+        return <div className="text-zen-text dark:text-zen-dark-text text-center p-8">No phrases data available.</div>;
+    }
 
-                            {/* BACK OF CARD (Translation & Romaji) */}
-                            <div className="absolute inset-0 flex flex-col items-center justify-center border-2 border-zen-border/40 bg-zen-surface-container p-8 backface-hidden rotate-y-180 zen-card dark:border-zen-dark-border dark:bg-zen-dark-surface-high rounded-3xl">
-                                <div className="text-center space-y-6 w-full px-4">
-                                    <div>
-                                        <div className="text-sm font-bold text-zen-text-muted dark:text-zen-dark-text-muted uppercase tracking-widest mb-2">Romaji</div>
-                                        <div className="font-mono text-xl sm:text-2xl text-zen-primary dark:text-zen-dark-primary font-medium tracking-tight">
-                                            {currentPhrase.romaji}
-                                        </div>
-                                    </div>
-                                    <div className="h-px w-16 bg-zen-border dark:bg-zen-dark-border mx-auto"></div>
-                                    <div>
-                                        <div className="text-sm font-bold text-zen-text-muted dark:text-zen-dark-text-muted uppercase tracking-widest mb-2">Traduzione</div>
-                                        <div className="font-headline font-bold text-2xl sm:text-3xl text-zen-text dark:text-zen-dark-text text-balance">
-                                            {lang === 'it' ? currentPhrase.it : currentPhrase.en}
-                                        </div>
-                                    </div>
-                                </div>
+    // ==========================================
+    // 1. SETUP VIEW (Identical to KanaStudy)
+    // ==========================================
+    if (phase === 'setup') {
+        return (
+            <div className="w-full max-w-2xl mx-auto p-4 flex flex-col pt-6 pb-20">
+                <div className="zen-card bg-zen-surface-lowest dark:bg-zen-dark-surface border-2 border-zen-border/40 dark:border-zen-dark-border rounded-3xl shadow-zen-lg dark:shadow-zen-dark-lg p-6 sm:p-8">
+                    <div className="flex items-center justify-center mb-8 gap-3">
+                        <div className="w-10 h-10 rounded-2xl bg-zen-primary/10 dark:bg-zen-dark-primary/20 text-zen-primary dark:text-zen-dark-primary flex items-center justify-center">
+                            <Sparkles className="w-6 h-6" />
+                        </div>
+                        <h2 className="text-2xl sm:text-3xl font-headline font-bold text-zen-text dark:text-zen-dark-text">
+                            {t('activeStudy.setupTitle')}
+                        </h2>
+                    </div>
+
+                    <div className="space-y-8">
+                        {/* Category Selector */}
+                        <div>
+                            <h3 className="text-xs font-bold text-zen-text-muted dark:text-zen-dark-text-muted mb-3 uppercase tracking-wider">
+                                {lang === 'it' ? 'Categoria Frasi' : 'Phrase Category'}
+                            </h3>
+                            <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
+                                <button
+                                    type="button"
+                                    onClick={() => setSelectedCategory('All')}
+                                    className={`py-3 px-3 rounded-2xl font-bold text-xs sm:text-sm transition-all border text-center flex items-center justify-center cursor-pointer ${
+                                        selectedCategory === 'All'
+                                            ? 'bg-zen-primary/10 border-zen-primary text-zen-primary dark:bg-zen-dark-primary/20 dark:border-zen-dark-primary dark:text-zen-dark-primary shadow-zen-sm ring-1 ring-zen-primary/30'
+                                            : 'bg-zen-surface-container/60 dark:bg-zen-dark-surface-high border-zen-border/40 dark:border-zen-dark-border text-zen-text dark:text-zen-dark-text hover:border-zen-primary/40'
+                                    }`}
+                                >
+                                    {lang === 'it' ? 'Tutte' : 'All'} ({phrasesData.length})
+                                </button>
+                                {phraseCategories.map((cat) => {
+                                    const count = phrasesData.filter(p => p.category === cat).length;
+                                    return (
+                                        <button
+                                            key={cat}
+                                            type="button"
+                                            onClick={() => setSelectedCategory(cat)}
+                                            className={`py-3 px-3 rounded-2xl font-bold text-xs sm:text-sm transition-all border text-center flex items-center justify-center cursor-pointer ${
+                                                selectedCategory === cat
+                                                    ? 'bg-zen-primary/10 border-zen-primary text-zen-primary dark:bg-zen-dark-primary/20 dark:border-zen-dark-primary dark:text-zen-dark-primary shadow-zen-sm ring-1 ring-zen-primary/30'
+                                                    : 'bg-zen-surface-container/60 dark:bg-zen-dark-surface-high border-zen-border/40 dark:border-zen-dark-border text-zen-text dark:text-zen-dark-text hover:border-zen-primary/40'
+                                            }`}
+                                        >
+                                            {cat} ({count})
+                                        </button>
+                                    );
+                                })}
                             </div>
                         </div>
+
+                        {/* Question Count */}
+                        <div>
+                            <h3 className="text-xs font-bold text-zen-text-muted dark:text-zen-dark-text-muted mb-3 uppercase tracking-wider">
+                                {t('activeStudy.questionCount')}
+                            </h3>
+                            <div className="flex flex-wrap gap-2.5 sm:gap-3">
+                                {[5, 10, 15, 20].map(num => (
+                                    <button 
+                                        key={num}
+                                        type="button"
+                                        onClick={() => setTargetCount(num)}
+                                        className={`px-5 py-2.5 sm:px-6 sm:py-3 rounded-xl font-bold text-sm transition-all cursor-pointer ${
+                                            targetCount === num 
+                                                ? 'bg-zen-primary dark:bg-zen-dark-primary text-white dark:text-zen-dark-on-primary shadow-zen-sm' 
+                                                : 'bg-zen-surface-container dark:bg-zen-dark-surface-high text-zen-text-muted dark:text-zen-dark-text-muted hover:text-zen-text dark:hover:text-zen-dark-text border border-zen-border/40 dark:border-zen-dark-border'
+                                        }`}
+                                    >
+                                        {num}
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
+
+                        {/* Study Mode */}
+                        <div>
+                            <h3 className="text-xs font-bold text-zen-text-muted dark:text-zen-dark-text-muted mb-3 uppercase tracking-wider">
+                                {t('activeStudy.studyMode')}
+                            </h3>
+                            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                                {[
+                                    { id: 'ja-to-ro', kana: 'あ ➔ A', label: t('activeStudy.modeReadKana') },
+                                    { id: 'ro-to-ja', kana: 'A ➔ あ', label: t('activeStudy.modeWriteKana') },
+                                    { id: 'mixed', icon: Layers, label: t('activeStudy.modeMixed') }
+                                ].map((item) => {
+                                    const Icon = item.icon;
+                                    const isSelected = studyMode === item.id;
+                                    return (
+                                        <button 
+                                            key={item.id}
+                                            type="button"
+                                            onClick={() => setStudyMode(item.id)}
+                                            className={`p-4 rounded-2xl font-bold transition-all flex flex-col items-center gap-1.5 border cursor-pointer ${
+                                                isSelected 
+                                                    ? 'bg-zen-primary dark:bg-zen-dark-primary text-white dark:text-zen-dark-on-primary border-zen-primary shadow-zen-sm' 
+                                                    : 'bg-zen-surface-container/60 dark:bg-zen-dark-surface-high text-zen-text dark:text-zen-dark-text border-zen-border/40 dark:border-zen-dark-border hover:border-zen-primary/40'
+                                            }`}
+                                        >
+                                            {item.kana ? <span className="text-xl font-kana">{item.kana}</span> : <Icon className="w-5 h-5" />}
+                                            <span className="text-xs">{item.label}</span>
+                                        </button>
+                                    );
+                                })}
+                            </div>
+                        </div>
+
+                        {/* Difficulty */}
+                        <div>
+                            <h3 className="text-xs font-bold text-zen-text-muted dark:text-zen-dark-text-muted mb-3 uppercase tracking-wider">
+                                {t('activeStudy.difficulty')}
+                            </h3>
+                            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                                {[
+                                    { id: 'easy', label: t('activeStudy.difficultyEasy'), desc: t('activeStudy.difficultyEasyDesc') },
+                                    { id: 'medium', label: t('activeStudy.difficultyMedium'), desc: t('activeStudy.difficultyMediumDesc') },
+                                    { id: 'hard', label: t('activeStudy.difficultyHard'), desc: t('activeStudy.difficultyHardDesc') }
+                                ].map((diffItem) => {
+                                    const isSelected = difficulty === diffItem.id;
+                                    return (
+                                        <button 
+                                            key={diffItem.id}
+                                            type="button"
+                                            onClick={() => setDifficulty(diffItem.id)}
+                                            className={`p-4 rounded-2xl font-bold transition-all flex flex-col items-start gap-1 border text-left cursor-pointer ${
+                                                isSelected
+                                                    ? 'bg-zen-primary/10 border-zen-primary text-zen-primary dark:bg-zen-dark-primary/15 dark:border-zen-dark-primary dark:text-zen-dark-primary ring-2 ring-zen-primary/20 dark:ring-zen-dark-primary/30'
+                                                    : 'bg-zen-surface-container/60 dark:bg-zen-dark-surface-high border-zen-border/40 dark:border-zen-dark-border text-zen-text dark:text-zen-dark-text hover:border-zen-border'
+                                            }`}
+                                        >
+                                            <span className="text-xs uppercase tracking-wider font-extrabold text-zen-primary dark:text-zen-dark-primary">
+                                                {diffItem.label}
+                                            </span>
+                                            <p className="text-xs-plus text-zen-text-muted dark:text-zen-dark-text-muted font-normal mt-0.5 leading-relaxed">
+                                                {diffItem.desc}
+                                            </p>
+                                        </button>
+                                    );
+                                })}
+                            </div>
+                        </div>
+
+                        <button 
+                            type="button"
+                            onClick={startSession}
+                            className="w-full py-4 rounded-2xl bg-zen-primary hover:bg-zen-primary-dark dark:bg-zen-dark-primary dark:hover:bg-zen-dark-primary-hover text-white dark:text-zen-dark-on-primary font-bold text-sm uppercase tracking-widest shadow-zen-md transition-all active:scale-95 cursor-pointer"
+                        >
+                            {t('activeStudy.startSession')}
+                        </button>
                     </div>
                 </div>
-            ) : (
-                <div className="flex flex-col items-center justify-center min-h-[300px] text-zen-text-muted">
-                    No phrases found.
-                </div>
-            )}
+            </div>
+        );
+    }
 
-            {/* Navigation Controls */}
-            {filteredPhrases.length > 0 && (
-                <div className="flex items-center justify-between mt-8 gap-4 px-2">
+    // ==========================================
+    // 2. SUMMARY VIEW (Identical to KanaStudy)
+    // ==========================================
+    if (phase === 'summary') {
+        return (
+            <div className="w-full max-w-md mx-auto p-4 flex flex-col pt-12 pb-20 text-center">
+                <div className="zen-card bg-zen-surface-lowest dark:bg-zen-dark-surface border-2 border-zen-border/40 dark:border-zen-dark-border rounded-3xl shadow-zen-lg dark:shadow-zen-dark-lg p-8">
+                    <h2 className="text-2xl sm:text-3xl font-headline font-bold text-zen-text dark:text-zen-dark-text mb-2">
+                        {t('activeStudy.sessionComplete')}
+                    </h2>
+                    <p className="text-sm text-zen-text-muted dark:text-zen-dark-text-muted mb-4">
+                        {t('activeStudy.sessionSummaryText')}
+                    </p>
+
+                    <div className="inline-flex items-center gap-2 mb-6 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-zen-surface-container dark:bg-zen-dark-surface-high text-zen-text-muted dark:text-zen-dark-text-muted border border-zen-border/40 dark:border-zen-dark-border">
+                        <span>{selectedCategory === 'All' ? (lang === 'it' ? 'Tutte le Frasi' : 'All Phrases') : selectedCategory}</span>
+                        <span>•</span>
+                        <span>{targetCount} {t('activeStudy.questionCount') || 'domande'}</span>
+                    </div>
+                    
+                    <div className="grid grid-cols-2 gap-4 mb-8">
+                        <div className="bg-emerald-500/10 p-4 rounded-2xl border border-emerald-500/30">
+                            <div className="text-4xl font-bold text-emerald-600 dark:text-emerald-400 mb-1">{stats.correct}</div>
+                            <div className="text-xs uppercase tracking-widest text-emerald-700 dark:text-emerald-300 font-bold">{t('activeStudy.correctCount')}</div>
+                        </div>
+                        <div className="bg-rose-500/10 p-4 rounded-2xl border border-rose-500/30">
+                            <div className="text-4xl font-bold text-rose-600 dark:text-rose-400 mb-1">{stats.failed}</div>
+                            <div className="text-xs uppercase tracking-widest text-rose-700 dark:text-rose-300 font-bold">{t('activeStudy.failedCount')}</div>
+                        </div>
+                    </div>
+                    
                     <button
-                        onClick={handlePrev}
-                        className="flex-1 flex items-center justify-center gap-2 py-4 rounded-2xl bg-zen-surface-container dark:bg-zen-dark-surface border border-zen-border/40 dark:border-zen-dark-border hover:bg-zen-surface-high dark:hover:bg-zen-dark-surface-high transition-all active:scale-95 font-bold text-zen-text dark:text-zen-dark-text"
+                        type="button"
+                        onClick={() => setPhase('setup')}
+                        className="w-full py-3.5 rounded-2xl bg-zen-primary hover:bg-zen-primary-dark dark:bg-zen-dark-primary dark:hover:bg-zen-dark-primary-hover text-white dark:text-zen-dark-on-primary font-bold uppercase tracking-widest transition-all shadow-zen-sm active:scale-95 text-xs cursor-pointer"
                     >
-                        <ArrowLeft className="w-5 h-5" />
-                        {lang === 'it' ? 'Precedente' : 'Previous'}
-                    </button>
-                    <button
-                        onClick={handleNext}
-                        className="flex-1 flex items-center justify-center gap-2 py-4 rounded-2xl bg-zen-primary dark:bg-zen-dark-primary text-white dark:text-zen-dark-on-primary hover:shadow-zen-md transition-all active:scale-95 font-bold"
-                    >
-                        {lang === 'it' ? 'Prossima' : 'Next'}
-                        <ArrowRight className="w-5 h-5" />
+                        {t('activeStudy.backToSetup')}
                     </button>
                 </div>
+            </div>
+        );
+    }
+
+    // ==========================================
+    // 3. PLAYING VIEW (Aligned to KanaStudy)
+    // ==========================================
+    const progressPercent = Math.round(((questionsDone + 1) / targetCount) * 100);
+
+    return (
+        <div className="w-full max-w-2xl mx-auto space-y-6 pb-20 xl:pb-8">
+            
+            {/* Header controls & Progress Bar */}
+            <div className="space-y-2.5">
+                <div className="flex justify-between items-center text-xs font-bold text-zen-text-muted dark:text-zen-dark-text-muted">
+                    <div className="flex items-center gap-3">
+                        <button 
+                            type="button"
+                            onClick={() => setPhase('setup')}
+                            className="px-3 py-1 rounded-lg bg-zen-surface-lowest dark:bg-zen-dark-surface border border-zen-border/60 dark:border-zen-dark-border text-zen-text-muted hover:text-zen-text dark:text-zen-dark-text-muted dark:hover:text-zen-dark-text text-xs-plus font-bold uppercase tracking-wider transition-colors shadow-zen-sm cursor-pointer"
+                            title="Quit Session"
+                        >
+                            {t('activeStudy.exitSession')}
+                        </button>
+                        <span>
+                            {t('activeStudy.questionProgress')} {questionsDone + 1} / {targetCount}
+                        </span>
+                    </div>
+
+                    <div className="flex items-center gap-2">
+                        <span className="px-2.5 py-0.5 rounded-full text-xs font-extrabold uppercase tracking-wider bg-zen-surface-container dark:bg-zen-dark-surface-high text-zen-text-muted dark:text-zen-dark-text-muted border border-zen-border/40 dark:border-zen-dark-border">
+                            {currentQuestion?.category || (lang === 'it' ? 'Frasi Utili' : 'Phrases')}
+                        </span>
+                        <span className="px-2.5 py-0.5 rounded-full text-xs font-extrabold uppercase tracking-wider bg-zen-primary/10 dark:bg-zen-dark-primary/20 text-zen-primary dark:text-zen-dark-primary border border-zen-primary/20 dark:border-zen-dark-primary/30">
+                            {difficulty === 'easy' ? t('activeStudy.difficultyEasy') : difficulty === 'medium' ? t('activeStudy.difficultyMedium') : t('activeStudy.difficultyHard')}
+                        </span>
+                    </div>
+                </div>
+
+                {/* Smooth Progress Bar */}
+                <div className="h-2 w-full overflow-hidden rounded-full bg-zen-surface-container dark:bg-zen-dark-surface-high">
+                    <div 
+                        className="h-full rounded-full bg-zen-primary dark:bg-zen-dark-primary transition-all duration-300"
+                        style={{ width: `${progressPercent}%` }}
+                    />
+                </div>
+            </div>
+            
+            {/* Main Interactive Stage */}
+            {status === 'playing' ? (
+                <div className="space-y-5">
+                    <QuestionPrompt 
+                        currentWord={currentQuestion} 
+                        mode={mode} 
+                        difficulty={difficulty}
+                        scriptFilter="hiragana"
+                    />
+                    
+                    <AnswerInput 
+                        value={userInput}
+                        onChange={(val) => { setUserInput(val); setDiff(null); }}
+                        onSubmit={handleSubmit}
+                        diff={diff}
+                        disabled={status !== 'playing'}
+                        mode={mode}
+                        attempts={attempts}
+                        maxAttempts={maxAttempts}
+                    />
+
+                    {/* Mode Write Kana (ro-to-ja): Virtual Keyboard for input */}
+                    {mode === 'ro-to-ja' && (
+                        <VirtualKeyboard 
+                            onKeyPress={handleKeyboardPress}
+                            onBackspace={handleBackspace}
+                            disabled={status !== 'playing'}
+                            readOnly={false}
+                            showRomaji={difficulty === 'easy'}
+                            allowToggleRomaji={difficulty === 'medium'}
+                            targetScript="hiragana"
+                        />
+                    )}
+
+                    {/* Mode Read Kana (ja-to-ro): Consultation Virtual Keyboard */}
+                    {mode === 'ja-to-ro' && (
+                        <>
+                            {/* Easy mode: auto-shown consultation keyboard with romaji */}
+                            {difficulty === 'easy' && (
+                                <VirtualKeyboard 
+                                    readOnly={true}
+                                    showRomaji={true}
+                                    allowToggleRomaji={false}
+                                    disabled={status !== 'playing'}
+                                    targetScript="hiragana"
+                                />
+                            )}
+
+                            {/* Medium mode: toggleable consultation keyboard */}
+                            {difficulty === 'medium' && (
+                                <div className="mt-4 space-y-3">
+                                    <div className="flex justify-center">
+                                        <button
+                                            type="button"
+                                            onClick={() => setShowConsultationKeyboard(!showConsultationKeyboard)}
+                                            className="flex items-center gap-2 px-4 py-2 rounded-xl bg-zen-surface-lowest dark:bg-zen-dark-surface border border-zen-border/60 dark:border-zen-dark-border text-zen-text dark:text-zen-dark-text text-xs font-bold uppercase tracking-wider hover:bg-zen-surface-container dark:hover:bg-zen-dark-surface-high transition-colors shadow-zen-sm cursor-pointer"
+                                        >
+                                            <Keyboard className="w-4 h-4 text-zen-primary dark:text-zen-dark-primary" />
+                                            <span>{showConsultationKeyboard ? t('activeStudy.hideRefKeyboard') : t('activeStudy.showRefKeyboard')}</span>
+                                        </button>
+                                    </div>
+
+                                    {showConsultationKeyboard && (
+                                        <VirtualKeyboard 
+                                            readOnly={true}
+                                            showRomaji={false}
+                                            allowToggleRomaji={true}
+                                            disabled={status !== 'playing'}
+                                            targetScript="hiragana"
+                                        />
+                                    )}
+                                </div>
+                            )}
+
+                            {/* Hard mode: no consultation keyboard available */}
+                        </>
+                    )}
+                </div>
+            ) : (
+                <SolutionCard 
+                    item={currentQuestion} 
+                    onNext={handleNextClick} 
+                    status={status}
+                />
             )}
+            
         </div>
     );
 }

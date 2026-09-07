@@ -128,3 +128,27 @@ export const phraseCategories = [
   'Acquisti',
   'Emergenze'
 ];
+
+/**
+ * Extracts pure Kana text from Japanese phrase with optional Furigana markup.
+ * E.g. "{駅}[えき]はどこですか？" -> "えきはどこですか"
+ */
+export function getPhraseCleanKana(japaneseText = '') {
+  if (!japaneseText) return '';
+  return japaneseText
+    .replace(/\{([^}]+)\}\[([^\]]+)\]/g, '$2')
+    .replace(/[？?!！。、・\s\r\n]/g, '')
+    .trim();
+}
+
+/**
+ * Normalizes Romaji text by stripping punctuation and spaces for flexible comparison.
+ */
+export function getPhraseCleanRomaji(romajiText = '') {
+  if (!romajiText) return '';
+  return romajiText
+    .replace(/[？?!！。、・,\s\r\n]/g, '')
+    .toLowerCase()
+    .trim();
+}
+

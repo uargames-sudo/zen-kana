@@ -1,17 +1,20 @@
 import React, { useMemo, useState, useEffect } from 'react';
-import { Volume2, RotateCw, CheckCircle, XCircle, ArrowRight, ArrowLeft, Layers, BookOpen, Shuffle } from 'lucide-react';
+import { Volume2, RotateCw, CheckCircle, XCircle, ArrowRight, ArrowLeft, Layers, BookOpen, Shuffle, MessageSquareText } from 'lucide-react';
 import { HIRAGANA_BASIC, KANA_DAKUTEN, getKanaExample } from '../data/kanaData';
 import { YOON_HIRAGANA_GRID, YOON_KATAKANA_GRID } from '../data/kanaTables';
 import { VOCABULARY } from '../data/vocabulary';
+import { phrasesData, phraseCategories } from '../data/phrasesData';
 import VocabIllustration from './common/VocabIllustration';
+import FuriganaText from './common/FuriganaText';
 import { playKanaSound } from '../utils/audio';
 import { useLanguage } from '../context/LanguageContext';
 
 export default function Flashcards({ scriptMode = 'hiragana', updateStats }) {
   const { lang, t } = useLanguage();
   
-  // Category selection: 'all', 'basic', 'dakuten', 'yoon', 'vocabulary'
+  // Category selection: 'all', 'basic', 'dakuten', 'yoon', 'vocabulary', 'phrases'
   const [category, setCategory] = useState('all');
+  const [selectedPhraseCategory, setSelectedPhraseCategory] = useState('All');
   
   // Shuffle state & random seed to trigger reshuffle
   const [isShuffled, setIsShuffled] = useState(false);
@@ -49,11 +52,14 @@ export default function Flashcards({ scriptMode = 'hiragana', updateStats }) {
         return YOON_ITEMS;
       case 'vocabulary':
         return VOCABULARY;
+      case 'phrases':
+        if (selectedPhraseCategory === 'All') return phrasesData;
+        return phrasesData.filter(p => p.category === selectedPhraseCategory);
       case 'all':
       default:
         return [...BASIC_ITEMS, ...DAKUTEN_ITEMS, ...YOON_ITEMS];
     }
-  }, [category, BASIC_ITEMS, DAKUTEN_ITEMS, YOON_ITEMS]);
+  }, [category, selectedPhraseCategory, BASIC_ITEMS, DAKUTEN_ITEMS, YOON_ITEMS]);
 
   // Apply shuffle if enabled
   const processedDeck = useMemo(() => {
@@ -76,14 +82,28 @@ export default function Flashcards({ scriptMode = 'hiragana', updateStats }) {
 
   const currentItem = fullDeck[currentIndex] || fullDeck[0];
   const isVocabulary = category === 'vocabulary';
+  const isPhrases = category === 'phrases';
   
   const char = currentItem
-    ? isVocabulary
+    ? isPhrases
+      ? currentItem.japanese
+      : isVocabulary
       ? currentItem.kana
       : scriptMode === 'hiragana'
       ? currentItem.hiragana
       : currentItem.katakana
     : '';
+
+  const playCurrentAudio = (event) => {
+    event?.stopPropagation();
+    if (!currentItem) return;
+    if (isPhrases) {
+      const clean = currentItem.japanese?.replace(/\{([^}]+)\}\[([^\]]+)\]/g, '$1') || '';
+      playKanaSound(clean, 0.85);
+    } else {
+      playKanaSound(char);
+    }
+  };
 
   const resetDeck = () => {
     setCurrentIndex(0);
@@ -96,6 +116,7 @@ export default function Flashcards({ scriptMode = 'hiragana', updateStats }) {
 
   const changeCategory = (nextCategory) => {
     setCategory(nextCategory);
+    setSelectedPhraseCategory('All');
     resetDeck();
   };
 
@@ -113,9 +134,9 @@ export default function Flashcards({ scriptMode = 'hiragana', updateStats }) {
   };
 
   const handleCardClick = () => {
-    if (!char) return;
+    if (!currentItem) return;
     setIsFlipped((flipped) => !flipped);
-    playKanaSound(char);
+    playCurrentAudio();
   };
 
   const handleRating = (gotIt) => {
@@ -127,8 +148,8 @@ export default function Flashcards({ scriptMode = 'hiragana', updateStats }) {
         currentItem &&
         !failedItems.some(
           (item) =>
-            (item.id || item.romaji || item.hiragana) ===
-            (currentItem.id || currentItem.romaji || currentItem.hiragana)
+            (item.id || item.romaji || item.hiragana || item.japanese) ===
+            (currentItem.id || currentItem.romaji || currentItem.hiragana || currentItem.japanese)
         )
       ) {
         setFailedItems((prev) => [...prev, currentItem]);
@@ -171,7 +192,7 @@ export default function Flashcards({ scriptMode = 'hiragana', updateStats }) {
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [isFlipped, currentIndex, fullDeck, char]);
+  }, [isFlipped, currentIndex, fullDeck, char, currentItem]);
 
   const progressPercent = fullDeck.length > 0 ? Math.round(((currentIndex + 1) / fullDeck.length) * 100) : 0;
 
@@ -180,7 +201,8 @@ export default function Flashcards({ scriptMode = 'hiragana', updateStats }) {
     { id: 'basic', label: t('flashcards.basic') || (lang === 'it' ? 'Base (46)' : 'Basic (46)') },
     { id: 'dakuten', label: t('flashcards.dakuten') || (lang === 'it' ? 'Dakuten (25)' : 'Dakuten (25)') },
     { id: 'yoon', label: t('flashcards.yoon') || (lang === 'it' ? 'Yōon (33)' : 'Yōon (33)') },
-    { id: 'vocabulary', label: t('flashcards.vocabulary') || (lang === 'it' ? 'Vocabolario (100)' : 'Vocabulary (100)') }
+    { id: 'vocabulary', label: t('flashcards.vocabulary') || (lang === 'it' ? 'Vocabolario (100)' : 'Vocabulary (100)') },
+    { id: 'phrases', label: lang === 'it' ? 'Frasi Utili (15)' : 'Phrases (15)' }
   ];
 
   return (
@@ -191,7 +213,7 @@ export default function Flashcards({ scriptMode = 'hiragana', updateStats }) {
           <button
             key={cat.id}
             onClick={() => changeCategory(cat.id)}
-            className={`flex-1 min-w-[90px] py-2 px-2.5 rounded-xl text-xs font-bold transition-all text-center cursor-pointer ${
+            className={`flex-1 min-w-[90px] py-2 px-2 rounded-xl text-xs font-bold transition-all text-center cursor-pointer ${
               category === cat.id
                 ? 'bg-zen-primary text-white dark:bg-zen-dark-primary dark:text-zen-dark-on-primary shadow-zen-sm'
                 : 'text-zen-text-muted hover:text-zen-text dark:text-zen-dark-text-muted dark:hover:text-zen-dark-text'
@@ -201,6 +223,38 @@ export default function Flashcards({ scriptMode = 'hiragana', updateStats }) {
           </button>
         ))}
       </div>
+
+      {/* Phrase Subcategories Pill Bar */}
+      {isPhrases && (
+        <div className="flex overflow-x-auto pb-1 scrollbar-hide gap-1.5 px-0.5">
+          <button
+            onClick={() => { setSelectedPhraseCategory('All'); resetDeck(); }}
+            className={`px-3.5 py-1.5 rounded-full text-xs font-bold whitespace-nowrap transition-all cursor-pointer ${
+              selectedPhraseCategory === 'All'
+                ? 'bg-zen-primary dark:bg-zen-dark-primary text-white dark:text-zen-dark-on-primary shadow-xs'
+                : 'bg-zen-surface-container dark:bg-zen-dark-surface-high text-zen-text-muted hover:text-zen-text dark:text-zen-dark-text-muted'
+            }`}
+          >
+            {lang === 'it' ? 'Tutte le Frasi' : 'All Phrases'} ({phrasesData.length})
+          </button>
+          {phraseCategories.map((cat) => {
+            const count = phrasesData.filter(p => p.category === cat).length;
+            return (
+              <button
+                key={cat}
+                onClick={() => { setSelectedPhraseCategory(cat); resetDeck(); }}
+                className={`px-3.5 py-1.5 rounded-full text-xs font-bold whitespace-nowrap transition-all cursor-pointer ${
+                  selectedPhraseCategory === cat
+                    ? 'bg-zen-primary dark:bg-zen-dark-primary text-white dark:text-zen-dark-on-primary shadow-xs'
+                    : 'bg-zen-surface-container dark:bg-zen-dark-surface-high text-zen-text-muted hover:text-zen-text dark:text-zen-dark-text-muted'
+                }`}
+              >
+                {cat} ({count})
+              </button>
+            );
+          })}
+        </div>
+      )}
 
       {/* Toolbar: Shuffle Toggle & Reshuffle & Mistakes review */}
       <div className="flex flex-wrap items-center justify-between gap-2.5 p-3 rounded-2xl bg-zen-surface-container/40 dark:bg-zen-dark-surface-high/50 border border-zen-border/40 dark:border-zen-dark-border">
@@ -260,6 +314,8 @@ export default function Flashcards({ scriptMode = 'hiragana', updateStats }) {
           <span className="font-headline font-bold text-zen-text dark:text-zen-dark-text">
             {isReviewOnly
               ? t('flashcards.mistakesReview') || (lang === 'it' ? 'Revisione Errori' : 'Mistakes Review')
+              : isPhrases
+              ? `${lang === 'it' ? 'Frasi Utili' : 'Phrases'} · ${currentItem?.category || ''}`
               : isVocabulary
               ? `${t('nav.vocabulary') || 'Vocabolario'} Flashcards`
               : `${categories.find((c) => c.id === category)?.label || 'Kana'} (${scriptMode.toUpperCase()})`}
@@ -286,16 +342,13 @@ export default function Flashcards({ scriptMode = 'hiragana', updateStats }) {
             }`}
           >
             {/* FRONT OF CARD */}
-            <div className="absolute inset-0 flex flex-col items-center justify-between border-2 border-zen-border/40 bg-zen-surface-lowest p-8 backface-hidden zen-card dark:border-zen-dark-border dark:bg-zen-dark-surface rounded-3xl">
+            <div className="absolute inset-0 flex flex-col items-center justify-between border-2 border-zen-border/40 bg-zen-surface-lowest p-6 sm:p-8 backface-hidden zen-card dark:border-zen-dark-border dark:bg-zen-dark-surface rounded-3xl">
               <div className="flex w-full items-center justify-between text-xs text-zen-text-muted dark:text-zen-dark-text-muted">
                 <span className="rounded-full bg-zen-surface-container px-3 py-1 font-semibold dark:bg-zen-dark-surface-high">
-                  {t('flashcards.flipHint') || (lang === 'it' ? 'Tocca per girare' : 'Tap to flip')}
+                  {isPhrases ? (currentItem?.category || 'Frase') : (t('flashcards.flipHint') || (lang === 'it' ? 'Tocca per girare' : 'Tap to flip'))}
                 </span>
                 <button
-                  onClick={(event) => {
-                    event.stopPropagation();
-                    playKanaSound(char);
-                  }}
+                  onClick={playCurrentAudio}
                   className="rounded-full bg-zen-primary/10 p-2.5 text-zen-primary dark:bg-zen-dark-primary/20 dark:text-zen-dark-primary hover:scale-110 transition-transform cursor-pointer"
                   title="Play Japanese audio"
                 >
@@ -303,24 +356,37 @@ export default function Flashcards({ scriptMode = 'hiragana', updateStats }) {
                 </button>
               </div>
 
-              <div className="my-auto text-center">
-                <span
-                  className={`font-kana font-bold tracking-tight text-zen-primary dark:text-zen-dark-primary ${
-                    char.length > 2 ? 'text-6xl sm:text-7xl' : char.length === 2 ? 'text-7xl sm:text-8xl' : 'text-8xl sm:text-9xl'
-                  }`}
-                >
-                  {char}
-                </span>
-                {isVocabulary && (
-                  <div className="mt-4 text-xl font-headline font-bold text-zen-text dark:text-zen-dark-text">
-                    {currentItem.romaji}
-                  </div>
+              <div className="my-auto text-center w-full px-2">
+                {isPhrases ? (
+                  <FuriganaText
+                    text={currentItem.japanese}
+                    className="font-kana font-bold text-3xl sm:text-4xl text-zen-primary dark:text-zen-dark-primary text-balance leading-loose"
+                  />
+                ) : (
+                  <>
+                    <span
+                      className={`font-kana font-bold tracking-tight text-zen-primary dark:text-zen-dark-primary ${
+                        char.length > 2 ? 'text-6xl sm:text-7xl' : char.length === 2 ? 'text-7xl sm:text-8xl' : 'text-8xl sm:text-9xl'
+                      }`}
+                    >
+                      {char}
+                    </span>
+                    {isVocabulary && (
+                      <div className="mt-4 text-xl font-headline font-bold text-zen-text dark:text-zen-dark-text">
+                        {currentItem.romaji}
+                      </div>
+                    )}
+                  </>
                 )}
               </div>
 
               <div className="flex items-center gap-1.5 text-xs font-medium text-zen-text-muted dark:text-zen-dark-text-muted">
                 <RotateCw className="h-3.5 w-3.5" />{' '}
-                {isVocabulary
+                {isPhrases
+                  ? lang === 'it'
+                    ? 'Tocca per scoprire traduzione e Romaji'
+                    : 'Tap to reveal translation & Romaji'
+                  : isVocabulary
                   ? lang === 'it'
                     ? 'Tocca per scoprire traduzioni'
                     : 'Tap to reveal translations'
@@ -331,24 +397,37 @@ export default function Flashcards({ scriptMode = 'hiragana', updateStats }) {
             </div>
 
             {/* BACK OF CARD */}
-            <div className="absolute inset-0 flex flex-col items-center justify-between border-2 border-zen-border/60 bg-zen-surface-lowest p-8 backface-hidden rotate-y-180 zen-card dark:border-zen-dark-border dark:bg-zen-dark-surface rounded-3xl">
+            <div className="absolute inset-0 flex flex-col items-center justify-between border-2 border-zen-border/60 bg-zen-surface-lowest p-6 sm:p-8 backface-hidden rotate-y-180 zen-card dark:border-zen-dark-border dark:bg-zen-dark-surface rounded-3xl">
               <div className="flex w-full items-center justify-between text-xs text-zen-text-muted dark:text-zen-dark-text-muted">
                 <span className="rounded-full bg-zen-primary/15 px-3 py-1 font-semibold text-zen-primary dark:bg-zen-dark-primary/20 dark:text-zen-dark-primary">
                   {t('flashcards.revealedAnswer') || (lang === 'it' ? 'Risultato' : 'Answer')}
                 </span>
                 <button
-                  onClick={(event) => {
-                    event.stopPropagation();
-                    playKanaSound(char);
-                  }}
+                  onClick={playCurrentAudio}
                   className="rounded-full bg-zen-primary p-2.5 text-white shadow-zen-sm dark:bg-zen-dark-primary dark:text-zen-dark-on-primary hover:scale-110 transition-transform cursor-pointer"
                 >
                   <Volume2 className="h-5 w-5" />
                 </button>
               </div>
 
-              <div className="my-auto space-y-3 text-center">
-                {isVocabulary ? (
+              <div className="my-auto space-y-3 text-center w-full px-2">
+                {isPhrases ? (
+                  <>
+                    <div>
+                      <FuriganaText
+                        text={currentItem.japanese}
+                        className="font-kana font-bold text-2xl sm:text-3xl text-zen-primary dark:text-zen-dark-primary text-balance leading-loose"
+                      />
+                    </div>
+                    <div className="text-base sm:text-lg font-mono text-zen-text-muted dark:text-zen-dark-text-muted">
+                      {currentItem.romaji}
+                    </div>
+                    <div className="h-px w-16 bg-zen-border dark:bg-zen-dark-border mx-auto my-2" />
+                    <div className="text-xl sm:text-2xl font-headline font-bold text-zen-text dark:text-zen-dark-text text-balance">
+                      {lang === 'it' ? currentItem.it : currentItem.en}
+                    </div>
+                  </>
+                ) : isVocabulary ? (
                   <>
                     <VocabIllustration
                       id={currentItem.id}
@@ -428,7 +507,7 @@ export default function Flashcards({ scriptMode = 'hiragana', updateStats }) {
           <button
             onClick={() => move(1)}
             disabled={currentIndex === fullDeck.length - 1}
-            className="flex items-center gap-1.5 rounded-xl bg-zen-surface-container px-4 py-2.5 text-sm font-semibold text-zen-primary disabled:cursor-not-allowed disabled:opacity-40 dark:bg-zen-dark-surface-high dark:text-zen-dark-primary cursor-pointer"
+            className="flex items-center gap-1.5 rounded-xl bg-zen-surface-container px-4 py-2.5 text-sm font-semibold text-zen-primary disabled:cursor-not-allowed disabled:opacity-40 dark:bg-zen-dark-surface-high dark:text-zen-primary cursor-pointer"
           >
             {t('flashcards.next') || (lang === 'it' ? 'Successivo' : 'Next')}{' '}
             <ArrowRight className="h-4 w-4" />
