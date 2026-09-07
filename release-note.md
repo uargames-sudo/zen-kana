@@ -1,5 +1,36 @@
 # Release Notes: Zen Kana
 
+## Version 1.6.2 — Survival Phrases Active Study & Flashcards Integration
+
+**Release Date:** September 2026  
+**Status:** Feature Expansion & Pedagogical Alignment  
+
+---
+
+### 💬 Interactive Active Study for Survival Phrases
+- **Full Transliteration & Writing Modes**: Transformed *Frasi Utili (Survival Phrases)* from passive flashcards into a complete active study engine identical in logic, layout, and ergonomic controls to *Kana / Vocabolario*:
+  - **Giapponese ➔ Romaji (`ja-to-ro`)**: Read phrases with clear, permanent Furigana and translation context, typing the corresponding Romaji transliteration.
+  - **Romaji ➔ Giapponese (`ro-to-ja`)**: Read Romaji and translations, actively writing/composing phrases in Kana.
+  - **Misto (`mixed`)**: Balanced automatic alternation between reading and writing modes.
+- **Always-Visible Furigana (`<FuriganaText />`)**: Ensuring pure Kana focus rather than Kanji memorization, all Kanji across questions, hint text, solution breakdowns, and flashcards consistently feature precise Ruby/Furigana phonetic guides.
+- **Aligned 3-Tier Difficulty & Keyboard Visibility**:
+  - **Facile / Easy**: Auto-displayed on-screen Kana keyboard (in writing mode) and consultation reference keyboard with Romaji active (in reading mode).
+  - **Media / Medium**: On-demand toggleable consultation/input keyboard with Romaji switch.
+  - **Difficile / Hard**: Distraction-free physical keyboard input with strict feedback.
+- **Intelligent Phrase Normalization & Verification**:
+  - Tolerant matching for punctuation (`?`, `!`, `。`, `、`), particle transliterations (`wa` / `ha`), and elongated vowels (`ou` / `oo`).
+  - Up to 3 attempts with live character-by-character diff feedback.
+  - Clean pronunciation audio synthesis stripped of Furigana markup.
+  - Comprehensive Solution Card with automatic Enter key shortcut navigation.
+  - Final Session Summary report with score, accuracy %, and retry actions.
+
+### 🃏 Survival Phrases Deck Integrated in Flashcards
+- **Dedicated Phrases Flashcard Category**: Added the **"Frasi Utili (15)"** deck directly into the main [Flashcards](file:///e:/pi-agent/pwa-kana/src/components/Flashcards.jsx) module alongside *All Kana*, *Basic*, *Dakuten*, *Yōon*, and *Vocabulary*.
+- **Category Filter Bar**: Filter phrase flashcards on the fly by category (*Saluti e Cortesia*, *In Viaggio e Trasporti*, *Al Ristorante*, *Acquisti*, *Emergenze*).
+- **Interactive 3D Rotation**: Front card displays Japanese phrase with prominent Furigana; reverse side reveals Romaji, Italian/English translation, category tags, audio playback, and spaced-repetition recall rating (`Knew it!` / `Did not know`).
+
+---
+
 ## Version 1.6.1 — Active Study Script Customization & Keyboard Workflow
 
 **Release Date:** September 2026  
