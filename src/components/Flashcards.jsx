@@ -133,13 +133,16 @@ export default function Flashcards({ scriptMode = 'hiragana', updateStats }) {
     setIsFlipped(false);
   };
 
+  const [isTransitioning, setIsTransitioning] = useState(false);
+
   const handleCardClick = () => {
-    if (!currentItem) return;
+    if (!currentItem || isTransitioning) return;
     setIsFlipped((flipped) => !flipped);
     playCurrentAudio();
   };
 
   const handleRating = (gotIt) => {
+    if (isTransitioning) return;
     if (gotIt) {
       setMasteredCount((count) => count + 1);
     } else {
@@ -156,13 +159,35 @@ export default function Flashcards({ scriptMode = 'hiragana', updateStats }) {
       }
     }
     updateStats?.(gotIt);
-    setIsFlipped(false);
-    if (currentIndex < fullDeck.length - 1) setCurrentIndex((index) => index + 1);
+    
+    if (isFlipped) {
+      setIsTransitioning(true);
+      setIsFlipped(false);
+      setTimeout(() => {
+        if (currentIndex < fullDeck.length - 1) {
+          setCurrentIndex((index) => index + 1);
+        }
+        setIsTransitioning(false);
+      }, 250);
+    } else {
+      if (currentIndex < fullDeck.length - 1) {
+        setCurrentIndex((index) => index + 1);
+      }
+    }
   };
 
   const move = (direction) => {
-    setIsFlipped(false);
-    setCurrentIndex((index) => Math.max(0, Math.min(fullDeck.length - 1, index + direction)));
+    if (isTransitioning) return;
+    if (isFlipped) {
+      setIsTransitioning(true);
+      setIsFlipped(false);
+      setTimeout(() => {
+        setCurrentIndex((index) => Math.max(0, Math.min(fullDeck.length - 1, index + direction)));
+        setIsTransitioning(false);
+      }, 250);
+    } else {
+      setCurrentIndex((index) => Math.max(0, Math.min(fullDeck.length - 1, index + direction)));
+    }
   };
 
   // Keyboard navigation for Flashcards (Space/Enter to flip, 1/2 or Arrows to rate/move)

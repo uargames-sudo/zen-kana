@@ -52,7 +52,7 @@ export default function QuestionPrompt({ currentWord, mode, difficulty, scriptFi
                             </div>
                         )}
                         
-                        {translation && (
+                        {translation && difficulty !== 'hard' && (
                             <div className="text-sm font-semibold text-zen-text-muted/80 dark:text-zen-dark-text-muted/80 italic mt-1">
                                 {translation}
                             </div>
@@ -68,7 +68,7 @@ export default function QuestionPrompt({ currentWord, mode, difficulty, scriptFi
                             {currentWord.romaji}
                         </div>
                         
-                        {translation && (
+                        {translation && difficulty !== 'hard' && (
                             <div className="text-base font-semibold text-zen-primary dark:text-zen-dark-primary mt-1 mb-2">
                                 {translation}
                             </div>

@@ -15,7 +15,8 @@ import {
   HelpCircle,
   Play,
   Heart,
-  AlertCircle
+  AlertCircle,
+  Eye
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { VOCABULARY, getSyllablesDataset } from '../data/vocabulary';
@@ -47,6 +48,7 @@ export default function KanaPuzzle({ defaultScriptMode = 'hiragana' }) {
   const [isSuccess, setIsSuccess] = useState(false);
   const [isError, setIsError] = useState(false);
   const [isFailed, setIsFailed] = useState(false);
+  const [isChoicesRevealed, setIsChoicesRevealed] = useState(false);
 
   // Session stats & mistakes
   const [score, setScore] = useState(0);
@@ -98,12 +100,13 @@ export default function KanaPuzzle({ defaultScriptMode = 'hiragana' }) {
     const allTiles = [...tokens, ...distractors].sort(() => Math.random() - 0.5);
     setAvailableTiles(allTiles);
 
-    // Empty slots array & reset attempts
+    // Empty slots array & reset attempts & hide choices in hard mode
     setPlacedSlots(new Array(tokens.length).fill(null));
     setAttemptsLeft(MAX_ATTEMPTS);
     setIsSuccess(false);
     setIsError(false);
     setIsFailed(false);
+    setIsChoicesRevealed(false);
   }, [distractorCount]);
 
   // Start new game session
@@ -208,15 +211,18 @@ export default function KanaPuzzle({ defaultScriptMode = 'hiragana' }) {
 
   // Advance to next word or finish session
   const advanceToNextWord = useCallback(() => {
-    if (currentIndex + 1 < wordList.length) {
-      const nextIdx = currentIndex + 1;
-      setCurrentIndex(nextIdx);
-      setupPuzzleWord(wordList[nextIdx]);
-    } else {
-      // Completed all words in session!
-      handleSessionVictory();
-    }
-  }, [currentIndex, wordList, setupPuzzleWord]);
+    setCurrentIndex((prevIdx) => {
+      const nextIdx = prevIdx + 1;
+      if (nextIdx < wordList.length) {
+        setupPuzzleWord(wordList[nextIdx]);
+        return nextIdx;
+      } else {
+        // Completed all words in session!
+        handleSessionVictory();
+        return prevIdx;
+      }
+    });
+  }, [wordList, setupPuzzleWord]);
 
   // Hint button -> place next correct tile
   const handleUseHint = () => {
@@ -803,8 +809,8 @@ export default function KanaPuzzle({ defaultScriptMode = 'hiragana' }) {
               <button
                 type="button"
                 onClick={handleShufflePool}
-                disabled={isSuccess || isFailed}
-                className="p-2 rounded-xl bg-zen-surface-lowest dark:bg-zen-dark-surface text-zen-text-muted hover:text-zen-text transition-colors shadow-zen-sm disabled:opacity-50 cursor-pointer"
+                disabled={isSuccess || isFailed || (difficulty === 'hard' && !isChoicesRevealed)}
+                className="p-2 rounded-xl bg-zen-surface-lowest dark:bg-zen-dark-surface text-zen-text-muted hover:text-zen-text transition-colors shadow-zen-sm disabled:opacity-40 cursor-pointer"
                 title={t('puzzle.shuffle')}
               >
                 <Shuffle className="w-4 h-4" />
@@ -812,8 +818,8 @@ export default function KanaPuzzle({ defaultScriptMode = 'hiragana' }) {
               <button
                 type="button"
                 onClick={handleClearSlots}
-                disabled={isSuccess || isFailed}
-                className="p-2 rounded-xl bg-zen-surface-lowest dark:bg-zen-dark-surface text-zen-text-muted hover:text-rose-500 transition-colors shadow-zen-sm disabled:opacity-50 cursor-pointer"
+                disabled={isSuccess || isFailed || placedSlots.every(s => s === null)}
+                className="p-2 rounded-xl bg-zen-surface-lowest dark:bg-zen-dark-surface text-zen-text-muted hover:text-rose-500 transition-colors shadow-zen-sm disabled:opacity-40 cursor-pointer"
                 title={t('puzzle.clearAll')}
               >
                 <Trash2 className="w-4 h-4" />
@@ -821,8 +827,8 @@ export default function KanaPuzzle({ defaultScriptMode = 'hiragana' }) {
               <button
                 type="button"
                 onClick={handleUseHint}
-                disabled={isSuccess || isFailed}
-                className="p-2 px-2.5 rounded-xl bg-zen-surface-lowest dark:bg-zen-dark-surface text-amber-500 hover:text-amber-600 transition-colors shadow-zen-sm flex items-center gap-1.5 text-xs font-bold disabled:opacity-50 cursor-pointer"
+                disabled={isSuccess || isFailed || (difficulty === 'hard' && !isChoicesRevealed)}
+                className="p-2 px-2.5 rounded-xl bg-zen-surface-lowest dark:bg-zen-dark-surface text-amber-500 hover:text-amber-600 transition-colors shadow-zen-sm flex items-center gap-1.5 text-xs font-bold disabled:opacity-40 cursor-pointer"
                 title={t('puzzle.hint')}
               >
                 <Lightbulb className="w-4 h-4" />
@@ -831,32 +837,49 @@ export default function KanaPuzzle({ defaultScriptMode = 'hiragana' }) {
             </div>
           </div>
 
-          {/* Tiles Grid */}
-          <div className="flex items-center justify-center gap-2.5 sm:gap-3 flex-wrap min-h-[72px]">
-            {availableTiles.map((tile) => {
-              const displayText = isKanaToRomaji ? tile.romaji : tile.kana;
+          {/* Hard Mode: Hidden choices with reveal button */}
+          {difficulty === 'hard' && !isChoicesRevealed && !isSuccess && !isFailed ? (
+            <div className="flex flex-col items-center justify-center p-6 sm:p-8 text-center space-y-3 bg-zen-surface-lowest/70 dark:bg-zen-dark-surface/70 rounded-2xl border-2 border-dashed border-zen-border/60 dark:border-zen-dark-border min-h-[120px] animate-fadeIn">
+              <p className="text-xs sm:text-sm text-zen-text-muted dark:text-zen-dark-text-muted font-medium max-w-xs">
+                {t('puzzle.revealChoicesDesc') || (lang === 'it' ? 'Tocca per scoprire le tessere disponibili' : 'Tap to reveal available syllable tiles')}
+              </p>
+              <button
+                type="button"
+                onClick={() => setIsChoicesRevealed(true)}
+                className="px-6 py-3 rounded-2xl bg-zen-primary hover:bg-zen-primary-dark dark:bg-zen-dark-primary dark:hover:bg-zen-dark-primary-hover text-white dark:text-zen-dark-on-primary font-bold text-xs sm:text-sm uppercase tracking-wider transition-all shadow-zen-md active:scale-95 flex items-center gap-2 cursor-pointer"
+              >
+                <Eye className="w-4 h-4" />
+                <span>{t('puzzle.revealChoicesBtn') || (lang === 'it' ? 'Mostra Scelte' : 'Show Choices')}</span>
+              </button>
+            </div>
+          ) : (
+            /* Tiles Grid */
+            <div className="flex items-center justify-center gap-2.5 sm:gap-3 flex-wrap min-h-[72px] animate-fadeIn">
+              {availableTiles.map((tile) => {
+                const displayText = isKanaToRomaji ? tile.romaji : tile.kana;
 
-              return (
-                <button
-                  key={tile.uid}
-                  type="button"
-                  onClick={() => handleTileClick(tile)}
-                  disabled={isSuccess || isFailed}
-                  className="w-16 h-16 sm:w-18 sm:h-18 min-w-[64px] min-h-[64px] rounded-2xl bg-zen-surface-lowest dark:bg-zen-dark-surface border-2 border-zen-border/70 dark:border-zen-dark-border text-zen-text dark:text-zen-dark-text font-bold shadow-zen-sm hover:border-zen-primary dark:hover:border-zen-dark-primary hover:scale-108 active:scale-95 transition-all flex items-center justify-center cursor-pointer disabled:opacity-50 disabled:pointer-events-none"
-                >
-                  <span className={isKanaToRomaji ? 'font-headline text-lg sm:text-xl font-bold uppercase tracking-wider' : 'font-kana text-3xl sm:text-4xl font-extrabold text-zen-primary dark:text-zen-dark-primary leading-none'}>
-                    {displayText}
-                  </span>
-                </button>
-              );
-            })}
+                return (
+                  <button
+                    key={tile.uid}
+                    type="button"
+                    onClick={() => handleTileClick(tile)}
+                    disabled={isSuccess || isFailed}
+                    className="w-16 h-16 sm:w-18 sm:h-18 min-w-[64px] min-h-[64px] rounded-2xl bg-zen-surface-lowest dark:bg-zen-dark-surface border-2 border-zen-border/70 dark:border-zen-dark-border text-zen-text dark:text-zen-dark-text font-bold shadow-zen-sm hover:border-zen-primary dark:hover:border-zen-dark-primary hover:scale-108 active:scale-95 transition-all flex items-center justify-center cursor-pointer disabled:opacity-50 disabled:pointer-events-none"
+                  >
+                    <span className={isKanaToRomaji ? 'font-headline text-lg sm:text-xl font-bold uppercase tracking-wider' : 'font-kana text-3xl sm:text-4xl font-extrabold text-zen-primary dark:text-zen-dark-primary leading-none'}>
+                      {displayText}
+                    </span>
+                  </button>
+                );
+              })}
 
-            {availableTiles.length === 0 && (
-              <span className="text-sm text-zen-text-muted italic py-3 font-medium">
-                {t('puzzle.allTilesPlaced')}
-              </span>
-            )}
-          </div>
+              {availableTiles.length === 0 && (
+                <span className="text-sm text-zen-text-muted italic py-3 font-medium">
+                  {t('puzzle.allTilesPlaced')}
+                </span>
+              )}
+            </div>
+          )}
         </div>
       </div>
     );
