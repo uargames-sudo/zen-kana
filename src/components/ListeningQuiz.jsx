@@ -264,7 +264,7 @@ export default function ListeningQuiz({ scriptMode, updateStats }) {
           </div>
 
           {/* Vocabulary Words Toggle */}
-          <div className="p-4 sm:p-5 rounded-2xl bg-zen-surface-container/40 dark:bg-zen-dark-surface-high border border-zen-border/40 dark:border-zen-dark-border flex items-center justify-between gap-4">
+          <div className="p-4 sm:p-5 bg-zen-surface-container/40 dark:bg-zen-dark-surface-high border border-zen-border/60 dark:border-zen-dark-border flex items-center justify-between gap-4">
             <div className="space-y-1">
               <div className="text-sm font-bold text-zen-text dark:text-zen-dark-text">
                 {t('listening.includeVocab')}
@@ -277,14 +277,20 @@ export default function ListeningQuiz({ scriptMode, updateStats }) {
             </div>
             <button
               type="button"
+              role="switch"
+              aria-checked={includeVocab}
               onClick={() => setIncludeVocab(!includeVocab)}
-              className={`w-14 h-8 rounded-full transition-colors relative p-1 shrink-0 ${
-                includeVocab ? 'bg-zen-primary dark:bg-zen-dark-primary' : 'bg-zen-border/60 dark:bg-zen-dark-border'
+              className={`w-14 h-8 border-2 transition-colors relative p-0.5 shrink-0 cursor-pointer ${
+                includeVocab 
+                  ? 'bg-zen-primary dark:bg-zen-dark-primary border-zen-primary dark:border-zen-dark-primary' 
+                  : 'bg-zen-surface-container dark:bg-zen-dark-surface border-zen-primary dark:border-zen-dark-primary'
               }`}
             >
               <div
-                className={`w-6 h-6 rounded-full bg-white transition-transform ${
-                  includeVocab ? 'translate-x-6' : 'translate-x-0'
+                className={`w-6 h-6 transition-transform ${
+                  includeVocab 
+                    ? 'translate-x-6 bg-white dark:bg-zen-dark-on-primary' 
+                    : 'translate-x-0 bg-zen-primary dark:bg-zen-dark-primary'
                 }`}
               />
             </button>

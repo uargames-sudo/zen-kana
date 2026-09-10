@@ -149,25 +149,25 @@ export default function WritingCanvas({ scriptMode }) {
       {/* Main Drawing Canvas & Reference Grid Container */}
       <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
         {/* Left Reference Card with Stroke Order Details */}
-        <div className="md:col-span-5 zen-card p-5 sm:p-6 border-2 border-zen-border/40 dark:border-zen-dark-border bg-zen-surface-lowest dark:bg-zen-dark-surface flex flex-col justify-between items-center text-center shadow-zen-lg dark:shadow-zen-dark-lg rounded-3xl">
+        <div className="md:col-span-5 zen-card p-5 sm:p-6 border-2 border-zen-border/60 dark:border-zen-dark-border bg-zen-surface-lowest dark:bg-zen-dark-surface flex flex-col justify-between items-center text-center shadow-zen-lg dark:shadow-zen-dark-lg">
           <div className="w-full flex justify-between items-center text-xs">
-            <span className="px-3 py-1 rounded-full bg-zen-surface-container dark:bg-zen-dark-surface-high font-semibold text-zen-text-muted dark:text-zen-dark-text-muted">
+            <span className="px-3 py-1 bg-zen-surface-container dark:bg-zen-dark-surface-high font-semibold text-zen-text-muted dark:text-zen-dark-text-muted border border-zen-border/30">
               {t('writing.currentChar')}
             </span>
-            <span className="px-2.5 py-0.5 rounded-full bg-zen-primary/10 dark:bg-zen-dark-primary/20 text-zen-primary dark:text-zen-dark-primary font-bold text-xs">
+            <span className="px-2.5 py-0.5 bg-zen-primary/10 dark:bg-zen-dark-primary/20 text-zen-primary dark:text-zen-dark-primary font-bold text-xs border border-zen-primary/20">
               {strokeInfo.strokes} {lang === 'it' ? (strokeInfo.strokes === 1 ? 'tratto' : 'tratti') : (strokeInfo.strokes === 1 ? 'stroke' : 'strokes')}
             </span>
           </div>
 
           {/* Sub-tabs: Visual Guide vs Stroke Steps */}
-          <div className="w-full mt-3 flex items-center bg-zen-surface-container/60 dark:bg-zen-dark-surface-high p-1 rounded-xl border border-zen-border/40 dark:border-zen-dark-border text-xs font-bold">
+          <div className="w-full mt-3 flex items-center bg-zen-surface-container/60 dark:bg-zen-dark-surface-high p-1 border border-zen-border/40 dark:border-zen-dark-border text-xs font-bold">
             <button
               type="button"
               onClick={() => setActiveStepTab('guide')}
-              className={`flex-1 py-1.5 rounded-lg transition-all flex items-center justify-center gap-1 ${
+              className={`flex-1 py-1.5 transition-all flex items-center justify-center gap-1 cursor-pointer border ${
                 activeStepTab === 'guide'
-                  ? 'bg-zen-surface-lowest dark:bg-zen-dark-surface text-zen-primary dark:text-zen-dark-primary shadow-sm'
-                  : 'text-zen-text-muted dark:text-zen-dark-text-muted hover:text-zen-text'
+                  ? 'bg-zen-surface-lowest dark:bg-zen-dark-surface text-zen-primary dark:text-zen-dark-primary border-zen-primary/30 shadow-sm'
+                  : 'text-zen-text-muted dark:text-zen-dark-text-muted border-transparent hover:text-zen-text'
               }`}
             >
               <Sparkles className="w-3.5 h-3.5" />
@@ -177,10 +177,10 @@ export default function WritingCanvas({ scriptMode }) {
             <button
               type="button"
               onClick={() => setActiveStepTab('steps')}
-              className={`flex-1 py-1.5 rounded-lg transition-all flex items-center justify-center gap-1 ${
+              className={`flex-1 py-1.5 transition-all flex items-center justify-center gap-1 cursor-pointer border ${
                 activeStepTab === 'steps'
-                  ? 'bg-zen-surface-lowest dark:bg-zen-dark-surface text-zen-primary dark:text-zen-dark-primary shadow-sm'
-                  : 'text-zen-text-muted dark:text-zen-dark-text-muted hover:text-zen-text'
+                  ? 'bg-zen-surface-lowest dark:bg-zen-dark-surface text-zen-primary dark:text-zen-dark-primary border-zen-primary/30 shadow-sm'
+                  : 'text-zen-text-muted dark:text-zen-dark-text-muted border-transparent hover:text-zen-text'
               }`}
             >
               <ListOrdered className="w-3.5 h-3.5" />
@@ -191,7 +191,7 @@ export default function WritingCanvas({ scriptMode }) {
           {/* Tab 1: Interactive Character with Stroke Numbers */}
           {activeStepTab === 'guide' ? (
             <div className="my-auto py-4 w-full flex flex-col items-center">
-              <div className="relative w-48 h-48 sm:w-52 sm:h-52 rounded-2xl bg-zen-surface-container/30 dark:bg-zen-dark-surface-high border border-dashed border-zen-border/60 dark:border-zen-dark-border flex items-center justify-center">
+              <div className="relative w-48 h-48 sm:w-52 sm:h-52 bg-zen-surface-container/30 dark:bg-zen-dark-surface-high border border-dashed border-zen-border/60 dark:border-zen-dark-border flex items-center justify-center">
                 {/* Cross Grid Lines */}
                 <div className="absolute inset-0 pointer-events-none flex flex-col justify-center items-center">
                   <div className="w-full h-px bg-zen-primary/20 dark:bg-zen-dark-border/60" />
@@ -208,7 +208,7 @@ export default function WritingCanvas({ scriptMode }) {
                   <div
                     key={`marker-${mIdx}`}
                     style={{ left: `${marker.x}%`, top: `${marker.y}%` }}
-                    className="absolute -translate-x-1/2 -translate-y-1/2 flex items-center justify-center w-6 h-6 rounded-full bg-rose-500 text-white font-extrabold text-xs shadow-md border-2 border-white dark:border-zen-dark-surface animate-pulse"
+                    className="absolute -translate-x-1/2 -translate-y-1/2 flex items-center justify-center w-6 h-6 bg-rose-500 text-white font-extrabold text-xs shadow-md border-2 border-white dark:border-zen-dark-surface animate-pulse"
                     title={`Tratto ${marker.num}: ${marker.dir}`}
                   >
                     <span>{marker.num}</span>
@@ -224,7 +224,7 @@ export default function WritingCanvas({ scriptMode }) {
               <button
                 type="button"
                 onClick={() => setShowStrokeNumbers(!showStrokeNumbers)}
-                className="mt-2 text-xs-plus font-semibold text-zen-text-muted dark:text-zen-dark-text-muted hover:text-zen-primary dark:hover:text-zen-dark-primary transition-colors flex items-center gap-1"
+                className="mt-2 text-xs-plus font-semibold text-zen-text-muted dark:text-zen-dark-text-muted hover:text-zen-primary dark:hover:text-zen-dark-primary transition-colors flex items-center gap-1 cursor-pointer"
               >
                 {showStrokeNumbers ? (lang === 'it' ? 'Nascondi numeri tratti' : 'Hide stroke numbers') : (lang === 'it' ? 'Mostra numeri tratti' : 'Show stroke numbers')}
               </button>
@@ -239,9 +239,9 @@ export default function WritingCanvas({ scriptMode }) {
                 {stepsList.map((step, sIdx) => (
                   <div
                     key={`step-desc-${sIdx}`}
-                    className="p-2.5 rounded-xl bg-zen-surface-container/40 dark:bg-zen-dark-surface border border-zen-border/40 dark:border-zen-dark-border flex items-start gap-2.5 text-xs text-zen-text dark:text-zen-dark-text"
+                    className="p-2.5 bg-zen-surface-container/40 dark:bg-zen-dark-surface border border-zen-border/40 dark:border-zen-dark-border flex items-start gap-2.5 text-xs text-zen-text dark:text-zen-dark-text"
                   >
-                    <span className="w-5 h-5 rounded-full bg-zen-primary dark:bg-zen-dark-primary text-white dark:text-zen-dark-on-primary font-bold text-xs-plus flex items-center justify-center shrink-0 mt-0.5">
+                    <span className="w-5 h-5 bg-zen-primary dark:bg-zen-dark-primary text-white dark:text-zen-dark-on-primary font-bold text-xs-plus flex items-center justify-center shrink-0 mt-0.5">
                       {sIdx + 1}
                     </span>
                     <span className="leading-relaxed">{step}</span>
@@ -257,17 +257,17 @@ export default function WritingCanvas({ scriptMode }) {
         </div>
 
         {/* Right Practice Pad Canvas Container */}
-        <div className="md:col-span-7 zen-card p-5 sm:p-6 border-2 border-zen-border/40 dark:border-zen-dark-border flex flex-col items-center justify-between relative bg-zen-surface-lowest dark:bg-zen-dark-surface overflow-hidden shadow-zen-lg dark:shadow-zen-dark-lg rounded-3xl">
+        <div className="md:col-span-7 zen-card p-5 sm:p-6 border-2 border-zen-border/60 dark:border-zen-dark-border flex flex-col items-center justify-between relative bg-zen-surface-lowest dark:bg-zen-dark-surface overflow-hidden shadow-zen-lg dark:shadow-zen-dark-lg">
           {/* Top toolbar over canvas */}
           <div className="w-full flex items-center justify-between mb-4 text-xs font-semibold text-zen-text-muted dark:text-zen-dark-text-muted">
-            <span className="px-3 py-1 rounded-full bg-zen-surface-container dark:bg-zen-dark-surface-high font-bold">
+            <span className="px-3 py-1 bg-zen-surface-container dark:bg-zen-dark-surface-high font-bold border border-zen-border/30">
               Canvas ({currentIndex + 1}/{kanaList.length})
             </span>
 
             <div className="flex items-center gap-2">
               <button
                 onClick={() => setShowGuide(!showGuide)}
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-zen-border/40 dark:border-zen-dark-border hover:bg-zen-surface-container dark:hover:bg-zen-dark-surface-high transition-colors text-xs font-bold"
+                className="flex items-center gap-1.5 px-3 py-1.5 border border-zen-border/40 dark:border-zen-dark-border hover:bg-zen-surface-container dark:hover:bg-zen-dark-surface-high transition-colors text-xs font-bold cursor-pointer"
               >
                 {showGuide ? <EyeOff className="w-3.5 h-3.5" /> : <Eye className="w-3.5 h-3.5" />}
                 {showGuide ? (lang === 'it' ? 'Nascondi Traccia' : 'Hide Outline') : (lang === 'it' ? 'Mostra Traccia' : 'Show Outline')}
@@ -275,7 +275,7 @@ export default function WritingCanvas({ scriptMode }) {
 
               <button
                 onClick={clearCanvas}
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-zen-border/40 dark:border-zen-dark-border hover:bg-rose-500/10 hover:text-rose-500 dark:hover:text-rose-400 transition-colors text-xs font-bold"
+                className="flex items-center gap-1.5 px-3 py-1.5 border border-zen-border/40 dark:border-zen-dark-border hover:bg-rose-500/10 hover:text-rose-500 dark:hover:text-rose-400 transition-colors text-xs font-bold cursor-pointer"
               >
                 <Eraser className="w-3.5 h-3.5" /> {t('writing.clear')}
               </button>
@@ -283,7 +283,7 @@ export default function WritingCanvas({ scriptMode }) {
           </div>
 
           {/* HTML5 Canvas Practice Area */}
-          <div className="relative w-full h-[280px] sm:h-[320px] rounded-3xl bg-zen-surface-container/30 dark:bg-zen-dark-surface-high border-2 border-dashed border-zen-border/40 dark:border-zen-dark-border flex items-center justify-center select-none touch-none">
+          <div className="relative w-full h-[280px] sm:h-[320px] bg-zen-surface-container/30 dark:bg-zen-dark-surface-high border-2 border-dashed border-zen-border/40 dark:border-zen-dark-border flex items-center justify-center select-none touch-none">
             {/* Background Grid Lines */}
             <div className="absolute inset-0 pointer-events-none flex flex-col justify-center items-center">
               <div className="w-full h-px bg-zen-primary/20 dark:bg-zen-dark-border/60" />
@@ -302,7 +302,7 @@ export default function WritingCanvas({ scriptMode }) {
                   <div
                     key={`canvas-marker-${mIdx}`}
                     style={{ left: `${marker.x}%`, top: `${marker.y}%` }}
-                    className="absolute -translate-x-1/2 -translate-y-1/2 flex items-center justify-center w-5 h-5 rounded-full bg-rose-500/80 text-white font-bold text-2xs shadow-sm pointer-events-none select-none"
+                    className="absolute -translate-x-1/2 -translate-y-1/2 flex items-center justify-center w-5 h-5 bg-rose-500/80 text-white font-bold text-2xs shadow-sm pointer-events-none select-none"
                   >
                     <span>{marker.num}</span>
                   </div>
@@ -329,7 +329,7 @@ export default function WritingCanvas({ scriptMode }) {
             <button
               onClick={handlePrev}
               disabled={currentIndex === 0}
-              className="px-3.5 py-2 rounded-xl border border-zen-border/40 text-zen-text dark:text-zen-dark-text disabled:opacity-40 flex items-center gap-1 font-bold shadow-zen-sm"
+              className="px-3.5 py-2 border border-zen-border/60 text-zen-text dark:text-zen-dark-text disabled:opacity-40 flex items-center gap-1 font-bold shadow-zen-sm cursor-pointer"
             >
               <ArrowLeft className="w-4 h-4" /> {t('writing.prev')}
             </button>
@@ -345,7 +345,7 @@ export default function WritingCanvas({ scriptMode }) {
             <button
               onClick={handleNext}
               disabled={currentIndex === kanaList.length - 1}
-              className="px-4 py-2 rounded-xl bg-zen-primary dark:bg-zen-dark-primary hover:bg-zen-primary-dark dark:hover:bg-zen-dark-primary-hover text-white dark:text-zen-dark-on-primary font-bold shadow-zen-sm flex items-center gap-1 disabled:opacity-40"
+              className="px-4 py-2 bg-zen-primary dark:bg-zen-dark-primary hover:bg-zen-primary-dark dark:hover:bg-zen-dark-primary-hover text-white dark:text-zen-dark-on-primary font-bold shadow-zen-sm flex items-center gap-1 disabled:opacity-40 cursor-pointer border border-transparent"
             >
               {t('writing.next')} <ArrowRight className="w-4 h-4" />
             </button>

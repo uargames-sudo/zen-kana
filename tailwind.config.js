@@ -58,7 +58,16 @@ export default {
         'kana-xl': ['6rem', { lineHeight: '1' }]
       },
       borderRadius: {
-        'zen': '1rem'
+        'none': '0px',
+        'sm': '0px',
+        DEFAULT: '0px',
+        'md': '0px',
+        'lg': '0px',
+        'xl': '0px',
+        '2xl': '0px',
+        '3xl': '0px',
+        'full': '0px',
+        'zen': '0px'
       },
       boxShadow: {
         'zen-sm': '0px 4px 16px rgba(45, 52, 70, 0.04)',

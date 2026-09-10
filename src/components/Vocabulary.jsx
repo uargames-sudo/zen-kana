@@ -47,10 +47,10 @@ export default function Vocabulary() {
 
   return (
     <section className="space-y-6 pb-20 xl:pb-8">
-      <div className="zen-card p-6 sm:p-8 border border-zen-border/40 dark:border-zen-dark-border bg-zen-surface-lowest dark:bg-zen-dark-surface shadow-zen-sm rounded-3xl">
+      <div className="zen-card p-6 sm:p-8 border border-zen-border/60 dark:border-zen-dark-border bg-zen-surface-lowest dark:bg-zen-dark-surface shadow-zen-sm">
         <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
           <div>
-            <div className="inline-flex items-center gap-2 rounded-full bg-zen-primary/10 dark:bg-zen-dark-primary/20 px-3 py-1 text-xs font-semibold text-zen-primary dark:text-zen-dark-primary">
+            <div className="inline-flex items-center gap-2 bg-zen-primary/10 dark:bg-zen-dark-primary/20 px-3 py-1 text-xs font-semibold text-zen-primary dark:text-zen-dark-primary border border-zen-primary/20">
               <BookOpen className="h-4 w-4" /> {t('vocabulary.wordsCount') || (lang === 'it' ? '100 parole giapponesi' : '100 Japanese words')}
             </div>
             <h2 className="mt-3 font-headline text-3xl font-bold text-zen-text dark:text-zen-dark-text">
@@ -66,7 +66,7 @@ export default function Vocabulary() {
               value={query}
               onChange={(event) => setQuery(event.target.value)}
               placeholder={t('vocabulary.searchPlaceholder') || (lang === 'it' ? 'Cerca per kana, romaji o significato...' : 'Search kana, romaji or translation...')}
-              className="w-full rounded-2xl border border-zen-border/60 bg-zen-surface-lowest py-3 pl-10 pr-3 text-sm text-zen-text outline-none placeholder:text-zen-text-muted focus:border-zen-primary dark:border-zen-dark-border dark:bg-zen-dark-surface-high dark:text-zen-dark-text dark:focus:border-zen-dark-primary shadow-2xs"
+              className="w-full border border-zen-border/60 bg-zen-surface-lowest py-3 pl-10 pr-3 text-sm text-zen-text outline-none placeholder:text-zen-text-muted focus:border-zen-primary dark:border-zen-dark-border dark:bg-zen-dark-surface-high dark:text-zen-dark-text dark:focus:border-zen-dark-primary shadow-2xs"
             />
           </label>
         </div>
@@ -78,10 +78,10 @@ export default function Vocabulary() {
               <button
                 key={filter}
                 onClick={() => setScriptFilter(filter)}
-                className={`rounded-xl px-4 py-2 text-xs font-bold capitalize transition-colors cursor-pointer ${
+                className={`px-4 py-2 text-xs font-bold capitalize transition-colors cursor-pointer border ${
                   scriptFilter === filter
-                    ? 'bg-zen-primary text-white dark:bg-zen-dark-primary dark:text-zen-dark-on-primary shadow-sm'
-                    : 'bg-zen-surface-container text-zen-text-muted hover:text-zen-primary dark:bg-zen-dark-surface-high dark:text-zen-dark-text-muted dark:hover:text-zen-dark-primary'
+                    ? 'bg-zen-primary text-white dark:bg-zen-dark-primary dark:text-zen-dark-on-primary border-zen-primary/40 shadow-sm'
+                    : 'bg-zen-surface-container text-zen-text-muted hover:text-zen-primary dark:bg-zen-dark-surface-high dark:text-zen-dark-text-muted dark:hover:text-zen-dark-primary border-transparent'
                 }`}
               >
                 {filterLabels[filter]}
@@ -93,7 +93,7 @@ export default function Vocabulary() {
           <div className="flex items-center gap-2">
             <button
               onClick={handleShuffleToggle}
-              className={`flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-bold transition-all border cursor-pointer ${
+              className={`flex items-center gap-1.5 px-3 py-2 text-xs font-bold transition-all border cursor-pointer ${
                 isShuffled
                   ? 'bg-amber-500/15 text-amber-700 dark:text-amber-300 border-amber-500/40 shadow-sm'
                   : 'bg-zen-surface-container dark:bg-zen-dark-surface-high text-zen-text-muted dark:text-zen-dark-text-muted border-zen-border/40 dark:border-zen-dark-border hover:text-zen-text'
@@ -110,7 +110,7 @@ export default function Vocabulary() {
             {isShuffled && (
               <button
                 onClick={handleReshuffle}
-                className="flex items-center gap-1 px-3 py-2 rounded-xl bg-zen-surface-container dark:bg-zen-dark-surface-high text-zen-text-muted dark:text-zen-dark-text-muted hover:text-zen-text border border-zen-border/40 dark:border-zen-dark-border text-xs font-semibold transition-all cursor-pointer"
+                className="flex items-center gap-1 px-3 py-2 bg-zen-surface-container dark:bg-zen-dark-surface-high text-zen-text-muted dark:text-zen-dark-text-muted hover:text-zen-text border border-zen-border/40 dark:border-zen-dark-border text-xs font-semibold transition-all cursor-pointer"
                 title={t('vocabulary.reshuffle') || (lang === 'it' ? 'Rimescola le parole' : 'Reshuffle words')}
               >
                 <RotateCw className="w-3.5 h-3.5" />
@@ -131,21 +131,21 @@ export default function Vocabulary() {
             <button 
               key={word.id} 
               onClick={() => playKanaSound(word.kana)} 
-              className="zen-card zen-card-active flex flex-col justify-between rounded-2xl border border-zen-border/40 p-4 sm:p-5 text-left dark:border-zen-dark-border bg-zen-surface-lowest dark:bg-zen-dark-surface group relative overflow-hidden transition-all duration-200 hover:shadow-zen-md min-h-[170px] cursor-pointer"
+              className="zen-card zen-card-active flex flex-col justify-between border border-zen-border/60 p-4 sm:p-5 text-left dark:border-zen-dark-border bg-zen-surface-lowest dark:bg-zen-dark-surface group relative overflow-hidden transition-all duration-150 hover:shadow-zen-md min-h-[170px] cursor-pointer"
             >
               {/* Top Row: Script badge + Audio volume icon */}
               <div className="flex items-center justify-between w-full mb-2">
-                <span className="rounded-full bg-zen-surface-container px-2.5 py-0.5 text-2xs sm:text-xs-plus font-bold capitalize text-zen-text-muted dark:bg-zen-dark-surface-high dark:text-zen-dark-text-muted">
+                <span className="bg-zen-surface-container px-2.5 py-0.5 text-2xs sm:text-xs-plus font-bold capitalize text-zen-text-muted dark:bg-zen-dark-surface-high dark:text-zen-dark-text-muted border border-zen-border/30">
                   {word.script}
                 </span>
-                <Volume2 className="h-4 w-4 sm:h-5 sm:w-5 text-zen-primary/70 dark:text-zen-dark-primary/70 group-hover:text-zen-primary dark:group-hover:text-zen-dark-primary group-hover:scale-110 transition-all" />
+                <Volume2 className="h-4 w-4 sm:h-5 sm:w-5 text-zen-primary/70 dark:text-zen-dark-primary/70 group-hover:text-zen-primary dark:group-hover:text-zen-dark-primary group-hover:scale-105 transition-all" />
               </div>
 
               {/* Middle Body: Left Text Info + Right Scalable Large Illustration */}
               <div className="flex items-center justify-between gap-3 sm:gap-4 my-auto w-full">
                 {/* Left Info: Kana + Romaji + Translation */}
                 <div className="min-w-0 flex-1 space-y-1">
-                  <div className="font-kana text-3xl sm:text-4xl font-bold text-zen-primary dark:text-zen-dark-primary group-hover:scale-102 transition-transform leading-tight truncate">
+                  <div className="font-kana text-3xl sm:text-4xl font-bold text-zen-primary dark:text-zen-dark-primary transition-transform leading-tight truncate">
                     {word.kana}
                   </div>
                   <div className="text-sm font-bold font-headline text-zen-text dark:text-zen-dark-text tracking-wide">
@@ -162,7 +162,7 @@ export default function Vocabulary() {
                     id={word.id} 
                     keyword={word.imageKeyword} 
                     alt={word.english} 
-                    className="w-24 h-24 xs:w-28 xs:h-28 sm:w-28 sm:h-28 md:w-32 md:h-32 rounded-2xl bg-zen-surface-container/30 dark:bg-zen-dark-surface-high/30 p-1.5 group-hover:scale-105 transition-transform duration-300 shadow-sm" 
+                    className="w-24 h-24 xs:w-28 xs:h-28 sm:w-28 sm:h-28 md:w-32 md:h-32 bg-zen-surface-container/30 dark:bg-zen-dark-surface-high/30 p-1.5 transition-transform duration-200 border border-zen-border/30" 
                     iconClassName="w-12 h-12 sm:w-14 sm:h-14" 
                   />
                 </div>

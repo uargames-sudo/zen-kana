@@ -102,16 +102,16 @@ export default function KanaTable({ scriptMode }) {
         </div>
 
         {/* 5 Sub-tabs matching VirtualKeyboard */}
-        <div className="flex flex-wrap items-center justify-center gap-1.5 bg-zen-surface-container dark:bg-zen-dark-surface p-1 rounded-2xl border border-zen-border/40 dark:border-zen-dark-border">
+        <div className="flex flex-wrap items-center justify-center gap-1 bg-zen-surface-container dark:bg-zen-dark-surface p-1 border border-zen-border/40 dark:border-zen-dark-border">
           {categories.map((cat) => (
             <button
               key={cat.id}
               onClick={() => { setActiveTab(cat.id); setSelectedKana(null); }}
               aria-label={cat.label}
-              className={`px-3 sm:px-4 py-2 rounded-xl text-xs font-bold transition-all min-h-[38px] flex items-center cursor-pointer ${
+              className={`px-3 sm:px-4 py-2 text-xs font-bold transition-all min-h-[38px] flex items-center cursor-pointer border ${
                 activeTab === cat.id
-                  ? 'bg-zen-surface-lowest dark:bg-zen-dark-primary text-zen-primary dark:text-zen-dark-on-primary shadow-zen-sm'
-                  : 'text-zen-text-muted dark:text-zen-dark-text-muted hover:text-zen-text dark:hover:text-zen-dark-text'
+                  ? 'bg-zen-surface-lowest dark:bg-zen-dark-primary text-zen-primary dark:text-zen-dark-on-primary border-zen-primary/40 dark:border-zen-dark-primary shadow-zen-sm'
+                  : 'text-zen-text-muted dark:text-zen-dark-text-muted border-transparent hover:text-zen-text dark:hover:text-zen-dark-text hover:bg-zen-surface-high dark:hover:bg-zen-dark-bg'
               }`}
             >
               {cat.label}
@@ -130,17 +130,20 @@ export default function KanaTable({ scriptMode }) {
         />
       </div>
 
-      {/* Coordinate Matrix Container with max-width to limit card growth */}
-      <div className="space-y-2 sm:space-y-3 max-w-2xl lg:max-w-3xl mx-auto w-full">
+      {/* Coordinate Matrix Container - Closed compact table grid */}
+      <div className="max-w-2xl lg:max-w-3xl mx-auto w-full bg-zen-surface-lowest dark:bg-zen-dark-surface border-2 border-zen-border/70 dark:border-zen-dark-border shadow-zen-md overflow-hidden">
         {/* Top Header Row: Vowels / Columns */}
-        <div className={`grid ${gridColsClass} gap-1.5 xs:gap-2 sm:gap-3.5 items-center`}>
-          <div className="flex items-center justify-center text-2xs font-bold font-mono text-zen-text-muted/60 dark:text-zen-dark-text-muted/60 uppercase">
+        <div className={`grid ${gridColsClass} border-b-2 border-zen-border/70 dark:border-zen-dark-border bg-zen-surface-container/60 dark:bg-zen-dark-surface-high`}>
+          <div className="flex items-center justify-center p-2 text-2xs font-bold font-mono text-zen-text-muted/60 dark:text-zen-dark-text-muted/60 border-r border-zen-border/60 dark:border-zen-dark-border select-none">
             {/* Corner anchor */}
+            Kana
           </div>
           {columns.map((colName, cIdx) => (
             <div 
               key={`${colName}-${cIdx}`} 
-              className="py-1.5 xs:py-2 text-center font-extrabold text-xs xs:text-sm sm:text-base font-mono text-zen-text dark:text-zen-dark-primary bg-white dark:bg-zen-dark-surface rounded-xl border-2 border-zen-text/70 dark:border-zen-dark-primary/60 shadow-zen-sm uppercase tracking-wider"
+              className={`py-2 text-center font-extrabold text-xs xs:text-sm sm:text-base font-mono text-zen-primary dark:text-zen-dark-primary uppercase tracking-wider select-none ${
+                cIdx < columns.length - 1 ? 'border-r border-zen-border/60 dark:border-zen-dark-border' : ''
+              }`}
             >
               {colName}
             </div>
@@ -148,24 +151,32 @@ export default function KanaTable({ scriptMode }) {
         </div>
 
         {/* Matrix Rows with Left Consonant Header */}
-        <div className="space-y-1.5 xs:space-y-2 sm:space-y-3">
+        <div>
           {grid.map((rowItems, rIdx) => (
-            <div key={`row-${rIdx}`} className={`grid ${gridColsClass} gap-1.5 xs:gap-2 sm:gap-3.5 items-stretch`}>
+            <div 
+              key={`row-${rIdx}`} 
+              className={`grid ${gridColsClass} items-stretch ${
+                rIdx < grid.length - 1 ? 'border-b border-zen-border/60 dark:border-zen-dark-border' : ''
+              }`}
+            >
               {/* Left Consonant Header Badge */}
               <div 
-                className="flex items-center justify-center rounded-xl sm:rounded-2xl bg-white dark:bg-zen-dark-surface border-2 border-zen-text/70 dark:border-zen-dark-primary/60 text-zen-text dark:text-zen-dark-primary font-mono font-extrabold text-xs xs:text-sm sm:text-base select-none"
+                className="flex items-center justify-center bg-zen-surface-container/40 dark:bg-zen-dark-surface-high/70 border-r border-zen-border/60 dark:border-zen-dark-border text-zen-text dark:text-zen-dark-primary font-mono font-extrabold text-xs xs:text-sm sm:text-base select-none py-2"
                 title={`Riga ${rowLabels[rIdx] || ''}`}
               >
                 {rowLabels[rIdx] || '—'}
               </div>
 
-              {/* Kana Cards */}
+              {/* Kana Cells */}
               {rowItems.map((cell, cIdx) => {
+                const isLastCol = cIdx === rowItems.length - 1;
+                const borderRightClass = isLastCol ? '' : 'border-r border-zen-border/60 dark:border-zen-dark-border';
+
                 if (!cell || !cell.k) {
                   return (
                     <div
                       key={`empty-${rIdx}-${cIdx}`}
-                      className="aspect-square max-w-[120px] max-h-[120px] w-full mx-auto rounded-xl sm:rounded-2xl bg-transparent border border-dashed border-zen-border/30 dark:border-zen-dark-border/40"
+                      className={`min-h-[58px] xs:min-h-[64px] sm:min-h-[72px] bg-zen-surface-container/15 dark:bg-zen-dark-bg/40 ${borderRightClass}`}
                     />
                   );
                 }
@@ -173,31 +184,29 @@ export default function KanaTable({ scriptMode }) {
                 const isSelected = selectedKana?.k === cell.k;
 
                 return (
-                  <div
+                  <button
                     key={`${cell.k}-${rIdx}-${cIdx}`}
                     onClick={() => handleCardClick(cell)}
-                    role="button"
-                    tabIndex={0}
-                    onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && handleCardClick(cell)}
+                    type="button"
                     aria-label={`Kana ${cell.k}, romaji ${cell.r}`}
-                    className={`aspect-square max-w-[120px] max-h-[120px] w-full mx-auto rounded-xl sm:rounded-2xl p-1 xs:p-1.5 sm:p-3 flex flex-col items-center justify-between cursor-pointer transition-all duration-200 ${
+                    className={`min-h-[58px] xs:min-h-[64px] sm:min-h-[72px] p-1 xs:p-1.5 sm:p-2 flex flex-col items-center justify-between cursor-pointer transition-colors select-none text-left relative ${borderRightClass} ${
                       isSelected
-                        ? 'bg-zen-primary dark:bg-zen-dark-primary text-white dark:text-zen-dark-on-primary ring-4 ring-zen-primary/20 dark:ring-zen-dark-primary/40 shadow-zen-lg scale-105'
-                        : 'zen-card bg-zen-surface-lowest dark:bg-zen-dark-surface border border-zen-border/40 dark:border-zen-dark-border hover:border-zen-primary dark:hover:border-zen-dark-primary hover:scale-102'
+                        ? 'bg-zen-primary dark:bg-zen-dark-primary text-white dark:text-zen-dark-on-primary ring-2 ring-inset ring-zen-primary dark:ring-zen-dark-primary z-10'
+                        : 'bg-zen-surface-lowest dark:bg-zen-dark-surface hover:bg-zen-surface-container/60 dark:hover:bg-zen-dark-surface-high'
                     }`}
                   >
                     <div className="w-full flex justify-end">
-                      <Volume2 className={`w-2.5 h-2.5 xs:w-3 xs:h-3 sm:w-3.5 sm:h-3.5 ${isSelected ? 'text-white dark:text-zen-dark-on-primary' : 'text-zen-primary/60 dark:text-zen-dark-text-muted'}`} />
+                      <Volume2 className={`w-2.5 h-2.5 xs:w-3 xs:h-3 ${isSelected ? 'text-white dark:text-zen-dark-on-primary' : 'text-zen-text-muted/40 group-hover:text-zen-primary'}`} />
                     </div>
 
-                    <span className={`font-kana font-bold ${activeTab === 'yoon' ? 'text-lg xs:text-xl sm:text-2xl md:text-3xl' : 'text-xl xs:text-2xl sm:text-3xl md:text-4xl'} leading-none ${isSelected ? 'text-white dark:text-zen-dark-on-primary' : 'text-zen-primary dark:text-zen-dark-text'}`}>
+                    <span className={`font-kana font-bold ${activeTab === 'yoon' ? 'text-lg xs:text-xl sm:text-2xl' : 'text-xl xs:text-2xl sm:text-3xl'} leading-none my-auto ${isSelected ? 'text-white dark:text-zen-dark-on-primary' : 'text-zen-primary dark:text-zen-dark-text'}`}>
                       {cell.k}
                     </span>
 
-                    <span className={`text-[10px] xs:text-2xs sm:text-xs font-semibold font-mono tracking-wider uppercase ${isSelected ? 'text-white/90 dark:text-zen-dark-on-primary/90' : 'text-zen-text-muted dark:text-zen-dark-text-muted'}`}>
+                    <span className={`text-[9px] xs:text-2xs sm:text-xs font-semibold font-mono tracking-wider uppercase ${isSelected ? 'text-white/90 dark:text-zen-dark-on-primary/90' : 'text-zen-text-muted dark:text-zen-dark-text-muted'}`}>
                       {cell.r}
                     </span>
-                  </div>
+                  </button>
                 );
               })}
             </div>
@@ -212,7 +221,7 @@ export default function KanaTable({ scriptMode }) {
 
         return (
           <div className="fixed bottom-24 xl:bottom-6 left-3 right-3 sm:left-1/2 sm:-translate-x-1/2 sm:w-full sm:max-w-xl z-30 animate-fade-in pointer-events-auto">
-            <div className="zen-card p-3 sm:p-4 rounded-2xl border-2 border-zen-primary/40 dark:border-zen-dark-primary/50 bg-white/95 dark:bg-zen-dark-surface/95 backdrop-blur-md shadow-2xl flex items-center justify-between gap-3 sm:gap-4">
+            <div className="zen-card p-3 sm:p-4 border-2 border-zen-primary dark:border-zen-dark-primary bg-white/95 dark:bg-zen-dark-surface/95 backdrop-blur-md shadow-2xl flex items-center justify-between gap-3 sm:gap-4">
               
               <div className="flex items-center gap-3 min-w-0 flex-1">
                 {/* Kana badge: click to replay single kana syllable */}
@@ -221,7 +230,7 @@ export default function KanaTable({ scriptMode }) {
                   onClick={() => playKanaSound(selectedKana.k)}
                   title={`Riascolta sillaba ${selectedKana.k}`}
                   aria-label={`Riascolta sillaba ${selectedKana.k}`}
-                  className="w-11 h-11 sm:w-13 sm:h-13 shrink-0 rounded-2xl bg-zen-primary dark:bg-zen-dark-primary hover:bg-zen-primary-dark dark:hover:bg-zen-dark-primary-hover text-white dark:text-zen-dark-on-primary flex items-center justify-center font-kana text-2xl sm:text-3xl font-bold shadow-zen-sm transition-transform active:scale-95 cursor-pointer relative group"
+                  className="w-11 h-11 sm:w-13 sm:h-13 shrink-0 bg-zen-primary dark:bg-zen-dark-primary hover:bg-zen-primary-dark dark:hover:bg-zen-dark-primary-hover text-white dark:text-zen-dark-on-primary flex items-center justify-center font-kana text-2xl sm:text-3xl font-bold shadow-zen-sm transition-transform active:scale-95 cursor-pointer relative group border border-transparent"
                 >
                   {selectedKana.k}
                   <Volume2 className="w-3 h-3 absolute top-1 right-1 opacity-60 group-hover:opacity-100 transition-opacity" />
@@ -254,7 +263,7 @@ export default function KanaTable({ scriptMode }) {
                   onClick={() => playKanaSound(exampleWord || selectedKana.k)}
                   title={`Ascolta parola d'esempio: ${exampleWord || selectedKana.k}`}
                   aria-label="Riproduci parola d'esempio"
-                  className="px-2.5 sm:px-3.5 py-2 rounded-xl bg-zen-primary dark:bg-zen-dark-primary hover:bg-zen-primary-dark dark:hover:bg-zen-dark-primary-hover text-white dark:text-zen-dark-on-primary font-bold text-xs flex items-center gap-1.5 shadow-zen-sm transition-transform active:scale-95 cursor-pointer"
+                  className="px-2.5 sm:px-3.5 py-2 bg-zen-primary dark:bg-zen-dark-primary hover:bg-zen-primary-dark dark:hover:bg-zen-dark-primary-hover text-white dark:text-zen-dark-on-primary font-bold text-xs flex items-center gap-1.5 shadow-zen-sm transition-transform active:scale-95 cursor-pointer border border-transparent"
                 >
                   <Volume2 className="w-4 h-4" />
                   <span className="hidden sm:inline">Audio</span>
@@ -264,7 +273,7 @@ export default function KanaTable({ scriptMode }) {
                   type="button"
                   onClick={() => setSelectedKana(null)}
                   aria-label="Chiudi dettaglio"
-                  className="p-1.5 sm:p-2 rounded-xl text-zen-text-muted dark:text-zen-dark-text-muted hover:text-zen-text dark:hover:text-zen-dark-text hover:bg-zen-surface-container dark:hover:bg-zen-dark-bg/60 transition-colors cursor-pointer"
+                  className="p-1.5 sm:p-2 text-zen-text-muted dark:text-zen-dark-text-muted hover:text-zen-text dark:hover:text-zen-dark-text hover:bg-zen-surface-container dark:hover:bg-zen-dark-bg/60 transition-colors cursor-pointer border border-transparent"
                 >
                   <X className="w-4 h-4" />
                 </button>

@@ -226,22 +226,22 @@ export default function Flashcards({ scriptMode = 'hiragana', updateStats }) {
     { id: 'basic', label: t('flashcards.basic') || (lang === 'it' ? 'Base (46)' : 'Basic (46)') },
     { id: 'dakuten', label: t('flashcards.dakuten') || (lang === 'it' ? 'Dakuten (25)' : 'Dakuten (25)') },
     { id: 'yoon', label: t('flashcards.yoon') || (lang === 'it' ? 'Yōon (33)' : 'Yōon (33)') },
-    { id: 'vocabulary', label: t('flashcards.vocabulary') || (lang === 'it' ? 'Vocabolario (100)' : 'Vocabulary (100)') },
+    { id: 'vocabulary', label: t('flashcards.vocabulary') || (lang === 'it' ? 'Vocabolario (150)' : 'Vocabulary (150)') },
     { id: 'phrases', label: lang === 'it' ? 'Frasi Utili (15)' : 'Phrases (15)' }
   ];
 
   return (
     <div className="mx-auto max-w-2xl space-y-5 pb-20 xl:pb-8">
       {/* Category Pills Header */}
-      <div className="flex flex-wrap items-center gap-1.5 p-1.5 rounded-2xl border border-zen-border/40 bg-zen-surface-lowest dark:border-zen-dark-border dark:bg-zen-dark-surface shadow-zen-sm">
+      <div className="flex flex-wrap items-center gap-1 p-1 border border-zen-border/40 bg-zen-surface-lowest dark:border-zen-dark-border dark:bg-zen-dark-surface shadow-zen-sm">
         {categories.map((cat) => (
           <button
             key={cat.id}
             onClick={() => changeCategory(cat.id)}
-            className={`flex-1 min-w-[90px] py-2 px-2 rounded-xl text-xs font-bold transition-all text-center cursor-pointer ${
+            className={`flex-1 min-w-[90px] py-2 px-2 text-xs font-bold transition-all text-center cursor-pointer border ${
               category === cat.id
-                ? 'bg-zen-primary text-white dark:bg-zen-dark-primary dark:text-zen-dark-on-primary shadow-zen-sm'
-                : 'text-zen-text-muted hover:text-zen-text dark:text-zen-dark-text-muted dark:hover:text-zen-dark-text'
+                ? 'bg-zen-primary text-white dark:bg-zen-dark-primary dark:text-zen-dark-on-primary border-zen-primary/40 dark:border-zen-dark-primary shadow-zen-sm'
+                : 'text-zen-text-muted hover:text-zen-text dark:text-zen-dark-text-muted dark:hover:text-zen-dark-text border-transparent hover:bg-zen-surface-container dark:hover:bg-zen-dark-bg'
             }`}
           >
             {cat.label}
@@ -251,13 +251,13 @@ export default function Flashcards({ scriptMode = 'hiragana', updateStats }) {
 
       {/* Phrase Subcategories Pill Bar */}
       {isPhrases && (
-        <div className="flex overflow-x-auto pb-1 scrollbar-hide gap-1.5 px-0.5">
+        <div className="flex overflow-x-auto pb-1 scrollbar-hide gap-1 px-0.5">
           <button
             onClick={() => { setSelectedPhraseCategory('All'); resetDeck(); }}
-            className={`px-3.5 py-1.5 rounded-full text-xs font-bold whitespace-nowrap transition-all cursor-pointer ${
+            className={`px-3.5 py-1.5 text-xs font-bold whitespace-nowrap transition-all cursor-pointer border ${
               selectedPhraseCategory === 'All'
-                ? 'bg-zen-primary dark:bg-zen-dark-primary text-white dark:text-zen-dark-on-primary shadow-xs'
-                : 'bg-zen-surface-container dark:bg-zen-dark-surface-high text-zen-text-muted hover:text-zen-text dark:text-zen-dark-text-muted'
+                ? 'bg-zen-primary dark:bg-zen-dark-primary text-white dark:text-zen-dark-on-primary border-zen-primary/30 shadow-xs'
+                : 'bg-zen-surface-container dark:bg-zen-dark-surface-high text-zen-text-muted hover:text-zen-text dark:text-zen-dark-text-muted border-transparent'
             }`}
           >
             {lang === 'it' ? 'Tutte le Frasi' : 'All Phrases'} ({phrasesData.length})
@@ -268,10 +268,10 @@ export default function Flashcards({ scriptMode = 'hiragana', updateStats }) {
               <button
                 key={cat}
                 onClick={() => { setSelectedPhraseCategory(cat); resetDeck(); }}
-                className={`px-3.5 py-1.5 rounded-full text-xs font-bold whitespace-nowrap transition-all cursor-pointer ${
+                className={`px-3.5 py-1.5 text-xs font-bold whitespace-nowrap transition-all cursor-pointer border ${
                   selectedPhraseCategory === cat
-                    ? 'bg-zen-primary dark:bg-zen-dark-primary text-white dark:text-zen-dark-on-primary shadow-xs'
-                    : 'bg-zen-surface-container dark:bg-zen-dark-surface-high text-zen-text-muted hover:text-zen-text dark:text-zen-dark-text-muted'
+                    ? 'bg-zen-primary dark:bg-zen-dark-primary text-white dark:text-zen-dark-on-primary border-zen-primary/30 shadow-xs'
+                    : 'bg-zen-surface-container dark:bg-zen-dark-surface-high text-zen-text-muted hover:text-zen-text dark:text-zen-dark-text-muted border-transparent'
                 }`}
               >
                 {cat} ({count})
@@ -282,12 +282,12 @@ export default function Flashcards({ scriptMode = 'hiragana', updateStats }) {
       )}
 
       {/* Toolbar: Shuffle Toggle & Reshuffle & Mistakes review */}
-      <div className="flex flex-wrap items-center justify-between gap-2.5 p-3 rounded-2xl bg-zen-surface-container/40 dark:bg-zen-dark-surface-high/50 border border-zen-border/40 dark:border-zen-dark-border">
+      <div className="flex flex-wrap items-center justify-between gap-2.5 p-3 bg-zen-surface-container/40 dark:bg-zen-dark-surface-high/50 border border-zen-border/40 dark:border-zen-dark-border">
         {/* Shuffle Controls */}
         <div className="flex items-center gap-2">
           <button
             onClick={handleShuffleToggle}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all border cursor-pointer ${
+            className={`flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold transition-all border cursor-pointer ${
               isShuffled
                 ? 'bg-amber-500/15 text-amber-700 dark:text-amber-300 border-amber-500/40 shadow-sm'
                 : 'bg-zen-surface-lowest dark:bg-zen-dark-surface text-zen-text-muted dark:text-zen-dark-text-muted border-zen-border/40 dark:border-zen-dark-border hover:text-zen-text'
@@ -304,7 +304,7 @@ export default function Flashcards({ scriptMode = 'hiragana', updateStats }) {
           {isShuffled && (
             <button
               onClick={handleReshuffle}
-              className="flex items-center gap-1 px-2.5 py-1.5 rounded-xl bg-zen-surface-lowest dark:bg-zen-dark-surface text-zen-text-muted dark:text-zen-dark-text-muted hover:text-zen-text border border-zen-border/40 dark:border-zen-dark-border text-xs font-semibold transition-all cursor-pointer"
+              className="flex items-center gap-1 px-2.5 py-1.5 bg-zen-surface-lowest dark:bg-zen-dark-surface text-zen-text-muted dark:text-zen-dark-text-muted hover:text-zen-text border border-zen-border/40 dark:border-zen-dark-border text-xs font-semibold transition-all cursor-pointer"
               title={t('flashcards.reshuffle') || (lang === 'it' ? 'Rimescola le carte' : 'Reshuffle cards')}
             >
               <RotateCw className="w-3 h-3" />
@@ -321,7 +321,7 @@ export default function Flashcards({ scriptMode = 'hiragana', updateStats }) {
               setCurrentIndex(0);
               setIsFlipped(false);
             }}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-zen-secondary/15 dark:bg-zen-dark-secondary/20 text-zen-secondary dark:text-zen-dark-secondary border border-zen-secondary/30 text-xs font-bold transition-all hover:bg-zen-secondary/25 cursor-pointer"
+            className="flex items-center gap-1.5 px-3 py-1.5 bg-zen-secondary/15 dark:bg-zen-dark-secondary/20 text-zen-secondary dark:text-zen-dark-secondary border border-zen-secondary/30 text-xs font-bold transition-all hover:bg-zen-secondary/25 cursor-pointer"
           >
             <XCircle className="w-3.5 h-3.5" />
             <span>
@@ -349,9 +349,9 @@ export default function Flashcards({ scriptMode = 'hiragana', updateStats }) {
             {currentIndex + 1} / {fullDeck.length}
           </span>
         </div>
-        <div className="h-2.5 w-full overflow-hidden rounded-full bg-zen-surface-container dark:bg-zen-dark-surface-high">
+        <div className="h-2 w-full overflow-hidden bg-zen-surface-container dark:bg-zen-dark-surface-high">
           <div
-            className="h-full rounded-full bg-zen-primary transition-all duration-300 dark:bg-zen-dark-primary"
+            className="h-full bg-zen-primary transition-all duration-300 dark:bg-zen-dark-primary"
             style={{ width: `${progressPercent}%` }}
           />
         </div>
@@ -359,22 +359,22 @@ export default function Flashcards({ scriptMode = 'hiragana', updateStats }) {
 
       {/* Flashcard Flip Card Container */}
       <div className="perspective-1000 min-h-[340px] w-full sm:min-h-[400px]">
-        <div className="flashcard-hover h-[340px] w-full rounded-3xl sm:h-[400px]">
+        <div className="flashcard-hover h-[340px] w-full sm:h-[400px]">
           <div
             onClick={handleCardClick}
-            className={`relative h-full w-full cursor-pointer rounded-3xl transition-transform duration-500 transform-style-3d shadow-zen-lg dark:shadow-zen-dark-lg ${
+            className={`relative h-full w-full cursor-pointer transition-transform duration-500 transform-style-3d shadow-zen-lg dark:shadow-zen-dark-lg ${
               isFlipped ? 'rotate-y-180' : ''
             }`}
           >
             {/* FRONT OF CARD */}
-            <div className="absolute inset-0 flex flex-col items-center justify-between border-2 border-zen-border/40 bg-zen-surface-lowest p-6 sm:p-8 backface-hidden zen-card dark:border-zen-dark-border dark:bg-zen-dark-surface rounded-3xl">
+            <div className="absolute inset-0 flex flex-col items-center justify-between border-2 border-zen-border/60 bg-zen-surface-lowest p-6 sm:p-8 backface-hidden zen-card dark:border-zen-dark-border dark:bg-zen-dark-surface">
               <div className="flex w-full items-center justify-between text-xs text-zen-text-muted dark:text-zen-dark-text-muted">
-                <span className="rounded-full bg-zen-surface-container px-3 py-1 font-semibold dark:bg-zen-dark-surface-high">
+                <span className="bg-zen-surface-container px-3 py-1 font-semibold dark:bg-zen-dark-surface-high border border-zen-border/30">
                   {isPhrases ? (currentItem?.category || 'Frase') : (t('flashcards.flipHint') || (lang === 'it' ? 'Tocca per girare' : 'Tap to flip'))}
                 </span>
                 <button
                   onClick={playCurrentAudio}
-                  className="rounded-full bg-zen-primary/10 p-2.5 text-zen-primary dark:bg-zen-dark-primary/20 dark:text-zen-dark-primary hover:scale-110 transition-transform cursor-pointer"
+                  className="bg-zen-primary/10 p-2.5 text-zen-primary dark:bg-zen-dark-primary/20 dark:text-zen-dark-primary hover:scale-105 transition-transform cursor-pointer border border-transparent"
                   title="Play Japanese audio"
                 >
                   <Volume2 className="h-5 w-5" />
@@ -422,14 +422,14 @@ export default function Flashcards({ scriptMode = 'hiragana', updateStats }) {
             </div>
 
             {/* BACK OF CARD */}
-            <div className="absolute inset-0 flex flex-col items-center justify-between border-2 border-zen-border/60 bg-zen-surface-lowest p-6 sm:p-8 backface-hidden rotate-y-180 zen-card dark:border-zen-dark-border dark:bg-zen-dark-surface rounded-3xl">
+            <div className="absolute inset-0 flex flex-col items-center justify-between border-2 border-zen-border/70 bg-zen-surface-lowest p-6 sm:p-8 backface-hidden rotate-y-180 zen-card dark:border-zen-dark-border dark:bg-zen-dark-surface">
               <div className="flex w-full items-center justify-between text-xs text-zen-text-muted dark:text-zen-dark-text-muted">
-                <span className="rounded-full bg-zen-primary/15 px-3 py-1 font-semibold text-zen-primary dark:bg-zen-dark-primary/20 dark:text-zen-dark-primary">
+                <span className="bg-zen-primary/15 px-3 py-1 font-semibold text-zen-primary dark:bg-zen-dark-primary/20 dark:text-zen-dark-primary border border-zen-primary/25">
                   {t('flashcards.revealedAnswer') || (lang === 'it' ? 'Risultato' : 'Answer')}
                 </span>
                 <button
                   onClick={playCurrentAudio}
-                  className="rounded-full bg-zen-primary p-2.5 text-white shadow-zen-sm dark:bg-zen-dark-primary dark:text-zen-dark-on-primary hover:scale-110 transition-transform cursor-pointer"
+                  className="bg-zen-primary p-2.5 text-white shadow-zen-sm dark:bg-zen-dark-primary dark:text-zen-dark-on-primary hover:scale-105 transition-transform cursor-pointer border border-transparent"
                 >
                   <Volume2 className="h-5 w-5" />
                 </button>
@@ -480,7 +480,7 @@ export default function Flashcards({ scriptMode = 'hiragana', updateStats }) {
                       {currentItem.romaji}
                     </div>
                     {getKanaExample(currentItem, lang) && (
-                      <div className="mx-auto max-w-xs px-4 py-2 rounded-xl border border-zen-border/60 dark:border-zen-dark-border bg-zen-surface-container/60 dark:bg-zen-dark-surface-high text-zen-text dark:text-zen-dark-text text-sm font-medium shadow-2xs">
+                      <div className="mx-auto max-w-xs px-4 py-2 border border-zen-border/60 dark:border-zen-dark-border bg-zen-surface-container/60 dark:bg-zen-dark-surface-high text-zen-text dark:text-zen-dark-text text-sm font-medium shadow-2xs">
                         {getKanaExample(currentItem, lang)}
                       </div>
                     )}
@@ -498,17 +498,17 @@ export default function Flashcards({ scriptMode = 'hiragana', updateStats }) {
 
       {/* Answer Controls or Navigation Buttons */}
       {isFlipped ? (
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-2 gap-3">
           <button
             onClick={() => handleRating(false)}
-            className="flex items-center justify-center gap-2 rounded-2xl border border-zen-border/40 bg-zen-surface-container px-4 py-3.5 text-sm font-bold text-zen-text dark:border-zen-dark-border dark:bg-zen-dark-surface-high dark:text-zen-dark-text hover:opacity-90 transition-opacity cursor-pointer"
+            className="flex items-center justify-center gap-2 border border-zen-border/60 bg-zen-surface-container px-4 py-3.5 text-sm font-bold text-zen-text dark:border-zen-dark-border dark:bg-zen-dark-surface-high dark:text-zen-dark-text hover:opacity-90 transition-opacity cursor-pointer"
           >
             <XCircle className="h-5 w-5 text-zen-secondary dark:text-zen-dark-secondary" />{' '}
             {t('flashcards.forgot') || (lang === 'it' ? 'Non lo sapevo' : 'Did not know')}
           </button>
           <button
             onClick={() => handleRating(true)}
-            className="flex items-center justify-center gap-2 rounded-2xl bg-zen-primary px-4 py-3.5 text-sm font-bold text-white shadow-zen-md dark:bg-zen-dark-primary dark:text-zen-dark-on-primary hover:opacity-90 transition-opacity cursor-pointer"
+            className="flex items-center justify-center gap-2 bg-zen-primary px-4 py-3.5 text-sm font-bold text-white shadow-zen-md dark:bg-zen-dark-primary dark:text-zen-dark-on-primary hover:opacity-90 transition-opacity cursor-pointer border border-transparent"
           >
             <CheckCircle className="h-5 w-5" />{' '}
             {t('flashcards.knewIt') || (lang === 'it' ? 'Lo sapevo!' : 'Knew it!')}
@@ -519,7 +519,7 @@ export default function Flashcards({ scriptMode = 'hiragana', updateStats }) {
           <button
             onClick={() => move(-1)}
             disabled={currentIndex === 0}
-            className="flex items-center gap-1.5 rounded-xl border border-zen-border/60 px-4 py-2.5 text-sm font-semibold text-zen-text disabled:cursor-not-allowed disabled:opacity-40 dark:border-zen-dark-border dark:text-zen-dark-text cursor-pointer"
+            className="flex items-center gap-1.5 border border-zen-border/60 px-4 py-2.5 text-sm font-semibold text-zen-text disabled:cursor-not-allowed disabled:opacity-40 dark:border-zen-dark-border dark:text-zen-dark-text cursor-pointer"
           >
             <ArrowLeft className="h-4 w-4" /> {t('flashcards.previous') || (lang === 'it' ? 'Precedente' : 'Previous')}
           </button>
@@ -532,7 +532,7 @@ export default function Flashcards({ scriptMode = 'hiragana', updateStats }) {
           <button
             onClick={() => move(1)}
             disabled={currentIndex === fullDeck.length - 1}
-            className="flex items-center gap-1.5 rounded-xl bg-zen-surface-container px-4 py-2.5 text-sm font-semibold text-zen-primary disabled:cursor-not-allowed disabled:opacity-40 dark:bg-zen-dark-surface-high dark:text-zen-primary cursor-pointer"
+            className="flex items-center gap-1.5 bg-zen-surface-container px-4 py-2.5 text-sm font-semibold text-zen-primary disabled:cursor-not-allowed disabled:opacity-40 dark:bg-zen-dark-surface-high dark:text-zen-primary cursor-pointer border border-transparent"
           >
             {t('flashcards.next') || (lang === 'it' ? 'Successivo' : 'Next')}{' '}
             <ArrowRight className="h-4 w-4" />
@@ -541,7 +541,7 @@ export default function Flashcards({ scriptMode = 'hiragana', updateStats }) {
       )}
 
       {/* Mastered / Need Review Stats Bar */}
-      <div className="flex items-center justify-around rounded-2xl border border-zen-border/40 bg-zen-surface-lowest dark:bg-zen-dark-surface dark:border-zen-dark-border p-4 text-xs font-semibold text-zen-text-muted dark:text-zen-dark-text-muted shadow-2xs">
+      <div className="flex items-center justify-around border border-zen-border/40 bg-zen-surface-lowest dark:bg-zen-dark-surface dark:border-zen-dark-border p-4 text-xs font-semibold text-zen-text-muted dark:text-zen-dark-text-muted shadow-2xs">
         <span className="flex items-center gap-1.5 text-zen-primary dark:text-zen-dark-primary font-bold">
           <CheckCircle className="h-4 w-4" />{' '}
           {t('flashcards.mastered') || (lang === 'it' ? 'Memorizzati' : 'Mastered')}: {masteredCount}

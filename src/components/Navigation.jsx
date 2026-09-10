@@ -127,9 +127,9 @@ export default function Navigation({
             {/* Logo */}
             <div
               onClick={() => setActiveTab('dashboard')}
-              className="group flex flex-1 min-w-0 cursor-pointer items-center gap-2"
+              className="group flex flex-1 min-w-0 cursor-pointer items-center gap-2.5"
             >
-              <div className="w-8 h-8 rounded-xl bg-zen-primary dark:bg-zen-dark-primary text-white dark:text-zen-dark-on-primary flex items-center justify-center font-kana font-bold text-base shadow-zen-sm group-hover:scale-105 transition-transform shrink-0">
+              <div className="w-8 h-8 bg-zen-primary dark:bg-zen-dark-primary text-white dark:text-zen-dark-on-primary flex items-center justify-center font-kana font-bold text-base shadow-zen-sm group-hover:scale-105 transition-transform shrink-0 border border-transparent">
                 あ
               </div>
 
@@ -146,7 +146,7 @@ export default function Navigation({
 
             {/* Desktop Navigation Links (Icon-only for inactive, full for active, hover reveal) */}
             <nav className="min-w-0 shrink-0 flex items-center justify-center px-1">
-              <div className="flex items-center gap-1 bg-zen-surface-container/60 dark:bg-zen-dark-surface p-1 rounded-2xl border border-zen-border/30 dark:border-zen-dark-border flex-nowrap">
+              <div className="flex items-center gap-1 bg-zen-surface-container/60 dark:bg-zen-dark-surface p-1 border border-zen-border/40 dark:border-zen-dark-border flex-nowrap">
                 {navItems.map((item) => {
                   const Icon = item.icon;
                   const isActive = activeTab === item.id;
@@ -157,14 +157,14 @@ export default function Navigation({
                       onClick={() => setActiveTab(item.id)}
                       title={item.label}
                       aria-label={item.label}
-                      className={`group relative flex items-center gap-1.5 rounded-xl px-2.5 py-1.5 text-xs font-medium transition-all duration-200 shrink-0 ${
+                      className={`group relative flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-medium transition-all duration-150 shrink-0 cursor-pointer border ${
                         isActive
-                          ? 'bg-zen-primary/10 dark:bg-zen-dark-primary/15 text-zen-primary dark:text-zen-dark-primary font-bold border border-zen-primary/25 dark:border-zen-dark-primary/30 shadow-sm'
-                          : 'text-zen-text-muted dark:text-zen-dark-text-muted hover:bg-zen-surface-high dark:hover:bg-zen-dark-bg hover:text-zen-primary dark:hover:text-zen-dark-primary'
+                          ? 'bg-zen-primary/10 dark:bg-zen-dark-primary/15 text-zen-primary dark:text-zen-dark-primary font-bold border-zen-primary/30 dark:border-zen-dark-primary/40 shadow-sm'
+                          : 'text-zen-text-muted dark:text-zen-dark-text-muted border-transparent hover:bg-zen-surface-high dark:hover:bg-zen-dark-bg hover:text-zen-primary dark:hover:text-zen-dark-primary'
                       }`}
                     >
                       <Icon
-                        className={`w-4 h-4 shrink-0 transition-transform duration-200 group-hover:scale-110 ${
+                        className={`w-4 h-4 shrink-0 transition-transform duration-150 group-hover:scale-105 ${
                           isActive
                             ? 'text-zen-primary dark:text-zen-dark-primary'
                             : ''
@@ -172,7 +172,7 @@ export default function Navigation({
                       />
                       {/* Name visible if active, or smoothly revealed on mouse over */}
                       <span
-                        className={`whitespace-nowrap transition-all duration-300 overflow-hidden select-none ${
+                        className={`whitespace-nowrap transition-all duration-200 overflow-hidden select-none ${
                           isActive
                             ? 'max-w-[160px] opacity-100'
                             : 'max-w-0 opacity-0 group-hover:max-w-[160px] group-hover:opacity-100 group-hover:ml-0.5'
@@ -189,13 +189,13 @@ export default function Navigation({
             {/* Top Bar Actions (Script switch, Language, Install PWA & Theme) */}
             <div className="flex flex-1 min-w-0 justify-end items-center gap-2">
               {/* Script Switcher */}
-              <div className="flex items-center bg-zen-surface-container dark:bg-zen-dark-surface p-0.5 rounded-full border border-zen-border/40 dark:border-zen-dark-border shrink-0">
+              <div className="flex items-center bg-zen-surface-container dark:bg-zen-dark-surface p-0.5 border border-zen-border/40 dark:border-zen-dark-border shrink-0">
                 <button
                   onClick={() => setScriptMode('hiragana')}
-                  className={`px-2.5 py-1 rounded-full text-xs font-semibold transition-all flex items-center justify-center min-w-[32px] ${
+                  className={`px-2.5 py-1 text-xs font-semibold transition-all flex items-center justify-center min-w-[32px] cursor-pointer border ${
                     scriptMode === 'hiragana'
-                      ? 'bg-zen-primary dark:bg-zen-dark-primary text-white dark:text-zen-dark-on-primary shadow-zen-sm'
-                      : 'text-zen-text-muted dark:text-zen-dark-text-muted hover:text-zen-text dark:hover:text-zen-dark-text'
+                      ? 'bg-zen-primary dark:bg-zen-dark-primary text-white dark:text-zen-dark-on-primary border-zen-primary/30 dark:border-zen-dark-primary/40 shadow-zen-sm'
+                      : 'text-zen-text-muted dark:text-zen-dark-text-muted border-transparent hover:text-zen-text dark:hover:text-zen-dark-text'
                   }`}
                   title={t('nav.scriptHiragana')}
                 >
@@ -205,10 +205,10 @@ export default function Navigation({
 
                 <button
                   onClick={() => setScriptMode('katakana')}
-                  className={`px-2.5 py-1 rounded-full text-xs font-semibold transition-all flex items-center justify-center min-w-[32px] ${
+                  className={`px-2.5 py-1 text-xs font-semibold transition-all flex items-center justify-center min-w-[32px] cursor-pointer border ${
                     scriptMode === 'katakana'
-                      ? 'bg-zen-primary dark:bg-zen-dark-primary text-white dark:text-zen-dark-on-primary shadow-zen-sm'
-                      : 'text-zen-text-muted dark:text-zen-dark-text-muted hover:text-zen-text dark:hover:text-zen-dark-text'
+                      ? 'bg-zen-primary dark:bg-zen-dark-primary text-white dark:text-zen-dark-on-primary border-zen-primary/30 dark:border-zen-dark-primary/40 shadow-zen-sm'
+                      : 'text-zen-text-muted dark:text-zen-dark-text-muted border-transparent hover:text-zen-text dark:hover:text-zen-dark-text'
                   }`}
                   title={t('nav.scriptKatakana')}
                 >
@@ -220,7 +220,7 @@ export default function Navigation({
               {/* Syllabary Guide Info Button */}
               <button
                 onClick={() => setShowGuideModal(true)}
-                className="shrink-0 p-2 rounded-xl bg-zen-surface-container dark:bg-zen-dark-surface border border-zen-border/40 dark:border-zen-dark-border text-zen-primary dark:text-zen-dark-primary hover:scale-105 active:scale-95 transition-all shadow-zen-sm"
+                className="shrink-0 p-2 bg-zen-surface-container dark:bg-zen-dark-surface border border-zen-border/40 dark:border-zen-dark-border text-zen-primary dark:text-zen-dark-primary hover:-translate-y-0.5 active:translate-y-0 transition-all shadow-zen-sm cursor-pointer"
                 title={t('nav.guideButton')}
                 aria-label={t('nav.guideButton')}
               >
@@ -230,7 +230,7 @@ export default function Navigation({
               {/* Language Switcher */}
               <button
                 onClick={toggleLang}
-                className="shrink-0 px-2.5 py-1.5 rounded-xl bg-zen-surface-container dark:bg-zen-dark-surface border border-zen-border/40 dark:border-zen-dark-border text-zen-primary dark:text-zen-dark-primary hover:scale-105 active:scale-95 transition-all shadow-zen-sm font-bold text-xs flex items-center gap-1.5"
+                className="shrink-0 px-2.5 py-1.5 bg-zen-surface-container dark:bg-zen-dark-surface border border-zen-border/40 dark:border-zen-dark-border text-zen-primary dark:text-zen-dark-primary hover:-translate-y-0.5 active:translate-y-0 transition-all shadow-zen-sm font-bold text-xs flex items-center gap-1.5 cursor-pointer"
                 title={lang === 'it' ? 'Switch to English' : 'Passa all\'Italiano'}
                 aria-label="Toggle Language"
               >
@@ -242,13 +242,13 @@ export default function Navigation({
               {!isStandalone && (
                 <button
                   onClick={handleInstallClick}
-                  className="relative shrink-0 p-2 rounded-xl bg-zen-surface-container dark:bg-zen-dark-surface border border-zen-border/40 dark:border-zen-dark-border text-zen-primary dark:text-zen-dark-primary hover:scale-105 active:scale-95 transition-all shadow-zen-sm"
+                  className="relative shrink-0 p-2 bg-zen-surface-container dark:bg-zen-dark-surface border border-zen-border/40 dark:border-zen-dark-border text-zen-primary dark:text-zen-dark-primary hover:-translate-y-0.5 active:translate-y-0 transition-all shadow-zen-sm cursor-pointer"
                   title={t('nav.installApp')}
                   aria-label={t('nav.installApp')}
                 >
                   <Download className="w-4 h-4 text-zen-primary dark:text-zen-dark-primary" />
                   {deferredPrompt && (
-                    <span className="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full bg-emerald-500 ring-2 ring-white dark:ring-zen-dark-bg animate-pulse" />
+                    <span className="absolute -top-0.5 -right-0.5 w-2 h-2 bg-emerald-500 animate-pulse" />
                   )}
                 </button>
               )}
@@ -256,7 +256,7 @@ export default function Navigation({
               {/* Dark / Light Mode Toggle */}
               <button
                 onClick={toggleTheme}
-                className="shrink-0 p-2 rounded-xl bg-zen-surface-container dark:bg-zen-dark-surface border border-zen-border/40 dark:border-zen-dark-border text-zen-primary dark:text-zen-dark-primary hover:scale-105 active:scale-95 transition-all shadow-zen-sm"
+                className="shrink-0 p-2 bg-zen-surface-container dark:bg-zen-dark-surface border border-zen-border/40 dark:border-zen-dark-border text-zen-primary dark:text-zen-dark-primary hover:-translate-y-0.5 active:translate-y-0 transition-all shadow-zen-sm cursor-pointer"
                 title={isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
                 aria-label={isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
               >
@@ -283,7 +283,7 @@ export default function Navigation({
             <div className="flex flex-1 items-center justify-start">
               <button
               onClick={() => setIsMobileMenuOpen(true)}
-              className="flex h-9 w-9 items-center justify-center rounded-xl bg-zen-surface-container dark:bg-zen-dark-surface border border-zen-border/40 dark:border-zen-dark-border text-zen-text dark:text-zen-dark-text active:scale-95 transition-transform"
+              className="flex h-9 w-9 items-center justify-center bg-zen-surface-container dark:bg-zen-dark-surface border border-zen-border/40 dark:border-zen-dark-border text-zen-text dark:text-zen-dark-text active:scale-95 transition-transform"
               aria-label="Apri menu navigazione"
               aria-expanded={isMobileMenuOpen}
             >
@@ -296,7 +296,7 @@ export default function Navigation({
               onClick={() => setActiveTab('dashboard')}
               className="flex shrink-0 items-center justify-center gap-2 px-1 text-center"
             >
-              <div className="w-7 h-7 rounded-lg bg-zen-primary dark:bg-zen-dark-primary text-white dark:text-zen-dark-on-primary flex items-center justify-center font-kana font-bold text-sm shadow-zen-sm">
+              <div className="w-7 h-7 bg-zen-primary dark:bg-zen-dark-primary text-white dark:text-zen-dark-on-primary flex items-center justify-center font-kana font-bold text-sm shadow-zen-sm">
                 あ
               </div>
               <span className="font-headline text-lg font-bold text-zen-primary dark:text-zen-dark-primary tracking-tight">
@@ -308,7 +308,7 @@ export default function Navigation({
             <div className="flex flex-1 items-center justify-end gap-1.5">
               <button
                 onClick={() => setShowGuideModal(true)}
-                className="flex h-8 w-8 items-center justify-center rounded-xl bg-zen-surface-container dark:bg-zen-dark-surface border border-zen-border/40 dark:border-zen-dark-border text-zen-primary dark:text-zen-dark-primary active:scale-95 transition-transform"
+                className="flex h-8 w-8 items-center justify-center bg-zen-surface-container dark:bg-zen-dark-surface border border-zen-border/40 dark:border-zen-dark-border text-zen-primary dark:text-zen-dark-primary active:scale-95 transition-transform"
                 title={t('nav.guideButton')}
                 aria-label={t('nav.guideButton')}
               >
@@ -319,7 +319,7 @@ export default function Navigation({
                 onClick={() =>
                   setScriptMode((prev) => (prev === 'hiragana' ? 'katakana' : 'hiragana'))
                 }
-                className="px-2 py-1 rounded-full text-xs-plus font-bold bg-zen-primary/10 dark:bg-zen-dark-primary/20 text-zen-primary dark:text-zen-dark-primary border border-zen-primary/20 dark:border-zen-dark-primary/30 transition-all active:scale-95"
+                className="px-2 py-1 text-xs font-bold bg-zen-primary/10 dark:bg-zen-dark-primary/20 text-zen-primary dark:text-zen-dark-primary border border-zen-primary/20 dark:border-zen-dark-primary/30 transition-all active:scale-95"
                 title={t('nav.writingSystem')}
               >
                 {scriptMode === 'hiragana' ? t('nav.scriptHiraganaShort') : t('nav.scriptKatakanaShort')}
@@ -327,7 +327,7 @@ export default function Navigation({
 
               <button
                 onClick={toggleLang}
-                className="flex h-8 px-2 items-center justify-center rounded-xl bg-zen-surface-container dark:bg-zen-dark-surface border border-zen-border/40 dark:border-zen-dark-border text-zen-primary dark:text-zen-dark-primary active:scale-95 transition-transform font-bold text-xs-plus uppercase gap-1"
+                className="flex h-8 px-2 items-center justify-center bg-zen-surface-container dark:bg-zen-dark-surface border border-zen-border/40 dark:border-zen-dark-border text-zen-primary dark:text-zen-dark-primary active:scale-95 transition-transform font-bold text-xs uppercase gap-1"
                 title={t('nav.language')}
               >
                 <Globe className="h-3 w-3" />
@@ -337,7 +337,7 @@ export default function Navigation({
               {!isStandalone && (
                 <button
                   onClick={handleInstallClick}
-                  className="flex h-8 w-8 items-center justify-center rounded-xl bg-zen-surface-container dark:bg-zen-dark-surface border border-zen-border/40 dark:border-zen-dark-border text-zen-primary dark:text-zen-dark-primary active:scale-95 transition-transform"
+                  className="flex h-8 w-8 items-center justify-center bg-zen-surface-container dark:bg-zen-dark-surface border border-zen-border/40 dark:border-zen-dark-border text-zen-primary dark:text-zen-dark-primary active:scale-95 transition-transform"
                   title={t('nav.installApp')}
                   aria-label={t('nav.installApp')}
                 >
@@ -347,7 +347,7 @@ export default function Navigation({
 
               <button
                 onClick={toggleTheme}
-                className="flex h-8 w-8 items-center justify-center rounded-xl bg-zen-surface-container dark:bg-zen-dark-surface border border-zen-border/40 dark:border-zen-dark-border text-zen-primary dark:text-zen-dark-primary active:scale-95 transition-transform"
+                className="flex h-8 w-8 items-center justify-center bg-zen-surface-container dark:bg-zen-dark-surface border border-zen-border/40 dark:border-zen-dark-border text-zen-primary dark:text-zen-dark-primary active:scale-95 transition-transform"
                 title={isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
                 aria-label={isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
               >
@@ -361,15 +361,15 @@ export default function Navigation({
       {/* ===================== INSTALLATION HELP MODAL ===================== */}
       {showInstallModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-fadeIn">
-          <div className="relative w-full max-w-sm rounded-2xl bg-white dark:bg-zen-dark-surface p-6 shadow-2xl border border-zen-surface-high dark:border-zen-dark-border text-center space-y-4">
+          <div className="relative w-full max-w-sm bg-white dark:bg-zen-dark-surface p-6 shadow-2xl border border-zen-border/60 dark:border-zen-dark-border text-center space-y-4">
             <button
               onClick={() => setShowInstallModal(false)}
-              className="absolute top-4 right-4 p-1.5 rounded-lg text-zen-text-muted hover:bg-zen-surface-container dark:hover:bg-zen-dark-surface-high transition-colors"
+              className="absolute top-4 right-4 p-1.5 text-zen-text-muted hover:bg-zen-surface-container dark:hover:bg-zen-dark-surface-high transition-colors cursor-pointer"
             >
               <X className="w-5 h-5" />
             </button>
 
-            <div className="w-12 h-12 mx-auto rounded-2xl bg-zen-primary/10 dark:bg-zen-dark-primary/20 text-zen-primary dark:text-zen-dark-primary flex items-center justify-center">
+            <div className="w-12 h-12 mx-auto bg-zen-primary/10 dark:bg-zen-dark-primary/20 text-zen-primary dark:text-zen-dark-primary flex items-center justify-center border border-zen-primary/20 dark:border-zen-dark-primary/30">
               <Download className="w-6 h-6" />
             </div>
 
@@ -378,7 +378,7 @@ export default function Navigation({
             </h3>
 
             {isIos ? (
-              <div className="space-y-3 text-xs text-zen-text-muted dark:text-zen-dark-text-muted text-left bg-zen-surface-container/50 dark:bg-zen-dark-surface-high/50 p-4 rounded-xl border border-zen-border/30">
+              <div className="space-y-3 text-xs text-zen-text-muted dark:text-zen-dark-text-muted text-left bg-zen-surface-container/50 dark:bg-zen-dark-surface-high/50 p-4 border border-zen-border/40">
                 <div className="flex items-center gap-2 text-zen-text dark:text-zen-dark-text font-semibold">
                   <Share className="w-4 h-4 text-zen-primary dark:text-zen-dark-primary" />
                   <span>{t('nav.installModalIosTitle')}</span>
@@ -390,7 +390,7 @@ export default function Navigation({
                 </ol>
               </div>
             ) : (
-              <div className="text-xs text-zen-text-muted dark:text-zen-dark-text-muted space-y-2 text-left bg-zen-surface-container/50 dark:bg-zen-dark-surface-high/50 p-4 rounded-xl border border-zen-border/30">
+              <div className="text-xs text-zen-text-muted dark:text-zen-dark-text-muted space-y-2 text-left bg-zen-surface-container/50 dark:bg-zen-dark-surface-high/50 p-4 border border-zen-border/40">
                 <div className="flex items-center gap-2 text-zen-text dark:text-zen-dark-text font-semibold">
                   <CheckCircle2 className="w-4 h-4 text-zen-primary dark:text-zen-dark-primary" />
                   <span>{t('nav.installModalDesktopTitle')}</span>
@@ -403,7 +403,7 @@ export default function Navigation({
 
             <button
               onClick={() => setShowInstallModal(false)}
-              className="w-full py-2.5 bg-zen-primary dark:bg-zen-dark-primary text-white dark:text-zen-dark-on-primary rounded-xl font-bold text-xs uppercase tracking-wider shadow-sm hover:opacity-90 transition-opacity"
+              className="w-full py-2.5 bg-zen-primary dark:bg-zen-dark-primary text-white dark:text-zen-dark-on-primary font-bold text-xs uppercase tracking-wider shadow-sm hover:opacity-90 transition-opacity cursor-pointer border border-transparent"
             >
               {t('nav.gotIt')}
             </button>
@@ -413,21 +413,19 @@ export default function Navigation({
 
       {/* ===================== KANA SYLLABARY GUIDE MODAL ===================== */}
 
-      {/* ===================== KANA SYLLABARY GUIDE MODAL ===================== */}
-
       {showGuideModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-md animate-fadeIn">
-          <div className="relative w-full max-w-xl bg-zen-surface-lowest dark:bg-zen-dark-surface rounded-3xl p-6 sm:p-7 shadow-2xl border border-zen-border/60 dark:border-zen-dark-border max-h-[90vh] overflow-y-auto space-y-5">
+          <div className="relative w-full max-w-xl bg-zen-surface-lowest dark:bg-zen-dark-surface p-6 sm:p-7 shadow-2xl border-2 border-zen-border/80 dark:border-zen-dark-border max-h-[90vh] overflow-y-auto space-y-5">
             <button
               onClick={() => setShowGuideModal(false)}
               aria-label={t('nav.closeGuide')}
-              className="absolute top-4 right-4 p-2 rounded-xl text-zen-text-muted hover:text-zen-text hover:bg-zen-surface-container dark:hover:bg-zen-dark-surface-high transition-colors cursor-pointer"
+              className="absolute top-4 right-4 p-2 text-zen-text-muted hover:text-zen-text hover:bg-zen-surface-container dark:hover:bg-zen-dark-surface-high transition-colors cursor-pointer"
             >
               <X className="w-5 h-5" />
             </button>
 
             <div className="flex items-center gap-3 pr-8">
-              <div className="w-11 h-11 rounded-2xl bg-zen-primary/10 dark:bg-zen-dark-primary/20 text-zen-primary dark:text-zen-dark-primary flex items-center justify-center border border-zen-primary/20 shrink-0 shadow-sm">
+              <div className="w-11 h-11 bg-zen-primary/10 dark:bg-zen-dark-primary/20 text-zen-primary dark:text-zen-dark-primary flex items-center justify-center border border-zen-primary/30 dark:border-zen-dark-primary/40 shrink-0 shadow-sm">
                 <HelpCircle className="w-6 h-6" />
               </div>
               <div>
@@ -440,11 +438,11 @@ export default function Navigation({
               </div>
             </div>
 
-            <div className="space-y-3.5 pt-1">
+            <div className="space-y-3 pt-1">
               {/* 1. Hiragana Card */}
-              <div className="p-4 rounded-2xl bg-zen-surface-container/40 dark:bg-zen-dark-surface-high/60 border border-zen-border/50 dark:border-zen-dark-border shadow-2xs space-y-1.5">
+              <div className="p-4 bg-zen-surface-container/40 dark:bg-zen-dark-surface-high/60 border border-zen-border/50 dark:border-zen-dark-border shadow-2xs space-y-1.5">
                 <div className="flex items-center gap-2.5">
-                  <span className="w-8 h-8 rounded-xl bg-zen-primary text-white flex items-center justify-center font-kana font-bold text-base shadow-sm shrink-0">
+                  <span className="w-8 h-8 bg-zen-primary text-white flex items-center justify-center font-kana font-bold text-base shadow-sm shrink-0">
                     あ
                   </span>
                   <h4 className="font-bold text-sm sm:text-base font-headline text-zen-text dark:text-zen-dark-text">
@@ -457,9 +455,9 @@ export default function Navigation({
               </div>
 
               {/* 2. Katakana Card */}
-              <div className="p-4 rounded-2xl bg-zen-surface-container/40 dark:bg-zen-dark-surface-high/60 border border-zen-border/50 dark:border-zen-dark-border shadow-2xs space-y-1.5">
+              <div className="p-4 bg-zen-surface-container/40 dark:bg-zen-dark-surface-high/60 border border-zen-border/50 dark:border-zen-dark-border shadow-2xs space-y-1.5">
                 <div className="flex items-center gap-2.5">
-                  <span className="w-8 h-8 rounded-xl bg-zen-secondary text-white flex items-center justify-center font-kana font-bold text-base shadow-sm shrink-0">
+                  <span className="w-8 h-8 bg-zen-secondary text-white flex items-center justify-center font-kana font-bold text-base shadow-sm shrink-0">
                     ア
                   </span>
                   <h4 className="font-bold text-sm sm:text-base font-headline text-zen-text dark:text-zen-dark-text">
@@ -472,9 +470,9 @@ export default function Navigation({
               </div>
 
               {/* 3. Kanji Card */}
-              <div className="p-4 rounded-2xl bg-zen-surface-container/40 dark:bg-zen-dark-surface-high/60 border border-zen-border/50 dark:border-zen-dark-border shadow-2xs space-y-1.5">
+              <div className="p-4 bg-zen-surface-container/40 dark:bg-zen-dark-surface-high/60 border border-zen-border/50 dark:border-zen-dark-border shadow-2xs space-y-1.5">
                 <div className="flex items-center gap-2.5">
-                  <span className="w-8 h-8 rounded-xl bg-purple-600 text-white flex items-center justify-center font-kana font-bold text-base shadow-sm shrink-0">
+                  <span className="w-8 h-8 bg-purple-600 text-white flex items-center justify-center font-kana font-bold text-base shadow-sm shrink-0">
                     漢
                   </span>
                   <h4 className="font-bold text-sm sm:text-base font-headline text-zen-text dark:text-zen-dark-text">
@@ -487,9 +485,9 @@ export default function Navigation({
               </div>
 
               {/* 4. Dakuten & Handakuten Card */}
-              <div className="p-4 rounded-2xl bg-zen-surface-container/40 dark:bg-zen-dark-surface-high/60 border border-zen-border/50 dark:border-zen-dark-border shadow-2xs space-y-1.5">
+              <div className="p-4 bg-zen-surface-container/40 dark:bg-zen-dark-surface-high/60 border border-zen-border/50 dark:border-zen-dark-border shadow-2xs space-y-1.5">
                 <div className="flex items-center gap-2.5">
-                  <span className="w-8 h-8 rounded-xl bg-zen-accent text-white flex items-center justify-center font-kana font-bold text-base shadow-sm shrink-0">
+                  <span className="w-8 h-8 bg-zen-accent text-white flex items-center justify-center font-kana font-bold text-base shadow-sm shrink-0">
                     が
                   </span>
                   <h4 className="font-bold text-sm sm:text-base font-headline text-zen-text dark:text-zen-dark-text">
@@ -502,9 +500,9 @@ export default function Navigation({
               </div>
 
               {/* 4. Yoon Combinations Card */}
-              <div className="p-4 rounded-2xl bg-zen-surface-container/40 dark:bg-zen-dark-surface-high/60 border border-zen-border/50 dark:border-zen-dark-border shadow-2xs space-y-1.5">
+              <div className="p-4 bg-zen-surface-container/40 dark:bg-zen-dark-surface-high/60 border border-zen-border/50 dark:border-zen-dark-border shadow-2xs space-y-1.5">
                 <div className="flex items-center gap-2.5">
-                  <span className="w-8 h-8 rounded-xl bg-emerald-600 text-white flex items-center justify-center font-kana font-bold text-xs shadow-sm shrink-0">
+                  <span className="w-8 h-8 bg-emerald-600 text-white flex items-center justify-center font-kana font-bold text-xs shadow-sm shrink-0">
                     きゃ
                   </span>
                   <h4 className="font-bold text-sm sm:text-base font-headline text-zen-text dark:text-zen-dark-text">
@@ -517,9 +515,9 @@ export default function Navigation({
               </div>
 
               {/* 5. Special Phonetics & Rhythm Card */}
-              <div className="p-4 rounded-2xl bg-zen-surface-container/40 dark:bg-zen-dark-surface-high/60 border border-zen-border/50 dark:border-zen-dark-border shadow-2xs space-y-1.5">
+              <div className="p-4 bg-zen-surface-container/40 dark:bg-zen-dark-surface-high/60 border border-zen-border/50 dark:border-zen-dark-border shadow-2xs space-y-1.5">
                 <div className="flex items-center gap-2.5">
-                  <span className="w-8 h-8 rounded-xl bg-amber-600 text-white flex items-center justify-center font-kana font-bold text-base shadow-sm shrink-0">
+                  <span className="w-8 h-8 bg-amber-600 text-white flex items-center justify-center font-kana font-bold text-base shadow-sm shrink-0">
                     っ
                   </span>
                   <h4 className="font-bold text-sm sm:text-base font-headline text-zen-text dark:text-zen-dark-text">
@@ -534,7 +532,7 @@ export default function Navigation({
 
             <button
               onClick={() => setShowGuideModal(false)}
-              className="w-full py-3.5 bg-zen-primary dark:bg-zen-dark-primary text-white dark:text-zen-dark-on-primary rounded-2xl font-bold text-xs uppercase tracking-wider shadow-zen-md hover:scale-[1.02] active:scale-[0.98] transition-all min-h-[48px] cursor-pointer"
+              className="w-full py-3 bg-zen-primary dark:bg-zen-dark-primary text-white dark:text-zen-dark-on-primary font-bold text-xs uppercase tracking-wider shadow-zen-md hover:opacity-90 active:scale-[0.99] transition-all min-h-[44px] cursor-pointer border border-transparent"
             >
               {t('nav.closeGuide')}
             </button>
@@ -558,7 +556,7 @@ export default function Navigation({
             {/* Drawer Header */}
             <div className="p-4 border-b border-zen-border/40 dark:border-zen-dark-border flex items-center justify-between bg-zen-surface dark:bg-zen-dark-bg">
               <div className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-xl bg-zen-primary dark:bg-zen-dark-primary text-white dark:text-zen-dark-on-primary flex items-center justify-center font-kana font-bold text-base shadow-zen-sm">
+                <div className="w-8 h-8 bg-zen-primary dark:bg-zen-dark-primary text-white dark:text-zen-dark-on-primary flex items-center justify-center font-kana font-bold text-base shadow-zen-sm border border-transparent">
                   あ
                 </div>
                 <div>
@@ -573,7 +571,7 @@ export default function Navigation({
 
               <button
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="p-1.5 rounded-lg text-zen-text-muted hover:text-zen-text dark:text-zen-dark-text-muted dark:hover:text-zen-dark-text bg-zen-surface-container dark:bg-zen-dark-surface"
+                className="p-1.5 text-zen-text-muted hover:text-zen-text dark:text-zen-dark-text-muted dark:hover:text-zen-dark-text bg-zen-surface-container dark:bg-zen-dark-surface cursor-pointer"
                 aria-label="Chiudi menu"
               >
                 <X className="w-5 h-5" />
@@ -585,23 +583,23 @@ export default function Navigation({
               <span className="block text-xs-plus font-semibold text-zen-text-muted dark:text-zen-dark-text-muted mb-2 uppercase tracking-wider">
                 {t('nav.writingSystem')}
               </span>
-              <div className="grid grid-cols-2 gap-2 bg-zen-surface-container dark:bg-zen-dark-surface p-1 rounded-xl border border-zen-border/40 dark:border-zen-dark-border">
+              <div className="grid grid-cols-2 gap-2 bg-zen-surface-container dark:bg-zen-dark-surface p-1 border border-zen-border/40 dark:border-zen-dark-border">
                 <button
                   onClick={() => setScriptMode('hiragana')}
-                  className={`py-2 rounded-lg text-xs font-bold transition-all ${
+                  className={`py-2 text-xs font-bold transition-all cursor-pointer border ${
                     scriptMode === 'hiragana'
-                      ? 'bg-zen-primary dark:bg-zen-dark-primary text-white dark:text-zen-dark-on-primary shadow-zen-sm'
-                      : 'text-zen-text-muted dark:text-zen-dark-text-muted'
+                      ? 'bg-zen-primary dark:bg-zen-dark-primary text-white dark:text-zen-dark-on-primary border-zen-primary/30 dark:border-zen-dark-primary/40 shadow-zen-sm'
+                      : 'text-zen-text-muted dark:text-zen-dark-text-muted border-transparent'
                   }`}
                 >
                   Hiragana (あ)
                 </button>
                 <button
                   onClick={() => setScriptMode('katakana')}
-                  className={`py-2 rounded-lg text-xs font-bold transition-all ${
+                  className={`py-2 text-xs font-bold transition-all cursor-pointer border ${
                     scriptMode === 'katakana'
-                      ? 'bg-zen-primary dark:bg-zen-dark-primary text-white dark:text-zen-dark-on-primary shadow-zen-sm'
-                      : 'text-zen-text-muted dark:text-zen-dark-text-muted hover:text-zen-text dark:hover:text-zen-dark-text'
+                      ? 'bg-zen-primary dark:bg-zen-dark-primary text-white dark:text-zen-dark-on-primary border-zen-primary/30 dark:border-zen-dark-primary/40 shadow-zen-sm'
+                      : 'text-zen-text-muted dark:text-zen-dark-text-muted hover:text-zen-text dark:hover:text-zen-dark-text border-transparent'
                   }`}
                 >
                   Katakana (ア)
@@ -614,23 +612,23 @@ export default function Navigation({
               <span className="block text-xs-plus font-semibold text-zen-text-muted dark:text-zen-dark-text-muted mb-2 uppercase tracking-wider">
                 {t('nav.language')}
               </span>
-              <div className="grid grid-cols-2 gap-2 bg-zen-surface-container dark:bg-zen-dark-surface p-1 rounded-xl border border-zen-border/40 dark:border-zen-dark-border">
+              <div className="grid grid-cols-2 gap-2 bg-zen-surface-container dark:bg-zen-dark-surface p-1 border border-zen-border/40 dark:border-zen-dark-border">
                 <button
                   onClick={() => setLang('it')}
-                  className={`py-2 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 ${
+                  className={`py-2 text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer border ${
                     lang === 'it'
-                      ? 'bg-zen-primary dark:bg-zen-dark-primary text-white dark:text-zen-dark-on-primary shadow-zen-sm'
-                      : 'text-zen-text-muted dark:text-zen-dark-text-muted hover:text-zen-text dark:hover:text-zen-dark-text'
+                      ? 'bg-zen-primary dark:bg-zen-dark-primary text-white dark:text-zen-dark-on-primary border-zen-primary/30 dark:border-zen-dark-primary/40 shadow-zen-sm'
+                      : 'text-zen-text-muted dark:text-zen-dark-text-muted hover:text-zen-text dark:hover:text-zen-dark-text border-transparent'
                   }`}
                 >
                   🇮🇹 Italiano
                 </button>
                 <button
                   onClick={() => setLang('en')}
-                  className={`py-2 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 ${
+                  className={`py-2 text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer border ${
                     lang === 'en'
-                      ? 'bg-zen-primary dark:bg-zen-dark-primary text-white dark:text-zen-dark-on-primary shadow-zen-sm'
-                      : 'text-zen-text-muted dark:text-zen-dark-text-muted hover:text-zen-text dark:hover:text-zen-dark-text'
+                      ? 'bg-zen-primary dark:bg-zen-dark-primary text-white dark:text-zen-dark-on-primary border-zen-primary/30 dark:border-zen-dark-primary/40 shadow-zen-sm'
+                      : 'text-zen-text-muted dark:text-zen-dark-text-muted hover:text-zen-text dark:hover:text-zen-dark-text border-transparent'
                   }`}
                 >
                   🇬🇧 English
@@ -652,7 +650,7 @@ export default function Navigation({
                   <button
                     key={item.id}
                     onClick={() => handleNavClick(item.id)}
-                    className={`w-full flex items-center justify-between p-3 rounded-xl transition-all ${
+                    className={`w-full flex items-center justify-between p-3 transition-all cursor-pointer ${
                       isActive
                         ? 'bg-zen-primary/10 dark:bg-zen-dark-surface-high text-zen-primary dark:text-zen-dark-primary font-bold border border-zen-primary/30 dark:border-zen-dark-primary/40 shadow-zen-sm'
                         : 'text-zen-text dark:text-zen-dark-text hover:bg-zen-surface-container dark:hover:bg-zen-dark-surface font-medium border border-transparent'
@@ -660,7 +658,7 @@ export default function Navigation({
                   >
                     <div className="flex items-center gap-3">
                       <div
-                        className={`p-2 rounded-lg ${
+                        className={`p-2 ${
                           isActive
                             ? 'bg-zen-primary text-white dark:bg-zen-dark-primary dark:text-zen-dark-on-primary'
                             : 'bg-zen-surface-container dark:bg-zen-dark-surface text-zen-text-muted dark:text-zen-dark-text-muted'
@@ -683,13 +681,13 @@ export default function Navigation({
             </div>
 
             {/* Drawer Footer Controls */}
-            <div className="p-4 border-t border-zen-surface-high dark:border-zen-dark-border bg-zen-surface dark:bg-zen-dark-surface space-y-2.5">
+            <div className="p-4 border-t border-zen-surface-high dark:border-zen-dark-border bg-zen-surface dark:bg-zen-dark-surface space-y-2">
               <button
                 onClick={() => {
                   setIsMobileMenuOpen(false);
                   setShowGuideModal(true);
                 }}
-                className="w-full flex items-center justify-between p-3 rounded-xl bg-zen-surface-container dark:bg-zen-dark-surface border border-zen-border/40 dark:border-zen-dark-border text-zen-text dark:text-zen-dark-text text-xs font-semibold"
+                className="w-full flex items-center justify-between p-3 bg-zen-surface-container dark:bg-zen-dark-surface border border-zen-border/40 dark:border-zen-dark-border text-zen-text dark:text-zen-dark-text text-xs font-semibold cursor-pointer"
               >
                 <div className="flex items-center gap-2">
                   <HelpCircle className="w-4 h-4 text-zen-primary dark:text-zen-dark-primary" />
@@ -704,7 +702,7 @@ export default function Navigation({
                     setIsMobileMenuOpen(false);
                     handleInstallClick();
                   }}
-                  className="w-full flex items-center justify-between p-3 rounded-xl bg-zen-primary/10 dark:bg-zen-dark-primary/20 text-zen-primary dark:text-zen-dark-primary text-xs font-semibold border border-zen-primary/20 dark:border-zen-dark-primary/30"
+                  className="w-full flex items-center justify-between p-3 bg-zen-primary/10 dark:bg-zen-dark-primary/20 text-zen-primary dark:text-zen-dark-primary text-xs font-semibold border border-zen-primary/20 dark:border-zen-dark-primary/30 cursor-pointer"
                 >
                   <div className="flex items-center gap-2">
                     <Download className="w-4 h-4" />
@@ -716,7 +714,7 @@ export default function Navigation({
 
               <button
                 onClick={toggleTheme}
-                className="w-full flex items-center justify-between p-3 rounded-xl bg-zen-surface-container dark:bg-zen-dark-surface border border-zen-border/40 dark:border-zen-dark-border text-zen-text dark:text-zen-dark-text text-xs font-semibold"
+                className="w-full flex items-center justify-between p-3 bg-zen-surface-container dark:bg-zen-dark-surface border border-zen-border/40 dark:border-zen-dark-border text-zen-text dark:text-zen-dark-text text-xs font-semibold cursor-pointer"
               >
                 <div className="flex items-center gap-2">
                   {isDark ? <Sun className="w-4 h-4 text-zen-dark-primary" /> : <Moon className="w-4 h-4 text-zen-primary" />}
@@ -749,10 +747,10 @@ export default function Navigation({
               <button
                 key={item.id}
                 onClick={() => setActiveTab(item.id)}
-                className={`flex flex-col items-center justify-center py-1 px-2 rounded-xl transition-all ${
+                className={`flex flex-col items-center justify-center py-1 px-2.5 transition-all cursor-pointer ${
                   isActive
-                    ? 'text-zen-primary dark:text-zen-dark-primary font-bold scale-105'
-                    : 'text-zen-text-muted dark:text-zen-dark-text-muted hover:text-zen-text dark:hover:text-zen-dark-text font-medium'
+                    ? 'text-zen-primary dark:text-zen-dark-primary font-bold border-b-2 border-zen-primary dark:border-zen-dark-primary -mb-[2px]'
+                    : 'text-zen-text-muted dark:text-zen-dark-text-muted hover:text-zen-text dark:hover:text-zen-dark-text font-medium border-b-2 border-transparent'
                 }`}
               >
                 <Icon className={`w-5 h-5 ${isActive ? 'stroke-[2.5]' : 'stroke-2'}`} />
@@ -766,7 +764,7 @@ export default function Navigation({
           {/* Menu Hamburger Trigger Button in Bottom Bar */}
           <button
             onClick={() => setIsMobileMenuOpen(true)}
-            className="flex flex-col items-center justify-center py-1 px-2 rounded-xl text-zen-text-muted dark:text-zen-dark-text-muted hover:text-zen-text dark:hover:text-zen-dark-text font-medium transition-all"
+            className="flex flex-col items-center justify-center py-1 px-2.5 text-zen-text-muted dark:text-zen-dark-text-muted hover:text-zen-text dark:hover:text-zen-dark-text font-medium transition-all cursor-pointer border-b-2 border-transparent"
             aria-label="Apri menu completo"
           >
             <Menu className="w-5 h-5 stroke-2" />

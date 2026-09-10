@@ -26,10 +26,10 @@ export default function ContextualTabGuide({
 
   if (variant === 'banner') {
     return (
-      <div className="zen-card p-4 sm:p-5 rounded-2xl bg-zen-surface-container/40 dark:bg-zen-dark-surface-high/60 border border-zen-border/60 dark:border-zen-dark-border shadow-zen-sm space-y-3 animate-fade-in">
+      <div className="zen-card p-4 sm:p-5 bg-zen-surface-container/40 dark:bg-zen-dark-surface-high/60 border border-zen-border/60 dark:border-zen-dark-border shadow-zen-sm space-y-3 animate-fade-in">
         <div className="flex items-center justify-between gap-3">
           <div className="flex items-center gap-2.5">
-            <div className="p-1.5 rounded-xl bg-zen-primary/10 dark:bg-zen-dark-primary/20 text-zen-primary dark:text-zen-dark-primary shrink-0">
+            <div className="p-1.5 bg-zen-primary/10 dark:bg-zen-dark-primary/20 text-zen-primary dark:text-zen-dark-primary shrink-0 border border-zen-primary/20">
               <BookOpen className="w-4 h-4" />
             </div>
             <div>
@@ -51,16 +51,16 @@ export default function ContextualTabGuide({
           {points.map((pt, idx) => (
             <div 
               key={idx}
-              className="text-xs text-zen-text dark:text-zen-dark-text flex items-start gap-2 bg-zen-surface-lowest/70 dark:bg-zen-dark-surface/70 p-2.5 rounded-xl border border-zen-border/30 dark:border-zen-dark-border/40"
+              className="text-xs text-zen-text dark:text-zen-dark-text flex items-start gap-2 bg-zen-surface-lowest/70 dark:bg-zen-dark-surface/70 p-2.5 border border-zen-border/40 dark:border-zen-dark-border/40"
             >
-              <span className="w-1.5 h-1.5 rounded-full bg-zen-primary dark:bg-zen-dark-primary mt-1.5 shrink-0" />
+              <span className="w-1.5 h-1.5 bg-zen-primary dark:bg-zen-dark-primary mt-1.5 shrink-0" />
               <span className="leading-snug">{pt}</span>
             </div>
           ))}
         </div>
 
         {tip && (
-          <div className="text-2xs sm:text-xs text-zen-text-muted dark:text-zen-dark-text-muted p-2.5 rounded-xl bg-zen-primary/10 dark:bg-zen-dark-primary/15 border border-zen-primary/20 leading-relaxed font-medium">
+          <div className="text-2xs sm:text-xs text-zen-text-muted dark:text-zen-dark-text-muted p-2.5 bg-zen-primary/10 dark:bg-zen-dark-primary/15 border border-zen-primary/20 leading-relaxed font-medium">
             {tip}
           </div>
         )}
@@ -69,7 +69,7 @@ export default function ContextualTabGuide({
   }
 
   return (
-    <div className="zen-card overflow-hidden rounded-2xl border border-zen-border/60 dark:border-zen-dark-border bg-zen-surface-lowest dark:bg-zen-dark-surface shadow-zen-sm transition-all">
+    <div className="zen-card overflow-hidden border border-zen-border/60 dark:border-zen-dark-border bg-zen-surface-lowest dark:bg-zen-dark-surface shadow-zen-sm transition-all">
       {/* Header / Accordion trigger */}
       <button
         type="button"
@@ -78,12 +78,12 @@ export default function ContextualTabGuide({
         aria-expanded={isOpen}
       >
         <div className="flex items-center gap-2.5 min-w-0">
-          <div className="p-1.5 rounded-xl bg-zen-primary/10 dark:bg-zen-dark-primary/20 text-zen-primary dark:text-zen-dark-primary shrink-0">
+          <div className="p-1.5 bg-zen-primary/10 dark:bg-zen-dark-primary/20 text-zen-primary dark:text-zen-dark-primary shrink-0 border border-zen-primary/20">
             <Info className="w-4 h-4" />
           </div>
           <div className="min-w-0">
             <div className="flex items-center gap-2">
-              <span className="text-3xs font-bold uppercase tracking-wider text-zen-primary dark:text-zen-dark-primary font-mono px-2 py-0.5 rounded-md bg-zen-primary/10 dark:bg-zen-dark-primary/20">
+              <span className="text-3xs font-bold uppercase tracking-wider text-zen-primary dark:text-zen-dark-primary font-mono px-2 py-0.5 bg-zen-primary/10 dark:bg-zen-dark-primary/20 border border-zen-primary/20">
                 {guideCategory.badge}
               </span>
               <span className="text-3xs font-semibold text-zen-text-muted dark:text-zen-dark-text-muted uppercase">
@@ -100,7 +100,7 @@ export default function ContextualTabGuide({
           <span className="text-2xs font-bold text-zen-primary dark:text-zen-dark-primary hidden sm:inline">
             {isOpen ? (lang === 'it' ? 'Nascondi' : 'Hide') : (lang === 'it' ? 'Leggi spiegazione' : 'Read guide')}
           </span>
-          <div className="p-1 rounded-lg bg-zen-surface-container dark:bg-zen-dark-surface-high text-zen-text-muted">
+          <div className="p-1 bg-zen-surface-container dark:bg-zen-dark-surface-high text-zen-text-muted border border-zen-border/30">
             {isOpen ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
           </div>
         </div>
@@ -108,25 +108,25 @@ export default function ContextualTabGuide({
 
       {/* Expandable Content Body */}
       {isOpen && (
-        <div className="p-4 sm:p-5 border-t border-zen-border/40 dark:border-zen-dark-border bg-zen-surface-container/20 dark:bg-zen-dark-surface-high/30 space-y-3.5 animate-fadeIn">
-          <p className="text-xs sm:text-sm text-zen-text/90 dark:text-zen-dark-text/90 font-medium leading-relaxed">
+        <div className="p-4 sm:p-6 border-t border-zen-border/40 dark:border-zen-dark-border bg-zen-surface-container/20 dark:bg-zen-dark-surface-high/30 space-y-4 animate-fadeIn">
+          <p className="text-sm sm:text-base text-zen-text dark:text-zen-dark-text font-semibold leading-relaxed">
             {subtitle}
           </p>
 
-          <div className="grid gap-2 sm:grid-cols-1">
+          <div className="grid gap-2.5 sm:grid-cols-1">
             {points.map((pt, idx) => (
               <div 
                 key={idx}
-                className="text-xs text-zen-text dark:text-zen-dark-text flex items-start gap-2.5 bg-zen-surface-lowest dark:bg-zen-dark-surface p-3 rounded-xl border border-zen-border/40 dark:border-zen-dark-border shadow-2xs"
+                className="text-xs sm:text-sm text-zen-text dark:text-zen-dark-text flex items-start gap-3 bg-zen-surface-lowest dark:bg-zen-dark-surface p-3.5 border border-zen-border/50 dark:border-zen-dark-border shadow-2xs"
               >
-                <span className="w-2 h-2 rounded-full bg-zen-primary dark:bg-zen-dark-primary mt-1 shrink-0" />
-                <span className="leading-relaxed font-medium">{pt}</span>
+                <span className="w-2.5 h-2.5 bg-zen-primary dark:bg-zen-dark-primary mt-1 shrink-0" />
+                <span className="leading-relaxed font-normal">{pt}</span>
               </div>
             ))}
           </div>
 
           {tip && (
-            <div className="text-2xs sm:text-xs text-zen-text dark:text-zen-dark-text p-3 rounded-xl bg-zen-primary/10 dark:bg-zen-dark-primary/20 border border-zen-primary/20 leading-relaxed font-medium">
+            <div className="text-xs sm:text-sm text-zen-text dark:text-zen-dark-text p-3.5 bg-zen-primary/10 dark:bg-zen-dark-primary/20 border border-zen-primary/20 leading-relaxed font-medium">
               {tip}
             </div>
           )}

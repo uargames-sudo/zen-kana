@@ -80,15 +80,27 @@ export const translations = {
 
     // Dashboard
     dashboard: {
-      welcome: 'Bentornato nel tuo Dojo di Kana',
-      welcomeSubtitle: 'Padroneggia i sillabari giapponesi Hiragana e Katakana con sessioni interattive quotidiane.',
+      welcome: 'Benvenuto in Zen Kana',
+      welcomeSubtitle: 'Uno spazio dedicato allo studio dei kana giapponesi, pensato per adattarsi al tuo ritmo e alle tue preferenze grazie a percorsi di apprendimento visivi, attivi e interattivi.',
+      learnMore: 'Scopri i Metodi di Studio',
+      methodModalTitle: 'Metodologie di Apprendimento in Zen Kana',
+      methodModalSubtitle: 'Scegli liberamente le attività che più si adattano al tuo stile di studio naturale.',
+      methodVisualTitle: 'Memoria & Riconoscimento Visivo',
+      methodVisualDesc: 'Flashcards con ripetizione attiva e Tabelle Kana compatte con riproduzione audio istantanea.',
+      methodActiveTitle: 'Pratica Attiva & Digitazione',
+      methodActiveDesc: 'Active Study per allenare la trascrizione a tastiera o touch, e 150 vocaboli illustrati per contestualizzare ogni suono.',
+      methodAudioTitle: 'Ascolto & Scrittura Manuale',
+      methodAudioDesc: 'Quiz di Ascolto per affinare l\'orecchio ai suoni nativi e Canvas con linee guida per memorizzare l\'ordine esatto dei tratti.',
+      methodGameTitle: 'Apprendimento Ludico & Percorsi',
+      methodGameDesc: 'Dojo Giochi (Mahjong, Puzzle, Memory) per consolidare senza stress e un percorso guidato in 10 giorni con test finali.',
+      closeModal: 'Inizia a Studiare',
       switchScript: 'Passa a',
       statsOverview: 'Panoramica Statistiche',
       reviewedKana: 'Kana Revisionati',
       accuracy: 'Precisione Globale',
       totalAttempts: 'Tentativi Totali',
       accuracyRate: 'Tasso di Risposte Corrette',
-      quickActions: 'Accesso Rapido alle Attività',
+      quickActions: 'Attività di Studio',
       startActiveStudy: 'Avvia Active Study',
       startActiveStudyDesc: 'Metti alla prova la traslitterazione Kana/Romaji a tempo.',
       browseKanaTable: 'Consulta le Tabelle',
@@ -207,10 +219,10 @@ export const translations = {
 
     // Vocabulary
     vocabulary: {
-      title: 'Vocabolario',
-      subtitle: 'Tocca una scheda per ascoltare la pronuncia giapponese.',
-      wordsCount: '100 parole giapponesi',
-      searchPlaceholder: 'Cerca per kana, romaji o significato...',
+      title: 'Vocabolario Giapponese',
+      subtitle: '150 vocaboli essenziali Hiragana e Katakana con illustrazioni dedicate e pronuncia audio nativa.',
+      wordsCount: '150 parole giapponesi',
+      searchPlaceholder: 'Cerca per kana, romaji o traduzione...',
       filterAll: 'Tutti',
       filterHiragana: 'Hiragana',
       filterKatakana: 'Katakana',
@@ -540,8 +552,20 @@ export const translations = {
 
     // Dashboard
     dashboard: {
-      welcome: 'Welcome to your Kana Dojo',
-      welcomeSubtitle: 'Master Hiragana and Katakana Japanese syllabaries through daily interactive sessions.',
+      welcome: 'Welcome to Zen Kana',
+      welcomeSubtitle: 'A space dedicated to learning Japanese kana, designed to adapt to your rhythm and preferences through visual, active, and interactive study paths.',
+      learnMore: 'Discover Study Methods',
+      methodModalTitle: 'Learning Methodologies in Zen Kana',
+      methodModalSubtitle: 'Freely choose the activities that best match your natural study style.',
+      methodVisualTitle: 'Visual Memory & Recognition',
+      methodVisualDesc: 'Flashcards with active recall and compact Kana Tables with instant audio playback.',
+      methodActiveTitle: 'Active Practice & Typing',
+      methodActiveDesc: 'Active Study to practice keyboard/touch transliteration, and 150 illustrated words to contextualize every sound.',
+      methodAudioTitle: 'Listening & Stroke Writing',
+      methodAudioDesc: 'Listening Quiz to train your ear for native sounds, and Canvas with stroke-order guidelines for muscle memory.',
+      methodGameTitle: 'Playful Learning & Roadmaps',
+      methodGameDesc: 'Games Dojo (Mahjong, Puzzle, Memory) for stress-free consolidation, and a structured 10-day roadmap with final tests.',
+      closeModal: 'Start Studying',
       switchScript: 'Switch to',
       statsOverview: 'Stats Overview',
       reviewedKana: 'Kana Reviewed',
@@ -694,10 +718,10 @@ export const translations = {
 
     // Vocabulary
     vocabulary: {
-      title: 'Vocabulary',
-      subtitle: 'Tap any card to hear its Japanese pronunciation.',
-      wordsCount: '100 Japanese words',
-      searchPlaceholder: 'Search kana, romaji or translation...',
+      title: 'Japanese Vocabulary',
+      subtitle: '150 essential Hiragana & Katakana words with dedicated illustrations and native audio pronunciation.',
+      wordsCount: '150 Japanese words',
+      searchPlaceholder: 'Search by kana, romaji or meaning...',
       filterAll: 'All',
       filterHiragana: 'Hiragana',
       filterKatakana: 'Katakana',

@@ -128,7 +128,7 @@ export default function App() {
   };
 
   return (
-    <div className="app-root flex min-h-[100dvh] flex-col bg-zen-surface font-sans text-zen-text antialiased transition-colors duration-300 dark:bg-zen-dark-bg dark:text-zen-dark-text">
+    <div className="app-root flex min-h-screen flex-col bg-zen-surface font-sans text-zen-text antialiased transition-colors duration-300 dark:bg-zen-dark-bg dark:text-zen-dark-text">
       {/* Top Header & Navigation */}
       <Navigation
         activeTab={activeTab}
@@ -140,14 +140,14 @@ export default function App() {
       />
 
       {/* Main Content View Container */}
-      <main className="flex-1 max-w-6xl w-full mx-auto px-2.5 xs:px-4 sm:px-6 pt-4 sm:pt-6 pb-24 xl:pb-8">
+      <main className="flex-1 max-w-6xl w-full mx-auto px-3 sm:px-6 pt-4 sm:pt-6 pb-20 xl:pb-8">
         <Suspense fallback={<ModuleLoadingFallback />}>
           {renderActiveComponent()}
         </Suspense>
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-zen-border/40 dark:border-zen-dark-border bg-zen-surface dark:bg-zen-dark-bg py-6 text-center text-xs text-zen-text-muted dark:text-zen-dark-text-muted hidden lg:block transition-colors duration-300">
+      <footer className="border-t border-zen-border/40 dark:border-zen-dark-border bg-zen-surface dark:bg-zen-dark-bg py-5 text-center text-xs text-zen-text-muted dark:text-zen-dark-text-muted hidden lg:block transition-colors duration-300">
         <p>{t('nav.footerText')}</p>
       </footer>
     </div>

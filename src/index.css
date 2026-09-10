@@ -3,22 +3,21 @@
 @tailwind utilities;
 
 @layer base {
-  html, body, #root, .app-root {
+  html, body {
     background-color: var(--zen-surface);
     color: var(--zen-text);
-    min-height: 100%;
-    overflow-x: hidden;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
   }
 
-  .dark html, .dark body, .dark #root, .dark .app-root {
+  .dark html, .dark body {
     background-color: var(--zen-dark-bg);
     color: var(--zen-dark-text);
   }
 
-  body {
-    -webkit-tap-highlight-color: transparent;
-    width: 100%;
-    font-family: 'Outfit', sans-serif;
+  *, ::before, ::after {
+    border-radius: 0px !important;
   }
 }
 :root {
@@ -79,28 +78,29 @@
   transform: rotateY(180deg);
 }
 
-/* Zen Glassmorphism & Diffused Elevation */
+/* Zen Crisp Geometry & Diffused Elevation */
 .zen-card {
   background: var(--zen-surface-lowest, #ffffff);
-  border-radius: 1rem;
-  box-shadow: 0px 4px 20px rgba(45, 52, 70, 0.05);
-  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 0px;
+  border: 1px solid var(--zen-border);
+  box-shadow: 0px 4px 16px rgba(45, 52, 70, 0.04);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .dark .zen-card {
-  background: var(--zen-dark-surface, #1a1b1e);
+  background: var(--zen-dark-surface, #121316);
   color: var(--zen-dark-text, #f4f3f0);
-  box-shadow: 0px 4px 24px var(--zen-dark-shadow, rgba(0, 0, 0, 0.5));
-  border-color: var(--zen-dark-border, #31333a);
+  box-shadow: 0px 4px 20px var(--zen-dark-shadow, rgba(0, 0, 0, 0.5));
+  border-color: var(--zen-dark-border, #282930);
 }
 
 .zen-card:hover {
-  box-shadow: 0px 12px 32px rgba(45, 52, 70, 0.09);
+  box-shadow: 0px 8px 24px rgba(45, 52, 70, 0.08);
 }
 
 .dark .zen-card:hover {
-  box-shadow: 0px 12px 36px var(--zen-dark-shadow-hover, rgba(0, 0, 0, 0.7));
-  border-color: var(--zen-dark-primary, #f0b000);
+  box-shadow: 0px 8px 28px var(--zen-dark-shadow-hover, rgba(0, 0, 0, 0.7));
+  border-color: var(--zen-dark-primary, #df9e12);
 }
 
 .flashcard-hover {
@@ -108,12 +108,12 @@
 }
 
 .flashcard-hover:hover {
-  transform: scale(1.015);
+  transform: translateY(-2px);
 }
 
 .zen-card-active:active {
-  transform: scale(0.98);
-  box-shadow: 0px 2px 8px rgba(45, 52, 70, 0.04);
+  transform: translateY(1px);
+  box-shadow: 0px 2px 6px rgba(45, 52, 70, 0.04);
 }
 
 /* Material Symbols Outlined styling */
@@ -127,24 +127,24 @@
 
 /* Custom Scrollbar for Zen Minimal Aesthetics */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
 }
 ::-webkit-scrollbar-track {
   background: var(--zen-surface-container, #ebe7dd);
 }
 .dark ::-webkit-scrollbar-track {
-  background: var(--zen-dark-bg, #141517);
+  background: var(--zen-dark-bg, #0a0a0c);
 }
 ::-webkit-scrollbar-thumb {
   background: var(--zen-primary, #981701);
-  border-radius: 999px;
+  border-radius: 0px;
 }
 .dark ::-webkit-scrollbar-thumb {
-  background: var(--zen-dark-primary, #f0b000);
+  background: var(--zen-dark-primary, #df9e12);
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--zen-dark-primary, #f0b000);
+  background: var(--zen-dark-primary, #df9e12);
 }
 
 /* Animations for Mobile Drawer */
