@@ -20,7 +20,7 @@ import {
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { VOCABULARY, getSyllablesDataset } from '../data/vocabulary';
-import { tokenizeKana, generateDistractors } from '../utils/kanaTokenizer';
+import { tokenizeKana, generateDistractors, shuffleArray } from '../utils/kanaTokenizer';
 import VocabIllustration from './common/VocabIllustration';
 import { playKanaSound } from '../utils/audio';
 import { useLanguage } from '../context/LanguageContext';
@@ -96,8 +96,8 @@ export default function KanaPuzzle({ defaultScriptMode = 'hiragana' }) {
     // Generate distractors if needed
     const distractors = generateDistractors(tokens, wordObj.script || 'hiragana', distractorCount);
 
-    // Combine and shuffle available tiles
-    const allTiles = [...tokens, ...distractors].sort(() => Math.random() - 0.5);
+    // Combine and shuffle available tiles using true Fisher-Yates randomization
+    const allTiles = shuffleArray([...tokens, ...distractors]);
     setAvailableTiles(allTiles);
 
     // Empty slots array & reset attempts & hide choices in hard mode
@@ -134,7 +134,7 @@ export default function KanaPuzzle({ defaultScriptMode = 'hiragana' }) {
       pool = VOCABULARY;
     }
 
-    const shuffled = [...pool].sort(() => Math.random() - 0.5);
+    const shuffled = shuffleArray(pool);
     const targetCount = wordCount === 'all' ? pool.length : Math.min(Number(wordCount), pool.length);
     const selected = shuffled.slice(0, targetCount);
 
@@ -206,7 +206,7 @@ export default function KanaPuzzle({ defaultScriptMode = 'hiragana' }) {
   // Shuffle available pool tiles visually
   const handleShufflePool = () => {
     if (isSuccess || isFailed) return;
-    setAvailableTiles(prev => [...prev].sort(() => Math.random() - 0.5));
+    setAvailableTiles(prev => shuffleArray(prev));
   };
 
   // Advance to next word or finish session

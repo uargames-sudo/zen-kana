@@ -184,6 +184,21 @@ const KATAKANA_DISTRACTOR_POOL = [
 ];
 
 /**
+ * Robust Fisher-Yates (Knuth) array shuffle
+ * @template T
+ * @param {T[]} array
+ * @returns {T[]} Shuffled new array
+ */
+export function shuffleArray(array = []) {
+  const result = [...array];
+  for (let i = result.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [result[i], result[j]] = [result[j], result[i]];
+  }
+  return result;
+}
+
+/**
  * Generate distractor tiles that are not already present in the target tokens
  * @param {Array<{ kana: string, romaji: string }>} existingTokens Target tokens
  * @param {string} scriptMode 'hiragana' | 'katakana'
@@ -199,7 +214,7 @@ export function generateDistractors(existingTokens = [], scriptMode = 'hiragana'
 
   // Filter pool to avoid duplicate answers
   const availableDistractors = pool.filter(p => !existingKanaSet.has(p.kana) && !existingRomajiSet.has(p.romaji));
-  const shuffled = [...availableDistractors].sort(() => Math.random() - 0.5);
+  const shuffled = shuffleArray(availableDistractors);
 
   return shuffled.slice(0, count).map((item, idx) => ({
     ...item,
