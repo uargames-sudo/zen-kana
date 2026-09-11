@@ -55,7 +55,7 @@ export default function ActiveStudy({ scriptMode }) {
 
             {/* Tab Content */}
             <div className="flex-1 w-full">
-                {activeTab === 'kana' && <KanaStudy />}
+                {activeTab === 'kana' && <KanaStudy initialScript={scriptMode} />}
                 {activeTab === 'phrases' && <PhrasesStudio />}
                 {activeTab === 'stories' && <StoryReader />}
             </div>

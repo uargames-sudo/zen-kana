@@ -62,12 +62,16 @@ export function getSyllablesDataset(scriptMode = 'all', category = 'all') {
 
       if (scriptMode === 'all' || scriptMode === 'katakana') {
         if (entry.katakana) {
+          // Use Katakana example if available from KANA_EXAMPLES_MAP or entry
+          const katExampleIt = entry.exampleIt ? entry.exampleIt.replace(/^[^\s(]+/, entry.katakana) : entry.romaji;
+          const katExampleEn = entry.exampleEn ? entry.exampleEn.replace(/^[^\s(]+/, entry.katakana) : entry.romaji;
+
           items.push({
             id: `syl-k-${catName}-${idx}-${entry.katakana}`,
             kana: entry.katakana,
             romaji: entry.romaji.split(' ')[0],
-            italian: entry.exampleIt || entry.romaji,
-            english: entry.exampleEn || entry.romaji,
+            italian: katExampleIt,
+            english: katExampleEn,
             script: 'katakana',
             category: catName,
             type: 'syllable',

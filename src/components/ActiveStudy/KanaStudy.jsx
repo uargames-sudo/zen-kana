@@ -1,9 +1,10 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import QuestionPrompt from './QuestionPrompt';
 import AnswerInput from './AnswerInput';
 import VirtualKeyboard from './VirtualKeyboard';
 import SolutionCard from './SolutionCard';
 import { checkRomajiMatch, getRomajiDiff } from '../../utils/romajiVariants';
+import { shuffleArray } from '../../utils/kanaTokenizer';
 import { Layers, Sparkles, Keyboard, CheckCircle, XCircle } from 'lucide-react';
 import { useLanguage } from '../../context/LanguageContext';
 import { VOCABULARY, getSyllablesDataset } from '../../data/vocabulary';
@@ -18,6 +19,13 @@ export default function KanaStudy({ vocabularyData = VOCABULARY, initialScript =
     const [targetCount, setTargetCount] = useState(10); // 5, 10, 20, or 50
     const [studyMode, setStudyMode] = useState('mixed'); // 'ja-to-ro', 'ro-to-ja', 'mixed'
     const [difficulty, setDifficulty] = useState('easy'); // 'easy', 'medium', 'hard'
+
+    // Synchronize script filter when initialScript changes from parent tabs
+    useEffect(() => {
+        if (initialScript) {
+            setScriptFilter(initialScript);
+        }
+    }, [initialScript]);
     
     // Active dataset pool based on selected content type and script filter
     const activeDataset = useMemo(() => {
@@ -47,6 +55,7 @@ export default function KanaStudy({ vocabularyData = VOCABULARY, initialScript =
     const [mode, setMode] = useState('ja-to-ro');
     const [questionsDone, setQuestionsDone] = useState(0);
     const [stats, setStats] = useState({ correct: 0, failed: 0 });
+    const [sessionQueue, setSessionQueue] = useState([]);
     
     const [currentQuestion, setCurrentQuestion] = useState(null);
     const [userInput, setUserInput] = useState('');
@@ -55,29 +64,25 @@ export default function KanaStudy({ vocabularyData = VOCABULARY, initialScript =
     const [status, setStatus] = useState('playing'); // 'playing', 'success', 'failed'
     const [diff, setDiff] = useState(null);
     const [showConsultationKeyboard, setShowConsultationKeyboard] = useState(false);
-    
-    const getRandomQuestion = () => {
-        const pool = activeDataset;
-        const validItems = pool.filter(item => (item.japanese || item.kana) && item.romaji);
-        if (validItems.length === 0) return null;
-        const randomIndex = Math.floor(Math.random() * validItems.length);
-        return validItems[randomIndex];
-    };
 
     const startSession = () => {
+        const validItems = activeDataset.filter(item => (item.japanese || item.kana) && item.romaji);
+        if (validItems.length === 0) return;
+
+        // Build a randomized non-repeating queue for the entire session
+        let queue = shuffleArray(validItems);
+        // If target count is greater than available items, repeat shuffled sets
+        while (queue.length < targetCount && validItems.length > 0) {
+            queue = queue.concat(shuffleArray(validItems));
+        }
+        const sessionItems = queue.slice(0, targetCount);
+
+        setSessionQueue(sessionItems);
         setQuestionsDone(0);
         setStats({ correct: 0, failed: 0 });
         setPhase('playing');
-        nextQuestion();
-    };
-
-    const nextQuestion = () => {
-        if (questionsDone >= targetCount) {
-            setPhase('summary');
-            return;
-        }
-
-        setCurrentQuestion(getRandomQuestion());
+        
+        setCurrentQuestion(sessionItems[0]);
         setUserInput('');
         setAttempts(0);
         setStatus('playing');
@@ -120,11 +125,11 @@ export default function KanaStudy({ vocabularyData = VOCABULARY, initialScript =
 
     const handleNextClick = () => {
         const nextDoneCount = questionsDone + 1;
-        if (nextDoneCount >= targetCount) {
+        if (nextDoneCount >= targetCount || nextDoneCount >= sessionQueue.length) {
             setPhase('summary');
         } else {
             setQuestionsDone(nextDoneCount);
-            setCurrentQuestion(getRandomQuestion());
+            setCurrentQuestion(sessionQueue[nextDoneCount]);
             setUserInput('');
             setAttempts(0);
             setStatus('playing');

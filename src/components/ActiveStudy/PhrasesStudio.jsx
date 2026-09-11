@@ -5,6 +5,7 @@ import VirtualKeyboard from './VirtualKeyboard';
 import SolutionCard from './SolutionCard';
 import { phrasesData, phraseCategories, getPhraseCleanKana, getPhraseCleanRomaji } from '../../data/phrasesData';
 import { checkRomajiMatch, getRomajiDiff } from '../../utils/romajiVariants';
+import { shuffleArray } from '../../utils/kanaTokenizer';
 import { Layers, Sparkles, Keyboard } from 'lucide-react';
 import { useLanguage } from '../../context/LanguageContext';
 
@@ -28,6 +29,7 @@ export default function PhrasesStudio() {
     const [mode, setMode] = useState('ja-to-ro');
     const [questionsDone, setQuestionsDone] = useState(0);
     const [stats, setStats] = useState({ correct: 0, failed: 0 });
+    const [sessionQueue, setSessionQueue] = useState([]);
     
     const [currentQuestion, setCurrentQuestion] = useState(null);
     const [userInput, setUserInput] = useState('');
@@ -37,20 +39,22 @@ export default function PhrasesStudio() {
     const [diff, setDiff] = useState(null);
     const [showConsultationKeyboard, setShowConsultationKeyboard] = useState(false);
 
-    const getRandomQuestion = () => {
-        const pool = activeDataset;
-        const validItems = pool.filter(item => item.japanese && item.romaji);
-        if (validItems.length === 0) return null;
-        const randomIndex = Math.floor(Math.random() * validItems.length);
-        return validItems[randomIndex];
-    };
-
     const startSession = () => {
+        const validItems = activeDataset.filter(item => item.japanese && item.romaji);
+        if (validItems.length === 0) return;
+
+        let queue = shuffleArray(validItems);
+        while (queue.length < targetCount && validItems.length > 0) {
+            queue = queue.concat(shuffleArray(validItems));
+        }
+        const sessionItems = queue.slice(0, targetCount);
+
+        setSessionQueue(sessionItems);
         setQuestionsDone(0);
         setStats({ correct: 0, failed: 0 });
         setPhase('playing');
         
-        setCurrentQuestion(getRandomQuestion());
+        setCurrentQuestion(sessionItems[0]);
         setUserInput('');
         setAttempts(0);
         setStatus('playing');
@@ -105,13 +109,11 @@ export default function PhrasesStudio() {
 
     const handleNextClick = () => {
         const nextDoneCount = questionsDone + 1;
-        const actualTarget = Math.min(targetCount, activeDataset.length > 0 ? activeDataset.length * 2 : targetCount);
-        
-        if (nextDoneCount >= actualTarget || nextDoneCount >= targetCount) {
+        if (nextDoneCount >= targetCount || nextDoneCount >= sessionQueue.length) {
             setPhase('summary');
         } else {
             setQuestionsDone(nextDoneCount);
-            setCurrentQuestion(getRandomQuestion());
+            setCurrentQuestion(sessionQueue[nextDoneCount]);
             setUserInput('');
             setAttempts(0);
             setStatus('playing');
