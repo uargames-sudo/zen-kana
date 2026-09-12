@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from 'react';
 import { 
     HIRAGANA_GRID, 
     KATAKANA_GRID, 
@@ -35,6 +36,12 @@ export default function VirtualKeyboard({
             setScript(targetScript);
         }
     }, [targetScript]);
+
+    useEffect(() => {
+        if (script === 'hiragana' && category === 'extended') {
+            setCategory('basic');
+        }
+    }, [script, category]);
 
     const isHiragana = script === 'hiragana';
 

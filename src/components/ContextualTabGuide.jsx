@@ -17,12 +17,13 @@ export default function ContextualTabGuide({
   const [isOpen, setIsOpen] = useState(defaultExpanded);
 
   const guideCategory = TAB_GUIDES[category] || TAB_GUIDES.basic;
-  const guide = guideCategory[scriptMode] || guideCategory.hiragana;
+  const guide = guideCategory?.[scriptMode] || guideCategory?.hiragana || guideCategory?.katakana || {};
 
-  const title = lang === 'it' ? guide.titleIt : guide.titleEn;
-  const subtitle = lang === 'it' ? guide.subtitleIt : guide.subtitleEn;
-  const points = lang === 'it' ? guide.pointsIt : guide.pointsEn;
-  const tip = lang === 'it' ? guide.tipIt : guide.tipEn;
+  const title = (lang === 'it' ? guide?.titleIt : guide?.titleEn) || guide?.titleIt || guide?.titleEn || '';
+  const subtitle = (lang === 'it' ? guide?.subtitleIt : guide?.subtitleEn) || guide?.subtitleIt || guide?.subtitleEn || '';
+  const points = (lang === 'it' ? guide?.pointsIt : guide?.pointsEn) || guide?.pointsIt || guide?.pointsEn || [];
+  const tip = (lang === 'it' ? guide?.tipIt : guide?.tipEn) || guide?.tipIt || guide?.tipEn || null;
+  const badge = guideCategory?.badge || 'Kana Guide';
 
   if (variant === 'banner') {
     return (
@@ -34,7 +35,7 @@ export default function ContextualTabGuide({
             </div>
             <div>
               <span className="text-3xs font-bold uppercase tracking-wider text-zen-primary dark:text-zen-dark-primary font-mono">
-                {guideCategory.badge}
+                {badge}
               </span>
               <h4 className="text-sm font-bold font-headline text-zen-text dark:text-zen-dark-text leading-tight">
                 {title}
@@ -84,7 +85,7 @@ export default function ContextualTabGuide({
           <div className="min-w-0">
             <div className="flex items-center gap-2">
               <span className="text-3xs font-bold uppercase tracking-wider text-zen-primary dark:text-zen-dark-primary font-mono px-2 py-0.5 bg-zen-primary/10 dark:bg-zen-dark-primary/20 border border-zen-primary/20">
-                {guideCategory.badge}
+                {badge}
               </span>
               <span className="text-3xs font-semibold text-zen-text-muted dark:text-zen-dark-text-muted uppercase">
                 {lang === 'it' ? 'Miniguida' : 'Quick Guide'}
