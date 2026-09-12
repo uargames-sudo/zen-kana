@@ -15,21 +15,21 @@ A calm, focused, and intuitive Japanese character learning studio designed as a 
 
 - **🎨 Zen Design System**: Kyoto Lacquer Red & Warm Rice Paper light theme, paired with a Deep Warm Charcoal & Sun Gold nocturnal sanctuary theme with high-contrast readability.
 - **🀄 Kana Mahjong Zen Solitaire**: Multi-layer 3D Mahjong Solitaire tile-matching game (match Kana with its corresponding Romaji) with 3 layouts (*Zen Turtle*, *Classic Pyramid*, *Imperial Dragon*), free-tile collision detection, hints, shuffle, and combo multipliers.
-- **🧩 Kana Word Puzzle**: Reconstruct Japanese vocabulary words by placing syllable tiles in correct order with distractor tiles, translation hints, difficulty tiers, customizable session lengths (5, 10, 15, 25, or All words), and senior-accessible high-contrast typography.
+- **🧩 Kana Word Puzzle**: Reconstruct Japanese vocabulary words by placing syllable tiles in correct order with distractor tiles, translation hints, difficulty tiers, customizable session lengths (5, 10, 15, 25, or All words), hidden tile mode for Hard tier, and senior-accessible high-contrast typography.
 - **🎴 Zen Memory Game**: Interactive Matching Game with 3 study modes (*Vocabulary & Illustrations*, *Syllabary Kana ↔ Romaji*, and *Audio Listening*), 3 difficulty tiers, 3D flip card animations, combo streak multipliers, and celebration confetti.
 - **📖 4 Comprehensive Guided Courses**:
   1. *5 Kana a Day* (10 Days • 46 Basic Gojūon)
   2. *Dakuten & Handakuten* (5 Days • 25 Voiced/Semi-voiced sounds)
   3. *Yōon Combinations* (6 Days • 33 Contracted sounds)
-  4. *Special Phonetics, Loanwords & Rhythm* (4 Days • Sokuon, Chōonpu, Particles & Nasal, Extended Katakana / Gairaigo Foreign Sounds)
+  4. *Special Phonetics, Loanwords & Rhythm* (4 Days • Sokuon, Chōonpu, Small Expressive Vowels, Particles & Nasal, Extended Katakana / Gairaigo Foreign Sounds)
 - **💡 Contextual Mini-Guides**: Live educational explanations embedded right inside Kana Reference Tables and the Virtual Keyboard matching the active script and category.
-- **🃏 Enhanced Flashcards & Shuffle Mode**: Spaced repetition cards with category filters (*All*, *Basic*, *Dakuten*, *Yōon*, *Extended Katakana*, *Vocabulary*, *Survival Phrases*), sub-category filters, Shuffle / Random order toggle, and instant error revision mode.
-- **📚 Shufflable Vocabulary Studio**: 150 essential Japanese words (75 Hiragana + 75 Katakana) with 100% kana coverage, authentic 2D vector illustrations, Romaji, Italian and English translations, pronunciation audio, and random shuffle mode.
+- **🃏 Enhanced Flashcards & Shuffle Mode**: Spaced repetition cards with category filters (*All*, *Basic*, *Dakuten*, *Yōon*, *Extended Katakana*, *Vocabulary*, *Survival Phrases*), sub-category filters, Shuffle / Random order toggle, instant error revision mode, and clean transition states.
+- **📚 Shufflable Vocabulary Studio**: 150 essential Japanese words (75 Hiragana + 75 Katakana) with 100% kana coverage, authentic 2D vector illustrations, Romaji, Italian and English translations, pronunciation audio, random shuffle mode, and dynamic text scaling ensuring words are always displayed in full without truncation.
 - **🔊 High-Fidelity Speech & Audio Engine**: Instant pre-warming on user gesture (zero first-click latency), maximum volume output (`1.0`), learner-calibrated cadence (0.75 for Kana, 0.80 for vocabulary), and Chromium GC protection.
 - **🌍 Bilingual Interface (i18n)**: Full runtime switching between **Italian** and **English** with seamless in-app language switcher (`IT` / `EN`) across all learning modules and menus.
-- **📑 Unified Kana Matrix**: Reference tables and virtual keyboard organized into **Base (46)**, **Dakuten (゛)**, **Handakuten (゜)**, **Yōon (拗音)**, **Small/Sokuon (っ/ー)**, and **Extended Katakana / Gairaigo (23 loanword sounds: ティ, ディ, ファ, ウィ, ヴァ, etc.)** with 100% bilingual example coverage.
+- **📑 Complete Extended Kana Matrix**: Reference tables and virtual keyboard organized into **Base (46)**, **Dakuten (゛)**, **Handakuten (゜)**, **Yōon (拗音)**, **Small & Expressive (っ/ッ, ぁ-ぉ, ゃ-ょ, ゎ/ヮ, ヵ/ヶ)**, and **Extended Katakana / Gairaigo (33 loanword sounds: 23 standard like ティ, ディ, ファ, ウィ + 10 rare like クァ, クィ, グァ, スィ, ズィ, イェ, etc.)** with 100% bilingual example coverage.
 - **⚡ Advanced Active Study Hub**: A comprehensive 3-pillar learning hub:
-  - *Kana Study*: Train muscle memory and transliteration with 3 difficulty tiers, writing system filters (*Hiragana Only*, *Katakana Only*, or *Both*), smart auto-aligning virtual keyboard, instant `Enter` key progression, and content selectors (*Vocabulary*, *All Syllabary*, *Basic 46*, *Dakuten*, *Yōon*).
+  - *Kana Study*: Train muscle memory and transliteration with 3 difficulty tiers (with strict Hard mode hiding translations until solved), writing system filters (*Hiragana Only*, *Katakana Only*, or *Both*), smart auto-aligning virtual keyboard with dedicated guide toggle, instant `Enter` key progression, and content selectors (*Vocabulary*, *All Syllabary*, *Basic 46*, *Dakuten*, *Yōon*).
   - *Phrases Studio*: Full interactive typing & transliteration practice for survival Japanese (Japanese ➔ Romaji, Romaji ➔ Kana, or Mixed) with Furigana, 3 difficulty tiers, virtual keyboard, and instant validation.
   - *Story Reader*: N5-level short stories presented line-by-line with progressive reveals (Romaji → Translation) and per-line playback.
 - **🇯🇵 Native Furigana Engine**: Full support for HTML5 `<ruby>` tags to display perfectly aligned Furigana over Kanji characters.
