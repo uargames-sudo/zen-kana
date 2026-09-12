@@ -1,4 +1,3 @@
-import React, { useState, useEffect } from 'react';
 import { 
     HIRAGANA_GRID, 
     KATAKANA_GRID, 
@@ -9,7 +8,8 @@ import {
     YOON_HIRAGANA_GRID,
     YOON_KATAKANA_GRID,
     SMALL_HIRAGANA_GRID,
-    SMALL_KATAKANA_GRID
+    SMALL_KATAKANA_GRID,
+    EXTENDED_KATAKANA_GRID
 } from '../../data/kanaTables';
 import { Eye, EyeOff, BookOpen, Info, HelpCircle } from 'lucide-react';
 import { useLanguage } from '../../context/LanguageContext';
@@ -24,9 +24,9 @@ export default function VirtualKeyboard({
     allowToggleRomaji = false,
     targetScript = 'hiragana'
 }) {
-    const { t } = useLanguage();
+    const { lang, t } = useLanguage();
     const [script, setScript] = useState(targetScript || 'hiragana'); // 'hiragana' or 'katakana'
-    const [category, setCategory] = useState('basic'); // 'basic', 'dakuten', 'handakuten', 'yoon', 'small'
+    const [category, setCategory] = useState('basic'); // 'basic', 'dakuten', 'handakuten', 'yoon', 'extended', 'small'
     const [romajiToggled, setRomajiToggled] = useState(false);
     const [showGuide, setShowGuide] = useState(false);
 
@@ -62,6 +62,12 @@ export default function VirtualKeyboard({
             rowLabels = ['KY', 'SH', 'CH', 'NY', 'HY', 'MY', 'RY', 'GY', 'J', 'BY', 'PY'];
             gridColsClass = 'grid-cols-[28px_repeat(3,minmax(0,1fr))] sm:grid-cols-[36px_repeat(3,minmax(0,1fr))]';
             break;
+        case 'extended':
+            activeGrid = EXTENDED_KATAKANA_GRID;
+            colHeaders = ['A / YA', 'I', 'U / YU', 'E', 'O / YO'];
+            rowLabels = ['T/D', 'F', 'W', 'V', 'CH/SH/J', 'TS'];
+            gridColsClass = 'grid-cols-[28px_repeat(5,minmax(0,1fr))] sm:grid-cols-[36px_repeat(5,minmax(0,1fr))]';
+            break;
         case 'small':
             activeGrid = isHiragana ? SMALL_HIRAGANA_GRID : SMALL_KATAKANA_GRID;
             colHeaders = isHiragana ? ['Sokuon (っ)'] : ['Chōonpu (ー)', 'Sokuon (ッ)'];
@@ -80,12 +86,19 @@ export default function VirtualKeyboard({
 
     const isRomajiVisible = showRomaji || (allowToggleRomaji && romajiToggled);
 
-    const categories = [
+    const categories = isHiragana ? [
         { id: 'basic', label: t('table.tabBasic') },
         { id: 'dakuten', label: t('table.tabDakuten') },
         { id: 'handakuten', label: t('table.tabHandakuten') },
         { id: 'yoon', label: t('table.tabYoon') },
-        { id: 'small', label: isHiragana ? t('table.tabSokuon') : t('table.tabChoonpu') }
+        { id: 'small', label: t('table.tabSokuon') }
+    ] : [
+        { id: 'basic', label: t('table.tabBasic') },
+        { id: 'dakuten', label: t('table.tabDakuten') },
+        { id: 'handakuten', label: t('table.tabHandakuten') },
+        { id: 'yoon', label: t('table.tabYoon') },
+        { id: 'extended', label: t('table.tabExtended') || (lang === 'it' ? 'Estesi (Gairaigo)' : 'Extended (Gairaigo)') },
+        { id: 'small', label: t('table.tabChoonpu') }
     ];
 
     return (

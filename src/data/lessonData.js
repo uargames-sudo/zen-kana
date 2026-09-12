@@ -831,6 +831,99 @@ const PHONETICS_SYLLABLES = [
         }
       }
     }
+  },
+  {
+    id: 4,
+    topic: 'extended-katakana',
+    hiraKana: [
+      { char: 'ティ', cleanRomaji: 'ti', baseChar: 'テ', modifier: 'ィ', descIt: 'Suono TI (es. Party)', descEn: 'Foreign TI sound (e.g. Party)' },
+      { char: 'ディ', cleanRomaji: 'di', baseChar: 'デ', modifier: 'ィ', descIt: 'Suono DI (es. Disney)', descEn: 'Foreign DI sound (e.g. Disney)' },
+      { char: 'ファ', cleanRomaji: 'fa', baseChar: 'フ', modifier: 'ァ', descIt: 'Suono FA (es. Family)', descEn: 'Foreign FA sound (e.g. Family)' },
+      { char: 'フィ', cleanRomaji: 'fi', baseChar: 'フ', modifier: 'ィ', descIt: 'Suono FI (es. Film)', descEn: 'Foreign FI sound (e.g. Film)' },
+      { char: 'フェ', cleanRomaji: 'fe', baseChar: 'フ', modifier: 'ェ', descIt: 'Suono FE (es. Café)', descEn: 'Foreign FE sound (e.g. Café)' },
+      { char: 'フォ', cleanRomaji: 'fo', baseChar: 'フ', modifier: 'ォ', descIt: 'Suono FO (es. Fork)', descEn: 'Foreign FO sound (e.g. Fork)' },
+      { char: 'ウィ', cleanRomaji: 'wi', baseChar: 'ウ', modifier: 'ィ', descIt: 'Suono WI (es. Wiki)', descEn: 'Foreign WI sound (e.g. Wiki)' },
+      { char: 'チェ', cleanRomaji: 'che', baseChar: 'チ', modifier: 'ェ', descIt: 'Suono CHE (es. Check)', descEn: 'Foreign CHE sound (e.g. Check)' },
+      { char: 'シェ', cleanRomaji: 'she', baseChar: 'シ', modifier: 'ェ', descIt: 'Suono SHE (es. Chef)', descEn: 'Foreign SHE sound (e.g. Chef)' },
+      { char: 'ジェ', cleanRomaji: 'je', baseChar: 'ジ', modifier: 'ェ', descIt: 'Suono JE (es. Jet)', descEn: 'Foreign JE sound (e.g. Jet)' },
+      { char: 'ヴァ', cleanRomaji: 'va', baseChar: 'ヴ', modifier: 'ァ', descIt: 'Suono VA (es. Violin)', descEn: 'Foreign VA sound (e.g. Violin)' }
+    ],
+    kataKana: [
+      { char: 'ティ', cleanRomaji: 'ti', baseChar: 'テ', modifier: 'ィ', descIt: 'Suono TI (es. Party)', descEn: 'Foreign TI sound (e.g. Party)' },
+      { char: 'ディ', cleanRomaji: 'di', baseChar: 'デ', modifier: 'ィ', descIt: 'Suono DI (es. Disney)', descEn: 'Foreign DI sound (e.g. Disney)' },
+      { char: 'ファ', cleanRomaji: 'fa', baseChar: 'フ', modifier: 'ァ', descIt: 'Suono FA (es. Family)', descEn: 'Foreign FA sound (e.g. Family)' },
+      { char: 'フィ', cleanRomaji: 'fi', baseChar: 'フ', modifier: 'ィ', descIt: 'Suono FI (es. Film)', descEn: 'Foreign FI sound (e.g. Film)' },
+      { char: 'フェ', cleanRomaji: 'fe', baseChar: 'フ', modifier: 'ェ', descIt: 'Suono FE (es. Café)', descEn: 'Foreign FE sound (e.g. Café)' },
+      { char: 'フォ', cleanRomaji: 'fo', baseChar: 'フ', modifier: 'ォ', descIt: 'Suono FO (es. Fork)', descEn: 'Foreign FO sound (e.g. Fork)' },
+      { char: 'ウィ', cleanRomaji: 'wi', baseChar: 'ウ', modifier: 'ィ', descIt: 'Suono WI (es. Wiki)', descEn: 'Foreign WI sound (e.g. Wiki)' },
+      { char: 'ウェ', cleanRomaji: 'we', baseChar: 'ウ', modifier: 'ェ', descIt: 'Suono WE (es. Web)', descEn: 'Foreign WE sound (e.g. Web)' },
+      { char: 'ウォ', cleanRomaji: 'wo', baseChar: 'ウ', modifier: 'ォ', descIt: 'Suono WO (es. Water)', descEn: 'Foreign WO sound (e.g. Water)' },
+      { char: 'チェ', cleanRomaji: 'che', baseChar: 'チ', modifier: 'ェ', descIt: 'Suono CHE (es. Check)', descEn: 'Foreign CHE sound (e.g. Check)' },
+      { char: 'シェ', cleanRomaji: 'she', baseChar: 'シ', modifier: 'ェ', descIt: 'Suono SHE (es. Chef)', descEn: 'Foreign SHE sound (e.g. Chef)' },
+      { char: 'ジェ', cleanRomaji: 'je', baseChar: 'ジ', modifier: 'ェ', descIt: 'Suono JE (es. Jet)', descEn: 'Foreign JE sound (e.g. Jet)' },
+      { char: 'ヴァ', cleanRomaji: 'va', baseChar: 'ヴ', modifier: 'ァ', descIt: 'Suono VA (es. Violin)', descEn: 'Foreign VA sound (e.g. Violin)' },
+      { char: 'ヴィ', cleanRomaji: 'vi', baseChar: 'ヴ', modifier: 'ィ', descIt: 'Suono VI (es. Venus)', descEn: 'Foreign VI sound (e.g. Venus)' }
+    ],
+    hiragana: {
+      titleIt: 'Katakana Estesi & Suoni per Parole Straniere (Gairaigo)',
+      titleEn: 'Extended Katakana & Foreign Sounds (Gairaigo)',
+      descIt: 'Come il Katakana combina piccole vocali (ァ, ィ, ゥ, ェ, ォ) per suoni occidentali (TI, DI, FA, WI, VA...).',
+      descEn: 'How modern Katakana combines small vowels (ァ, ィ, ゥ, ェ, ォ) for Western sounds (TI, DI, FA, WI, VA...).',
+      theory: {
+        it: {
+          title: 'I Suoni Stranieri Moderni del Katakana (Gairaigo)',
+          intro: 'Nel giapponese tradizionale non esistevano suoni come "ti", "di", "fa", "wi", "va". Nel Katakana moderno sono state create combinazioni speciali con piccole vocali (ァ, ィ, ゥ, ェ, ォ) per riprodurre fedelmente i termini stranieri!',
+          points: [
+            'TI e DI: テ (te) + ィ = ティ (ti, es. パーティー party, ティー tea); デ (de) + ィ = ディ (di, es. ディナー dinner, ディズニー Disney)',
+            'Serie F: フ (fu) + ァ/ィ/ェ/ォ = ファ (fa, es. ファミリー), フィ (fi, es. フィルム), フェ (fe, es. カフェ), フォ (fo, es. フォーク)',
+            'Serie W e V: ウ (u) + ィ/ェ/ォ = ウィ (wi, es. ウィキ), ウェ (we, es. ウェブ), ウォ (wo, es. ウォーター); ヴ (vu con dakuten) + ァ/ィ/ェ/ォ = ヴァ, ヴィ, ヴェ, ヴォ (suoni V)',
+            'Serie CH/SH/J: チ+ェ = チェ (che, es. チェック check); シ+ェ = シェ (she, es. シェフ chef); ジ+ェ = ジェ (je, es. ジェット jet)'
+          ],
+          tip: '💡 Nota Grafica: La piccola vocale (ァ, ィ, ゥ, ェ, ォ) si scrive a circa 1/4 della dimensione normale in basso a sinistra.'
+        },
+        en: {
+          title: 'Modern Foreign Sounds in Katakana (Gairaigo)',
+          intro: 'Traditional Japanese lacked phonemes like "ti", "di", "fa", "wi", "va". Modern Katakana created dedicated extended combinations using small vowels (ァ, ィ, ゥ, ェ, ォ) to accurately transcribe foreign words!',
+          points: [
+            'TI & DI: テ (te) + ィ = ティ (ti, e.g. パーティー party, ティー tea); デ (de) + ィ = ディ (di, e.g. ディナー dinner, ディズニー Disney)',
+            'F Series: フ (fu) + ァ/ィ/ェ/ォ = ファ (fa, e.g. ファミリー family), フィ (fi, e.g. フィルム film), フェ (fe, e.g. カフェ café), フォ (fo, e.g. フォーク fork)',
+            'W & V Series: ウ (u) + ィ/ェ/ォ = ウィ (wi, e.g. Wiki), ウェ (we, e.g. Web), ウォ (wo, e.g. Water); ヴ (vu with dakuten) + ァ/ィ/ェ/ォ = ヴァ, ヴィ, ヴェ, ヴォ (V sounds)',
+            'CH/SH/J Series: チ+ェ = チェ (che, e.g. チェック check); シ+ェ = シェ (she, e.g. シェフ chef); ジ+ェ = ジェ (je, e.g. ジェット jet)'
+          ],
+          tip: '💡 Graphic Note: Small vowels (ァ, ィ, ゥ, ェ, ォ) are written at 1/4 standard size in the lower-left area.'
+        }
+      }
+    },
+    katakana: {
+      titleIt: 'Katakana Estesi & Suoni per Parole Straniere (Gairaigo)',
+      titleEn: 'Extended Katakana & Foreign Sounds (Gairaigo)',
+      descIt: 'Le combinazioni con vocali piccole (ティ, ディ, ファ, フィ, ウィ, ヴァ, チェ...) per trascrivere parole internazionali.',
+      descEn: 'Combinations with small vowels (ティ, ディ, ファ, フィ, ウィ, ヴァ, チェ...) for transcribing foreign loanwords.',
+      theory: {
+        it: {
+          title: 'I Suoni Stranieri Moderni del Katakana (Gairaigo)',
+          intro: 'Nel giapponese tradizionale non esistevano suoni come "ti", "di", "fa", "wi", "va". Nel Katakana moderno sono state create combinazioni speciali con piccole vocali (ァ, ィ, ゥ, ェ, ォ) per riprodurre fedelmente i termini stranieri!',
+          points: [
+            'TI e DI: テ (te) + ィ = ティ (ti, es. パーティー party, ティー tea); デ (de) + ィ = ディ (di, es. ディナー dinner, ディズニー Disney)',
+            'Serie F: フ (fu) + ァ/ィ/ェ/ォ = ファ (fa, es. ファミリー), フィ (fi, es. フィルム), フェ (fe, es. カフェ), フォ (fo, es. フォーク)',
+            'Serie W e V: ウ (u) + ィ/ェ/ォ = ウィ (wi, es. ウィキ), ウェ (we, es. ウェブ), ウォ (wo, es. ウォーター); ヴ (vu con dakuten) + ァ/ィ/ェ/ォ = ヴァ, ヴィ, ヴェ, ヴォ (suoni V)',
+            'Serie CH/SH/J: チ+ェ = チェ (che, es. チェック check); シ+ェ = シェ (she, es. シェフ chef); ジ+ェ = ジェ (je, es. ジェット jet)'
+          ],
+          tip: '💡 Nota Grafica: La piccola vocale (ァ, ィ, ゥ, ェ, ォ) si scrive a circa 1/4 della dimensione normale in basso a sinistra.'
+        },
+        en: {
+          title: 'Modern Foreign Sounds in Katakana (Gairaigo)',
+          intro: 'Traditional Japanese lacked phonemes like "ti", "di", "fa", "wi", "va". Modern Katakana created dedicated extended combinations using small vowels (ァ, ィ, ゥ, ェ, ォ) to accurately transcribe foreign words!',
+          points: [
+            'TI & DI: テ (te) + ィ = ティ (ti, e.g. パーティー party, ティー tea); デ (de) + ィ = ディ (di, e.g. ディナー dinner, ディズニー Disney)',
+            'F Series: フ (fu) + ァ/ィ/ェ/ォ = ファ (fa, e.g. ファミリー family), フィ (fi, e.g. フィルム film), フェ (fe, e.g. カフェ café), フォ (fo, e.g. フォーク fork)',
+            'W & V Series: ウ (u) + ィ/ェ/ォ = ウィ (wi, e.g. Wiki), ウェ (we, e.g. Web), ウォ (wo, e.g. Water); ヴ (vu with dakuten) + ァ/ィ/ェ/ォ = ヴァ, ヴィ, ヴェ, ヴォ (V sounds)',
+            'CH/SH/J Series: チ+ェ = チェ (che, e.g. チェック check); シ+ェ = シェ (she, e.g. シェフ chef); ジ+ェ = ジェ (je, e.g. ジェット jet)'
+          ],
+          tip: '💡 Graphic Note: Small vowels (ァ, ィ, ゥ, ェ, ォ) are written at 1/4 standard size in the lower-left area.'
+        }
+      }
+    }
   }
 ];
 
@@ -853,7 +946,13 @@ const PHONETICS_EXTRA_VOCAB = [
   { id: 'p_kitte', kanaH: 'きって', kanaK: 'キッテ', romaji: 'kitte', english: 'stamp', italian: 'francobollo', imageKeyword: 'letter', topic: 'sokuon' },
   { id: 'p_ippai', kanaH: 'いっぱい', kanaK: 'イッパイ', romaji: 'ippai', english: 'full', italian: 'pieno', imageKeyword: 'water', topic: 'sokuon' },
   { id: 'p_konnichiwa', kanaH: 'こんにちは', kanaK: 'コンニチハ', romaji: 'konnichiwa', english: 'hello', italian: 'ciao / buongiorno', imageKeyword: 'friend', topic: 'particles-n' },
-  { id: 'p_arigatou', kanaH: 'ありがとう', kanaK: 'アリガトウ', romaji: 'arigatou', english: 'thank you', italian: 'grazie', imageKeyword: 'heart', topic: 'long-vowels' }
+  { id: 'p_arigatou', kanaH: 'ありがとう', kanaK: 'アリガトウ', romaji: 'arigatou', english: 'thank you', italian: 'grazie', imageKeyword: 'heart', topic: 'long-vowels' },
+  { id: 'p_party', kanaH: 'パーティー', kanaK: 'パーティー', romaji: 'paatii', english: 'party', italian: 'festa / party', imageKeyword: 'cake', topic: 'extended-katakana' },
+  { id: 'p_dinner', kanaH: 'ディナー', kanaK: 'ディナー', romaji: 'dinaa', english: 'dinner', italian: 'cena', imageKeyword: 'food', topic: 'extended-katakana' },
+  { id: 'p_family', kanaH: 'ファミリー', kanaK: 'ファミリー', romaji: 'famirii', english: 'family', italian: 'famiglia', imageKeyword: 'friend', topic: 'extended-katakana' },
+  { id: 'p_cafe', kanaH: 'カフェ', kanaK: 'カフェ', romaji: 'kafe', english: 'cafe', italian: 'bar / caffè', imageKeyword: 'water', topic: 'extended-katakana' },
+  { id: 'p_web', kanaH: 'ウェブ', kanaK: 'ウェブ', romaji: 'webu', english: 'web', italian: 'web / internet', imageKeyword: 'tv', topic: 'extended-katakana' },
+  { id: 'p_check', kanaH: 'チェック', kanaK: 'チェック', romaji: 'chekku', english: 'check', italian: 'controllo', imageKeyword: 'help', topic: 'extended-katakana' }
 ];
 
 export function getPhoneticsLessonVocabulary(lesson, scriptMode) {
@@ -874,6 +973,9 @@ export function getPhoneticsLessonVocabulary(lesson, scriptMode) {
   } else if (lesson.topic === 'particles-n') {
     const nChar = scriptMode === 'katakana' ? 'ン' : 'ん';
     vocabMatching = candidates.filter(w => w.kana.includes(nChar));
+  } else if (lesson.topic === 'extended-katakana') {
+    const extChars = ['ティ', 'ディ', 'ファ', 'フィ', 'フェ', 'フォ', 'ウィ', 'ウェ', 'ウォ', 'ヴァ', 'ヴィ', 'チェ', 'シェ', 'ジェ'];
+    vocabMatching = candidates.filter(w => extChars.some(ext => w.kana.includes(ext)));
   }
 
   const extraMatching = PHONETICS_EXTRA_VOCAB

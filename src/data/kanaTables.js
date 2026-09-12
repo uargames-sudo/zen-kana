@@ -86,3 +86,13 @@ export const SMALL_KATAKANA_GRID = [
     [{ k: 'ー', r: '—' }, { k: 'ッ', r: 'tsu' }]
 ];
 
+// Modern Extended Katakana for Foreign Loanwords (Gairaigo / 外来語)
+export const EXTENDED_KATAKANA_GRID = [
+    [{ k: 'ティ', r: 'ti' }, { k: 'ディ', r: 'di' }, { k: 'トゥ', r: 'tu' }, { k: 'ドゥ', r: 'du' }, null],
+    [{ k: 'ファ', r: 'fa' }, { k: 'フィ', r: 'fi' }, { k: 'フュ', r: 'fyu' }, { k: 'フェ', r: 'fe' }, { k: 'フォ', r: 'fo' }],
+    [null, { k: 'ウィ', r: 'wi' }, null, { k: 'ウェ', r: 'we' }, { k: 'ウォ', r: 'wo' }],
+    [{ k: 'ヴァ', r: 'va' }, { k: 'ヴィ', r: 'vi' }, { k: 'ヴ', r: 'vu' }, { k: 'ヴェ', r: 've' }, { k: 'ヴォ', r: 'vo' }],
+    [{ k: 'チェ', r: 'che' }, { k: 'シェ', r: 'she' }, { k: 'ジェ', r: 'je' }, null, null],
+    [{ k: 'ツァ', r: 'tsa' }, null, null, { k: 'ツェ', r: 'tse' }, { k: 'ツォ', r: 'tso' }]
+];
+

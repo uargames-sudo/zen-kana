@@ -126,6 +126,7 @@ export const translations = {
       tabSmall: 'Piccoli (っ/ー)',
       tabSokuon: 'Sokuon (促音)',
       tabChoonpu: 'Chōonpu / Sokuon (ー/ッ)',
+      tabExtended: 'Estesi (Gairaigo)',
       charDetails: 'Dettagli Carattere',
       exampleWord: 'Parola d\'esempio',
       close: 'Chiudi'
@@ -598,6 +599,7 @@ export const translations = {
       tabSmall: 'Small (っ/ー)',
       tabSokuon: 'Sokuon (促音)',
       tabChoonpu: 'Chōonpu / Sokuon (ー/ッ)',
+      tabExtended: 'Extended (Gairaigo)',
       charDetails: 'Character Details',
       exampleWord: 'Example Word',
       close: 'Close'

@@ -193,5 +193,46 @@ export const TAB_GUIDES = {
       ],
       tipEn: '💡 Chōonpu Tip: Keep your mouth in the same vowel shape and maintain vocal sound for 2 full counts smoothly.'
     }
+  },
+  extended: {
+    badge: 'Katakana Estesi (Gairaigo)',
+    hiragana: {
+      titleIt: 'Katakana Estesi & Suoni per Parole Straniere',
+      titleEn: 'Extended Katakana & Foreign Loanword Sounds',
+      subtitleIt: 'Combinazioni esclusive del Katakana per suoni occidentali',
+      subtitleEn: 'Katakana-exclusive combinations for Western phonetics',
+      pointsIt: [
+        'Perché esistono: Il giapponese tradizionale non aveva suoni come "ti", "di", "fa", "wi", "va".',
+        'Regola di Creazione: Si combinano caratteri base con piccole vocali (ァ, ィ, ゥ, ェ, ォ) o col segno ヴ.',
+        'Esempi Celebri: パーティー (pātī = party), ディズニー (dizunī = Disney), カフェ (kafe = café), ウィキ (wiki).'
+      ],
+      tipIt: '💡 Ricorda: Queste combinazioni esistono solo nel Katakana moderno per trascrivere prestiti stranieri!',
+      pointsEn: [
+        'Why they exist: Traditional Japanese phonology lacked sounds like "ti", "di", "fa", "wi", "va".',
+        'Creation Rule: Formed by combining base kana with small vowels (ァ, ィ, ゥ, ェ, ォ) or ヴ.',
+        'Famous Examples: パーティー (pātī = party), ディズニー (dizunī = Disney), カフェ (kafe = café), ウィキ (wiki).'
+      ],
+      tipEn: '💡 Note: These combinations are modern Katakana creations used exclusively for loanwords!'
+    },
+    katakana: {
+      titleIt: 'Katakana Estesi (外来語): Suoni Stranieri Moderni',
+      titleEn: 'Extended Katakana: Modern Foreign Sounds',
+      subtitleIt: 'Le combinazioni con vocali piccole (ティ, ディ, ファ, ウィ, ヴァ...)',
+      subtitleEn: 'Combinations with small vowels (ティ, ディ, ファ, ウィ, ヴァ...)',
+      pointsIt: [
+        'Suoni TI / DI: テ (te) + ィ = ティ (ti, es. パーティー party, ティー tea); デ (de) + ィ = ディ (di, es. ディナー dinner, ディズニー Disney); ト+ゥ = トゥ (tu), ド+ゥ = ドゥ (du).',
+        'Serie F: フ (fu) + ァ/ィ/ェ/ォ = ファ (fa, es. ファミリー), フィ (fi, es. フィルム), フェ (fe, es. カフェ), フォ (fo, es. フォーク).',
+        'Serie W & V: ウ (u) + ィ/ェ/ォ = ウィ (wi, es. ウィキ), ウェ (we, es. ウェブ), ウォ (wo, es. ウォーター); ヴ + ァ/ィ/ェ/ォ = ヴァ, ヴィ, ヴェ, ヴォ (suoni V).',
+        'Serie CH / SH / J: チ+ェ = チェ (che, es. チェック check); シ+ェ = シェ (she, es. シェフ chef); ジ+ェ = ジェ (je, es. ジェット jet).'
+      ],
+      tipIt: '💡 Regola delle Piccole Vocali: La vocale piccola (ァ, ィ, ゥ, ェ, ォ) si scrive a 1/4 della grandezza e modifica la vocale della sillaba principale.',
+      pointsEn: [
+        'TI / DI Sounds: テ (te) + ィ = ティ (ti, e.g. パーティー party, ティー tea); デ (de) + ィ = ディ (di, e.g. ディナー dinner, ディズニー Disney); ト+ゥ = トゥ (tu), ド+ゥ = ドゥ (du).',
+        'F Series: フ (fu) + ァ/ィ/ェ/ォ = ファ (fa, e.g. ファミリー family), フィ (fi, e.g. フィルム film), フェ (fe, e.g. カフェ café), フォ (fo, e.g. フォーク fork).',
+        'W & V Series: ウ (u) + ィ/ェ/ォ = ウィ (wi, e.g. Wiki), ウェ (we, e.g. Web), ウォ (wo, e.g. Water); ヴ + ァ/ィ/ェ/ォ = ヴァ, ヴィ, ヴェ, ヴォ (V sounds).',
+        'CH / SH / J Series: チ+ェ = チェ (che, e.g. チェック check); シ+ェ = シェ (she, e.g. シェフ chef); ジ+ェ = ジェ (je, e.g. ジェット jet).'
+      ],
+      tipEn: '💡 Small Vowel Rule: Small vowels (ァ, ィ, ゥ, ェ, ォ) are written at 1/4 standard size and replace the vowel of the preceding kana.'
+    }
   }
 };

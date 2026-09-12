@@ -10,7 +10,8 @@ import {
   YOON_HIRAGANA_GRID,
   YOON_KATAKANA_GRID,
   SMALL_HIRAGANA_GRID,
-  SMALL_KATAKANA_GRID
+  SMALL_KATAKANA_GRID,
+  EXTENDED_KATAKANA_GRID
 } from '../data/kanaTables';
 import { getKanaExample, getKanaExampleWord } from '../data/kanaData';
 import { playKanaSound } from '../utils/audio';
@@ -47,6 +48,13 @@ export default function KanaTable({ scriptMode }) {
           colCount: 3,
           grid: isHiragana ? YOON_HIRAGANA_GRID : YOON_KATAKANA_GRID
         };
+      case 'extended':
+        return {
+          columns: ['A / YA', 'I', 'U / YU', 'E', 'O / YO'],
+          rowLabels: ['T/D', 'F', 'W', 'V', 'CH/SH/J', 'TS'],
+          colCount: 5,
+          grid: EXTENDED_KATAKANA_GRID
+        };
       case 'small':
         return {
           columns: isHiragana ? ['促音 (Sokuon)'] : ['長音符 (Chōonpu)', '促音 (Sokuon)'],
@@ -80,12 +88,19 @@ export default function KanaTable({ scriptMode }) {
     ? 'grid-cols-[28px_minmax(0,1fr)] xs:grid-cols-[36px_minmax(0,1fr)] sm:grid-cols-[48px_minmax(140px,220px)]'
     : 'grid-cols-[28px_repeat(5,minmax(0,1fr))] xs:grid-cols-[36px_repeat(5,minmax(0,1fr))] sm:grid-cols-[48px_repeat(5,minmax(0,1fr))]';
 
-  const categories = [
+  const categories = isHiragana ? [
     { id: 'basic', label: t('table.tabBasic') },
     { id: 'dakuten', label: t('table.tabDakuten') },
     { id: 'handakuten', label: t('table.tabHandakuten') },
     { id: 'yoon', label: t('table.tabYoon') },
-    { id: 'small', label: isHiragana ? t('table.tabSokuon') : t('table.tabChoonpu') }
+    { id: 'small', label: t('table.tabSokuon') }
+  ] : [
+    { id: 'basic', label: t('table.tabBasic') },
+    { id: 'dakuten', label: t('table.tabDakuten') },
+    { id: 'handakuten', label: t('table.tabHandakuten') },
+    { id: 'yoon', label: t('table.tabYoon') },
+    { id: 'extended', label: t('table.tabExtended') || (lang === 'it' ? 'Estesi (Gairaigo)' : 'Extended (Gairaigo)') },
+    { id: 'small', label: t('table.tabChoonpu') }
   ];
 
   return (

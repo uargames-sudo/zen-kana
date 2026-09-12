@@ -1,6 +1,6 @@
 import React, { useMemo, useState, useEffect } from 'react';
 import { Volume2, RotateCw, CheckCircle, XCircle, ArrowRight, ArrowLeft, Layers, BookOpen, Shuffle, MessageSquareText } from 'lucide-react';
-import { HIRAGANA_BASIC, KANA_DAKUTEN, getKanaExample } from '../data/kanaData';
+import { HIRAGANA_BASIC, KANA_DAKUTEN, KANA_EXTENDED, getKanaExample } from '../data/kanaData';
 import { YOON_HIRAGANA_GRID, YOON_KATAKANA_GRID } from '../data/kanaTables';
 import { VOCABULARY } from '../data/vocabulary';
 import { phrasesData, phraseCategories } from '../data/phrasesData';
@@ -12,7 +12,7 @@ import { useLanguage } from '../context/LanguageContext';
 export default function Flashcards({ scriptMode = 'hiragana', updateStats }) {
   const { lang, t } = useLanguage();
   
-  // Category selection: 'all', 'basic', 'dakuten', 'yoon', 'vocabulary', 'phrases'
+  // Category selection: 'all', 'basic', 'dakuten', 'yoon', 'extended', 'vocabulary', 'phrases'
   const [category, setCategory] = useState('all');
   const [selectedPhraseCategory, setSelectedPhraseCategory] = useState('All');
   
@@ -40,6 +40,7 @@ export default function Flashcards({ scriptMode = 'hiragana', updateStats }) {
       group: 'yoon'
     }));
   }, []);
+  const EXTENDED_ITEMS = useMemo(() => KANA_EXTENDED, []);
 
   // Base unfiltered deck according to category
   const baseDeck = useMemo(() => {
@@ -50,6 +51,8 @@ export default function Flashcards({ scriptMode = 'hiragana', updateStats }) {
         return DAKUTEN_ITEMS;
       case 'yoon':
         return YOON_ITEMS;
+      case 'extended':
+        return EXTENDED_ITEMS;
       case 'vocabulary':
         return VOCABULARY;
       case 'phrases':
@@ -57,9 +60,11 @@ export default function Flashcards({ scriptMode = 'hiragana', updateStats }) {
         return phrasesData.filter(p => p.category === selectedPhraseCategory);
       case 'all':
       default:
-        return [...BASIC_ITEMS, ...DAKUTEN_ITEMS, ...YOON_ITEMS];
+        return scriptMode === 'katakana'
+          ? [...BASIC_ITEMS, ...DAKUTEN_ITEMS, ...YOON_ITEMS, ...EXTENDED_ITEMS]
+          : [...BASIC_ITEMS, ...DAKUTEN_ITEMS, ...YOON_ITEMS];
     }
-  }, [category, selectedPhraseCategory, BASIC_ITEMS, DAKUTEN_ITEMS, YOON_ITEMS]);
+  }, [category, selectedPhraseCategory, scriptMode, BASIC_ITEMS, DAKUTEN_ITEMS, YOON_ITEMS, EXTENDED_ITEMS]);
 
   // Apply shuffle if enabled
   const processedDeck = useMemo(() => {
@@ -90,8 +95,8 @@ export default function Flashcards({ scriptMode = 'hiragana', updateStats }) {
       : isVocabulary
       ? currentItem.kana
       : scriptMode === 'hiragana'
-      ? currentItem.hiragana
-      : currentItem.katakana
+      ? (currentItem.hiragana || currentItem.katakana)
+      : (currentItem.katakana || currentItem.hiragana)
     : '';
 
   const playCurrentAudio = (event) => {
@@ -222,10 +227,11 @@ export default function Flashcards({ scriptMode = 'hiragana', updateStats }) {
   const progressPercent = fullDeck.length > 0 ? Math.round(((currentIndex + 1) / fullDeck.length) * 100) : 0;
 
   const categories = [
-    { id: 'all', label: t('flashcards.allKana') || (lang === 'it' ? 'Tutti i Kana (104)' : 'All Kana (104)') },
+    { id: 'all', label: t('flashcards.allKana') || (lang === 'it' ? `Tutti i Kana (${scriptMode === 'katakana' ? '127' : '104'})` : `All Kana (${scriptMode === 'katakana' ? '127' : '104'})`) },
     { id: 'basic', label: t('flashcards.basic') || (lang === 'it' ? 'Base (46)' : 'Basic (46)') },
     { id: 'dakuten', label: t('flashcards.dakuten') || (lang === 'it' ? 'Dakuten (25)' : 'Dakuten (25)') },
     { id: 'yoon', label: t('flashcards.yoon') || (lang === 'it' ? 'Yōon (33)' : 'Yōon (33)') },
+    ...(scriptMode === 'katakana' ? [{ id: 'extended', label: lang === 'it' ? 'Estesi (23)' : 'Extended (23)' }] : []),
     { id: 'vocabulary', label: t('flashcards.vocabulary') || (lang === 'it' ? 'Vocabolario (150)' : 'Vocabulary (150)') },
     { id: 'phrases', label: lang === 'it' ? 'Frasi Utili (15)' : 'Phrases (15)' }
   ];

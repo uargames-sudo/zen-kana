@@ -127,11 +127,20 @@ export default function Vocabulary() {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {visibleWords.map((word) => {
+          const kanaLength = word.kana ? word.kana.length : 0;
+          const kanaSizeClass = kanaLength <= 2 
+            ? 'text-2xl sm:text-3xl lg:text-4xl' 
+            : kanaLength <= 4 
+            ? 'text-xl sm:text-2xl lg:text-3xl' 
+            : kanaLength <= 6 
+            ? 'text-lg sm:text-xl lg:text-2xl' 
+            : 'text-base sm:text-lg lg:text-xl';
+
           return (
             <button 
               key={word.id} 
               onClick={() => playKanaSound(word.kana)} 
-              className="zen-card zen-card-active flex flex-col justify-between border border-zen-border/60 p-4 sm:p-5 text-left dark:border-zen-dark-border bg-zen-surface-lowest dark:bg-zen-dark-surface group relative overflow-hidden transition-all duration-150 hover:shadow-zen-md min-h-[170px] cursor-pointer"
+              className="zen-card zen-card-active flex flex-col justify-between border border-zen-border/60 p-4 sm:p-5 text-left dark:border-zen-dark-border bg-zen-surface-lowest dark:bg-zen-dark-surface group relative overflow-hidden transition-all duration-150 hover:shadow-zen-md min-h-[160px] cursor-pointer"
             >
               {/* Top Row: Script badge + Audio volume icon */}
               <div className="flex items-center justify-between w-full mb-2">
@@ -141,14 +150,14 @@ export default function Vocabulary() {
                 <Volume2 className="h-4 w-4 sm:h-5 sm:w-5 text-zen-primary/70 dark:text-zen-dark-primary/70 group-hover:text-zen-primary dark:group-hover:text-zen-dark-primary group-hover:scale-105 transition-all" />
               </div>
 
-              {/* Middle Body: Left Text Info + Right Scalable Large Illustration */}
+              {/* Middle Body: Left Text Info + Right Illustration */}
               <div className="flex items-center justify-between gap-3 sm:gap-4 my-auto w-full">
                 {/* Left Info: Kana + Romaji + Translation */}
                 <div className="min-w-0 flex-1 space-y-1">
-                  <div className="font-kana text-3xl sm:text-4xl font-bold text-zen-primary dark:text-zen-dark-primary transition-transform leading-tight truncate">
+                  <div className={`font-kana font-bold text-zen-primary dark:text-zen-dark-primary transition-transform leading-snug break-words ${kanaSizeClass}`}>
                     {word.kana}
                   </div>
-                  <div className="text-sm font-bold font-headline text-zen-text dark:text-zen-dark-text tracking-wide">
+                  <div className="text-sm font-bold font-headline text-zen-text dark:text-zen-dark-text tracking-wide break-words">
                     {word.romaji}
                   </div>
                   <div className="text-xs text-zen-text-muted dark:text-zen-dark-text-muted font-medium truncate capitalize">
@@ -156,14 +165,14 @@ export default function Vocabulary() {
                   </div>
                 </div>
 
-                {/* Right: Generous Scalable Illustration Box */}
+                {/* Right: Scalable Illustration Box */}
                 <div className="shrink-0 flex items-center justify-center">
                   <VocabIllustration 
                     id={word.id} 
                     keyword={word.imageKeyword} 
                     alt={word.english} 
-                    className="w-24 h-24 xs:w-28 xs:h-28 sm:w-28 sm:h-28 md:w-32 md:h-32 bg-zen-surface-container/30 dark:bg-zen-dark-surface-high/30 p-1.5 transition-transform duration-200 border border-zen-border/30" 
-                    iconClassName="w-12 h-12 sm:w-14 sm:h-14" 
+                    className="w-16 h-16 xs:w-18 xs:h-18 sm:w-20 sm:h-20 md:w-22 md:h-22 rounded-2xl bg-zen-surface-container/30 dark:bg-zen-dark-surface-high/30 p-1.5 transition-transform duration-200 border border-zen-border/30" 
+                    iconClassName="w-8 h-8 xs:w-9 xs:h-9 sm:w-10 sm:h-10 md:w-11 md:h-11" 
                   />
                 </div>
               </div>

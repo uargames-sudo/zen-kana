@@ -406,8 +406,58 @@ export const KANA_EXAMPLES_MAP = {
   'ゎ': { it: 'ゎ (piccola wa)', en: 'ゎ (small wa)' },
   'ヮ': { it: 'ヮ (piccola wa)', en: 'ヮ (small wa)' },
   'ゔ': { it: 'ヴァイオリン (vaiorin - violino)', en: 'ヴァイオリン (vaiorin - violin)' },
-  'ヴ': { it: 'ヴァイオリン (vaiorin - violino)', en: 'ヴァイオリン (vaiorin - violin)' }
+  'ヴ': { it: 'ヴァイオリン (vaiorin - violino)', en: 'ヴァイオリン (vaiorin - violin)' },
+
+  // Extended Katakana (Gairaigo / Foreign Loanword Sounds)
+  'ティ': { it: 'パーティー (pātī - festa / party)', en: 'パーティー (pātī - party)' },
+  'ディ': { it: 'ディナー (dinā - cena / dinner)', en: 'ディナー (dinā - dinner)' },
+  'トゥ': { it: 'トゥルー (turū - vero / true)', en: 'トゥルー (turū - true)' },
+  'ドゥ': { it: 'ドゥー (dū - fare / do)', en: 'ドゥー (dū - do)' },
+  'ファ': { it: 'ファミリー (famirī - famiglia)', en: 'ファミリー (famirī - family)' },
+  'フィ': { it: 'フィルム (firumu - pellicola / film)', en: 'フィルム (firumu - film)' },
+  'フェ': { it: 'カフェ (kafe - bar / café)', en: 'カフェ (kafe - café)' },
+  'フォ': { it: 'フォーク (fōku - forchetta)', en: 'フォーク (fōku - fork)' },
+  'フュ': { it: 'フュージョン (fyūjon - fusione / fusion)', en: 'フュージョン (fyūjon - fusion)' },
+  'ウィ': { it: 'ウィキペディア (wikipedia)', en: 'ウィキペディア (wikipedia)' },
+  'ウェ': { it: 'ウェブ (webu - web / sito)', en: 'ウェブ (webu - web)' },
+  'ウォ': { it: 'ウォーター (wōtā - acqua / water)', en: 'ウォーター (wōtā - water)' },
+  'ヴァ': { it: 'ヴァイオリン (vaiorin - violino)', en: 'ヴァイオリン (vaiorin - violin)' },
+  'ヴィ': { it: 'ヴィーナス (vīnasu - Venere)', en: 'ヴィーナス (vīnasu - Venus)' },
+  'ヴェ': { it: 'ヴェネツィア (venetsia - Venezia)', en: 'ヴェネツィア (venetsia - Venice)' },
+  'ヴォ': { it: 'ヴォーカル (vōkaru - voce / vocal)', en: 'ヴォーカル (vōkaru - vocal)' },
+  'チェ': { it: 'チェック (chekku - controllo / check)', en: 'チェック (chekku - check)' },
+  'シェ': { it: 'シェフ (shefu - cuoco / chef)', en: 'シェフ (shefu - chef)' },
+  'ジェ': { it: 'ジェット (jetto - aereo jet)', en: 'ジェット (jetto - jet)' },
+  'ツァ': { it: 'モーツァルト (mōtsaruto - Mozart)', en: 'モーツァルト (mōtsaruto - Mozart)' },
+  'ツェ': { it: 'ツェッペリン (tsepperin - dirigibile Zeppelin)', en: 'ツェッペリン (tsepperin - Zeppelin)' },
+  'ツォ': { it: 'カンツォーネ (kantsōne - canzone)', en: 'カンツォーネ (kantsōne - canzone)' }
 };
+
+export const KANA_EXTENDED = [
+  { katakana: 'ティ', romaji: 'ti', exampleIt: 'パーティー (pātī - festa / party)', exampleEn: 'パーティー (pātī - party)', group: 't_d' },
+  { katakana: 'ディ', romaji: 'di', exampleIt: 'ディナー (dinā - cena / dinner)', exampleEn: 'ディナー (dinā - dinner)', group: 't_d' },
+  { katakana: 'トゥ', romaji: 'tu', exampleIt: 'トゥルー (turū - vero / true)', exampleEn: 'トゥルー (turū - true)', group: 't_d' },
+  { katakana: 'ドゥ', romaji: 'du', exampleIt: 'ドゥー (dū - fare / do)', exampleEn: 'ドゥー (dū - do)', group: 't_d' },
+  { katakana: 'ファ', romaji: 'fa', exampleIt: 'ファミリー (famirī - famiglia)', exampleEn: 'ファミリー (famirī - family)', group: 'f' },
+  { katakana: 'フィ', romaji: 'fi', exampleIt: 'フィルム (firumu - pellicola / film)', exampleEn: 'フィルム (firumu - film)', group: 'f' },
+  { katakana: 'フェ', romaji: 'fe', exampleIt: 'カフェ (kafe - bar / café)', exampleEn: 'カフェ (kafe - café)', group: 'f' },
+  { katakana: 'フォ', romaji: 'fo', exampleIt: 'フォーク (fōku - forchetta)', exampleEn: 'フォーク (fōku - fork)', group: 'f' },
+  { katakana: 'フュ', romaji: 'fyu', exampleIt: 'フュージョン (fyūjon - fusione / fusion)', exampleEn: 'フュージョン (fyūjon - fusion)', group: 'f' },
+  { katakana: 'ウィ', romaji: 'wi', exampleIt: 'ウィキペディア (wikipedia)', exampleEn: 'ウィキペディア (wikipedia)', group: 'w' },
+  { katakana: 'ウェ', romaji: 'we', exampleIt: 'ウェブ (webu - web / sito)', exampleEn: 'ウェブ (webu - web)', group: 'w' },
+  { katakana: 'ウォ', romaji: 'wo', exampleIt: 'ウォーター (wōtā - acqua / water)', exampleEn: 'ウォーター (wōtā - water)', group: 'w' },
+  { katakana: 'ヴァ', romaji: 'va', exampleIt: 'ヴァイオリン (vaiorin - violino)', exampleEn: 'ヴァイオリン (vaiorin - violin)', group: 'v' },
+  { katakana: 'ヴィ', romaji: 'vi', exampleIt: 'ヴィーナス (vīnasu - Venere)', exampleEn: 'ヴィーナス (vīnasu - Venus)', group: 'v' },
+  { katakana: 'ヴ', romaji: 'vu', exampleIt: 'ヴ (vu - suono V)', exampleEn: 'ヴ (vu - V sound)', group: 'v' },
+  { katakana: 'ヴェ', romaji: 've', exampleIt: 'ヴェネツィア (venetsia - Venezia)', exampleEn: 'ヴェネツィア (venetsia - Venice)', group: 'v' },
+  { katakana: 'ヴォ', romaji: 'vo', exampleIt: 'ヴォーカル (vōkaru - voce / vocal)', exampleEn: 'ヴォーカル (vōkaru - vocal)', group: 'v' },
+  { katakana: 'チェ', romaji: 'che', exampleIt: 'チェック (chekku - controllo / check)', exampleEn: 'チェック (chekku - check)', group: 'ch_sh_j' },
+  { katakana: 'シェ', romaji: 'she', exampleIt: 'シェフ (shefu - cuoco / chef)', exampleEn: 'シェフ (shefu - chef)', group: 'ch_sh_j' },
+  { katakana: 'ジェ', romaji: 'je', exampleIt: 'ジェット (jetto - aereo jet)', exampleEn: 'ジェット (jetto - jet)', group: 'ch_sh_j' },
+  { katakana: 'ツァ', romaji: 'tsa', exampleIt: 'モーツァルト (mōtsaruto - Mozart)', exampleEn: 'モーツァルト (mōtsaruto - Mozart)', group: 'ts' },
+  { katakana: 'ツェ', romaji: 'tse', exampleIt: 'ツェッペリン (tsepperin - dirigibile Zeppelin)', exampleEn: 'ツェッペリン (tsepperin - Zeppelin)', group: 'ts' },
+  { katakana: 'ツォ', romaji: 'tso', exampleIt: 'カンツォーネ (kantsōne - canzone)', exampleEn: 'カンツォーネ (kantsōne - canzone)', group: 'ts' }
+];
 
 export function getKanaExample(item, lang = 'it') {
   if (!item) return '';
@@ -423,6 +473,10 @@ export function getKanaExample(item, lang = 'it') {
   if (item.char) {
     const entry = KANA_EXAMPLES_MAP[item.char];
     if (entry) return lang === 'it' ? entry.it : entry.en;
+  }
+  if (item.katakana && KANA_EXAMPLES_MAP[item.katakana]) {
+    const entry = KANA_EXAMPLES_MAP[item.katakana];
+    return lang === 'it' ? entry.it : entry.en;
   }
   if (item.hiragana && KANA_EXAMPLES_MAP[item.hiragana]) {
     const entry = KANA_EXAMPLES_MAP[item.hiragana];
@@ -440,4 +494,5 @@ export function getKanaExampleWord(item) {
   const match = exampleStr.match(/^([^\s(]+)/);
   return match ? match[1].trim() : '';
 }
+
 

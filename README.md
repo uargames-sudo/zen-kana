@@ -21,13 +21,13 @@ A calm, focused, and intuitive Japanese character learning studio designed as a 
   1. *5 Kana a Day* (10 Days • 46 Basic Gojūon)
   2. *Dakuten & Handakuten* (5 Days • 25 Voiced/Semi-voiced sounds)
   3. *Yōon Combinations* (6 Days • 33 Contracted sounds)
-  4. *Special Phonetics & Rhythm* (3 Days • Sokuon, Chōonpu, Particles & Nasal)
+  4. *Special Phonetics, Loanwords & Rhythm* (4 Days • Sokuon, Chōonpu, Particles & Nasal, Extended Katakana / Gairaigo Foreign Sounds)
 - **💡 Contextual Mini-Guides**: Live educational explanations embedded right inside Kana Reference Tables and the Virtual Keyboard matching the active script and category.
-- **🃏 Enhanced Flashcards & Shuffle Mode**: Spaced repetition cards with category filters (*All*, *Basic*, *Dakuten*, *Yōon*, *Vocabulary*, *Survival Phrases*), sub-category filters, Shuffle / Random order toggle, and instant error revision mode.
+- **🃏 Enhanced Flashcards & Shuffle Mode**: Spaced repetition cards with category filters (*All*, *Basic*, *Dakuten*, *Yōon*, *Extended Katakana*, *Vocabulary*, *Survival Phrases*), sub-category filters, Shuffle / Random order toggle, and instant error revision mode.
 - **📚 Shufflable Vocabulary Studio**: 150 essential Japanese words (75 Hiragana + 75 Katakana) with 100% kana coverage, authentic 2D vector illustrations, Romaji, Italian and English translations, pronunciation audio, and random shuffle mode.
 - **🔊 High-Fidelity Speech & Audio Engine**: Instant pre-warming on user gesture (zero first-click latency), maximum volume output (`1.0`), learner-calibrated cadence (0.75 for Kana, 0.80 for vocabulary), and Chromium GC protection.
 - **🌍 Bilingual Interface (i18n)**: Full runtime switching between **Italian** and **English** with seamless in-app language switcher (`IT` / `EN`) across all learning modules and menus.
-- **📑 Unified 5-Category Kana Matrix**: Reference tables and virtual keyboard organized into **Base (46)**, **Dakuten (゛)**, **Handakuten (゜)**, **Yōon (拗音)**, and **Small/Sokuon (っ/ー)** with 100% bilingual example coverage.
+- **📑 Unified Kana Matrix**: Reference tables and virtual keyboard organized into **Base (46)**, **Dakuten (゛)**, **Handakuten (゜)**, **Yōon (拗音)**, **Small/Sokuon (っ/ー)**, and **Extended Katakana / Gairaigo (23 loanword sounds: ティ, ディ, ファ, ウィ, ヴァ, etc.)** with 100% bilingual example coverage.
 - **⚡ Advanced Active Study Hub**: A comprehensive 3-pillar learning hub:
   - *Kana Study*: Train muscle memory and transliteration with 3 difficulty tiers, writing system filters (*Hiragana Only*, *Katakana Only*, or *Both*), smart auto-aligning virtual keyboard, instant `Enter` key progression, and content selectors (*Vocabulary*, *All Syllabary*, *Basic 46*, *Dakuten*, *Yōon*).
   - *Phrases Studio*: Full interactive typing & transliteration practice for survival Japanese (Japanese ➔ Romaji, Romaji ➔ Kana, or Mixed) with Furigana, 3 difficulty tiers, virtual keyboard, and instant validation.
