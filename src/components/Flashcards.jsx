@@ -227,11 +227,11 @@ export default function Flashcards({ scriptMode = 'hiragana', updateStats }) {
   const progressPercent = fullDeck.length > 0 ? Math.round(((currentIndex + 1) / fullDeck.length) * 100) : 0;
 
   const categories = [
-    { id: 'all', label: t('flashcards.allKana') || (lang === 'it' ? `Tutti i Kana (${scriptMode === 'katakana' ? '127' : '104'})` : `All Kana (${scriptMode === 'katakana' ? '127' : '104'})`) },
+    { id: 'all', label: t('flashcards.allKana') || (lang === 'it' ? `Tutti i Kana (${scriptMode === 'katakana' ? '137' : '104'})` : `All Kana (${scriptMode === 'katakana' ? '137' : '104'})`) },
     { id: 'basic', label: t('flashcards.basic') || (lang === 'it' ? 'Base (46)' : 'Basic (46)') },
     { id: 'dakuten', label: t('flashcards.dakuten') || (lang === 'it' ? 'Dakuten (25)' : 'Dakuten (25)') },
     { id: 'yoon', label: t('flashcards.yoon') || (lang === 'it' ? 'Yōon (33)' : 'Yōon (33)') },
-    ...(scriptMode === 'katakana' ? [{ id: 'extended', label: lang === 'it' ? 'Estesi (23)' : 'Extended (23)' }] : []),
+    ...(scriptMode === 'katakana' ? [{ id: 'extended', label: lang === 'it' ? 'Estesi (33)' : 'Extended (33)' }] : []),
     { id: 'vocabulary', label: t('flashcards.vocabulary') || (lang === 'it' ? 'Vocabolario (150)' : 'Vocabulary (150)') },
     { id: 'phrases', label: lang === 'it' ? 'Frasi Utili (15)' : 'Phrases (15)' }
   ];

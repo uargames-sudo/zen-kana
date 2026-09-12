@@ -156,83 +156,87 @@ export const TAB_GUIDES = {
     }
   },
   small: {
-    badge: 'Fonetica & Ritmo',
+    badge: 'Piccoli & Espressivi (促音・小母音)',
     hiragana: {
-      titleIt: 'Sokuon (促音): Piccolo っ & Vocali Lunghe',
-      titleEn: 'Sokuon: Small っ & Long Vowels',
-      subtitleIt: 'Le regole ritmiche per il raddoppio consonantico e la durata',
-      subtitleEn: 'Rhythmic rules for consonant doubling and duration',
+      titleIt: 'Sokuon (っ) & Piccole Vocali Espressive (ぁ・ぃ・ぅ・ぇ・ぉ)',
+      titleEn: 'Sokuon (っ) & Small Expressive Vowels (ぁ・ぃ・ぅ・ぇ・ぉ)',
+      subtitleIt: 'Le regole ritmiche, pause glottali, interiezioni e sospiri',
+      subtitleEn: 'Rhythmic pauses, glottal stops, interjections and sighs',
       pointsIt: [
-        'Sokuon (っ): Il piccolo っ NON si pronuncia "tsu". Crea una pausa di silenzio (glottal stop) a 1 battito che raddoppia la consonante successiva (K, S, T, P).',
-        'Esempi Sokuon: きっぷ (kippu = biglietto), がっこう (gakkou = scuola), ざっし (zasshi = rivista), きって (kitte = francobollo).',
-        'Allungamenti Hiragana: O si allunga con う (es. たいよう taiyou = sole, きょう kyou = oggi); E si allunga con い (es. せんせい sensei = maestro).'
+        'Sokuon (っ): Il piccolo っ a metà parola crea una pausa di 1 battito che raddoppia la consonante (es. きっぷ kippu, がっこう gakkou).',
+        'Pausa Glottale & Interiezione: A fine parola indica un\'interruzione brusca del respiro tipica delle esclamazioni emotive (es. あっ! = "Ah!", えっ?! = "Eh?!").',
+        'Piccole Vocali Espressive (ぁ, ぃ, ぅ, ぇ, ぉ): Usate nei manga, canzoni e nel parlato informale per trascrivere sospiri, lamenti o allungamenti emotivi (es. あぁ... = sospiro/sollievo, うぅ... = lamento).',
+        'Piccolo ゎ: Usato colloquialmente o nello slang giovanile (es. ゎたし per dare un tono carino/infantile).'
       ],
-      tipIt: '💡 Conta i Battiti: In giapponese ogni mora dura esattamente lo stesso tempo. Una pausa o vocale lunga cambia radicalmente il significato (es. おばさん zia vs おばあさん nonna)!',
+      tipIt: '💡 Regola Grafica: Tutti i piccoli kana si scrivono a circa 1/4 della dimensione normale e si posizionano in basso a sinistra nel quadrato del carattere.',
       pointsEn: [
-        'Sokuon (っ): Small っ is NEVER pronounced as "tsu". It creates a 1-beat glottal pause that doubles the next consonant (K, S, T, P).',
-        'Sokuon Examples: きっぷ (kippu = ticket), がっこう (gakkou = school), ざっし (zasshi = magazine), きって (kitte = stamp).',
-        'Hiragana Long Vowels: O extends with う (e.g. たいよう taiyou = sun, きょう kyou = today); E extends with い (e.g. せんせい sensei = teacher).'
+        'Sokuon (っ): Small っ mid-word creates a 1-beat glottal silence that doubles the next consonant (e.g. きっぷ kippu, がっこう gakkou).',
+        'Glottal Cut & Interjection: At the end of a word, it marks an abrupt cut-off breath for sudden emotions (e.g. あっ! = "Ah!", えっ?! = "What?!").',
+        'Small Expressive Vowels (ぁ, ぃ, ぅ, ぇ, ぉ): Widely used in manga, lyrics, and colloquial Japanese for sighs, groans, or emotional trails (e.g. あぁ... = sigh, うぅ... = groan).',
+        'Small ゎ: Used playfully in youth slang (e.g. ゎたし for a cute/informal tone).'
       ],
-      tipEn: '💡 Count the Beats: Every mora in Japanese takes equal time. A pause or vowel extension completely changes meaning (e.g. おばさん aunt vs おばあさん grandmother)!'
+      tipEn: '💡 Graphic Rule: All small kana are drawn at roughly 1/4 standard size and positioned in the lower-left quadrant.'
     },
     katakana: {
-      titleIt: 'Chōonpu (ー) & Piccolo ッ in Katakana',
-      titleEn: 'Chōonpu (ー) & Small ッ in Katakana',
-      subtitleIt: 'I due segni ritmici cardine dei prestiti linguistici (Gairaigo)',
-      subtitleEn: 'The two core rhythmic markers of loanwords (Gairaigo)',
+      titleIt: 'Chōonpu (ー), Piccolo ッ & Vocali Estese in Katakana',
+      titleEn: 'Chōonpu (ー), Small ッ & Extended Vowels in Katakana',
+      subtitleIt: 'I segni ritmici cardine, le vocali modificatrici e i simboli speciali',
+      subtitleEn: 'Core rhythmic markers, vowel modifiers, and special symbols',
       pointsIt: [
-        'Chōonpu (ー): Il trattino orizzontale che allunga di 1 battito intero qualsiasi vocale precedente (es. コーヒー koohii = caffè, ケーキ keeki = torta, タクシー takushii = taxi).',
-        'Sokuon (ッ): Il piccolo ッ nei prestiti riproduce le consonanti doppie e i suoni troncati brevi dell\'inglese (es. ベッド beddo = letto, サッカー sakkaa = calcio, コップ koppu = bicchiere).',
-        'Orientamento Grafico: Nella scrittura orizzontale il chōonpu è una linea orizzontale (ー), nella scrittura verticale classica diventa una linea verticale (丨).'
+        'Chōonpu (ー): Il trattino universale che allunga di 1 tempo qualsiasi vocale precedente nei prestiti (es. コーヒー kōhī = caffè, ケーキ kēki = torta).',
+        'Sokuon (ッ): Trascrive consonanti doppie e finali troncate delle lingue europee (es. ベッド beddo = letto, サッカー sakkā = calcio).',
+        'Piccole Vocali (ァ, ィ, ゥ, ェ, ォ): I blocchi costruttivi per forgiare suoni occidentali moderni (es. カフェ kafe, パーティー pātī).',
+        'Segni Contatori (ヵ, ヶ): Simboli speciali derivati da kanji usati per contare i mesi (1ヵ月 ikkagetsu) o in toponimi celebri (霞ヶ関 Kasumigaseki).'
       ],
-      tipIt: '💡 Trucco per il Chōonpu: Tieni la bocca nella stessa posizione vocalica e continua a emettere voce per 2 tempi completi senza spezzarla.',
+      tipIt: '💡 Differenza Tratto: Chōonpu (ー) è orizzontale in testi orizzontali e ruota a linea verticale (丨) nella scrittura verticale classica.',
       pointsEn: [
-        'Chōonpu (ー): The horizontal lengthening line that extends any preceding vowel by 1 full beat (e.g. コーヒー koohii = coffee, ケーキ keeki = cake, タクシー takushii = taxi).',
-        'Sokuon (ッ): Small ッ in loanwords represents double consonants and crisp truncated endings (e.g. ベッド beddo = bed, サッカー sakkaa = soccer, コップ koppu = cup).',
-        'Orientation: Drawn horizontally in horizontal text (ー), and rotates into a vertical stroke (丨) in traditional vertical text.'
+        'Chōonpu (ー): Universal lengthener mark adding 1 beat to any preceding vowel in loanwords (e.g. コーヒー kōhī = coffee, ケーキ kēki = cake).',
+        'Sokuon (ッ): Transcribes crisp double consonants and abrupt foreign endings (e.g. ベッド beddo = bed, サッカー sakkā = soccer).',
+        'Small Vowels (ァ, ィ, ゥ, ェ, ォ): The phonetic building blocks for modern loanwords (e.g. カフェ kafe, パーティー pātī).',
+        'Counter Symbols (ヵ, ヶ): Specialized symbols from Kanji used for counting months (1ヵ月 ikkagetsu = 1 month) or place names (霞ヶ関 Kasumigaseki).'
       ],
-      tipEn: '💡 Chōonpu Tip: Keep your mouth in the same vowel shape and maintain vocal sound for 2 full counts smoothly.'
+      tipEn: '💡 Stroke Direction: Chōonpu (ー) is horizontal in standard layout and rotates to vertical (丨) in traditional vertical script.'
     }
   },
   extended: {
-    badge: 'Katakana Estesi (Gairaigo)',
+    badge: '33 Katakana Estesi (Gairaigo)',
     hiragana: {
-      titleIt: 'Katakana Estesi & Suoni per Parole Straniere',
-      titleEn: 'Extended Katakana & Foreign Loanword Sounds',
-      subtitleIt: 'Combinazioni esclusive del Katakana per suoni occidentali',
-      subtitleEn: 'Katakana-exclusive combinations for Western phonetics',
+      titleIt: 'Katakana Estesi & Prestiti Stranieri',
+      titleEn: 'Extended Katakana & Foreign Loanwords',
+      subtitleIt: 'Suoni occidentali moderni (Standard & Rari)',
+      subtitleEn: 'Modern Western phonetics (Standard & Rare)',
       pointsIt: [
-        'Perché esistono: Il giapponese tradizionale non aveva suoni come "ti", "di", "fa", "wi", "va".',
+        'Perché esistono: Il giapponese tradizionale non possedeva suoni come "ti", "di", "fa", "wi", "va", "kwa", "si".',
         'Regola di Creazione: Si combinano caratteri base con piccole vocali (ァ, ィ, ゥ, ェ, ォ) o col segno ヴ.',
-        'Esempi Celebri: パーティー (pātī = party), ディズニー (dizunī = Disney), カフェ (kafe = café), ウィキ (wiki).'
+        'Esempi Frequenti: パーティー (pātī = party), ディナー (dinā = cena), カフェ (kafe = café), チェック (chekku = check).'
       ],
-      tipIt: '💡 Ricorda: Queste combinazioni esistono solo nel Katakana moderno per trascrivere prestiti stranieri!',
+      tipIt: '💡 Ricorda: Queste combinazioni sono nate per trascrivere prestiti internazionali nel Katakana moderno!',
       pointsEn: [
-        'Why they exist: Traditional Japanese phonology lacked sounds like "ti", "di", "fa", "wi", "va".',
-        'Creation Rule: Formed by combining base kana with small vowels (ァ, ィ, ゥ, ェ, ォ) or ヴ.',
-        'Famous Examples: パーティー (pātī = party), ディズニー (dizunī = Disney), カフェ (kafe = café), ウィキ (wiki).'
+        'Why they exist: Classical Japanese phonology lacked sounds like "ti", "di", "fa", "wi", "va", "kwa", "si".',
+        'Creation Rule: Formed by pairing base kana with small vowels (ァ, ィ, ゥ, ェ, ォ) or ヴ.',
+        'Common Examples: パーティー (pātī = party), ディナー (dinā = dinner), カフェ (kafe = café), チェック (chekku = check).'
       ],
-      tipEn: '💡 Note: These combinations are modern Katakana creations used exclusively for loanwords!'
+      tipEn: '💡 Note: These combinations are modern Katakana innovations designed specifically for international loanwords!'
     },
     katakana: {
-      titleIt: 'Katakana Estesi (外来語): Suoni Stranieri Moderni',
-      titleEn: 'Extended Katakana: Modern Foreign Sounds',
-      subtitleIt: 'Le combinazioni con vocali piccole (ティ, ディ, ファ, ウィ, ヴァ...)',
-      subtitleEn: 'Combinations with small vowels (ティ, ディ, ファ, ウィ, ヴァ...)',
+      titleIt: 'Katakana Estesi (外来語): 33 Suoni Stranieri Standard & Rari',
+      titleEn: 'Extended Katakana: 33 Standard & Rare Loanword Sounds',
+      subtitleIt: 'L\'inventario completo per riprodurre qualsiasi parola e lingua del mondo',
+      subtitleEn: 'The complete inventory to transcribe any world language accurately',
       pointsIt: [
-        'Suoni TI / DI: テ (te) + ィ = ティ (ti, es. パーティー party, ティー tea); デ (de) + ィ = ディ (di, es. ディナー dinner, ディズニー Disney); ト+ゥ = トゥ (tu), ド+ゥ = ドゥ (du).',
-        'Serie F: フ (fu) + ァ/ィ/ェ/ォ = ファ (fa, es. ファミリー), フィ (fi, es. フィルム), フェ (fe, es. カフェ), フォ (fo, es. フォーク).',
-        'Serie W & V: ウ (u) + ィ/ェ/ォ = ウィ (wi, es. ウィキ), ウェ (we, es. ウェブ), ウォ (wo, es. ウォーター); ヴ + ァ/ィ/ェ/ォ = ヴァ, ヴィ, ヴェ, ヴォ (suoni V).',
-        'Serie CH / SH / J: チ+ェ = チェ (che, es. チェック check); シ+ェ = シェ (she, es. シェフ chef); ジ+ェ = ジェ (je, es. ジェット jet).'
+        'Suoni TI / DI & TU / DU: テ+ィ = ティ (ti, es. パーティー), デ+ィ = ディ (di, es. ディナー); ト+ゥ = トゥ (tu), ド+ゥ = ドゥ (du).',
+        'Serie F & V: フ + ァ/ィ/ェ/ォ = ファ, フィ, フェ, フォ; ヴ + ァ/ィ/ェ/ォ = ヴァ, ヴィ, ヴェ, ヴォ (suoni V occidentali).',
+        'Serie W & CH/SH/J: ウ+ィ/ェ/ォ = ウィ, ウェ, ウォ; チ/シ/ジ+ェ = チェ, シェ, ジェ; ツ+ァ/ェ/ォ = ツァ, ツェ, ツォ.',
+        'Forme Rare & Specializzate: ク+ァ/ィ/ェ/ォ = クァ (kwa, es. クァルテット), クィ (kwi, es. クィーン), クェ, クォ; グ+ァ = グァ (gwa, es. グァム); ス+ィ = スィ (si puro), ズ+ィ = ズィ (zi puro); イ+ェ = イェ (ye, es. イェロー); テ/デ+ュ = テュ (tyu), デュ (dyu).'
       ],
-      tipIt: '💡 Regola delle Piccole Vocali: La vocale piccola (ァ, ィ, ゥ, ェ, ォ) si scrive a 1/4 della grandezza e modifica la vocale della sillaba principale.',
+      tipIt: '💡 Regola delle Piccole Vocali: La vocale piccola modifica il timbro finale del suono mantenendo la consonante del kana principale.',
       pointsEn: [
-        'TI / DI Sounds: テ (te) + ィ = ティ (ti, e.g. パーティー party, ティー tea); デ (de) + ィ = ディ (di, e.g. ディナー dinner, ディズニー Disney); ト+ゥ = トゥ (tu), ド+ゥ = ドゥ (du).',
-        'F Series: フ (fu) + ァ/ィ/ェ/ォ = ファ (fa, e.g. ファミリー family), フィ (fi, e.g. フィルム film), フェ (fe, e.g. カフェ café), フォ (fo, e.g. フォーク fork).',
-        'W & V Series: ウ (u) + ィ/ェ/ォ = ウィ (wi, e.g. Wiki), ウェ (we, e.g. Web), ウォ (wo, e.g. Water); ヴ + ァ/ィ/ェ/ォ = ヴァ, ヴィ, ヴェ, ヴォ (V sounds).',
-        'CH / SH / J Series: チ+ェ = チェ (che, e.g. チェック check); シ+ェ = シェ (she, e.g. シェフ chef); ジ+ェ = ジェ (je, e.g. ジェット jet).'
+        'TI / DI & TU / DU Sounds: テ+ィ = ティ (ti, e.g. party), デ+ィ = ディ (di, e.g. dinner); ト+ゥ = トゥ (tu), ド+ゥ = ドゥ (du).',
+        'F & V Series: フ + ァ/ィ/ェ/ォ = ファ, フィ, フェ, フォ; ヴ + ァ/ィ/ェ/ォ = ヴァ, ヴィ, ヴェ, ヴォ (Western V sounds).',
+        'W & CH/SH/J Series: ウ+ィ/ェ/ォ = ウィ, ウェ, ウォ; チ/シ/ジ+ェ = チェ, シェ, ジェ; ツ+ァ/ェ/ォ = ツァ, ツェ, ツォ.',
+        'Rare & Specialized Forms: ク+ァ/ィ/ェ/ォ = クァ (kwa, e.g. quartet), クィ (kwi, e.g. queen), クェ, クォ; グ+ァ = グァ (gwa, e.g. Guam); ス+ィ = スィ (clean si), ズ+ィ = ズィ (clean zi); イ+ェ = イェ (ye, e.g. yellow); テ/デ+ュ = テュ (tyu), デュ (dyu).'
       ],
-      tipEn: '💡 Small Vowel Rule: Small vowels (ァ, ィ, ゥ, ェ, ォ) are written at 1/4 standard size and replace the vowel of the preceding kana.'
+      tipEn: '💡 Small Vowel Principle: The small vowel alters the final vocalic release while keeping the consonant attack of the main kana.'
     }
   }
 };

@@ -65,16 +65,14 @@ export default function VirtualKeyboard({
         case 'extended':
             activeGrid = EXTENDED_KATAKANA_GRID;
             colHeaders = ['A / YA', 'I', 'U / YU', 'E', 'O / YO'];
-            rowLabels = ['T/D', 'F', 'W', 'V', 'CH/SH/J', 'TS'];
+            rowLabels = ['T/D', 'F', 'W', 'V', 'CH/SH/J', 'TS', 'KW/GW', 'S/Z/Y', 'TYU/DYU'];
             gridColsClass = 'grid-cols-[28px_repeat(5,minmax(0,1fr))] sm:grid-cols-[36px_repeat(5,minmax(0,1fr))]';
             break;
         case 'small':
             activeGrid = isHiragana ? SMALL_HIRAGANA_GRID : SMALL_KATAKANA_GRID;
-            colHeaders = isHiragana ? ['Sokuon (っ)'] : ['Chōonpu (ー)', 'Sokuon (ッ)'];
-            rowLabels = [isHiragana ? 'っ' : '•'];
-            gridColsClass = isHiragana 
-                ? 'grid-cols-[28px_minmax(0,1fr)] sm:grid-cols-[36px_minmax(120px,180px)]'
-                : 'grid-cols-[28px_repeat(2,minmax(0,1fr))] sm:grid-cols-[36px_repeat(2,minmax(100px,160px))]';
+            colHeaders = isHiragana ? ['A / 促音', 'I', 'U', 'E', 'O'] : ['A / ー', 'I / ッ', 'U', 'E', 'O'];
+            rowLabels = isHiragana ? ['促音', '小母音', '修飾'] : ['記号', '小母音', '修飾'];
+            gridColsClass = 'grid-cols-[28px_repeat(5,minmax(0,1fr))] sm:grid-cols-[36px_repeat(5,minmax(0,1fr))]';
             break;
         default:
             activeGrid = isHiragana ? HIRAGANA_GRID : KATAKANA_GRID;
@@ -91,14 +89,14 @@ export default function VirtualKeyboard({
         { id: 'dakuten', label: t('table.tabDakuten') },
         { id: 'handakuten', label: t('table.tabHandakuten') },
         { id: 'yoon', label: t('table.tabYoon') },
-        { id: 'small', label: t('table.tabSokuon') }
+        { id: 'small', label: t('table.tabSokuon') || (lang === 'it' ? 'Piccoli & Espressivi (っ/ぁ)' : 'Small & Expressive (っ/ぁ)') }
     ] : [
         { id: 'basic', label: t('table.tabBasic') },
         { id: 'dakuten', label: t('table.tabDakuten') },
         { id: 'handakuten', label: t('table.tabHandakuten') },
         { id: 'yoon', label: t('table.tabYoon') },
         { id: 'extended', label: t('table.tabExtended') || (lang === 'it' ? 'Estesi (Gairaigo)' : 'Extended (Gairaigo)') },
-        { id: 'small', label: t('table.tabChoonpu') }
+        { id: 'small', label: t('table.tabChoonpu') || (lang === 'it' ? 'Piccoli & Segni (ー/ッ/ァ)' : 'Small & Symbols (ー/ッ/ァ)') }
     ];
 
     return (

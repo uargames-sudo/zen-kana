@@ -51,15 +51,15 @@ export default function KanaTable({ scriptMode }) {
       case 'extended':
         return {
           columns: ['A / YA', 'I', 'U / YU', 'E', 'O / YO'],
-          rowLabels: ['T/D', 'F', 'W', 'V', 'CH/SH/J', 'TS'],
+          rowLabels: ['T/D', 'F', 'W', 'V', 'CH/SH/J', 'TS', 'KW/GW', 'S/Z/Y', 'TYU/DYU'],
           colCount: 5,
           grid: EXTENDED_KATAKANA_GRID
         };
       case 'small':
         return {
-          columns: isHiragana ? ['促音 (Sokuon)'] : ['長音符 (Chōonpu)', '促音 (Sokuon)'],
-          rowLabels: [isHiragana ? 'っ' : '•'],
-          colCount: isHiragana ? 1 : 2,
+          columns: isHiragana ? ['A / 促音', 'I', 'U', 'E', 'O'] : ['A / ー', 'I / ッ', 'U', 'E', 'O'],
+          rowLabels: isHiragana ? ['促音', '小母音', '修飾'] : ['記号', '小母音', '修飾'],
+          colCount: 5,
           grid: isHiragana ? SMALL_HIRAGANA_GRID : SMALL_KATAKANA_GRID
         };
       default:
@@ -93,14 +93,14 @@ export default function KanaTable({ scriptMode }) {
     { id: 'dakuten', label: t('table.tabDakuten') },
     { id: 'handakuten', label: t('table.tabHandakuten') },
     { id: 'yoon', label: t('table.tabYoon') },
-    { id: 'small', label: t('table.tabSokuon') }
+    { id: 'small', label: t('table.tabSokuon') || (lang === 'it' ? 'Piccoli & Espressivi (っ/ぁ)' : 'Small & Expressive (っ/ぁ)') }
   ] : [
     { id: 'basic', label: t('table.tabBasic') },
     { id: 'dakuten', label: t('table.tabDakuten') },
     { id: 'handakuten', label: t('table.tabHandakuten') },
     { id: 'yoon', label: t('table.tabYoon') },
     { id: 'extended', label: t('table.tabExtended') || (lang === 'it' ? 'Estesi (Gairaigo)' : 'Extended (Gairaigo)') },
-    { id: 'small', label: t('table.tabChoonpu') }
+    { id: 'small', label: t('table.tabChoonpu') || (lang === 'it' ? 'Piccoli & Segni (ー/ッ/ァ)' : 'Small & Symbols (ー/ッ/ァ)') }
   ];
 
   return (

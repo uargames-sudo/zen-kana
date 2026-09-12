@@ -430,7 +430,44 @@ export const KANA_EXAMPLES_MAP = {
   'ジェ': { it: 'ジェット (jetto - aereo jet)', en: 'ジェット (jetto - jet)' },
   'ツァ': { it: 'モーツァルト (mōtsaruto - Mozart)', en: 'モーツァルト (mōtsaruto - Mozart)' },
   'ツェ': { it: 'ツェッペリン (tsepperin - dirigibile Zeppelin)', en: 'ツェッペリン (tsepperin - Zeppelin)' },
-  'ツォ': { it: 'カンツォーネ (kantsōne - canzone)', en: 'カンツォーネ (kantsōne - canzone)' }
+  'ツォ': { it: 'カンツォーネ (kantsōne - canzone)', en: 'カンツォーネ (kantsōne - canzone)' },
+
+  // Rare Loanwords
+  'クァ': { it: 'クァルテット (kuarutetto - quartetto)', en: 'クァルテット (kuarutetto - quartet)' },
+  'クィ': { it: 'クィーン (kuīn - regina / queen)', en: 'クィーン (kuīn - queen)' },
+  'クェ': { it: 'クェスチョン (kuesuchon - domanda / question)', en: 'クェスチョン (kuesuchon - question)' },
+  'クォ': { it: 'クォーター (kuōtā - quarto / quarter)', en: 'クォーター (kuōtā - quarter)' },
+  'グァ': { it: 'グァム (guamu - isola di Guam)', en: 'グァム (guamu - Guam)' },
+  'スィ': { it: 'スィーツ (sītsu - dolci / sweets)', en: 'スィーツ (sītsu - sweets)' },
+  'ズィ': { it: 'ズィー (zī - lettera Z / Zee)', en: 'ズィー (zī - letter Z)' },
+  'イェ': { it: 'イェロー (yerō - giallo / yellow)', en: 'イェロー (yerō - yellow)' },
+  'テュ': { it: 'テューブ (tyūbu - tubetto / tube)', en: 'テューブ (tyūbu - tube)' },
+  'デュ': { it: 'デューティ (dyūti - dovere / duty)', en: 'デューティ (dyūti - duty)' },
+
+  // Small & Expressive Kana
+  'っ': { it: 'きって (kitte - francobollo / pausa)', en: 'きって (kitte - stamp / pause)' },
+  'ッ': { it: 'ベッド (beddo - letto / sokuon)', en: 'ベッド (beddo - bed / sokuon)' },
+  'ー': { it: 'コーヒー (kōhī - caffè / chōonpu)', en: 'コーヒー (kōhī - coffee / chōonpu)' },
+  'ぁ': { it: 'あぁ (aah - interiezione / sospiro)', en: 'あぁ (aah - interjection / sigh)' },
+  'ぃ': { it: 'いぃ (ii - enfasi / interiezione)', en: 'いぃ (ii - emphasis)' },
+  'ぅ': { it: 'うぅ (uu - lamento / sospiro)', en: 'うぅ (uu - groan / sigh)' },
+  'ぇ': { it: 'えぇ (ee - sorpresa / esitazione)', en: 'えぇ (ee - surprise / hesitation)' },
+  'ぉ': { it: 'おぉ (oo - meraviglia / oh!)', en: 'おぉ (oo - wonder / oh!)' },
+  'ァ': { it: 'アァ (aah - esclamazione)', en: 'アァ (aah - exclamation)' },
+  'ィ': { it: 'パーティー (pātī - loanword)', en: 'パーティー (pātī - loanword)' },
+  'ゥ': { it: 'トゥルー (turū - vero / true)', en: 'トゥルー (turū - true)' },
+  'ェ': { it: 'カフェ (kafe - bar / café)', en: 'カフェ (kafe - café)' },
+  'ォ': { it: 'フォーク (fōku - forchetta)', en: 'フォーク (fōku - fork)' },
+  'ゃ': { it: 'おちゃ (ocha - tè verde)', en: 'おちゃ (ocha - green tea)' },
+  'ゅ': { it: 'ぎゅうにく (gyuuniku - manzo)', en: 'ぎゅうにく (gyuuniku - beef)' },
+  'ょ': { it: 'きょう (kyou - oggi)', en: 'きょう (kyou - today)' },
+  'ャ': { it: 'シャツ (shatsu - camicia)', en: 'シャツ (shatsu - shirt)' },
+  'ュ': { it: 'ジュース (juusu - succo)', en: 'ジュース (juusu - juice)' },
+  'ョ': { it: 'チョコ (choko - cioccolato)', en: 'チョコ (choko - chocolate)' },
+  'ゎ': { it: 'ゎたし (watashi - slang giovanile)', en: 'ゎたし (watashi - youth slang)' },
+  'ヮ': { it: 'クヮ (kwa - grafia rara)', en: 'クヮ (kwa - rare spelling)' },
+  'ヵ': { it: '1ヵ月 (ikkagetsu - un mese)', en: '1ヵ月 (ikkagetsu - 1 month)' },
+  'ヶ': { it: '霞ヶ関 (Kasumigaseki - toponimo)', en: '霞ヶ関 (Kasumigaseki - place name)' }
 };
 
 export const KANA_EXTENDED = [
@@ -456,7 +493,17 @@ export const KANA_EXTENDED = [
   { katakana: 'ジェ', romaji: 'je', exampleIt: 'ジェット (jetto - aereo jet)', exampleEn: 'ジェット (jetto - jet)', group: 'ch_sh_j' },
   { katakana: 'ツァ', romaji: 'tsa', exampleIt: 'モーツァルト (mōtsaruto - Mozart)', exampleEn: 'モーツァルト (mōtsaruto - Mozart)', group: 'ts' },
   { katakana: 'ツェ', romaji: 'tse', exampleIt: 'ツェッペリン (tsepperin - dirigibile Zeppelin)', exampleEn: 'ツェッペリン (tsepperin - Zeppelin)', group: 'ts' },
-  { katakana: 'ツォ', romaji: 'tso', exampleIt: 'カンツォーネ (kantsōne - canzone)', exampleEn: 'カンツォーネ (kantsōne - canzone)', group: 'ts' }
+  { katakana: 'ツォ', romaji: 'tso', exampleIt: 'カンツォーネ (kantsōne - canzone)', exampleEn: 'カンツォーネ (kantsōne - canzone)', group: 'ts' },
+  { katakana: 'クァ', romaji: 'kwa', exampleIt: 'クァルテット (kuarutetto - quartetto)', exampleEn: 'クァルテット (kuarutetto - quartet)', group: 'kw_gw' },
+  { katakana: 'クィ', romaji: 'kwi', exampleIt: 'クィーン (kuīn - regina / queen)', exampleEn: 'クィーン (kuīn - queen)', group: 'kw_gw' },
+  { katakana: 'クェ', romaji: 'kwe', exampleIt: 'クェスチョン (kuesuchon - domanda / question)', exampleEn: 'クェスチョン (kuesuchon - question)', group: 'kw_gw' },
+  { katakana: 'クォ', romaji: 'kwo', exampleIt: 'クォーター (kuōtā - quarto / quarter)', exampleEn: 'クォーター (kuōtā - quarter)', group: 'kw_gw' },
+  { katakana: 'グァ', romaji: 'gwa', exampleIt: 'グァム (guamu - isola di Guam)', exampleEn: 'グァム (guamu - Guam)', group: 'kw_gw' },
+  { katakana: 'スィ', romaji: 'si', exampleIt: 'スィーツ (sītsu - dolci / sweets)', exampleEn: 'スィーツ (sītsu - sweets)', group: 'si_zi' },
+  { katakana: 'ズィ', romaji: 'zi', exampleIt: 'ズィー (zī - lettera Z / Zee)', exampleEn: 'ズィー (zī - letter Z)', group: 'si_zi' },
+  { katakana: 'イェ', romaji: 'ye', exampleIt: 'イェロー (yerō - giallo / yellow)', exampleEn: 'イェロー (yerō - yellow)', group: 'ye' },
+  { katakana: 'テュ', romaji: 'tyu', exampleIt: 'テューブ (tyūbu - tubetto / tube)', exampleEn: 'テューブ (tyūbu - tube)', group: 'tyu_dyu' },
+  { katakana: 'デュ', romaji: 'dyu', exampleIt: 'デューティ (dyūti - dovere / duty)', exampleEn: 'デューティ (dyūti - duty)', group: 'tyu_dyu' }
 ];
 
 export function getKanaExample(item, lang = 'it') {

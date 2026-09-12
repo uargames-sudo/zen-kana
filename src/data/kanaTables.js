@@ -78,21 +78,29 @@ export const YOON_KATAKANA_GRID = [
     [{ k: 'ピャ', r: 'pya' }, { k: 'ピュ', r: 'pyu' }, { k: 'ピョ', r: 'pyo' }]
 ];
 
+// Small & Expressive Kana (促音 Sokuon, 長音符 Chōonpu, 小母音 Small Vowels, Slang)
 export const SMALL_HIRAGANA_GRID = [
-    [{ k: 'っ', r: 'tsu' }]
+    [{ k: 'っ', r: 'tsu' }, null, null, null, null],
+    [{ k: 'ぁ', r: 'a' }, { k: 'ぃ', r: 'i' }, { k: 'ぅ', r: 'u' }, { k: 'ぇ', r: 'e' }, { k: 'ぉ', r: 'o' }],
+    [{ k: 'ゃ', r: 'ya' }, { k: 'ゅ', r: 'yu' }, { k: 'ょ', r: 'yo' }, { k: 'ゎ', r: 'wa' }, null]
 ];
 
 export const SMALL_KATAKANA_GRID = [
-    [{ k: 'ー', r: '—' }, { k: 'ッ', r: 'tsu' }]
+    [{ k: 'ー', r: '—' }, { k: 'ッ', r: 'tsu' }, null, null, null],
+    [{ k: 'ァ', r: 'a' }, { k: 'ィ', r: 'i' }, { k: 'ゥ', r: 'u' }, { k: 'ェ', r: 'e' }, { k: 'ォ', r: 'o' }],
+    [{ k: 'ャ', r: 'ya' }, { k: 'ュ', r: 'yu' }, { k: 'ョ', r: 'yo' }, { k: 'ヮ', r: 'wa' }, { k: 'ヵ', r: 'ka' }]
 ];
 
-// Modern Extended Katakana for Foreign Loanwords (Gairaigo / 外来語)
+// Modern Extended Katakana for Foreign Loanwords (Gairaigo / 外来語 - Standard & Rare)
 export const EXTENDED_KATAKANA_GRID = [
     [{ k: 'ティ', r: 'ti' }, { k: 'ディ', r: 'di' }, { k: 'トゥ', r: 'tu' }, { k: 'ドゥ', r: 'du' }, null],
     [{ k: 'ファ', r: 'fa' }, { k: 'フィ', r: 'fi' }, { k: 'フュ', r: 'fyu' }, { k: 'フェ', r: 'fe' }, { k: 'フォ', r: 'fo' }],
     [null, { k: 'ウィ', r: 'wi' }, null, { k: 'ウェ', r: 'we' }, { k: 'ウォ', r: 'wo' }],
     [{ k: 'ヴァ', r: 'va' }, { k: 'ヴィ', r: 'vi' }, { k: 'ヴ', r: 'vu' }, { k: 'ヴェ', r: 've' }, { k: 'ヴォ', r: 'vo' }],
     [{ k: 'チェ', r: 'che' }, { k: 'シェ', r: 'she' }, { k: 'ジェ', r: 'je' }, null, null],
-    [{ k: 'ツァ', r: 'tsa' }, null, null, { k: 'ツェ', r: 'tse' }, { k: 'ツォ', r: 'tso' }]
+    [{ k: 'ツァ', r: 'tsa' }, null, null, { k: 'ツェ', r: 'tse' }, { k: 'ツォ', r: 'tso' }],
+    [{ k: 'クァ', r: 'kwa' }, { k: 'クィ', r: 'kwi' }, null, { k: 'クェ', r: 'kwe' }, { k: 'クォ', r: 'kwo' }],
+    [{ k: 'グァ', r: 'gwa' }, { k: 'スィ', r: 'si' }, { k: 'ズィ', r: 'zi' }, { k: 'イェ', r: 'ye' }, null],
+    [null, null, { k: 'テュ', r: 'tyu' }, { k: 'デュ', r: 'dyu' }, null]
 ];
 

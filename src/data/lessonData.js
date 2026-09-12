@@ -551,7 +551,6 @@ const YOON_EXTRA_VOCAB = [
   { id: 'y_gyu', kanaH: 'ぎゅうにく', kanaK: 'ギュウニク', romaji: 'gyuuniku', english: 'beef', italian: 'carne di manzo', imageKeyword: 'food', yoon: 'gyu' },
   { id: 'y_gyo', kanaH: 'ぎょうざ', kanaK: 'ギョウザ', romaji: 'gyouza', english: 'dumplings', italian: 'ravioli', imageKeyword: 'food', yoon: 'gyo' },
   { id: 'y_ja', kanaH: 'じゃがいも', kanaK: 'ジャガイモ', romaji: 'jagaimo', english: 'potato', italian: 'patata', imageKeyword: 'food', yoon: 'ja' },
-  { id: 'y_ju', kanaH: 'ジュース', kanaK: 'ジュース', romaji: 'juusu', english: 'juice', italian: 'succo', imageKeyword: 'water', yoon: 'ju' },
   { id: 'y_jo', kanaH: 'じょせい', kanaK: 'ジョセイ', romaji: 'josei', english: 'woman', italian: 'donna', imageKeyword: 'friend', yoon: 'jo' },
   { id: 'y_bya', kanaH: 'びゃくや', kanaK: 'ビャクヤ', romaji: 'byakuya', english: 'white night', italian: 'notte bianca', imageKeyword: 'sun', yoon: 'bya' },
   { id: 'y_byu', kanaH: 'びゅー', kanaK: 'ビュー', romaji: 'byuu', english: 'view', italian: 'panorama', imageKeyword: 'mountain', yoon: 'byu' },
@@ -594,9 +593,8 @@ export function getYoonLessonVocabulary(lesson, scriptMode) {
   return combined.slice(0, 10);
 }
 
-
 // ====================================================
-// 4. SPECIAL PHONETICS COURSE (3 Days)
+// 4. SPECIAL PHONETICS COURSE (4 Days)
 // ====================================================
 const PHONETICS_SYLLABLES = [
   {
@@ -607,40 +605,47 @@ const PHONETICS_SYLLABLES = [
       { char: 'っき', cleanRomaji: 'kki', baseChar: 'き', modifier: 'っ', descIt: 'Doppia K', descEn: 'Double K' },
       { char: 'っし', cleanRomaji: 'sshi', baseChar: 'し', modifier: 'っ', descIt: 'Doppia S', descEn: 'Double S' },
       { char: 'って', cleanRomaji: 'tte', baseChar: 'て', modifier: 'っ', descIt: 'Doppia T', descEn: 'Double T' },
-      { char: 'っぷ', cleanRomaji: 'ppu', baseChar: 'ぷ', modifier: 'っ', descIt: 'Doppia P', descEn: 'Double P' }
+      { char: 'っぷ', cleanRomaji: 'ppu', baseChar: 'ぷ', modifier: 'っ', descIt: 'Doppia P', descEn: 'Double P' },
+      { char: 'ぁ', cleanRomaji: 'a (piccolo)', baseChar: 'あ', modifier: 'ぁ', descIt: 'Sospiro / enfasi', descEn: 'Sigh / expressive vowel' },
+      { char: 'ぅ', cleanRomaji: 'u (piccolo)', baseChar: 'う', modifier: 'ぅ', descIt: 'Lamento / sospiro', descEn: 'Groan / emotional vowel' }
     ],
     kataKana: [
       { char: 'ッ', cleanRomaji: 'sokuon (ッ)', baseChar: 'ツ', modifier: 'small', descIt: 'Raddoppia consonante', descEn: 'Doubles consonant' },
       { char: 'ッカ', cleanRomaji: 'kka', baseChar: 'カ', modifier: 'ッ', descIt: 'Doppia K', descEn: 'Double K' },
       { char: 'ッシ', cleanRomaji: 'sshi', baseChar: 'シ', modifier: 'ッ', descIt: 'Doppia S', descEn: 'Double S' },
       { char: 'ット', cleanRomaji: 'tto', baseChar: 'ト', modifier: 'ッ', descIt: 'Doppia T', descEn: 'Double T' },
-      { char: 'ップ', cleanRomaji: 'ppu', baseChar: 'プ', modifier: 'ッ', descIt: 'Doppia P', descEn: 'Double P' }
+      { char: 'ップ', cleanRomaji: 'ppu', baseChar: 'プ', modifier: 'ッ', descIt: 'Doppia P', descEn: 'Double P' },
+      { char: 'ァ', cleanRomaji: 'a (small)', baseChar: 'ア', modifier: 'ァ', descIt: 'Vocale modificatrice', descEn: 'Modifier vowel' }
     ],
     hiragana: {
-      titleIt: 'Sokuon (促音): Piccolo っ e Consonanti Doppie',
-      titleEn: 'Sokuon: Small っ & Double Consonants',
-      descIt: 'Il salto di 1 battito (glottal stop) che raddoppia la consonante successiva nelle parole native.',
-      descEn: 'The 1-beat glottal pause that doubles the following consonant in native words.',
+      titleIt: 'Sokuon (促音): Piccolo っ & Vocali Espressive (ぁ・ぅ)',
+      titleEn: 'Sokuon: Small っ & Expressive Vowels (ぁ・ぅ)',
+      descIt: 'Il salto di 1 battito (glottal stop), pause brusche (あっ!) e piccole vocali emotive (あぁ...).',
+      descEn: 'The 1-beat glottal pause, abrupt stops (あっ!) and small expressive vowels (あぁ...).',
       theory: {
         it: {
-          title: 'Come funziona il Piccolo っ (Sokuon)',
-          intro: 'Il piccolo っ (scritto a circa 1/4 della dimensione normale) NON si pronuncia "tsu". Rappresenta una brevissima pausa di silenzio (glottal stop) che raddoppia il suono della consonante successiva (K, S, T, P)!',
+          title: 'Come funziona il Piccolo っ e le Piccole Vocali',
+          intro: 'Il piccolo っ (scritto a circa 1/4 della dimensione normale) NON si pronuncia "tsu". A metà parola crea una brevissima pausa di silenzio (glottal stop) che raddoppia la consonante (K, S, T, P), mentre a fine parola (es. あっ!) indica un\'interruzione brusca del respiro tipica delle esclamazioni. Le piccole vocali (ぁ, ぃ, ぅ, ぇ, ぉ) indicano sospiri o sfumature emotive nel parlato e nei manga!',
           points: [
-            'き (ki) + っ (pausa) + ぷ (pu) = きっぷ (kippu, "biglietto")',
-            'が (ga) + っ (pausa) + こう (kou) = がっこう (gakkou, "scuola")',
-            'ざ (za) + っ (pausa) + し (shi) = ざっし (zasshi, "rivista")',
-            'き (ki) + っ (pausa) + て (te) = きって (kitte, "francobollo")'
+            'き (ki) + っ + ぷ (pu) = きっぷ (kippu, "biglietto")',
+            'が (ga) + っ + こう (kou) = がっこう (gakkou, "scuola")',
+            'ざ (za) + っ + し (shi) = ざっし (zasshi, "rivista")',
+            'き (ki) + っ + て (te) = きって (kitte, "francobollo")',
+            'Pausa a fine parola: あっ! (Ah! / Oops!), えっ?! (Eh?! / Davvero?!)',
+            'Sospiri emotivi: あぁ... (aah / sospiro), うぅ... (uu / lamento)'
           ],
           tip: '💡 Trucco di Ritmo: Trattieni il respiro per un istante prima di pronunciare la consonante successiva. Conta mentalmente 1 battito sulla pausa!'
         },
         en: {
-          title: 'How Small っ (Sokuon) Works in Hiragana',
-          intro: 'Small っ (written at 1/4 size) is NEVER pronounced as "tsu". It creates a tiny glottal stop (a beat of silence) that doubles the subsequent consonant (K, S, T, P)!',
+          title: 'How Small っ & Expressive Vowels Work',
+          intro: 'Small っ (written at 1/4 size) is NEVER pronounced as "tsu". Mid-word it creates a 1-beat glottal pause that doubles the next consonant (K, S, T, P). At the end of a word (e.g. あっ!) it represents an abrupt breath stop for sudden emotion. Small vowels (ぁ, ぃ, ぅ, ぇ, ぉ) indicate emotional sighs or trails in manga and speech!',
           points: [
-            'き (ki) + っ (pause) + ぷ (pu) = きっぷ (kippu, "ticket")',
-            'が (ga) + っ (pause) + こう (kou) = がっこう (gakkou, "school")',
-            'ざ (za) + っ (pause) + し (shi) = ざっし (zasshi, "magazine")',
-            'き (ki) + っ (pause) + て (te) = きって (kitte, "stamp")'
+            'き (ki) + っ + ぷ (pu) = きっぷ (kippu, "ticket")',
+            'が (ga) + っ + こう (kou) = がっこう (gakkou, "school")',
+            'ざ (za) + っ + し (shi) = ざっし (zasshi, "magazine")',
+            'き (ki) + っ + て (te) = きって (kitte, "stamp")',
+            'Abrupt word-final stop: あっ! (Ah! / Oops!), えっ?! (What?!)',
+            'Emotional sighs: あぁ... (aah / sigh), うぅ... (uu / groan)'
           ],
           tip: '💡 Rhythm Tip: Hold your breath for half a second before releasing the next consonant. Count 1 distinct beat on the pause!'
         }
@@ -862,33 +867,38 @@ const PHONETICS_SYLLABLES = [
       { char: 'シェ', cleanRomaji: 'she', baseChar: 'シ', modifier: 'ェ', descIt: 'Suono SHE (es. Chef)', descEn: 'Foreign SHE sound (e.g. Chef)' },
       { char: 'ジェ', cleanRomaji: 'je', baseChar: 'ジ', modifier: 'ェ', descIt: 'Suono JE (es. Jet)', descEn: 'Foreign JE sound (e.g. Jet)' },
       { char: 'ヴァ', cleanRomaji: 'va', baseChar: 'ヴ', modifier: 'ァ', descIt: 'Suono VA (es. Violin)', descEn: 'Foreign VA sound (e.g. Violin)' },
-      { char: 'ヴィ', cleanRomaji: 'vi', baseChar: 'ヴ', modifier: 'ィ', descIt: 'Suono VI (es. Venus)', descEn: 'Foreign VI sound (e.g. Venus)' }
+      { char: 'ヴィ', cleanRomaji: 'vi', baseChar: 'ヴ', modifier: 'ィ', descIt: 'Suono VI (es. Venus)', descEn: 'Foreign VI sound (e.g. Venus)' },
+      { char: 'クァ', cleanRomaji: 'kwa', baseChar: 'ク', modifier: 'ァ', descIt: 'Suono KWA (es. Quartetto)', descEn: 'Foreign KWA sound (e.g. Quartet)' },
+      { char: 'スィ', cleanRomaji: 'si', baseChar: 'ス', modifier: 'ィ', descIt: 'Suono SI (es. Sweets)', descEn: 'Foreign clean SI sound' },
+      { char: 'イェ', cleanRomaji: 'ye', baseChar: 'イ', modifier: 'ェ', descIt: 'Suono YE (es. Yellow)', descEn: 'Foreign YE sound (e.g. Yellow)' }
     ],
     hiragana: {
       titleIt: 'Katakana Estesi & Suoni per Parole Straniere (Gairaigo)',
       titleEn: 'Extended Katakana & Foreign Sounds (Gairaigo)',
-      descIt: 'Come il Katakana combina piccole vocali (ァ, ィ, ゥ, ェ, ォ) per suoni occidentali (TI, DI, FA, WI, VA...).',
-      descEn: 'How modern Katakana combines small vowels (ァ, ィ, ゥ, ェ, ォ) for Western sounds (TI, DI, FA, WI, VA...).',
+      descIt: 'Come il Katakana combina piccole vocali (ァ, ィ, ゥ, ェ, ォ) per suoni occidentali (TI, DI, FA, WI, VA, KWA, SI...).',
+      descEn: 'How modern Katakana combines small vowels (ァ, ィ, ゥ, ェ, ォ) for Western sounds (TI, DI, FA, WI, VA, KWA, SI...).',
       theory: {
         it: {
           title: 'I Suoni Stranieri Moderni del Katakana (Gairaigo)',
-          intro: 'Nel giapponese tradizionale non esistevano suoni come "ti", "di", "fa", "wi", "va". Nel Katakana moderno sono state create combinazioni speciali con piccole vocali (ァ, ィ, ゥ, ェ, ォ) per riprodurre fedelmente i termini stranieri!',
+          intro: 'Nel giapponese tradizionale non esistevano suoni come "ti", "di", "fa", "wi", "va", "kwa", "si". Nel Katakana moderno sono state create combinazioni speciali con piccole vocali (ァ, ィ, ゥ, ェ, ォ) per riprodurre fedelmente qualsiasi termine straniero!',
           points: [
             'TI e DI: テ (te) + ィ = ティ (ti, es. パーティー party, ティー tea); デ (de) + ィ = ディ (di, es. ディナー dinner, ディズニー Disney)',
             'Serie F: フ (fu) + ァ/ィ/ェ/ォ = ファ (fa, es. ファミリー), フィ (fi, es. フィルム), フェ (fe, es. カフェ), フォ (fo, es. フォーク)',
             'Serie W e V: ウ (u) + ィ/ェ/ォ = ウィ (wi, es. ウィキ), ウェ (we, es. ウェブ), ウォ (wo, es. ウォーター); ヴ (vu con dakuten) + ァ/ィ/ェ/ォ = ヴァ, ヴィ, ヴェ, ヴォ (suoni V)',
-            'Serie CH/SH/J: チ+ェ = チェ (che, es. チェック check); シ+ェ = シェ (she, es. シェフ chef); ジ+ェ = ジェ (je, es. ジェット jet)'
+            'Serie CH/SH/J: チ+ェ = チェ (che, es. チェック check); シ+ェ = シェ (she, es. シェフ chef); ジ+ェ = ジェ (je, es. ジェット jet)',
+            'Forme Specializzate: クァ (kwa, es. クァルテット quartetto), スィ (si puro, es. スィーツ dolci), イェ (ye, es. イェロー)'
           ],
           tip: '💡 Nota Grafica: La piccola vocale (ァ, ィ, ゥ, ェ, ォ) si scrive a circa 1/4 della dimensione normale in basso a sinistra.'
         },
         en: {
           title: 'Modern Foreign Sounds in Katakana (Gairaigo)',
-          intro: 'Traditional Japanese lacked phonemes like "ti", "di", "fa", "wi", "va". Modern Katakana created dedicated extended combinations using small vowels (ァ, ィ, ゥ, ェ, ォ) to accurately transcribe foreign words!',
+          intro: 'Traditional Japanese lacked phonemes like "ti", "di", "fa", "wi", "va", "kwa", "si". Modern Katakana created dedicated extended combinations using small vowels (ァ, ィ, ゥ, ェ, ォ) to accurately transcribe foreign words!',
           points: [
             'TI & DI: テ (te) + ィ = ティ (ti, e.g. パーティー party, ティー tea); デ (de) + ィ = ディ (di, e.g. ディナー dinner, ディズニー Disney)',
             'F Series: フ (fu) + ァ/ィ/ェ/ォ = ファ (fa, e.g. ファミリー family), フィ (fi, e.g. フィルム film), フェ (fe, e.g. カフェ café), フォ (fo, e.g. フォーク fork)',
             'W & V Series: ウ (u) + ィ/ェ/ォ = ウィ (wi, e.g. Wiki), ウェ (we, e.g. Web), ウォ (wo, e.g. Water); ヴ (vu with dakuten) + ァ/ィ/ェ/ォ = ヴァ, ヴィ, ヴェ, ヴォ (V sounds)',
-            'CH/SH/J Series: チ+ェ = チェ (che, e.g. チェック check); シ+ェ = シェ (she, e.g. シェフ chef); ジ+ェ = ジェ (je, e.g. ジェット jet)'
+            'CH/SH/J Series: チ+ェ = チェ (che, e.g. チェック check); シ+ェ = シェ (she, e.g. シェフ chef); ジ+ェ = ジェ (je, e.g. ジェット jet)',
+            'Specialized Forms: クァ (kwa, e.g. quartet), スィ (clean si, e.g. sweets), イェ (ye, e.g. yellow)'
           ],
           tip: '💡 Graphic Note: Small vowels (ァ, ィ, ゥ, ェ, ォ) are written at 1/4 standard size in the lower-left area.'
         }
@@ -897,28 +907,30 @@ const PHONETICS_SYLLABLES = [
     katakana: {
       titleIt: 'Katakana Estesi & Suoni per Parole Straniere (Gairaigo)',
       titleEn: 'Extended Katakana & Foreign Sounds (Gairaigo)',
-      descIt: 'Le combinazioni con vocali piccole (ティ, ディ, ファ, フィ, ウィ, ヴァ, チェ...) per trascrivere parole internazionali.',
-      descEn: 'Combinations with small vowels (ティ, ディ, ファ, フィ, ウィ, ヴァ, チェ...) for transcribing foreign loanwords.',
+      descIt: 'Le combinazioni con vocali piccole (ティ, ディ, ファ, フィ, ウィ, ヴァ, チェ, クァ, スィ...) per trascrivere parole internazionali.',
+      descEn: 'Combinations with small vowels (ティ, ディ, ファ, フィ, ウィ, ヴァ, チェ, クァ, スィ...) for transcribing foreign loanwords.',
       theory: {
         it: {
           title: 'I Suoni Stranieri Moderni del Katakana (Gairaigo)',
-          intro: 'Nel giapponese tradizionale non esistevano suoni come "ti", "di", "fa", "wi", "va". Nel Katakana moderno sono state create combinazioni speciali con piccole vocali (ァ, ィ, ゥ, ェ, ォ) per riprodurre fedelmente i termini stranieri!',
+          intro: 'Nel giapponese tradizionale non esistevano suoni come "ti", "di", "fa", "wi", "va", "kwa", "si". Nel Katakana moderno sono state create combinazioni speciali con piccole vocali (ァ, ィ, ゥ, ェ, ォ) per riprodurre fedelmente i termini stranieri!',
           points: [
             'TI e DI: テ (te) + ィ = ティ (ti, es. パーティー party, ティー tea); デ (de) + ィ = ディ (di, es. ディナー dinner, ディズニー Disney)',
             'Serie F: フ (fu) + ァ/ィ/ェ/ォ = ファ (fa, es. ファミリー), フィ (fi, es. フィルム), フェ (fe, es. カフェ), フォ (fo, es. フォーク)',
             'Serie W e V: ウ (u) + ィ/ェ/ォ = ウィ (wi, es. ウィキ), ウェ (we, es. ウェブ), ウォ (wo, es. ウォーター); ヴ (vu con dakuten) + ァ/ィ/ェ/ォ = ヴァ, ヴィ, ヴェ, ヴォ (suoni V)',
-            'Serie CH/SH/J: チ+ェ = チェ (che, es. チェック check); シ+ェ = シェ (she, es. シェフ chef); ジ+ェ = ジェ (je, es. ジェット jet)'
+            'Serie CH/SH/J: チ+ェ = チェ (che, es. チェック check); シ+ェ = シェ (she, es. シェフ chef); ジ+ェ = ジェ (je, es. ジェット jet)',
+            'Forme Specializzate: クァ (kwa, es. クァルテット), スィ (si puro, es. スィーツ), イェ (ye, es. イェロー)'
           ],
           tip: '💡 Nota Grafica: La piccola vocale (ァ, ィ, ゥ, ェ, ォ) si scrive a circa 1/4 della dimensione normale in basso a sinistra.'
         },
         en: {
           title: 'Modern Foreign Sounds in Katakana (Gairaigo)',
-          intro: 'Traditional Japanese lacked phonemes like "ti", "di", "fa", "wi", "va". Modern Katakana created dedicated extended combinations using small vowels (ァ, ィ, ゥ, ェ, ォ) to accurately transcribe foreign words!',
+          intro: 'Traditional Japanese lacked phonemes like "ti", "di", "fa", "wi", "va", "kwa", "si". Modern Katakana created dedicated extended combinations using small vowels (ァ, ィ, ゥ, ェ, ォ) to accurately transcribe foreign words!',
           points: [
             'TI & DI: テ (te) + ィ = ティ (ti, e.g. パーティー party, ティー tea); デ (de) + ィ = ディ (di, e.g. ディナー dinner, ディズニー Disney)',
             'F Series: フ (fu) + ァ/ィ/ェ/ォ = ファ (fa, e.g. ファミリー family), フィ (fi, e.g. フィルム film), フェ (fe, e.g. カフェ café), フォ (fo, e.g. フォーク fork)',
             'W & V Series: ウ (u) + ィ/ェ/ォ = ウィ (wi, e.g. Wiki), ウェ (we, e.g. Web), ウォ (wo, e.g. Water); ヴ (vu with dakuten) + ァ/ィ/ェ/ォ = ヴァ, ヴィ, ヴェ, ヴォ (V sounds)',
-            'CH/SH/J Series: チ+ェ = チェ (che, e.g. チェック check); シ+ェ = シェ (she, e.g. シェフ chef); ジ+ェ = ジェ (je, e.g. ジェット jet)'
+            'CH/SH/J Series: チ+ェ = チェ (che, e.g. チェック check); シ+ェ = シェ (she, e.g. シェフ chef); ジ+ェ = ジェ (je, e.g. ジェット jet)',
+            'Specialized Forms: クァ (kwa, e.g. quartet), スィ (clean si, e.g. sweets), イェ (ye, e.g. yellow)'
           ],
           tip: '💡 Graphic Note: Small vowels (ァ, ィ, ゥ, ェ, ォ) are written at 1/4 standard size in the lower-left area.'
         }
@@ -926,6 +938,7 @@ const PHONETICS_SYLLABLES = [
     }
   }
 ];
+
 
 export const PHONETICS_LESSONS = PHONETICS_SYLLABLES.map((item) => ({
   ...item
