@@ -215,7 +215,9 @@ export const translations = {
       yoon: 'Yōon / Comb.',
       small: 'Sokuon (っ)',
       del: 'Canc',
-      consultationNotice: 'Tastiera di consultazione (Digita la risposta con la tastiera del dispositivo)'
+      consultationNotice: 'Tastiera di consultazione (Digita la risposta con la tastiera del dispositivo)',
+      showGuide: 'Guida',
+      hideGuide: 'Nascondi Guida'
     },
 
     // Vocabulary
@@ -688,7 +690,9 @@ export const translations = {
       yoon: 'Yōon / Comb.',
       small: 'Sokuon (っ)',
       del: 'Del',
-      consultationNotice: 'Consultation Keyboard (Type answer with your keyboard)'
+      consultationNotice: 'Consultation Keyboard (Type answer with your keyboard)',
+      showGuide: 'Guide',
+      hideGuide: 'Hide Guide'
     },
 
     // Flashcards

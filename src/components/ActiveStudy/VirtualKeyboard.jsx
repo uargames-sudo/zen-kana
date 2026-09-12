@@ -155,7 +155,7 @@ export default function VirtualKeyboard({
                         title="Mostra / Nascondi miniguida"
                     >
                         <Info className="w-3.5 h-3.5" />
-                        <span>{showGuide ? t('activeStudy.hideRefKeyboard') || 'Chiudi Guida' : 'Guida'}</span>
+                        <span>{showGuide ? (t('keyboard.hideGuide') || 'Nascondi Guida') : (t('keyboard.showGuide') || 'Guida')}</span>
                     </button>
 
                     {allowToggleRomaji && (
